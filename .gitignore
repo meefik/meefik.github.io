@@ -1,4 +1,5 @@
 _site
+.deploy
 .sass-cache
 .code-highlighter-cache
 .gist-cache
