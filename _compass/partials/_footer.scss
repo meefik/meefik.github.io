@@ -1,0 +1,24 @@
+body > footer {
+  @extend .sans;
+
+  text-align: center;
+  font-size: 0.8em;
+  color: $footer-color;
+  background-color: #FFF;
+  position: relative;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 3em;
+
+  @include border-bottom-radius(0.4em);
+
+  z-index: 1;
+
+  a {
+    @include link-colors($footer-link-color, $footer-link-color-hover, $visited: $footer-link-color);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}

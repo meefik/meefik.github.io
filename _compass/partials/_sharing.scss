@@ -1,0 +1,17 @@
+.sharing {
+  p.meta + & {
+    padding: {
+      top: 1em;
+      left: 0;
+    };
+    background: $img-border top left repeat-x;
+  }
+}
+
+#fb-root {
+  display: none;
+}
+
+.fb-like.fb_iframe_widget span {
+  vertical-align: baseline !important;
+}

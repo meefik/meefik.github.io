@@ -1,0 +1,23 @@
+{% if post.author %}
+  {% assign author = post.author %}
+{% elsif page.author %}
+  {% assign author = page.author %}
+{% else %}
+  {% assign author = site.author %}
+{% endif %}
+{% if post.googleplus_user %}
+  {% assign googleplus_user = post.googleplus_user | downcase %}
+{% elsif page.googleplus_user %}
+  {% assign googleplus_user = page.googleplus_user | downcase %}
+{% elsif site.googleplus_user %}
+  {% assign googleplus_user = site.googleplus_user | downcase %}
+{% endif %}
+{% if author %}
+  <span class="byline author vcard">Authored by <span class="fn">
+  {% if googleplus_user and googleplus_user != "ignore" %}
+    <a href="https://plus.google.com/{{ googleplus_user }}" rel="author">{{ author }}</a>
+  {% else %}
+    {{ author }}
+  {% endif %}
+  </span></span>
+{% endif %}

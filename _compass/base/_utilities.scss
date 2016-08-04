@@ -1,0 +1,56 @@
+@mixin mask-image($img, $repeat: no-repeat) {
+  @include experimental(mask-image, image-url($img), -webkit, -moz, -o, -ms);
+
+  @include experimental(mask-repeat, $repeat, -webkit, -moz, -o, -ms);
+
+  @include experimental(mask-size, 100% 100%, -webkit, -moz, -o, -ms);
+
+  width: image-width($img);
+  height: image-height($img);
+}
+
+@mixin mask-image-retina($img, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+    width: $width;
+    height: $height;
+  }
+}
+
+@mixin shadow-box($border: #fff 0.5em solid, $shadow: rgba(#000, 0.15) 0 1px 4px, $border-radius: 0.3em) {
+  @include border-radius($border-radius);
+
+  @include box-shadow($shadow);
+
+  @include box-sizing(border-box);
+
+  border: $border;
+}
+
+@mixin selection($bg, $color: inherit, $text-shadow: none) {
+  * {
+    &::-moz-selection {
+      background: $bg;
+      color: $color;
+      text-shadow: $text-shadow;
+    }
+
+    &::-webkit-selection {
+      background: $bg;
+      color: $color;
+      text-shadow: $text-shadow;
+    }
+
+    &::selection {
+      background: $bg;
+      color: $color;
+      text-shadow: $text-shadow;
+    }
+  }
+}
+
+@function text-color($color, $dark: dark, $light: light) {
+  $text-color: (red($color) * 299 + green($color) * 587 + blue($color) * 114) / 1000;
+  $text-color: if($text-color >= 150, $dark, $light);
+
+  @return $text-color;
+}

@@ -1,0 +1,33 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piggy</title>
+<script src="piggy.js"></script>
+<script>
+setInterval(piggy,30000);
+</script>
+</head>
+<body style="padding:0;margin:0;">
+<div style="margin: 50px auto; width: 400px; word-wrap:break-word;">
+<pre>
+  ,,_  
+ o"  )~   Piggy .js &amp; .sh
+  '''' 
+</pre>
+<p>Using from Web Browser Console (<a href="javascript:void(0);" onclick="piggy(Math.random()*20+1);return false;">demo</a>):</p>
+<pre style="color:blue;white-space:pre-line;">
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = 'http://meefik.ru/piggy/piggy.js';
+document.head.appendChild(script);
+setTimeout(function(){piggy(5)},1000);
+</pre>
+<p>Using from Unix terminal:</p>
+<pre style="color:green;white-space:pre-line;">
+echo 'H4sIADVoSlUAA1WP0U6DMBSG789T/CFkuowaBlviTZ+EEafbmWusbVdAYUaf3ULRZL3q/52v/0ldta5lAmTZE4CEXFWM2e4CW/5MoJyEu3CisJlyEP7AdhZGFsAg963rWmhluNlTP8eD1SFpbtHLXjxmgxzEJjOypDhWH6qZr51DOiCPiY/0eVaa71vf8ZKO9kZK+6nyKgc6WQ8FZbBGgdTcmtd/c7Ui55VpT0jSL1elqv5OgmuYqvAK4pWxhbDBh+BLKKuxWMDIYpxHlkf24vn5Lf5IiMyE4kYzO+QPZSyM643178SHs6Vfb6yr520BAAA=' | base64 -d | zcat | bash /dev/stdin
+</pre>
+<p>(c) <a href="http://meefik.ru">meefik.ru</a></p>
+</div>
+</body>
+</html>

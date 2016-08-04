@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat's Advice</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script>
+        var arr = [];
+        function generateArr(num) {
+            while (arr.length < num) {
+                var rnd = Math.round(Math.random()*(num-1))+1;
+                if (jQuery.inArray(rnd,arr) < 0) {
+                    arr.push(rnd);
+                }
+            }
+        }
+        function getRnd(num) {
+            if (arr.length < 1) {
+                generateArr(num);
+            }
+            return arr.pop();
+        }
+        function start() {
+            if ($('#magicbtn').attr('disabled') === 'disabled') return;
+            $('#magicbtn').attr('disabled','disabled');
+            var cnt='';
+            var timer = function() {
+                cnt+='.';
+                $('#magicbox').html(cnt);
+                if (cnt.length <= 3) {
+                    setTimeout(timer,1000);
+                } else {
+                    var iv = $('#inputVar').val();
+                    var rnd = getRnd(iv);
+                    $('#magicbox').html(rnd);
+                    $('#magicbtn').removeAttr('disabled','disabled');
+                }
+            }
+            timer();
+        }
+        $(document).ready(function(){
+            $(document).keypress(function(e){
+                if(e.keyCode==13) start();
+            });
+            $('#magicbtn').click(start);
+        });
+    </script>
+    <style>
+        /* Space out content a bit */
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            min-width: 650px;
+        }
+
+        /* Everything but the jumbotron gets side spacing for mobile first views */
+        .header,
+        .marketing,
+        .footer {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        /* Custom page header */
+        .header {
+            margin-bottom: 10px;
+            white-space: nowrap;
+        }
+
+        /* Custom page footer */
+        .footer {
+            padding-top: 19px;
+            color: #777;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        /* Customize container */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 730px;
+            }
+        }
+        .container-narrow > hr {
+            margin: 30px 0;
+        }
+
+        /* Main marketing message and sign up button */
+        .jumbotron {
+            position: relative;
+            text-align: center;
+        }
+        .jumbotron .btn {
+            font-size: 21px;
+            padding: 14px 24px;
+        }
+
+        /* Supporting marketing content */
+        .marketing {
+            margin: 40px 0;
+        }
+        .marketing p + h4 {
+            margin-top: 28px;
+        }
+        .col-lg-6 {
+            margin-bottom: 30px;
+        }
+
+        /* Magic */
+        #magicbox {
+            font-size: 90px;
+            padding: 20px 20px 30px 20px;
+            overflow: hidden;
+        }
+
+        /* Title */
+        .title {
+            padding-left: 10px;
+            font-size: 28px;
+            line-height: 20px;
+        }
+
+        /* Cat */
+        .cat {
+            padding: 10px;
+        }
+
+        /* Foot */
+        .foot1, .foot2, .foot3 {
+            opacity: 0.5;
+            position: absolute;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsdEQIHBmElZAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAGPSURBVDjLrdRBS1VREAfw3zOVQDIwkAhBWoRIEUgEEQi1aBVCq6BFm+gzuIzauYoQapELcRO07QNEbUSw6BEtgpQIqYUWlCIW4T1t5sXp8Hr3Bg1czrkzZ/5nZs5/hv8sB3rYBjGOCj8K20DoG8sEFvEaT3Aks03jAW7hWBOww3iHlH0Pw3YVXzL9ShPQucyhyvbD2Cgu2sf93LmvC+BwrCnTfcdPfCvOVvhUF+Fx7GRRbOFa2GbwOYD28RancQaT0IqDF3EOu5HCZVzBHhbQjmyqAJgO35e4hNv4GKtJbGcRzWbRnsU8nmIZz3EXQ2E/WtR0G5YK5dc4PBWPUBX2hDdBpans8SqkPmwWNVyL9OYx1qXGCSfxIfYbkX6r0wATceM6XkSNznehTepCpzZO4Ble4Ubn1kM4Fe0Gj2oAO7ZdjIRPfy/qvO8BVAJeqCM2jDbs+RR0qZV2wxquNp02N//Sz/l/FbRpJIN4XFPDO/86fEdxr+iiFPS4njHiD2nVgA7gYDbZU0ydvWIa/ZZfktih3Z1LkO8AAAAASUVORK5CYII=);
+            height: 20px;
+            width: 20px;
+            -webkit-transform: rotate(30deg);
+            -moz-transform: rotate(30deg);
+            -o-transform: rotate(30deg);
+        }
+        .foot1 {
+            bottom: 10px;
+            right: 40px;
+        }
+
+        .foot2 {
+            bottom: 26px;
+            right: 10px;
+        }
+
+        .foot3 {
+            bottom: 58px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <!--
+        <ul class="nav nav-pills pull-right">
+            <li><a href="#about" data-toggle="modal">О проекте</a></li>
+        </ul>
+        -->
+        <img class="cat" src="data:image/png;base64,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" alt="Cat"/>
+        <span class="title text-muted">Помощник в принятии решений :з</span>
+    </div>
+    <div class="jumbotron">
+        <p>Укажи число вариантов:</p>
+        <input id="inputVar" type="number" min="2" step="1" value="2" class="form-control">
+        <div id="magicbox">Жми батон!</div>
+        <p><button id="magicbtn" class="btn btn-lg btn-success">Сделать выбор!</button></p>
+        <div class="foot1"></div>
+        <div class="foot2"></div>
+        <div class="foot3"></div>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-lg-6">
+            <h4>Что это?</h4>
+            <p>Порой, сделать выбор ох как непросто... Это приложение призвано помочь тебе с этим!</p>
+
+            <h4>Как использовать?</h4>
+            <p>Укажи количество вариантов, из которых нужно выбрать. Мысленно распредели цифры от 1 до N между вариантами. Нажми кнопку!</p>
+        </div>
+
+        <div class="col-lg-6">
+            <h4>Что в результате?</h4>
+            <p>В результате выдается число, которое соответствует одному из пронумерованных вариантов, из которых нужно выбрать.</p>
+
+            <h4>Что дальше?</h4>
+            <p>А дальше можно с чистой совестью делать выбор, ведь судьба ошибаться не может! =)</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; <a href="https://github.com/meefik">meefik</a> 2013</p>
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>
