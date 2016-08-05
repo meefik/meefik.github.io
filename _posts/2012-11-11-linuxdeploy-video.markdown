@@ -8,4 +8,4 @@ categories: linuxdeploy review
 
 Демонстрационный ролик установки и запуска Ubuntu на Android телефоне с помощью Linux Deploy.
 
-{% youtube j4Rlu7zi1Fc %}
+{% youtube "https://www.youtube.com/watch?v=j4Rlu7zi1Fc" %}

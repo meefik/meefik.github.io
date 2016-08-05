@@ -28,8 +28,12 @@ email: meefik@gmail.com
 
 gems:
   - jekyll-compass
+  - jekyll-youtube
   - octopress-solarized
   - octopress-date-format
+  - octopress-video-tag
+  - octopress-image-tag
+  - octopress-gist
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
 #root: /
