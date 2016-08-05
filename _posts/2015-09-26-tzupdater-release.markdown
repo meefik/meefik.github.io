@@ -19,7 +19,7 @@ categories: tzupdater release
 * права суперпользователя (root)
 * установленный BusyBox
 
-![tzupdater](/images/tzupdater.png "Timezone Updater")
+![tzupdater](/images/tzupdater.png "Timezone Updater"){: .center}
 
 Приложение распространяется под лицензией [GPL версии 3](http://www.gnu.org/licenses/) или более поздней.
 

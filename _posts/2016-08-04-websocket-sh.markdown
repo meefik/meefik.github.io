@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "Реализация WebSocket сервера на SH"
+title: "Реализация WebSocket-сервера на SH"
 date: 2016-08-04 12:00:00 +0300
 comments: true
 categories: websocket busybox sh
 ---
 
-[Websocket.sh](https://github.com/meefik/websocket.sh) - кросс-платформенная реализация [WebSocket](https://tools.ietf.org/html/rfc6455) сервера на SH. Для работы требуется только busybox, вместо bash можно использовать ash. Может использоваться во встраиваемых системах.
+[Websocket.sh](https://github.com/meefik/websocket.sh) - кроссплатформенная реализация [WebSocket](https://tools.ietf.org/html/rfc6455) сервера на SH. Для работы требуется только busybox, вместо bash можно использовать ash. Может использоваться во встраиваемых системах.
 
-### Bash оболочка через веб-браузер
+### Bash-оболочка через веб-браузер
 
 Для демонстрации работы websocket.sh подготовлен простой сценарий (файл /cgi-bin/terminal), позволяющий получить доступ к shell из браузера. Для этого сначала нужно запустить httpd (из пакета busybox) в директории с websocket.sh:
 ```sh
