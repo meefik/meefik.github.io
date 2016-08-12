@@ -10,9 +10,21 @@ categories: websocket busybox sh
 
 ### Bash-оболочка через веб-браузер
 
-Для демонстрации работы websocket.sh подготовлен простой сценарий (файл /cgi-bin/terminal), позволяющий получить доступ к shell из браузера. Для этого сначала нужно запустить httpd (из пакета busybox) в директории с websocket.sh:
+Для демонстрации работы websocket.sh подготовлен простой сценарий (файл /cgi-bin/terminal), позволяющий получить доступ к shell из браузера. Для этого сначала нужно запустить httpd (из пакета busybox) в директории с websocket.sh. Запуск примера работы через библиотеку [JQuery Terminal Emulator](http://terminal.jcubic.pl):
 ```sh
-httpd -p 8080
+cd jquery.terminal
+WS_SHELL="bash" httpd -p 8080
+```
+Или через библиотеку [Terminal.js](http://terminal.js.org):
+```sh
+cd terminal.js
+WS_SHELL="bash -i" httpd -p 8080
+```
+Или через библиотеку [xterm.js](https://github.com/sourcelair/xterm.js):
+```sh
+cd xterm.js
+telnetd -p 5023 -l /bin/bash
+WS_SHELL="telnet 127.0.0.1 5023" httpd -p 8080
 ```
 После этого открыть страницу в браузере [http://localhost:8080/cgi-bin/terminal](http://localhost:8080/cgi-bin/terminal), где должна отобразиться командная строка терминала.
 
