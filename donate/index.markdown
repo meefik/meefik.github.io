@@ -46,3 +46,7 @@ You can help the development of [Linux Deploy](/blog/categories/linuxdeploy/) pr
 <input class="webmoney-btn" type="submit" alt="WebMoney" value=" ">
 </form>
 
+### Bitcoin
+
+1CbubyYmTut2HZfBPAePRUMvbPRuPoW6Hs
+
