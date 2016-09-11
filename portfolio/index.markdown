@@ -6,15 +6,25 @@ sharing: true
 footer: false
 ---
 
+## 2016
+
+Технологии: Bash (Ash), JavaScript
+<br>
+Страница проекта: [https://github.com/meefik/websocket.sh](https://github.com/meefik/websocket.sh)
+
+![websocket.sh](/portfolio/images/image17.png "websocket.sh + xterm.js")
+
+Кроссплатформенная реализация WebSocket сервера на SH. Для работы требуется только busybox, вместо bash можно использовать ash. Может использоваться во встраиваемых системах.
+
 ## 2015-2016
 
 Технологии: Node.js, JavaScript, Kurento, WebRTC
 <br>
-Страница проекта: https://github.com/meefik/ITMOproctor 
+Страница проекта: [https://github.com/meefik/ITMOproctor](https://github.com/meefik/ITMOproctor)
 
 ![ITMOproctor](/portfolio/images/image09.png "ITMOproctor")
 
-Разработано программное обеспечение для сопровождения процесса территориально удаленного прохождения экзаменов, подтверждения личности испытуемого и подтверждения результатов его аттестации (https://habrahabr.ru/post/277147/).
+Разработано программное обеспечение для сопровождения процесса территориально удаленного прохождения экзаменов, подтверждения личности испытуемого и подтверждения результатов его аттестации (см. [статью на Хабре](https://habrahabr.ru/post/277147/)).
 
 ## 2012-2016
 
@@ -22,11 +32,11 @@ footer: false
 <br>
 Операционные системы: Android, Linux
 <br>
-Страница проекта: https://github.com/meefik/linuxdeploy 
+Страница проекта: [https://github.com/meefik/linuxdeploy](https://github.com/meefik/linuxdeploy)
 
 ![LinuxDeploy](/portfolio/images/image03.png "LinuxDeploy")
 
-Разработка утилиты для автоматизации процесса установки, конфигурирования и запуска GNU/Linux дистрибутивов на платформе Android внутри контейнеров. Позже утилита получила распространение и на десктопах (https://habrahabr.ru/post/276013/).
+Разработка утилиты для автоматизации процесса установки, конфигурирования и запуска GNU/Linux дистрибутивов на платформе Android внутри контейнеров. Позже утилита получила распространение и на десктопах (см. [статью на Хабре](https://habrahabr.ru/post/276013/)).
 
 ## 2015-2016
 
@@ -34,7 +44,7 @@ footer: false
 <br>
 Операционные системы: Android (ARM, Intel, MIPS)
 <br>
-Страница проекта: https://github.com/meefik/busybox 
+Страница проекта: [https://github.com/meefik/busybox ](https://github.com/meefik/busybox)
 
 ![BusyBox](/portfolio/images/image10.png "BusyBox")
 
@@ -46,7 +56,7 @@ footer: false
 <br>
 Операционные системы: Android
 <br>
-Страница проекта: https://github.com/meefik/tzupdater 
+Страница проекта: [https://github.com/meefik/tzupdater](https://github.com/meefik/tzupdater)
 
 ![TZUpdater](/portfolio/images/image06.png "Timezone Updater")
 
@@ -56,7 +66,7 @@ footer: false
 
 Технологии: Android SDK, Bash, C
 <br>
-Страница проекта: https://github.com/meefik/wshell 
+Страница проекта: [https://github.com/meefik/wshell](https://github.com/meefik/wshell)
 
 ![wShell](/portfolio/images/image02.png "wShell")
 
@@ -66,7 +76,7 @@ footer: false
 
 Технологии: Java
 <br>
-Страница проекта: https://github.com/meefik/jcut 
+Страница проекта: [https://github.com/meefik/jcut](https://github.com/meefik/jcut)
 
 ![jCut](/portfolio/images/image07.png "jCut")
 
@@ -76,7 +86,7 @@ footer: false
 
 Технологии: Node.js, JavaScript
 <br>
-Страница проекта: https://github.com/meefik/spyjs 
+Страница проекта: [https://github.com/meefik/spyjs](https://github.com/meefik/spyjs)
 
 ![SpyJS](/portfolio/images/image08.png "SpyJS")
 
@@ -86,7 +96,7 @@ footer: false
 
 Технологии: Node.js, AngularJS
 <br>
-Страница проекта: https://github.com/meefik/semanticNT 
+Страница проекта: [https://github.com/meefik/semanticNT](https://github.com/meefik/semanticNT)
 
 ![SemanticNT](/portfolio/images/image16.png "SemanticNT")
 
@@ -96,7 +106,7 @@ footer: false
 
 Технологии: Java
 <br>
-Страница проекта: https://github.com/meefik/keystorebreaker 
+Страница проекта: [https://github.com/meefik/keystorebreaker](https://github.com/meefik/keystorebreaker)
 
 ![KeystoreBreaker](/portfolio/images/image12.png "KeystoreBreaker")
 
@@ -106,7 +116,7 @@ footer: false
 
 Технологии: Asterisk, SIP, WebRTC, Node.js, JavaScript
 <br>
-Страница проекта: https://github.com/meefik/medinfo 
+Страница проекта: [https://github.com/meefik/medinfo](https://github.com/meefik/medinfo)
 
 ![MedInfo](/portfolio/images/image14.png "MedInfo")
 
@@ -116,7 +126,7 @@ footer: false
 
 Технологии: Scilab, Python, JavaScript
 <br>
-Страницы проекта: https://github.com/meefik/varikard 
+Страницы проекта: [https://github.com/meefik/varikard](https://github.com/meefik/varikard)
 
 ![Varikard](/portfolio/images/image13.png "Varikard")
 
@@ -128,7 +138,7 @@ footer: false
 <br>
 Операционные системы: Android
 <br>
-Страница проекта: https://github.com/meefik/microscope 
+Страница проекта: [https://github.com/meefik/microscope](https://github.com/meefik/microscope)
 
 ![Microscope](/portfolio/images/image00.png "Microscope")
 
@@ -140,7 +150,7 @@ footer: false
 <br>
 Операционные системы: CentOS, Oracle Linux
 <br>
-Страница проекта: https://github.com/meefik/classman 
+Страница проекта: [https://github.com/meefik/classman](https://github.com/meefik/classman)
 
 ![ClassMan](/portfolio/images/image05.png "ClassMan")
 
@@ -152,7 +162,7 @@ footer: false
 <br>
 Операционные системы: Windows 95-XP, Palm OS 4
 <br>
-Страница проекта: https://github.com/meefik/nop-virus 
+Страница проекта: [https://github.com/meefik/nop-virus](https://github.com/meefik/nop-virus)
 
 Исследование вирусов и антивирусных технологий, написание патчей и загрузчиков, участие в соревнованиях CrackMe.
 
@@ -162,7 +172,7 @@ footer: false
 <br>
 Операционные системы: Windows 95-XP
 <br>
-Страница проекта: http://project-soft.narod.ru 
+Страница проекта: [http://project-soft.narod.ru](http://project-soft.narod.ru)
 
 **Rocket Messenger**
 
