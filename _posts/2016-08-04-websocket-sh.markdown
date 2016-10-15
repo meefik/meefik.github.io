@@ -12,7 +12,7 @@ categories: websocket busybox sh
 
 Для демонстрации работы websocket.sh подготовлен простой сценарий (файл /cgi-bin/terminal), позволяющий получить доступ к shell из браузера. Для этого сначала нужно запустить httpd (из пакета busybox) в директории с websocket.sh.
 
-Для запуска примера работы через библиотеку [JQuery Terminal Emulator](http://terminal.jcubic.pl), позволяющая реализовать выполнение простых команд и отображение резульата выполнения, нужно выполнить:
+Для запуска примера работы через библиотеку [JQuery Terminal Emulator](http://terminal.jcubic.pl), позволяющая реализовать выполнение простых команд и отображение результата выполнения, нужно выполнить:
 ```sh
 cd jquery.terminal
 WS_SHELL="sh" httpd -p 8080
