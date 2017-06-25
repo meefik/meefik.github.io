@@ -23,7 +23,7 @@ You can help the development of [Linux Deploy](/blog/categories/linuxdeploy/) pr
 <input type="hidden" name="business" value="R974QA3K8MY48">
 <input type="hidden" name="lc" value="US">
 <input type="hidden" name="item_name" value="Linux Deploy">
-<input type="number" name="amount" value="10" class="amount">
+<input type="number" name="amount" value="10" step="0.01" class="amount">
 <select name="currency_code" class="currency">
   <option value="USD" selected>USD</option>
   <option value="EUR">EUR</option>
@@ -36,7 +36,7 @@ You can help the development of [Linux Deploy](/blog/categories/linuxdeploy/) pr
 ### WebMoney
 
 <form action="https://merchant.wmtransfer.com/lmi/payment.asp" method="post" target="_top">
-<input type="number" name="LMI_PAYMENT_AMOUNT" value="10" class="amount">
+<input type="number" name="LMI_PAYMENT_AMOUNT" value="10" step="0.01" class="amount">
 <input type="hidden" name="LMI_PAYMENT_DESC_BASE64" value="TGludXggRGVwbG95">
 <select name="LMI_PAYEE_PURSE" class="currency">
   <option value="Z908867080379" selected>USD</option>
