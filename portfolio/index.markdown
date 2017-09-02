@@ -6,6 +6,16 @@ sharing: true
 footer: false
 ---
 
+## 2016-2017
+
+Технологии: Full-Stack JavaScript, WebRTC
+<br>
+Страница проекта: [http://proctoredu.ru](http://proctoredu.ru)
+
+![ProctorEdu](/portfolio/images/image18.png "ProctorEdu Report")
+
+Разработана автоматизированная система прокторинга для подтверждения результатов онлайн-экзаменов (см. [статью на Хабре](https://habrahabr.ru/post/325296/)).
+
 ## 2016
 
 Технологии: Bash (Ash), JavaScript
