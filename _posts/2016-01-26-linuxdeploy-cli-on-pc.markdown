@@ -50,7 +50,7 @@ chmod 755 ~/bin/proot
 
 Загрузка и установка Linux Deploy CLI:
 ```
-wget https://github.com/meefik/linuxdeploy/archive/cli.zip
+wget -O cli.zip https://github.com/meefik/linuxdeploy-cli/archive/master.zip
 unzip cli.zip
 rm cli.zip
 ln -sf ~/linuxdeploy-cli/cli.sh ~/bin/linuxdeploy
