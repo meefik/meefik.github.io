@@ -8,13 +8,13 @@ footer: false
 
 Вы можете помочь развитию проекта [Linux Deploy](/blog/categories/linuxdeploy/) или другому проекту, которым занимается автор. Спасибо!
 
-You can help the development of [Linux Deploy](/blog/categories/linuxdeploy/) project or another project that are developed by the author. Thanks!
+You can help the development of the [Linux Deploy](/blog/categories/linuxdeploy/) project or another project that are developed by the author. Thanks!
 
 <hr style="border: 0;border-top: 1px solid #f7f7f7;background: #999;margin: 2em 0 1.5em 0;">
 
 ### Яндекс.Деньги
 
-<iframe style="margin-bottom: 1.5em;" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/shop.xml?account=410011256960911&quickpay=shop&payment-type-choice=on&writer=seller&targets=Linux+Deploy&default-sum=300&button-text=04&successURL=http%3A%2F%2Fmeefik.ru" width="450" height="198"></iframe>
+<iframe style="margin-bottom: 1.5em;" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/shop.xml?account=410011256960911&quickpay=shop&payment-type-choice=on&writer=seller&targets=Linux+Deploy&default-sum=300&button-text=04&successURL=http%3A%2F%2Fmeefik.ru" width="450" height="250"></iframe>
 
 ### PayPal
 
