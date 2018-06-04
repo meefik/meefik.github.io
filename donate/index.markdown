@@ -48,5 +48,4 @@ You can help the development of the [Linux Deploy](/blog/categories/linuxdeploy/
 
 ### Bitcoin
 
-1CbubyYmTut2HZfBPAePRUMvbPRuPoW6Hs
-
+<a style="display: inline-block; padding: 2px 9px; background-color: #FFECD9; border: 1px solid #FFE2C4; border-radius: 3px; font-size: 14px; color: inherit;" href="bitcoin:1CbubyYmTut2HZfBPAePRUMvbPRuPoW6Hs"><img src="/images/bitcoin_button.png" style="margin-right: .5em; vertical-align: -4px; border: none; box-shadow: none;">1CbubyYmTut2HZfBPAePRUMvbPRuPoW6Hs</a>
