@@ -3,6 +3,10 @@
 // By default this file should be EMPTY!!!
 // Please edit specifications in place if you are building an other theme!
 
+body {
+    background-color: white;
+}
+
 /* Solarized custom style */
 .code-highlight-figure {
     margin: 1em 0;
@@ -61,4 +65,30 @@ select.currency {
     width: 90px;
     height: 30px;
     padding: 2px 0 2px 5px
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+    margin: 15px 0;
+}
+
+th {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+th {
+    border-top: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+thead {
+    background-color: #f2f2f2;
 }
