@@ -35,7 +35,7 @@ WS_SHELL="telnet 127.0.0.1 5023" httpd -p 8080
 
 Можно обойтись без httpd, запустив websocket.sh вручную, однако при перезагрузке страницы браузера скрипт придется запускать заново:
 ```sh
-WS_SHELL="sh" nc -l -p 5000 -e websocket.sh
+WS_SHELL="cat" nc -l -p 5000 -e websocket.sh
 ```
 Здесь используется версия NetCat из пакета busybox, имеющая параметр -e. Также, возможно, в самом скрипте потребуется указать другой путь к интерпретатору, например, так:
 ```sh
@@ -46,23 +46,18 @@ WS_SHELL="sh" nc -l -p 5000 -e websocket.sh
 ```js
 var port = 5000;
 var ws = new WebSocket('ws://' + location.hostname + ':' + port);
-ws.onmessage = function(msg) {
-    // convert base64 to string
-    var data = atob(msg.data);
-    // decode utf-8 chars
-    data = decodeURIComponent(escape(data));
-    console.log('Received data: ', data);
+ws.onmessage = function(ev) {
+  var textDecoder = new TextDecoder();
+  var fileReader = new FileReader();
+  fileReader.addEventListener('load', function () {
+    var str = textDecoder.decode(fileReader.result);
+    console.log('Received data: ', str);
+  });
+  fileReader.readAsArrayBuffer(ev.data);
 }
-ws.onclose = function() {
-    console.log('Connection closed.');
+ws.onopen = function() {
+  ws.send('hello');
 }
-// send command: ls /
-var data = 'ls /';
-// encode utf-8 chars
-data = unescape(encodeURIComponent(data));
-// convert string to base64
-data = btoa(data);
-ws.send(data);
 ```
 
 Прослойка websocket.sh создавалась для Linux Deploy, чтобы получить возможность управлять контейнерами из браузера, однако может быть использована и для других целей.
