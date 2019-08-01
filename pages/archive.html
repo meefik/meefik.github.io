@@ -1,0 +1,50 @@
+---
+permalink: /archive
+layout: page
+title: Blog Archive
+comments: false
+footer: false
+---
+
+<div class="archive">
+{% assign posts = page.posts %}
+{% unless posts %}
+  {% assign posts = site.posts %}
+{% endunless %}
+{% for post in posts %}
+{% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+{% unless year == this_year %}
+  {% assign year = this_year %}
+  <h2>{{ year }}</h2>
+{% endunless %}
+<article data-categories="{{ post.categories | join: ' ' }}">
+  {% capture category %}
+    {{ post.categories | size }}
+  {% endcapture %}
+  <h1><a href="{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}{% if post.external-url %} &rarr;{% endif %}</a></h1>
+  <time datetime="{{ post.date | datetime | date_to_xmlschema }}" pubdate>{{ post.date | date: "<span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}</time>
+  {% if category != '0' %}
+  <footer>
+    posted in {% include post/categories.html %}
+  </footer>
+  {% endif %}
+</article>
+{% endfor %}
+</div>
+
+<script type="text/javascript">
+var category = location.search.replace('?category=', '');
+if (category) {
+  [].forEach.call(document.querySelectorAll('.archive>article[data-categories]'), function(el, i, arr) {
+    var categories = (el.dataset.categories || '').split(' ');
+    if (categories.indexOf(category) === -1) {
+      var prev = el.previousElementSibling;
+      var next = el.nextElementSibling
+      if (prev && prev.tagName !== el.tagName && (!next || next.tagName !== el.tagName)) {
+        prev.remove();
+      }
+      el.remove();
+    }
+  });
+}
+</script>

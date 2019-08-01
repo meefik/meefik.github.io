@@ -1,0 +1,86 @@
+.archive {
+  >article {
+    color: $text-color-light;
+    margin-left: 0;
+    padding: 1em 0 1em;
+    position: relative;
+
+    h1 {
+      color: $text-color;
+      margin-bottom: 0.3em;
+      margin-top: 0;
+      font-size: 1.5em;
+
+      a {
+        color: inherit;
+        font-weight: normal;
+        display: inline-block;
+
+        &:hover {
+          color: $link-color-hover;
+        }
+      }
+    }
+  }
+
+  article + article, h2 + article {
+    background: $img-border bottom left repeat-x;
+  }
+
+  >h2 {
+    display: none;
+    float: left;
+    background: none;
+    font-weight: normal;
+    color: $text-color-light;
+  }
+
+  a.category, time {
+    @extend .sans;
+    color: $text-color-light;
+  }
+
+  a:hover {
+    color: $link-color-hover;
+  }
+
+  time {
+    font-size: 0.9em;
+    line-height: 1.2em;
+
+    .month, .day {
+      display: inline-block;
+    }
+
+    .month {
+      text-transform: uppercase;
+    }
+
+    .year {
+      display: inline;
+    }
+  }
+
+  @media only screen and (min-width: 550px) {
+
+    >article {
+      margin-left: 5em;
+      padding-left: 4.5em;
+    }
+
+    >h2 {
+      display: inline-block;
+    }
+
+    time {
+      position: absolute;
+      text-align: right;
+      left: 0em;
+      top: 1.8em;
+
+      .year {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.portfolio {
+  >article {
+    padding: 1em 0 1em;
+  }
+
+  td.label {
+    width: 40%;
+  }
+
+  article header {
+    display: flex;
+    margin: 0;
+    padding-top: 1em;
+
+    h1 {
+      flex: 1;
+      color: $text-color;
+      font-size: 1.5em;
+      padding: 0;
+      margin-top: 0;
+    }
+
+    h2 {
+      display: inline-block;
+      font-weight: normal;
+      position: relative;
+      color: $text-color-light;
+      padding: 0;
+      margin-top: 0;
+    }
+  }
+}

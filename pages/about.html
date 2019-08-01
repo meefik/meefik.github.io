@@ -1,0 +1,51 @@
+---
+permalink: /about
+layout: page
+title: "About me"
+comments: false
+footer: false
+---
+
+<div class="about">
+  <div class="desc">
+    <img src="/assets/images/avatar.png" alt="avatar"/>
+    <div>
+      <h3>{{ site.author }}{% if site.author_degree %}, {{ site.author_degree }}{% endif %}</h3>
+      <div>{{ site.time | date: "%Y" | minus: site.birthday }} age, {{ site.country }}</div>
+      <div>{{ site.email }}</div>
+    </div>
+  </div>
+
+  <h3>EXPERIENCE</h3>
+
+  {% for experience in site.data.experiences %}
+  <table>
+    <tr>
+      <td style="border: none;">
+        <div>{{ experience.position }}</div>
+        <div><a href="{{ experience.link }}" target="_blank">{{ experience.company }}</a></div>
+      </td>
+      <td style="border: none; width: 40%">{{ experience.duration }}</td>
+    </tr>
+    {% if experience.description %}
+    <tr>
+      <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">{{ experience.description }}</td>
+    </tr>
+    {% endif %}
+  </table>
+  {% endfor %}
+
+  <h3>EDUCATION</h3>
+
+  {% for education in site.data.educations %}
+  <table>
+    <tr>
+      <td style="border: none">
+        <div>{{ education.specialty }}</div>
+        <a href="{{ education.link }}" target="_blank">{{ education.institution }}</a>
+      </td>
+      <td style="border: none; width: 40%">{{ education.duration }}</td>
+    </tr>
+  </table>
+  {% endfor %}
+</div>

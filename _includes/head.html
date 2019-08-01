@@ -1,0 +1,14 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {% if page.keywords %}
+  <meta name="keywords" content="{{ page.keywords }}" />
+  {% endif %}
+
+  {% seo %}
+
+  <link href="{{ '/favicon.ico' | relative_url }}" rel="icon" />
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" />
+
+  {% include custom/head.html %}
+</head>

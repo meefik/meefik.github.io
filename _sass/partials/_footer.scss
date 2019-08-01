@@ -1,0 +1,17 @@
+body > footer {
+  @extend .sans;
+
+  text-align: center;
+  font-size: 0.8em;
+  color: $title-color;
+  background-color: #FFF;
+  position: relative;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 3em;
+  z-index: 1;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}

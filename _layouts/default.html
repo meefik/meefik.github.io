@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html %}
+  <body>
+    <header role="banner">{% include header.html %}</header>
+    <nav role="navigation">{% include navigation.html %}</nav>
+    <div class="content">{{ content }}</div>
+    <footer role="contentinfo">{% include footer.html %}</footer>
+    {% include after_footer.html %}
+  </body>
+</html>

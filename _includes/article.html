@@ -1,0 +1,16 @@
+<article>
+  {% unless page.no_header %}
+  <header>
+    <h1>
+      <a href="{{ post.url }}">{{ post.title }}{% if post.external-url %} &rarr;{% endif %}</a>
+    </h1>
+    {% unless page.meta == false %}
+    <p class="meta">{% include post/date.html %} | {% include post/categories.html %}</p>
+    {% endunless %}
+  </header>
+  {% endunless %}
+  {{ post.excerpt }}
+  <footer>
+    <a rel="full-article" href="{{ post.url }}">{{ site.excerpt_link }}</a>
+  </footer>
+</article>

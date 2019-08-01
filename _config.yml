@@ -1,0 +1,47 @@
+# ----------------------- #
+#      Main Config        #
+# ----------------------- #
+
+url: "https://meefik.github.io"
+title: "Meefik's Blog"
+subtitle: "Freedom and Open Source"
+author: "Anton Skshidlevsky"
+author_url: "/about"
+author_degree: "PhD"
+email: "meefik [at] gmail.com"
+birthday: 1985
+country: "Russia"
+simple_search: "https://www.google.com/search"
+description:
+permalink: "/:year/:month/:day/:title/"
+markdown: "kramdown"
+highlighter: "rouge"
+paginate: 10
+paginate_path: "posts/:num"
+excerpt_link: "Read on &rarr;"
+excerpt_separator: "<!--more-->"
+edit: true
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# ----------------------- #
+#   3rd Party Settings    #
+# ----------------------- #
+
+# Github
+github_user: meefik
+github_repo: meefik.github.io
+
+# Youtube
+youtube_user: skshidlevsky
+
+# Disqus Comments
+disqus_short_name: meefik

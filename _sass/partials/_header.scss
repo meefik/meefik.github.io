@@ -1,0 +1,20 @@
+body > header {
+  h1 {
+    display: inline-block;
+    margin: 0;
+
+    a, a:visited, a:hover {
+      color: $title-color;
+      text-decoration: none;
+    }
+  }
+
+  h2 {
+    @extend .sans;
+
+    margin: 0.2em 0 0;
+    font-size: 1em;
+    color: $subtitle-color;
+    font-weight: normal;
+  }
+}

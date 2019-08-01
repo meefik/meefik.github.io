@@ -1,0 +1,20 @@
+{% capture category %}
+{% if post %}
+  {{ post.categories | size }}
+{% else %}
+  {{ page.categories | size }}
+{% endif %}
+{% endcapture %}
+{% unless category == '0' %}
+<span class="categories">
+  {% if post %}
+  {% for category in post.categories %}
+    <a class="category" href="/archive?category={{ category }}">{{ category }}</a>
+  {% endfor %}
+  {% else %}
+  {% for category in page.categories %}
+    <a class="category" href="/archive?category={{ category }}">{{ category }}</a>
+  {% endfor %}
+  {% endif %}
+</span>
+{% endunless %}

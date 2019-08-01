@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<article role="article">
+  {% if page.title %}
+  <header>
+    <h1>{{ page.title }}</h1>
+    {% if page.date %}
+    <p class="meta">
+      {% include post/date.html %}
+      {% if edit %} | <a href="{{ site.edit }}">edit</a>{% endif %}
+    </p>
+    {% endif %}
+  </header>
+  {% endif %}
+  {{ content }}
+  {% unless page.footer == false %}
+  <footer>
+    {% if page.date or page.author %}
+    <p class="meta">
+      {% include post/author.html %}
+      {% include post/categories.html%}
+    </p>
+    {% endif %}
+  </footer>
+  {% endunless %}
+</article>
+{% if site.disqus_short_name and page.comments == true %}
+<section class="comment">
+  <h1>Comments</h1>
+  <div id="disqus_thread" aria-live="polite">
+    {% include post/disqus_thread.html %}
+  </div>
+</section>
+{% endif %}
+{% if site.juvia_site_key and page.comments == true %}
+<section class="comment">
+  <h1>Comments</h1>
+  <div id="juvia_thread" aria-live="polite">
+    {% include post/juvia_thread.html %}
+  </div>
+</section>
+{% endif %}

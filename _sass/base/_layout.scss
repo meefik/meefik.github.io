@@ -1,0 +1,156 @@
+$max-width: 960px !default;
+
+// Padding used for layout margins
+$pad-min: 18px !default;
+$pad-narrow: 25px !default;
+$pad-medium: 35px !default;
+$pad-wide: 55px !default;
+
+$header-font-size: 1em !default;
+$header-padding-top: 1.5em !default;
+$header-padding-bottom: 1.5em !default;
+
+.group {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+body {
+  -webkit-text-size-adjust: none;
+  max-width: $max-width;
+  position: relative;
+  margin: 0 auto;
+
+  > header, > nav, > footer, .content > article, .content > section {
+    @extend .group;
+
+    margin-left: $pad-min;
+    margin-right: $pad-min;
+
+    @media only screen and (min-width: 480px) {
+      margin-left: $pad-narrow;
+      margin-right: $pad-narrow;
+    }
+
+    @media only screen and (min-width: 768px) {
+      margin-left: $pad-medium;
+      margin-right: $pad-medium;
+    }
+
+    @media only screen and (min-width: 992px) {
+      margin-left: $pad-wide;
+      margin-right: $pad-wide;
+    }
+  }
+
+  div.pagination {
+    @extend .group;
+
+    margin-left: $pad-min;
+    margin-right: $pad-min;
+
+    @media only screen and (min-width: 480px) {
+      margin-left: $pad-narrow;
+      margin-right: $pad-narrow;
+    }
+
+    @media only screen and (min-width: 768px) {
+      margin-left: $pad-medium;
+      margin-right: $pad-medium;
+    }
+
+    @media only screen and (min-width: 992px) {
+      margin-left: $pad-wide;
+      margin-right: $pad-wide;
+    }
+  }
+
+  > header {
+    text-align: center;
+    font-size: $header-font-size;
+    padding-top: $header-padding-top;
+    padding-bottom: $header-padding-bottom;
+  }
+}
+
+.flex-content {
+  max-width: 100%;
+  height: auto;
+}
+
+.basic-alignment {
+  &.left {
+    float: left;
+    margin-right: 1.5em;
+  }
+
+  &.right {
+    float: right;
+    margin-left: 1.5em;
+  }
+
+  &.center {
+    display: block;
+    margin: 0 auto 1.5em;
+  }
+
+  &.left, &.right {
+    margin-bottom: 0.8em;
+  }
+}
+
+article {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+@media only screen and (min-width: 550px) {
+  body > header {
+    font-size: $header-font-size;
+  }
+
+  article {
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    -webkit-text-size-adjust: auto;
+  }
+
+  body > header {
+    font-size: $header-font-size * 1.2;
+  }
+
+  .content {
+    overflow: visible;
+    position: relative;
+
+    > div, > article {
+      text-align: justify;
+    }
+
+    article {
+      padding-top: 1.5em;
+      padding-bottom: 1.5em;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  body > header {
+    font-size: $header-font-size * 1.3;
+  }
+
+  .content {
+    article {
+      padding-top: 2em;
+      padding-bottom: 2em
+    }
+  }
+}

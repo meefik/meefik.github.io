@@ -1,0 +1,48 @@
+// Borders
+$img-border: url("/assets/images/dotted-border.png");
+$border-color: #f2f2f2 !default;
+$highlight-bg: #f8f8f8 !default;
+
+// Main Link Colors
+$link-color: #195ea2 !default;
+$link-color-hover: adjust-color($link-color, $lightness: 10, $saturation: 25) !default;
+$link-color-visited: $link-color !default;
+$link-color-active: adjust-color($link-color-hover, $lightness: -15) !default;
+
+// Site header
+$title-color: #777 !default;
+$subtitle-color: lighten($title-color, 25) !default;
+
+// Text colors
+$text-color: #222 !default;
+$text-color-light: lighten($text-color, 60) !default;
+
+/* Core theme application */
+
+html {
+  overflow-y: scroll;
+}
+
+a {
+  color: $link-color;
+}
+
+a:hover {
+  color: $link-color-hover;
+}
+
+a:focus {
+  color: $link-color-hover;
+}
+
+a:visited {
+  color: $link-color-visited;
+}
+
+a:active {
+  color: $link-color-active;
+}
+
+a {
+  transition: color 0.3s;
+}

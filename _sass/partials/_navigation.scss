@@ -1,0 +1,175 @@
+body > nav {
+  position: relative;
+  padding: 0.35em 5px;
+  border: {
+    top: 1px solid $border-color;
+    bottom: 1px solid $border-color;
+  };
+
+  form {
+    display: inline-block;
+    width: 100%;
+
+    fieldset[role=search] {
+      all: unset;
+      width: inherit;
+    }
+
+    input {
+      all: unset;
+      border: 1px solid darken($border-color, 20);
+      background-color: $border-color;
+      border-radius: 4px;
+      padding: 0 0.5em;
+      box-sizing: border-box;
+      font-size: 0.8em;
+      width: inherit;
+
+      &:focus {
+        border-color: $link-color-hover;
+        box-shadow: $link-color-hover 0 0 2px, $link-color-hover 0 0 2px inset;
+        outline: none;
+        background: none;
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    li {
+      display: inline;
+      list-style-image: none;
+      list-style-type: none;
+      white-space: nowrap;
+      margin: 0;
+    }
+
+    li.search {
+      flex: 1;
+    }
+
+    li.menu {
+      display: none;
+    }
+  }
+
+  a {
+    color: darken($border-color, 50);
+    text-shadow: $border-color 0 1px;
+    text-decoration: none;
+  }
+  a:visited {
+    color: darken($border-color, 50);
+  }
+  a:hover {
+    color: $link-color-hover;
+  }
+
+  li + li {
+    border-left: 0;
+    margin-left: 0.8em;
+  }
+
+  li.menu + li.menu > a {
+    padding-left: 0.8em;
+    border-left: 1px solid $border-color;
+  }
+
+  svg {
+    fill: darken($border-color, 20);
+    transition: 0.3s;
+  }
+
+  svg:hover {
+    fill: $link-color-hover;
+  }
+
+  // menu button
+  #toggle {
+    display: block;
+    position: relative;
+    width: 28px;
+    height: 30px;
+  }
+  #toggle:hover {
+    span,
+    span:before,
+    span:after {
+      background-color: $link-color-hover;
+    }
+  }
+
+  #toggle span:after,
+  #toggle span:before {
+    content: "";
+    position: absolute;
+    top: -9px;
+  }
+  #toggle span:after{
+    top: 9px;
+  }
+  #toggle span {
+    position: absolute;
+    display: block;
+    top: 11px;
+    left: 0;
+    right: 0;
+  }
+
+  #toggle span,
+  #toggle span:after,
+  #toggle span:before {
+    width: 100%;
+    height: 5px;
+    background-color: darken($border-color, 20);
+    transition: all 0.3s;
+    backface-visibility: hidden;
+    border-radius: 2px;
+  }
+
+  /* on activation */
+  #toggle.on span {
+    background-color: transparent;
+  }
+  #toggle.on span:before {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  #toggle.on span:after {
+    transform: rotate(-45deg) translate(7px, -8px);
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: $border-color;
+    min-width: 160px;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 0;
+
+    >a {
+      display: block;
+      padding: 4px 8px;
+    }
+    >a:hover {
+      background-color: rgba(0,0,0,0.1);
+    }
+  }
+
+  #toggle.on + .dropdown-content {
+    display: block;
+  }
+
+  @media only screen and (min-width: 768px) {
+    #toggle {
+      display: none;
+    }
+    ul li.menu {
+      display: inline;
+    }
+  }
+}
