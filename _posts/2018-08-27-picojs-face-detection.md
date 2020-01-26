@@ -50,10 +50,10 @@ comments: true
 
 ```js
 // load cascade
-fetch('./cascade.json')
+fetch('./cascade.dat')
   .then(function(response) {
     if (!response.ok) throw new Error(response.statusText || 'Request error');
-    return response.json(); // or response.arrayBuffer()
+    return response.arrayBuffer();
   })
   .then(function(cascade) {
     // create PICO detector with options
