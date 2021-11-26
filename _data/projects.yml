@@ -1,9 +1,23 @@
-- title: "Автоматизированная система прокторинга"
-  year: 2017
-  stack: ["JavaScript", "Node.js", "WebRTC"]
-  homepage: "http://proctoredu.ru"
-  description: "Разработана автоматизированная система прокторинга для подтверждения результатов онлайн-экзаменов (см. [статью на Хабре](https://habrahabr.ru/post/325296/))."
+- title: "Стеганографическая библиотека asPNG"
+  year: 2018
+  stack: ["JavaScript"]
+  homepage: "https://github.com/meefik/aspng"
+  description: "Библиотека для кодирования данных в PNG со сжатием или вставкой данных в существующее изображение PNG."
+  poster: "/assets/images/aspng_encoded.png"
+
+- title: "PICO Face Detector"
+  year: 2018
+  stack: ["JavaScript"]
+  homepage: "https://github.com/meefik/pico.js"
+  description: "Библиотека для детекции лиц с использованием алгоритма PICO с инвариантностью к наклону головы."
   poster: "/assets/images/image18.png"
+
+- title: "Генерация и распознавание DTMF"
+  year: 2018
+  stack: ["JavaScript"]
+  homepage: "https://github.com/meefik/dtmf.js"
+  description: "Библиотека для отправки и получения кодов DTMF."
+  poster: "/assets/images/dtmf_demo.png"
 
 - title: "WebSocket сервер на bash"
   year: 2016
