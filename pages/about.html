@@ -8,10 +8,9 @@ footer: false
 
 <div class="about">
   <div class="desc">
-    <img src="/assets/images/avatar.png" alt="avatar"/>
+    <img src="/assets/images/avatar.png" alt="avatar" />
     <div>
       <h3>{{ site.author }}{% if site.author_degree %}, {{ site.author_degree }}{% endif %}</h3>
-      <div>{{ site.time | date: "%Y" | minus: site.birthday }} age, {{ site.country }}</div>
       <div>{{ site.email }}</div>
     </div>
   </div>
@@ -29,7 +28,8 @@ footer: false
     </tr>
     {% if experience.description %}
     <tr>
-      <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">{{ experience.description }}</td>
+      <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">{{
+        experience.description }}</td>
     </tr>
     {% endif %}
   </table>

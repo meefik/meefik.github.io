@@ -9,10 +9,7 @@ author: "Anton Skshidlevsky"
 author_url: "/about"
 author_degree: "PhD"
 email: "meefik [at] gmail.com"
-birthday: 1985
-country: "Russia"
 simple_search: "https://www.google.com/search"
-description:
 permalink: "/:year/:month/:day/:title/"
 markdown: "kramdown"
 highlighter: "rouge"

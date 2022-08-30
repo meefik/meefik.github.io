@@ -1,3 +1,10 @@
+- title: "UX библиотека без зависимостей"
+  year: 2021
+  stack: ["JavaScript"]
+  homepage: "https://github.com/meefik/libux"
+  description: "Минималистичная UX библиотека для реализации встраиваемых интерфейсов на JavaScript без зависимостей."
+  poster: "/assets/images/image19.png"
+
 - title: "Стеганографическая библиотека asPNG"
   year: 2018
   stack: ["JavaScript"]
