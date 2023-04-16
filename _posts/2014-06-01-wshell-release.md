@@ -8,7 +8,7 @@ comments: true
 
 wShell - эмулятор терминала с веб-интерфейсом для Android. Основан на [Shell In A Box](http://code.google.com/p/shellinabox/). Приложение позволяет подключиться к консоли Android-устройства прямо из веб-браузера, если компьютер и устройства находятся в одной локальной сети.
 
-![wshell](/assets/images/wshell-web.png "wShell в веб-браузере"){: .center}
+![wshell](/assets/images/wshell.png "wShell в веб-браузере"){: .center}
 
 <!--more-->
 

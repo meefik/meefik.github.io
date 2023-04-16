@@ -9,6 +9,3 @@
 
 - name: About
   route: /about
-
-- name: Donate
-  route: /donate

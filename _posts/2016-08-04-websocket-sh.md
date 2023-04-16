@@ -8,7 +8,7 @@ comments: true
 
 [Websocket.sh](https://github.com/meefik/websocket.sh) - кроссплатформенная реализация [WebSocket](https://tools.ietf.org/html/rfc6455) сервера на bash. Для работы требуется только busybox, вместо bash можно использовать ash. Может использоваться во встраиваемых системах.
 
-![websocket.sh](/assets/images/websocket_sh.png "websocket.sh + xterm.js")
+![websocket.sh](/assets/images/websocket-sh.png "websocket.sh + xterm.js")
 
 <!--more-->
 

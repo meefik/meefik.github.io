@@ -1,152 +1,152 @@
-- title: "UX библиотека без зависимостей"
+- title: "UX library without dependencies"
   year: 2021
   stack: ["JavaScript"]
   homepage: "https://github.com/meefik/libux"
-  description: "Минималистичная UX библиотека для реализации встраиваемых интерфейсов на JavaScript без зависимостей."
-  poster: "/assets/images/image19.png"
+  description: "A minimalistic UX framework for libraries in pure JavaScript without dependencies."
+  poster: "/assets/images/libux-todo.png"
 
-- title: "Стеганографическая библиотека asPNG"
+- title: "Steganographic library"
   year: 2018
   stack: ["JavaScript"]
   homepage: "https://github.com/meefik/aspng"
-  description: "Библиотека для кодирования данных в PNG со сжатием или вставкой данных в существующее изображение PNG."
-  poster: "/assets/images/aspng_encoded.png"
+  description: "A JS library for encoding data as PNG with compression or injecting data into an existing PNG image."
+  poster: "/assets/images/aspng-encoded.png"
 
-- title: "PICO Face Detector"
+- title: "PICO face detector"
   year: 2018
   stack: ["JavaScript"]
   homepage: "https://github.com/meefik/pico.js"
-  description: "Библиотека для детекции лиц с использованием алгоритма PICO с инвариантностью к наклону головы."
-  poster: "/assets/images/image18.png"
+  description: "A library for detecting faces using the PICO algorithm with the face rotation invariant implementation."
+  poster: "/assets/images/pico-js.png"
 
-- title: "Генерация и распознавание DTMF"
+- title: "DTMF tone generator and receiver"
   year: 2018
   stack: ["JavaScript"]
   homepage: "https://github.com/meefik/dtmf.js"
-  description: "Библиотека для отправки и получения кодов DTMF."
-  poster: "/assets/images/dtmf_demo.png"
+  description: "Library for sending and receive DTMF codes."
+  poster: "/assets/images/dtmf-demo.png"
 
-- title: "WebSocket сервер на bash"
+- title: "WebSocket implementation for UNIX shell"
   year: 2016
   stack: ["Bash", "JavaScript"]
   homepage: "https://github.com/meefik/websocket.sh"
-  description: "Кроссплатформенная реализация WebSocket сервера на bash. Для работы требуется только busybox, вместо bash можно использовать ash. Может использоваться во встраиваемых системах."
-  poster: "/assets/images/image17.png"
+  description: "The cross platform WebSocket implementation for UNIX shell. It works on busybox and ash for embedded systems."
+  poster: "/assets/images/websocket-sh.png"
 
-- title: "Система дистанционного надзора"
+- title: "System of distant supervision"
   year: 2015
   stack: ["Node.js", "JavaScript", "Kurento", "WebRTC"]
   homepage: "https://github.com/meefik/ITMOproctor"
-  description: "Разработано программное обеспечение для сопровождения процесса территориально удаленного прохождения экзаменов, подтверждения личности испытуемого и подтверждения результатов его аттестации (см. [статью на Хабре](https://habrahabr.ru/post/277147/))."
-  poster: "/assets/images/image09.png"
+  description: "Software to accompany the process of passing exams remotely, confirming the identity of the test taker and confirming the results of his certification (see [the article on Habr](https://habrahabr.ru/post/277147/))."
+  poster: "/assets/images/itmoproctor.png"
 
-- title: "BusyBox для Android"
+- title: "BusyBox for Android"
   year: 2015
   stack: ["Android", "Java", "Bash", "C"]
   homepage: "https://github.com/meefik/busybox"
-  description: "Приложение представляет собой инсталлятор последней версии BusyBox для Android. Приложение содержит сборку BusyBox для различных аппаратных архитектур и является сборкой с наиболее полным набором функций."
-  poster: "/assets/images/image10.png"
+  description: "This application is an BusyBox installer for Android."
+  poster: "/assets/images/busybox.png"
 
-- title: "Timezone Updater для Android"
+- title: "Timezone Updater for Android"
   year: 2015
   stack: ["Android", "Java", "Bash", "C"]
   homepage: "https://github.com/meefik/tzupdater"
-  description: "Приложение автоматически обновляет базу данных часовых поясов и ICU данные в Android. Последние версии базы данных часовых поясов берутся от официальных поставщиков, компилируются и устанавливаются прямо на самом устройстве."
-  poster: "/assets/images/image06.png"
+  description: "Automatic update of time zones on Android."
+  poster: "/assets/images/tzupdater.png"
 
-- title: "Веб-терминал для Android"
+- title: "Terminal for Android"
   year: 2014
   stack: ["Android", "Java", "Bash", "C"]
   homepage: "https://github.com/meefik/wshell"
-  description: "Эмулятор терминала для Android с веб-интерфейсом."
-  poster: "/assets/images/image02.png"
+  description: "Web-based terminal emulator for Android."
+  poster: "/assets/images/wshell.png"
 
-- title: "Отслеживание изменений в каталоге"
+- title: "Track changes in a directory"
   year: 2013
   stack: ["Java"]
   homepage: "https://github.com/meefik/jcut"
-  description: "Приложение для отслеживания изменений в каталоге. Первый запуск делает снапшот файловой системы (указанного каталога), второй запуск сравнивает текущее состояние файлов и каталогов со снапшотом. Скорость обработки около 100 000 файлов в секунду."
-  poster: "/assets/images/image07.png"
+  description: "Java console application for tracking changes in the directory."
+  poster: "/assets/images/jcut.png"
 
-- title: "Клавиатурный почерк"
+- title: "Keyboard handwriting"
   year: 2013
   stack: ["Node.js", "JavaScript"]
   homepage: "https://github.com/meefik/spyjs"
-  description: "Проводились исследования, направленные на идентификацию пользователей по клавиатурному почерку и движениям мыши. Разработано программное обеспечение для сбора статистики активности пользователей при работе с веб-страницами и исследования особенностей их поведения."
-  poster: "/assets/images/image08.png"
+  description: "Research has been conducted to identify users by keyboard handwriting and mouse movements. Software has been developed to collect statistics on user activity when working with web pages and to study the features of their behavior."
+  poster: "/assets/images/spyjs.png"
 
-- title: "Каталог онлайн-курсов"
+- title: "Catalog of online courses"
   year: 2013
-  stack: ["Node.js", "AngularJS"]
+  stack: ["Node.js", "Angular"]
   homepage: "https://github.com/meefik/semanticNT"
-  description: "Проект 'Открытое онлайн-обучение' — предоставление доступа к электронным курсам, которые могут содержать видеолекции, электронные презентации к ним, текстовые материалы, вопросы для самоконтроля, экзаменационные задания. Проект был закрыт после появления платформы Open edX."
-  poster: "/assets/images/image16.png"
+  description: "Providing access to online courses that may contain video lectures, presentations for them, text materials, questions for self-control, examination tasks. The project was closed after the introduction of the Open edX platform."
+  poster: "/assets/images/semantic-nt.png"
 
-- title: "Приложение Linux Deploy"
+- title: "Linux Deploy for Android"
   year: 2012
   stack: ["Android", "Linux", "Java", "Bash", "C"]
   homepage: "https://github.com/meefik/linuxdeploy"
-  description: "Разработка утилиты для автоматизации процесса установки, конфигурирования и запуска GNU/Linux дистрибутивов на платформе Android внутри контейнеров. Позже утилита получила распространение и на десктопах (см. [статью на Хабре](https://habrahabr.ru/post/276013/))."
-  poster: "/assets/images/image03.png"
+  description: "This application is open source software for quick and easy installation of the operating system GNU/Linux on your Android device. Later, the utility gained distribution on desktops (see [the article on Habr](https://habrahabr.ru/post/276013/))."
+  poster: "/assets/images/linuxdeploy.png"
 
-- title: "Восстановитель паролей Keystore"
+- title: "Password guessing to Java keystore"
   year: 2012
   stack: ["Java"]
   homepage: "https://github.com/meefik/keystorebreaker"
-  description: "Приложения для подбора забытых паролей к Java keystore. Приложение позволяет разбить задачу на N частей и выполнять каждую часть независимо в разных потоках на одном компьютере, либо на разных компьютерах (распределенные вычисления)."
-  poster: "/assets/images/image12.png"
+  description: "Applications for recovering forgotten passwords for Java keystore. The application allows you to split the task into N parts and execute each part independently in different threads on the same computer, or on different computers (distributed computing)."
+  poster: "/assets/images/keystorebreaker.png"
 
-- title: "Колл-центр для медицинских консультаций"
+- title: "Workplace of a call center operator"
   year: 2012
   stack: ["Asterisk", "SIP", "WebRTC", "Node.js", "JavaScript"]
   homepage: "https://github.com/meefik/medinfo"
-  description: "Разработка системы колл-центра для медицинских консультаций (многоканальный номер, обработка очереди звонков, программный телефон для работы через веб-браузер). Проект реализован в рамках [программы трансграничного сотрудничества Эстония-Латвия-Россия](http://www.estlatrus.eu/eng/projects/1632)."
-  poster: "/assets/images/image14.png"
+  description: "Call center system for medical consultations (multiline number, call queue processing, web browser softphone). The project was implemented as part of [ENPI cross border cooperation programme Estonia-Latvia-Russia](http://www.estlatrus.eu/eng/projects/1632)."
+  poster: "/assets/images/medinfo.png"
 
-- title: "Вариабельность сердечного ритма"
+- title: "Heart rate variability"
   year: 2011
   stack: ["Scilab", "Python", "JavaScript"]
   homepage: "https://github.com/meefik/varikard"
-  description: "Исследование вариабельности сердечного ритма с целью построения адаптивного электронного обучения с учетом функционального состояния обучающегося. В исследованиях используется программно-аппаратный комплекс Варикард 2.51 (и [пульсометры с Bluetooth](https://github.com/meefik/blehr)) и специально разработанное программное обеспечение. Также проводились исследования идентификации личности по ЭКГ, исследовалась возможность использования кардиосигналов с [оптических датчиков](https://github.com/meefik/PulseSensor_Amped_Arduino/tree/master/PulseSensor_Capture) для идентификации личности."
-  poster: "/assets/images/image13.png"
+  description: "The study of heart rate variability in order to build adaptive e-learning, taking into account the functional state of the student. The research uses a hardware-software complex Varikard 2.51 (and [heart rate monitors with Bluetooth](https://github.com/meefik/blehr)) and specially designed software. ECG personality identification studies have also been conducted, studied the possibility of using cardiac signals with [optical sensors](https://github.com/meefik/PulseSensor_Amped_Arduino/tree/master/PulseSensor_Capture) for personal identification."
+  poster: "/assets/images/varikard.png"
 
-- title: "Микроскоп для Android"
+- title: "Microscope for Android"
   year: 2011
   stack: ["Android", "Java", "C"]
   homepage: "https://github.com/meefik/microscope"
-  description: "Проект разработки драйвера и приложения для микроскопа LOMO Expert на платформе Android. Реализована поддержка микроскопа на Nexus 7 (2013) и enTourage eDGe."
-  poster: "/assets/images/image00.png"
+  description: "Driver and Android application development project for LOMO Expert microscope. Implemented support for the microscope on Nexus 7 (2013) and enTourage eDGe."
+  poster: "/assets/images/microscope.png"
 
-- title: "ПО для управления терминалами San Ray"
+- title: "San Ray terminal management software"
   year: 2010
   stack: ["Sun Ray Software", "Java", "Bash"]
   homepage: "https://github.com/meefik/classman"
-  description: "Разработка и внедрение централизованной системы управления работой компьютерного класса, построенного на основе терминальной системы Sun Ray. Система позволяет автоматически запускать и завершать терминальные сессии по расписанию или через удаленное управление, отправлять оповещения на компьютеры. Каждая сессия создается на базе шаблона, который включает рабочий стол в режиме киоска (Xfce), таймер текущей сессии, систему уведомлений (отправляются через интерфейс управления), веб-браузер и другое необходимое программное обеспечение."
-  poster: "/assets/images/image05.png"
+  description: "Development and implementation of a centralized system for managing the work of a computer class, built on the basis of the Sun Ray terminal system. The system allows you to automatically start and end terminal sessions according to a schedule or through remote control, send notifications to computers. Each session is created from a template that includes a kiosk desktop (Xfce), a timer for the current session, a notification system (sent via the management interface), a web browser, and other necessary software."
+  poster: "/assets/images/classman.png"
 
-- title: "Исследование компьютерных вирусов"
+- title: "Computer virus research"
   year: 2002
   stack: ["ASM", "OllyDbg", "SoftICE", "Windows", "PalmOS"]
   homepage: "https://github.com/meefik/nop-virus"
-  description: "Исследование вирусов и антивирусных технологий, написание патчей и загрузчиков, участие в соревнованиях CrackMe."
+  description: "Researching viruses and anti-virus technologies, writing patches and loaders, participating in CrackMe competitions."
 
 - title: "Rocket Messenger"
   year: 2000
   stack: ["Delphi"]
-  homepage: "http://project-soft.narod.ru"
-  description: "Клиент-серверное приложение, позволяющее устанавливать соединение между двумя компьютерами в локальной сети, обмениваться текстовыми сообщениями и файлами. Поддерживаются темы оформления и докачка файлов."
-  poster: "/assets/images/image11.png"
+  homepage: "http://project-soft.narod.ru/rocket.htm"
+  description: "A client-server application that allows you to establish a connection between two computers on a local network, exchange text messages and files. Themes and resume files are supported."
+  poster: "/assets/images/rocket-messenger.png"
 
-- title: "Приложение для тестов MultCheck"
+- title: "Desktop application for tests"
   year: 2000
   stack: ["Delphi"]
-  homepage: "http://project-soft.narod.ru"
-  description: "Клиент-серверное приложение, позволяющее устанавливать соединение между двумя компьютерами в локальной сети, обмениваться текстовыми сообщениями и файлами. Поддерживаются темы оформления и докачка файлов."
-  poster: "/assets/images/image01.png"
+  homepage: "http://project-soft.narod.ru/mcheck.htm"
+  description: "MultiCheck - an application for making and passing tests on a computer."
+  poster: "/assets/images/multi-check.png"
 
-- title: "Игра Mario"
+- title: "Mario game"
   year: 2000
   stack: ["Delphi"]
-  homepage: "http://project-soft.narod.ru"
-  description: "Клиент-серверное приложение, позволяющее устанавливать соединение между двумя компьютерами в локальной сети, обмениваться текстовыми сообщениями и файлами. Поддерживаются темы оформления и докачка файлов."
-  poster: "/assets/images/image04.png"
+  homepage: "http://project-soft.narod.ru/mario.htm"
+  description: "Game clone (only 1 level) Super Mario Bros."
+  poster: "/assets/images/mario-game.png"
