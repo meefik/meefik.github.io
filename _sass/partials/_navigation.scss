@@ -39,6 +39,7 @@ body > nav {
     margin: 0;
     padding: 0;
     border: 0;
+    align-items: center;
 
     li {
       display: inline;
@@ -54,6 +55,10 @@ body > nav {
 
     li.menu {
       display: none;
+    }
+
+    li.subscribe svg {
+      display: block;
     }
   }
 
