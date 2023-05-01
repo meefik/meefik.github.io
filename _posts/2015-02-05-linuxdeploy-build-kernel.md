@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Сборка ядра Linux и модулей для Android
-date: 2015-02-05 00:50:00 +0300
-categories: [android]
+title: Building the Linux Kernel and Modules for Android
+date: 2015-02-05 12:00:00 +0000
+categories: [android, android]
 comments: true
 ---
 

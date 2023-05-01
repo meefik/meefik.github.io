@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Запуск дистрибутива Angstrom
-date: 2013-08-06 18:00:00 +0300
-categories: [linuxdeploy]
+title: Launch Angstrom on Android
+date: 2013-08-06 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
-Через Linux Deploy под Android можно запустить дистрибутив <a href="http://ru.wikipedia.org/wiki/%C3%85ngstr%C3%B6m">Angstrom</a>.
+Через Linux Deploy под Android можно запустить дистрибутив <a href="https://en.wikipedia.org/wiki/%C3%85ngstr%C3%B6m_distribution">Ångström</a>.
 
 <!--more-->
 

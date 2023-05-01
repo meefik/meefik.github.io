@@ -1,8 +1,8 @@
 ---
 layout: post
-title: IntelliJ IDEA запущена на Android
-date: 2012-10-03 18:00:00 +0300
-categories: [linuxdeploy]
+title: IntelliJ IDEA launched on Android
+date: 2012-10-03 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

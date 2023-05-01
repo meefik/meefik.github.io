@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Реализация WebSocket-сервера на bash
-date: 2016-08-04 12:00:00 +0300
+title: WebSocket implementation for UNIX shell
+date: 2016-08-04 12:00:00 +0000
 categories: [bash]
 comments: true
 ---

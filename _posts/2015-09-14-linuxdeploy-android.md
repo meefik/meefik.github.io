@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Интеграция Linux Deploy с Android
-date: 2015-09-14 12:00:00 +0300
+title: Integrating Linux Deploy with Android
+date: 2015-09-14 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true
 ---

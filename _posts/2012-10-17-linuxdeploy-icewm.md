@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Настройка окружения рабочего стола IceWM
-date: 2012-10-17 18:00:00 +0300
-categories: [linuxdeploy]
+title: IceWM desktop environment setup
+date: 2012-10-17 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
-Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="http://ru.wikipedia.org/wiki/IceWM">IceWM</a>.
+Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="https://en.wikipedia.org/wiki/IceWM">IceWM</a>.
 
 <!--more-->
 

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Обучение модели для детекции точек лица в OpenCV
-date: 2018-09-20 2:00:00 +0300
+title: Training 5 points model for OpenCV Facemark API
+date: 2018-09-20 12:00:00 +0000
 categories: [opencv]
 comments: true
 ---

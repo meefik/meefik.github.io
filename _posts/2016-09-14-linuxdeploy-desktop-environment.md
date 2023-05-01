@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Окружение рабочего стола в Linux Deploy
-date: 2016-09-14 12:30:00 +0300
-categories: [linuxdeploy]
+title: Desktop environment in Linux Deploy 2.0
+date: 2016-09-14 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

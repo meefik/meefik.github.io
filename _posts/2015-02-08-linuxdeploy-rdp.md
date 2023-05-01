@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Установка и настройка RDP-сервера
-date: 2015-02-08 13:30:00 +0300
-categories: [linuxdeploy]
+title: Installing and configuring the RDP server
+date: 2015-02-08 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
-Linux Deploy в качестве графической подсистемы по умолчанию использует [VNC](https://ru.wikipedia.org/wiki/Virtual_Network_Computing), как наиболее нативный сбособ организации удаленного доступа к рабочему столу GNU/Linux системы. Однако можно настроить удаленный доступ и по протоколу [RDP](https://ru.wikipedia.org/wiki/Remote_Desktop_Protocol), используемый в операционных системах MS Windows. В примере используется дистрибутив Ubuntu 12.04 (Precise Pangolin), однако с небольшими изменениями это будет работать и в других дистрибутивах. В данном случае RDP будет работать поверх VNC-сервера, поэтому требуется чтобы он был установлен. В Linux Deploy VNC-сервер устанавливается по умолчанию.
+Linux Deploy в качестве графической подсистемы по умолчанию использует [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing), как наиболее нативный сбособ организации удаленного доступа к рабочему столу GNU/Linux системы. Однако можно настроить удаленный доступ и по протоколу [RDP](https://en.wikipedia.org/wiki/Remote_Desktop_Protocol), используемый в операционных системах MS Windows. В примере используется дистрибутив Ubuntu 12.04 (Precise Pangolin), однако с небольшими изменениями это будет работать и в других дистрибутивах. В данном случае RDP будет работать поверх VNC-сервера, поэтому требуется чтобы он был установлен. В Linux Deploy VNC-сервер устанавливается по умолчанию.
 
 <!--more-->
 

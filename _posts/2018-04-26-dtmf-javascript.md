@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Генерация и распознавание DTMF на JavaScript
-date: 2018-04-26 20:00:00 +0300
+title: DTMF generation and recognition in JavaScript
+date: 2018-04-26 12:00:00 +0000
 categories: [javascript]
 comments: true
 ---
@@ -17,7 +17,7 @@ comments: true
 | 852 Гц | 7       | 8       | 9       | C       |
 | 941 Гц | *       | 0       | #       | D       |
 
-Есть множество примеров реализации DTMF, один из наиболее известных алгоритмов детекции DTMF является [алгоритм Герцеля](https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%93%D1%91%D1%80%D1%86%D0%B5%D0%BB%D1%8F). Есть даже его [реализация на JavaScript](https://github.com/Ravenstine/goertzeljs).
+Есть множество примеров реализации DTMF, один из наиболее известных алгоритмов детекции DTMF является [алгоритм Герцеля](https://en.wikipedia.org/wiki/Goertzel_algorithm). Есть даже его [реализация на JavaScript](https://github.com/Ravenstine/goertzeljs).
 
 Распознавание кода происходит по частотной характеристики, а по временной характеристике можно реализовать фильтрацию от шумов.
 

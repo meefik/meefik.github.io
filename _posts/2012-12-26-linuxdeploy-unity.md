@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Настройка окружения рабочего стола Unity"
-date: 2012-12-26 18:00:00 +0300
+title: Unity desktop environment setup
+date: 2012-12-26 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
-categories: linuxdeploy gui unity
 ---
 
-Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере [Unity](http://ru.wikipedia.org/wiki/Unity_(оболочка_рабочего_стола)).
+Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере [Unity](https://en.wikipedia.org/wiki/Unity_(user_interface)).
 
 <!--more-->
 

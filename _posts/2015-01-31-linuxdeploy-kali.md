@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Запуск дистрибутива Kali Linux из образа
-date: 2015-01-31 15:30:00 +0300
-categories: [linuxdeploy]
+title: Launch Kali Linux on Android
+date: 2015-01-31 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

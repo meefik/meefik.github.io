@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Увеличение образа без переустановки системы
-date: 2012-10-08 18:00:00 +0300
-categories: [linuxdeploy]
+title: Extending a Linux Deploy image
+date: 2012-10-08 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

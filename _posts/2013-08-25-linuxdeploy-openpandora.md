@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Запуск дистрибутива OpenPandora
-date: 2013-08-25 18:00:00 +0300
-categories: [linuxdeploy]
+title: Launch OpenPandora on Android
+date: 2013-08-25 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
-Через Linux Deploy под Android можно запустить дистрибутив [OpenPandora](http://www.openpandora.org/).
+Через Linux Deploy под Android можно запустить дистрибутив [OpenPandora](http://www.openpandora.org).
 
 <!--more-->
 

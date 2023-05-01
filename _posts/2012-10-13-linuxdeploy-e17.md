@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Настройка окружения рабочего стола E17
-date: 2012-10-13 18:00:00 +0300
-categories: [linuxdeploy]
+title: E17 desktop environment setup
+date: 2012-10-13 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
-Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="http://ru.wikipedia.org/wiki/Enlightenment">Enlightenment</a>.
+Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="https://en.wikipedia.org/wiki/Enlightenment_(software)">Enlightenment</a>.
 
 <!--more-->
 

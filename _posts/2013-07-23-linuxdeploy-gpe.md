@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Настройка окружения рабочего стола GPE
-date: 2013-07-23 18:00:00 +0300
-categories: [linuxdeploy]
+title: GPE desktop environment setup
+date: 2013-07-23 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
-Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="http://ru.wikipedia.org/wiki/GPE_Palmtop_Environment">GPE</a>.
+Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="https://en.wikipedia.org/wiki/GPE_Palmtop_Environment">GPE</a>.
 
 ![linuxdeploy](/assets/images/linuxdeploy-debian-gpe.png "Debian и GPE"){: .center}
 

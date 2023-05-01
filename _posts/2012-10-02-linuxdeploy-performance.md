@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Тест производительности Linux Deploy
-date: 2012-10-02 18:00:00 +0300
-categories: [linuxdeploy]
+title: Linux Deploy performance test
+date: 2012-10-02 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

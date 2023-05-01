@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Видеоролик Linux Deploy 2.0
-date: 2017-02-25 18:00:00 +0300
+title: Video of Linux Deploy 2.0
+date: 2017-02-25 12:00:00 +0000
 categories: [linuxdeploy]
 comments: true
 ---

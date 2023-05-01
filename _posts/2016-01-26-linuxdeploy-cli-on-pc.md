@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Применение Linux Deploy CLI на десктопах
-date: 2016-01-26 11:30:00 +0300
+title: Using Linux Deploy CLI on desktops
+date: 2016-01-26 12:00:00 +0000
 categories: [linuxdeploy]
 comments: true
 ---
@@ -60,7 +60,7 @@ ln -sf ~/linuxdeploy-cli/cli.sh ~/bin/linuxdeploy
 
 Создание конфигурации с именем "linux" для развертывания базовой системы Debian Wheezy (64 бита):
 ```
-linuxdeploy -p linux conf --method='proot' --source-path='http://mirror.yandex.ru/debian/' \
+linuxdeploy -p linux conf --method='proot' --source-path='http://deb.debian.org/debian/' \
     --distrib='debian' --arch='amd64' --suite='wheezy' --target-path='$ENV_DIR/rootfs/linux' \
     --chroot-dir='$TARGET_PATH' --target-type='directory' --username='webmaster' --include='bootstrap'
 ```

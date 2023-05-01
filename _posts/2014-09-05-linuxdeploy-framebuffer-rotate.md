@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Поворот экрана в режиме кадрового буфера
-date: 2014-09-05 18:00:00 +0300
-categories: [linuxdeploy]
+title: Screen rotation in framebuffer mode
+date: 2014-09-05 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

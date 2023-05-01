@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Детекция лиц с инвариантностью к повороту
-date: 2018-08-27 16:00:00 +0300
+title: Face detection with rotation invariance
+date: 2018-08-27 12:00:00 +0000
 categories: [javascript]
 comments: true
 ---

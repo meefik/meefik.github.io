@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Анонс Linux Deploy 2.0
-date: 2015-12-08 13:30:00 +0300
-categories: [linuxdeploy]
+title: Announcement of Linux Deploy 2.0
+date: 2015-12-08 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

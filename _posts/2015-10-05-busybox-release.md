@@ -1,7 +1,7 @@
 ---
 layout: post
-title: BusyBox для Android
-date: 2015-10-05 19:30:00 +0300
+title: BusyBox for Android
+date: 2015-10-05 12:00:00 +0000
 categories: [android, busybox]
 comments: true
 ---

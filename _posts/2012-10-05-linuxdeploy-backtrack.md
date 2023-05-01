@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Запуск дистрибутива BackTrack
-date: 2012-10-05 18:00:00 +0300
-categories: [linuxdeploy]
+title: Launch BackTrack on Android
+date: 2012-10-05 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
-Linux Deploy поддерживает запуск дистрибутива [BackTrack](http://ru.wikipedia.org/wiki/Backtrack) под Android. Подготовленный образ этого дистрибутива можно скачать с сайта проекта [Linux-on-Android](http://sourceforge.net/projects/linuxonandroid/).
+Linux Deploy поддерживает запуск дистрибутива [BackTrack](https://en.wikipedia.org/wiki/BackTrack) под Android. Подготовленный образ этого дистрибутива можно скачать с сайта проекта [Linux-on-Android](https://sourceforge.net/projects/linuxonandroid/).
 
 ### Инструкция
 
-- Скачать [образ](http://downloads.sourceforge.net/project/linuxonandroid/Backtrack/Image/backtrack-v10-image.zip), распаковать и скопировать его на SD карту.
+- Скачать [образ](https://downloads.sourceforge.net/project/linuxonandroid/Backtrack/Image/backtrack-v10-image.zip), распаковать и скопировать его на SD карту.
 - В параметрах указать дистрибутив - Ubuntu, версия дистрибутива - lucid, тип установки - файл образа, указать путь к образу (например, /mnt/sdcard/backtrack.img), имя пользователя - backtrack или root, окружение рабочего стола - GNOME
 - Запустить переконфигурацию (Параметры -> Переконфигурировать).
 - Запустить систему кнопкой СТАРТ.

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Инструкция по установке GNU/Linux через Linux Deploy
-date: 2012-11-18 18:00:00 +0300
-categories: [linuxdeploy]
+title: Instructions for installing GNU/Linux via Linux Deploy
+date: 2012-11-18 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

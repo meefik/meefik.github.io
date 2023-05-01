@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Подбор пароля к Java keystore
-date: 2012-11-16 20:00:00 +0300
+title: Java keystore password guessing
+date: 2012-11-16 12:00:00 +0000
 categories: [java]
 comments: true
 ---

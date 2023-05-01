@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Запуск дистрибутива Bodhi Linux
-date: 2013-01-02 18:00:00 +0300
-categories: [linuxdeploy]
+title: Launch Bodhi Linux on Android
+date: 2013-01-02 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
-Linux Deploy поддерживает запуск дистрибутива [Bodhi Linux](http://www.bodhilinux.com/) под Android.
+Linux Deploy поддерживает запуск дистрибутива [Bodhi Linux](https://www.bodhilinux.com) под Android.
 
 ![linuxdeploy](/assets/images/linuxdeploy-bodhilinux-e17.png "Bodhi Linux и E17"){: .center}
 
@@ -39,5 +39,5 @@ Linux Deploy поддерживает запуск дистрибутива [Bod
     sudo apt-get install locales openssh-server -yq
 ```
 
-- Перезапустить GNU/Linux через интерфейс программы. Подключиться по VNC, пароль - changeme. Должен открыться рабочий стол среды [E17](http://ru.wikipedia.org/wiki/Enlightenment).
+- Перезапустить GNU/Linux через интерфейс программы. Подключиться по VNC, пароль - changeme. Должен открыться рабочий стол среды [E17](https://en.wikipedia.org/wiki/Enlightenment_(software)).
 

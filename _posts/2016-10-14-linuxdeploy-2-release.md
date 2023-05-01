@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Релиз Linux Deploy 2.0
-date: 2016-10-14 21:00:00 +0300
+title: Release Linux Deploy 2.0
+date: 2016-10-14 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true
 ---
@@ -72,5 +72,5 @@ am broadcast -a ru.meefik.linuxdeploy.BROADCAST_ACTION --user 0 --esn "hide"
 
 ### Обратная связь
 
-Поддержка русскоговорящих пользователей осуществляется на [форуме 4pda.ru](http://4pda.ru/forum/index.php?showtopic=378043), а англоговорящих — в [разделе вопросов](https://github.com/meefik/linuxdeploy/issues) на странице проекта в GitHub. Само приложение можно скачать в [Google Play](https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy), на [форуме 4pda.ru](http://4pda.ru/forum/index.php?showtopic=378043) или в [GitHub](https://github.com/meefik/linuxdeploy/releases).
+Поддержка русскоговорящих пользователей осуществляется на [форуме 4pda](https://4pda.to/forum/index.php?showtopic=378043), а англоговорящих — в [разделе вопросов](https://github.com/meefik/linuxdeploy/issues) на странице проекта в GitHub. Само приложение можно скачать в [Google Play](https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy), на [форуме 4pda](https://4pda.to/forum/index.php?showtopic=378043) или в [GitHub](https://github.com/meefik/linuxdeploy/releases).
 

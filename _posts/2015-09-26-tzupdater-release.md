@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Обновление часовых поясов в Android
-date: 2015-09-26 12:00:00 +0300
+title: Update time zones in Android
+date: 2015-09-26 12:00:00 +0000
 categories: [android, tzupdater]
 comments: true
 ---

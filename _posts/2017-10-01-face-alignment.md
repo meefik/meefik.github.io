@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Выравнивание изображений лиц на JavaScript
-date: 2017-10-01 21:00:00 +0300
+title: Aligning face images in JavaScript
+date: 2017-10-01 12:00:00 +0000
 categories: [javascript]
 comments: true
 ---
@@ -12,7 +12,7 @@ comments: true
 
 ### Поиск лиц на изображении
 
-Для работы с изображениями на NodeJS используется модуль [node-opencv](https://github.com/peterbraden/node-opencv), основанный на библиотеке компьютерного зрения OpenCV. Для поиска лиц на изображении используется [метод Виолы-Джонса](https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%92%D0%B8%D0%BE%D0%BB%D1%8B_%E2%80%94_%D0%94%D0%B6%D0%BE%D0%BD%D1%81%D0%B0) и его реализация в OpenCV.
+Для работы с изображениями на NodeJS используется модуль [node-opencv](https://github.com/peterbraden/node-opencv), основанный на библиотеке компьютерного зрения OpenCV. Для поиска лиц на изображении используется [метод Виолы-Джонса](https://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework) и его реализация в OpenCV.
 
 Для реализации метода Виолы-Джонса в браузере используется часть кода из библиотеки [tracking.js](https://github.com/eduardolundgren/tracking.js/).
 

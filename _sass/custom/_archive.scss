@@ -38,6 +38,7 @@
   a.category, time {
     @extend .sans;
     color: $text-color-light;
+    text-transform: uppercase;
   }
 
   a:hover {

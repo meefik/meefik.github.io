@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Веб-терминал для Android
-date: 2014-06-01 18:00:00 +0300
+title: Web Terminal for Android
+date: 2014-06-01 12:00:00 +0000
 categories: [android, wshell]
 comments: true
 ---

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Запуск дистрибутива Raspbian MATE
-date: 2013-01-04 18:00:00 +0300
-categories: [linuxdeploy]
+title: Launch Raspbian MATE on Android
+date: 2013-01-04 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 

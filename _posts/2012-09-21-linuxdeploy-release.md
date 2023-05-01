@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Релиз Linux Deploy 1.0
-date: 2012-08-21 18:00:00 +0300
-categories: [linuxdeploy]
+title: Linux Deploy release 1.0
+date: 2012-08-21 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
@@ -32,5 +32,5 @@ comments: true
 <br>
 Установить из Google play: <https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy>
 <br>
-Обсуждение на форуме: <http://4pda.ru/forum/index.php?showtopic=378043>
+Обсуждение на форуме: <https://4pda.to/forum/index.php?showtopic=378043>
 

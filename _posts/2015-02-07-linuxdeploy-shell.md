@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Управление Linux Deploy из командной строки
-date: 2015-02-07 14:30:00 +0300
-categories: [linuxdeploy]
+title: Managing Linux Deploy from the command line
+date: 2015-02-07 12:00:00 +0000
+categories: [android, linuxdeploy]
 comments: true
 ---
 
