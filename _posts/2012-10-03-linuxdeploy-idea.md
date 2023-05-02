@@ -6,9 +6,8 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-С помощью [Linux Deploy](https://github.com/meefik/linuxdeploy) была запущена среда разработки [IntelliJ IDEA](https://www.jetbrains.com/idea/).
+[IntelliJ IDEA](https://www.jetbrains.com/idea/) was launched using [Linux Deploy](https://github.com/meefik/linuxdeploy).
 
-![linuxdeploy](/assets/images/linuxdeploy-idea.png "IntelliJ IDEA под Android"){: .center}
+![linuxdeploy](/assets/images/linuxdeploy-idea.png "IntelliJ IDEA on Android"){: .center}
 
-Работает на OpenJDK 7 под Debian 7.0 на Samsung Galaxy S2. Удалось собрать из запустить проект Hello World.
-
+Runs on OpenJDK 7 under Debian 7.0 on Samsung Galaxy S2. It was possible to build and run the "Hello World" project.

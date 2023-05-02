@@ -6,31 +6,24 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-[Linux Deploy](https://ru.wikipedia.org/wiki/Linux_Deploy) - программа для простой и быстрой установки GNU/Linux дистрибутивов на устройства под управлением операционной системы (ОС) Android.
+**Linux Deploy** is open source software for quick and easy installation of the operating system GNU/Linux on your Android device.
 
-![linuxdeploy](/assets/images/linuxdeploy-debian-lxde.png "Debian LXDE"){: .center}
+![linuxdeploy](/assets/images/linuxdeploy-debian-lxde.png "Debian LXDE on Android"){: .center}
 
-Приложение создает образ диска на флеш-карте, монтирует его и устанавливает туда дистрибутив ОС. Приложения из новой системы запускаются в chroot окружении параллельно со штатной работой платформы Android. Все вносимые изменения на устройстве обратимы, т.е. приложение и созданные им компоненты можно полностью удалить. Установка дистрибутива ОС осуществляется по сети с официальных зеркал в Интернете. Для работы приложению требуются привилегии суперпользователя (root).
+The application creates a disk image or a directory on a flash card or uses a partition, mounts it and installs an OS distribution. Applications of the new system are run in a chroot environment and working together with the Android platform. All changes made on the device are reversible, i.e. the application and components can be removed completely. Installation of a distribution is done by downloading files from official mirrors online over the internet. The application can run better with superuser rights (root).
 
 <!--more-->
 
-Интерфейс программы поддерживает английский и русский языки. Через интерфейс программы можно управлять процессом установки ОС, а после установки можно запускать и останавливать службы новой системы (есть поддержка запуска своих сценариев). Процесс установки отображается в виде текстовых отчетов в главном окне приложения. Во время установки программа сама настраивает рабочее окружение, которое включает в себя базовую систему, сервер SSH, сервер VNC и графическую среду LXDE. Также через интерфейс программы можно управлять параметрами сервера SSH и VNC.
+You can manage the process of installing the OS, and after installation, you can start and stop services of the new system (there is support for running your scripts) through the UI. The installation process is reported as text in the main application window. During the installation, the program will adjust the environment, which includes the base system, SSH server, VNC server and desktop environment. The program interface can also manage SSH and VNC settings.
 
-Установка новой ОС занимает около 30 минут. Рекомендованный минимальный размер образа диска без графического интерфейса - 512 МБ, а с графическим интерфейсом - 1024 МБ. После начальной установки пароль для доступа по SSH и VNC назначается как "changeme", который можно сменить стандартными средствами ОС.
+Installing a new operating system takes about 15 minutes. The recommended minimum size of a disk image is 1024 MB (with LXDE), and without a GUI - 512 MB. When you install Linux on the flash card with the FAT32 file system. After the initial setup the password for SSH and VNC generated automatically.
 
-Характеристики:
+Features:
 
-* Поддерживаемая ОС: Debian GNU/Linux
-* Версии дистрибутива: stable, testing, unstable (squeeze, wheezy, sid)
-* Сборка под архитектуру: armel, armhf
-* Интерфейс управления: SSH, VNC
-* Поддерживаемые языки: русский, английский
+* Bootstrap: Debian GNU/Linux
+* Distribution versions: stable, testing, unstable (squeeze, wheezy, sid)
+* Supported architectures: armel, armhf
+* Control interface: SSH, VNC
+* Supported languages: multilingual interface
 
-Приложение распространяется под лицензией [GPL версии 3](http://www.gnu.org/licenses/) или более поздней.
-
-Исходный код: <https://github.com/meefik/linuxdeploy>
-<br>
-Установить из Google play: <https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy>
-<br>
-Обсуждение на форуме: <https://4pda.to/forum/index.php?showtopic=378043>
-
+The application is distributed under license [GPLv3](https://www.gnu.org/licenses/gpl-3.0.html) or later. For more details, see [the project page](/linuxdeploy).

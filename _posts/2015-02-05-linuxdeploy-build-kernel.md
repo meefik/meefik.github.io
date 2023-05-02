@@ -6,13 +6,13 @@ categories: [android, android]
 comments: true
 ---
 
-Дистрибутивы, запускаемые через Linux Deploy, работают с ядром Android (модифицированное ядро Linux), а потому изменить конфигурацию ядра или подключить новые модули можно только путем пересборки этого ядра, либо сборки модулей под данную версию ядра.
+Distributions running through Linux Deploy work with the Android kernel (a modified Linux kernel), and therefore you can change the configuration of the kernel or connect new modules only by rebuilding this kernel, or assembling modules for this version of the kernel.
 
 <!--more-->
 
-### Инструкция
+### Playbook
 
-* Скачать и подготовить [Android NDK](https://developer.android.com/tools/sdk/ndk/):
+- Download and prepare [Android NDK](https://developer.android.com/tools/sdk/ndk/):
 ```sh
 wget http://dl.google.com/android/ndk/android-ndk-r9d-linux-x86.tar.bz2
 tar -jxf android-ndk-r9d-linux-x86.tar.bz2
@@ -20,7 +20,7 @@ export ARCH=arm
 export CROSS_COMPILE=$(pwd)/android-ndk-r9d/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86/bin/arm-linux-androideabi-
 ```
 
-* Скачать и подготовить [Android SDK](http://developer.android.com/sdk/), понадобятся утилиты adb и fastboot:
+- Download and prepare the [Android SDK](http://developer.android.com/sdk/), you will need the `adb` and `fastboot` utilities:
 ```sh
 wget http://dl.google.com/android/android-sdk_r13-linux_x86.tgz
 tar -zxf android-sdk_r13-linux_x86.tgz
@@ -28,81 +28,81 @@ android-sdk-linux_x86/tools/android update sdk -u -t platform-tool
 export PATH=$PATH:$(pwd)/android-sdk-linux_x86/platform-tools
 ```
 
-* Получить исходники ядра данного устройства (в нашем случае это tinykernel-flo для Nexus 7 (2013), либо скачать аналогичную версию с [kernel.org](https://www.kernel.org/pub/linux/kernel/)):
+- Get the source code of this device (in our case it is [tinykernel-flo](https://github.com/tiny4579/tinykernel-flo) for Nexus 7 (2013), or download a similar version from [kernel.org](https://www.kernel.org/pub/linux/kernel/)):
 ```
-git clone -b tiny-jb-mr2 https://github.com/meefik/tinykernel-flo
+git clone -b tiny-jb-mr2 https://github.com/tiny4579/tinykernel-flo
 cd tinykernel-flo
 ```
 
-* Получить файл конфигурации ядра с устройства (ядро должно быть собрано с поддержкой данной возможности):
+- Get the kernel configuration file from the device (the kernel must be assembled with support for this feature):
 ```sh
 adb shell cat /proc/config.gz | gzip -d > .config
 ```
-либо из boot.img (как извлечь boot описано ниже):
+or from `boot.img` (how to extract boot is described below):
 ```sh
 scripts/extract-ikconfig boot.img > .config
 ```
 
-* Если получить файл конфигурации ядра не получилось, то можно воспользоваться предварительной конфигурацией из поставки ядра (список конфигураций arch/arm/configs):
+- If you can't get the kernel configuration file, you can use the preconfiguration from the kernel delivery (`arch/arm/configs` list of configurations):
 ```sh
 make flo_defconfig
 ```
 
-* Узнать точную версию ядра устройства:
+- Find out the exact version of the device kernel:
 ```sh
 adb shell cat /proc/version
 ```
-Рузультат команды:
+The result looks like this:
 ```sh
 Linux version 3.4.0-g03485a6 (android-build@vpbs1.mtv.corp.google.com) (gcc version 4.7 (GCC) )
  #1 SMP PREEMPT Tue Mar 18 15:02:27 PDT 2014
 ```
-В данном случае полной версией ядра будет строка "3.4.0-g03485a6".
+In this case, the full version of the kernel will be the string "3.4.0-g03485a6".
 
-* Установить локальную версию ядра (то что отображается после основной версии 3.4.0):
+- Install the local version of the kernel (what is displayed after the main version 3.4.0):
 ```sh
 echo "-g03485a6" > .scmversion
 ```
 
-* Изменить конфигурацию ядра в файле .config или командой:
+- Change the kernel configuration in the `.config` file or by:
 ```sh
 make menuconfig
 ```
-В нашем случае в файл .config изменены следующие строки (включена поддержка модулей и включен модуль binfmt_misc):
+In our case, the following lines were changed in the `.config` file (module support is enabled and the `binfmt_misc` module is enabled):
 ```sh
 CONFIG_MODULES=y
 CONFIG_BINFMT_MISC=m
 ```
 
-* Запустить сборку ядра:
+- Start building kernel:
 ```sh
 make
 ```
-либо только модулей:
+or modules only:
 ```sh
 make modules
 ```
 
-* Скачать утилиты для работы с загрузочным образом (boot.img):
+- Download utilities for working with boot image `boot.img`:
 ```
 git clone https://github.com/meefik/binary-tools-android.git
 cd binary-tools-android
 ```
 
-* Получить загрузочный образ с устройства (ядро хранится на специальном boot разделе):
+- Get a boot image from the device (the kernel is stored on a special boot section):
 ```
 adb shell su -с 'dd if=/dev/block/platform/msm_sdcc.1/by-name/boot' > boot.img
 ```
-Путь может отличаться на других устройствах, определить его можно командой:
+The path may be different on other devices, you can define it with the command:
 ```sh
 adb shell su -c 'ls /dev/block/platform/*/by-name/boot'
 ```
 
-* Получить информацию об образе:
+- Get information about the image:
 ```sh
 ./boot_info boot.img 
 ```
-Результат выглядит так:
+The result looks like this:
 ```sh
 Page size: 2048 (0x00000800)
 Kernel size: 6722240 (0x006692c0)
@@ -113,7 +113,7 @@ Command line: 'console=ttyHSL0,115200,n8 androidboot.hardware=flo user_debug=31 
 Base address: 2149580800 (0x80200000)
 ```
 
-* Извлечь kernel и ramdisk из boot.img, заменить ядро и запаковать обратно:
+-  Extract `kernel` and `ramdisk` from `boot.img`, replace kernel and pack back:
 ```sh
 ./unmkbootimg boot.img
 ./mkbootimg --kernel ../tinykernel-flo/arch/arm/boot/zImage \
@@ -123,13 +123,13 @@ Base address: 2149580800 (0x80200000)
     -o new_boot.img
 ```
 
-* Прошить устройство новым ядром:
+- Flash the device with the new kernel:
 ```sh
 adb reboot bootloader
 fastboot flash boot new_boot.img
 ```
 
-* Загрузить модуль на устройстве:
+- Download the module on the device:
 ```sh
 adb push ../tinykernel-flo/fs/binfmt_misc.ko /storage/sdcard0/binfmt_misc.ko
 adb shell
@@ -143,11 +143,11 @@ exit
 exit
 ```
 
-* Следует учесть, что vermagic модуля должен полностью соответствовать версии ядра (с точностью до символа), иначе загрузить новый модуль не удастся. Необходимо узнать vermagic модуля и сравнить его с уже присутствующими на устройстве модулями:
+- It should be noted that the `vermagic` of the module must fully comply with the kernel version (to the nearest character), otherwise it will not be possible to load the new module. You need to find out the vermagic of the module and compare it with the modules already present on the device:
 ```sh
 modinfo binfmt_misc.ko
 ```
-Результат выглядит примерно так:
+The result looks something like this:
 ```sh
 filename:       /path/to/kernel/fs/binfmt_misc.ko
 license:        GPL
@@ -155,4 +155,3 @@ depends:
 intree:         Y
 vermagic:       3.4.0-g03485a6 SMP preempt ARMv7 
 ```
-

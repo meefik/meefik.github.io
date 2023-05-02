@@ -6,16 +6,18 @@ categories: [java]
 comments: true
 ---
 
-Интересная история произошла со мной не так давно. Я опубликовал в Google Market приложение, а когда пришло время его обновить, я обнаружил, что потерял пароль от ключа для подписи своих приложений. Стандартным выходом из этой ситуации было создание нового ключа, закрытие старого приложения и размешение нового приложение под новым именем в маркете. Этого делать очень не хотелось и в итоге появилось приложение [KeystoreBreaker](https://github.com/meefik/keystorebreaker). Приложение позволяет осущетвить подбор пароля к keystore по определенным условиям с возможностью распределенного вычисления. Можно задать набор символов, из которых состоит предполагаемый пароль, а затем разделить все возможные комбинации этих символов на непересекающиеся группы и перебор по каждой группе осуществлять отедльно. Это может быть и распределение по нескольким ядрам в рамках одного компьютера, так и распределение по нескольким компьютерам. Суть алгоритма в том, что каждый вариант пароля представляется в N-ричной системе счисления, которая формируется на основе входного набора символов. После этого весь диапазон от первого до последнего символа, например 000000-zzzzzz, можно поделить на любое число более мелких диапазонов, в которых и осуществляется перебор.
+An interesting story happened to me not so long ago. I posted an app to Google Market and when it was time to update it, I found that I had lost the key password to sign my apps. The standard way out of this situation was to create a new key, shut down the old app, and upload the new app under a new name in the marketplace. I did not want to do this, and as a result, the application [KeystoreBreaker](https://github.com/meefik/keystorebreaker) appeared. The application allows you to select a password for keystore under certain conditions with the possibility of distributed calculation. You can specify the set of characters that make up the intended password, and then divide all possible combinations of these characters into non-overlapping groups and bust for each group separately. It can be distribution on several cores within one computer, and distribution on several computers. The essence of the algorithm is that each variant of the password is represented in N-digit number system, which is formed on the basis of the input character set. After that, the entire range from the first to the last character, for example 000000-zzzzzz, can be divided into any number of smaller ranges in which the search is carried out.
 
 <!--more-->
 
-Формат запуска утилиты такой:
+The format for running the utility is as follows:
+
 ```
 java -jar KeystoreBreaker.jar <keystore file> <sequence> <first passwd> <last passwd> <number of threads>
 ```
 
-Пример использования:
+Usage example:
+
 ```
 $ java -jar KeystoreBreaker.jar test.jks 0123456789abcdefghijklmnopqrstuvwxyz 000000 zzzzzz 4
 
@@ -38,5 +40,4 @@ Processing:
 Total: 0% [ 82943 pwd/s ]  Time left: 0.05:10:23
 ```
 
-Моя история с потеренным паролем закончилась хорошо, за несколько дней на четырех 12-ядерных процессорах мне удалось подобрать свой пароль. Помогло то, что я знал из каких символов состоял пароль и какой длины он был.
-
+My story with the lost password ended well, in a few days on four 12-core processors, I managed to pick up my password. It helped that I knew what symbols the password consisted of and how long it was.

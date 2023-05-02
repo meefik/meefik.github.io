@@ -6,10 +6,12 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Чтобы увеличить размер файла образа для Linux Deploy нужно сначала расширить существующий образ, а затем расширить файловую систему до нового размера. Например, чтобы увеличить образ на 3000 МБ нужно выполнить следующее:
+To increase the image file size for Linux Deploy, you first need to expand the existing image, and then expand the file system to a new size. For example, to increase the image by 3000 MB, you need to do the following:
+
 ```sh
 dd if=/dev/zero bs=1048576 count=3000 >> /mnt/sdcard/linux.img
 e2fsck -f /mnt/sdcard/linux.img
 resize2fs /mnt/sdcard/linux.img
 ```
-Предварительно нужно обязательно сделать резервную копию образа.
+
+You must first make a backup copy of the image.

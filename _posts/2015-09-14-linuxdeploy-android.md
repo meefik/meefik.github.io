@@ -6,17 +6,18 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Начиная с версии 1.5.3 в Linux Deploy начаты работы по интеграции GNU/Linux контейнеров с окружением Android. Это открывает следующие возможности:
+Since version 1.5.3, Linux Deploy has begun work on integrating GNU/Linux containers with the Android environment. This opens up the following possibilities:
 
-* доступ ко всей файловой системе Android;
-* выполнение приложений/команд Android прямо из контейнера (например, getprop, reboot, shutdown);
-* переключение между консолью контейнера и Android (команда unchroot).
+- access to the entire Android file system;
+- execution of Android applications/commands directly from the container (for example, getprop, reboot, shutdown);
+- switching between the container console and Android (`unchroot` command).
 
 <!--more-->
 
-Для активации возможности запуска Android-приложений нужно в параметрах разрешить монтирование (Параметры -> Монтирование), а в качестве точки монтирования (Параметры -> Точки монтирования) должен быть добавлен каталог /system (добавлен по умолчанию). После этого нужно нажать кнопку СТАРТ в приложении, чтобы каталог смонтировался в контейнере. Команды из Android будут доступны из консоли контейнера, если их названия не пересекаются с аналогичными в контейнере, либо доступны по полному пути, например /system/bin/ls. Команды reboot и shutdown автоматически переопределены в контейнере и вызывают аналогичные команды из Android.
+To activate the ability to run Android applications, you need to enable mounting in the settings ("Properties" -> "Mounts"), and the/system directory (added by default) should be added as a mounting point ("Properties" -> "Mount points"). After that, you need to click the "START" button in the application so that the directory is mounted in the container. Commands from Android will be available from the container console if their names do not overlap with similar ones in the container, or are available along the full path, for example `/system/bin/ls`. The reboot and shutdown commands are automatically overridden in the container and call similar commands from Android.
 
-Если возможностей запуска некоторых команд из Android недостаточно, то можно воспользоваться переключением между консолью контейнера и Android командой unchroot внутри контейнера. Вызов unchroot без параметров открывает sh из Android со всеми его переменными окружения, вызов с параметрами запускает соответствующую команду в Android. Например:
+If the ability to run some commands from Android is not enough, then you can use the switch between the container console and the Android unchroot command inside the container. Calling `unchroot` without parameters opens `sh` from Android with all its environment variables, call with parameters launches the corresponding command in Android. For example:
+
 ```
 root@THL:/ # linuxdeploy shell
 Configuring the container: 
@@ -32,4 +33,4 @@ root@THL:/ # exit
 root@localhost:/#
 ```
 
-Таким образом, имея доступ к Android прямо из контейнера, можно организовывать более плотную интеграцию запускаемых приложений внутри GNU/Linux контейнеров с системой Android.
+Thus, having access to Android directly from the container, you can organize a tighter integration of running applications inside GNU/Linux containers with the Android system.

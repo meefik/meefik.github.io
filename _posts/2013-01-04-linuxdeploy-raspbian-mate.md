@@ -6,29 +6,37 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Дистрибутив <a href="http://www.raspbian.org/RaspbianMate">Raspbian MATE</a> основан на Debian и разрабатывается для Raspberry Pi, в качестве окружения рабочего стола используется <a href="http://mate-desktop.org/">MATE</a>. Этот дистрибутив можно запустить под Android через Linux Deploy.
+The <a href="http://www.raspbian.org/RaspbianMate">Raspbian MATE</a> distribution is based on Debian and is being developed for the Raspberry Pi, using <a href="http://mate-desktop.org/">MATE</a> as the desktop environment. This distribution can be run on Android via Linux Deploy.
 
 ![linuxdeploy](/assets/images/linuxdeploy-raspbian-mate.png "Rapsbian MATE"){: .center}
 
 <!--more-->
 
-### Инструкция
+### Playbook
 
-- Скачать образ с <a href="http://www.raspbian.org/PiscesMATEImages">официального сайта</a>: <a href="http://archive.raspbian.org/assets/images/rpi_pisces_mate_r2.zip">rpi_pisces_mate_r2.zip</a>
+- Download image from the <a href="http://www.raspbian.org/PiscesMATEImages">official website</a>: <a href="http://archive.raspbian.org/assets/images/rpi_pisces_mate_r2.zip">rpi_pisces_mate_r2.zip</a>
 
-- Извлечь из полного образа образ третьего раздела (выполнять из-под Linux):
+- Extract an image of the third partition from the full image (run it under Linux):
 ```sh
 kpartx -v -a rpi_pisces_mate_r2.img
 dd if=/dev/mapper/loop0p3 of=/tmp/rpi_pisces_mate.img bs=1M
 ```
 
-- Скопировать файл rpi_pisces_mate.img на карту памяти устройства.
+- Copy the rpi_pisces_mate.img file to the device memory card.
 
-- В приложении Linux Deploy создать новый профиль и в параметрах указать: Дистрибутив - Debian; Версия дистрибутива - wheezy; Тип установки - Файл; Путь установки - путь к файлу rpi_pisces_mate.img; Имя пользователя - raspbian; Окружение рабочего стола - Другое. Выполнить переконфигурацию (Параметры -> Переконфигировать).
+- In the Linux Deploy application, create a new profile and specify in the properties:
+  - *Distribution* - Debian;
+  - *Distribution suite* - wheezy;
+  - *Installation type* - File;
+  - *Installation path* - the path to the image file (for example, `/sdcard/rpi_pisces_mate.img`);
+  - *User name* - raspbian;
+  - *Desktop environment* - Other.
+  
+- Run reconfiguration ("Properties" -> "Reconfigure").
 
-- Запустить GNU/Linux кнопкой СТАРТ из главного окна приложения. Подключиться по SSH: логин - raspbian, пароль - changeme.
+- Start GNU/Linux with the "START" button from the main application window. Connect via SSH: login - `raspbian`, password - `changeme`.
 
-- Настроить автозапуск окружения рабочего стола по VNC:
+- Configure desktop environment autostart via VNC:
 ```sh
 cat << EOF > ~/.vnc/xstartup
 XAUTHORITY=\$HOME/.Xauthority
@@ -40,5 +48,6 @@ EOF
 chmod 755 ~/.vnc/xstartup
 ```
 
-- Перезапустить GNU/Linux через интерфейс программы. Подключиться по VNC, пароль - changeme. Должен открыться рабочий стол MATE.
+- Restart GNU/Linux through the program interface.
 
+- Connect via VNC, password - `changeme`. The MATE desktop should open.

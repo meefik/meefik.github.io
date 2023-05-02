@@ -37,21 +37,21 @@
   year: 2015
   stack: ["Node.js", "JavaScript", "Kurento", "WebRTC"]
   homepage: "https://github.com/meefik/ITMOproctor"
-  description: "Software to accompany the process of passing exams remotely, confirming the identity of the test taker and confirming the results of his certification (see [the article on Habr](https://habrahabr.ru/post/277147/))."
+  description: "Software to accompany the process of passing exams remotely, confirming the identity of the test taker and confirming the results of his certification (see [the article on Habr](https://habr.com/ru/articles/277147/))."
   poster: "/assets/images/itmoproctor.png"
 
 - title: "BusyBox for Android"
   year: 2015
   stack: ["Android", "Java", "Bash", "C"]
   homepage: "https://github.com/meefik/busybox"
-  description: "This application is an BusyBox installer for Android."
+  description: "This application is a BusyBox installer for Android. For more details, see [the project page](/busybox)."
   poster: "/assets/images/busybox.png"
 
 - title: "Timezone Updater for Android"
   year: 2015
   stack: ["Android", "Java", "Bash", "C"]
   homepage: "https://github.com/meefik/tzupdater"
-  description: "Automatic update of time zones on Android."
+  description: "Automatic update of time zones on Android. For more details, see [the project page](/tzupdater)."
   poster: "/assets/images/tzupdater.png"
 
 - title: "Terminal for Android"
@@ -86,7 +86,7 @@
   year: 2012
   stack: ["Android", "Linux", "Java", "Bash", "C"]
   homepage: "https://github.com/meefik/linuxdeploy"
-  description: "This application is open source software for quick and easy installation of the operating system GNU/Linux on your Android device. Later, the utility gained distribution on desktops (see [the article on Habr](https://habrahabr.ru/post/276013/))."
+  description: "This application is open source software for quick and easy installation of the operating system GNU/Linux on your Android device. Later, the utility gained distribution on desktops (see [the article on Habr](https://habr.com/ru/articles/276013/)). For more details, see [the project page](/linuxdeploy) and [the journal Information and Control Systems](/assets/files/linuxdeploy_i-us-5-66-2013.pdf)."
   poster: "/assets/images/linuxdeploy.png"
 
 - title: "Password guessing to Java keystore"
@@ -121,7 +121,7 @@
   year: 2010
   stack: ["Sun Ray Software", "Java", "Bash"]
   homepage: "https://github.com/meefik/classman"
-  description: "Development and implementation of a centralized system for managing the work of a computer class, built on the basis of the Sun Ray terminal system. The system allows you to automatically start and end terminal sessions according to a schedule or through remote control, send notifications to computers. Each session is created from a template that includes a kiosk desktop (Xfce), a timer for the current session, a notification system (sent via the management interface), a web browser, and other necessary software."
+  description: "Development and implementation of a centralized system for managing the work of a computer class, built on the basis of the Sun Ray terminal system. The system allows you to automatically start and end terminal sessions according to a schedule or through remote control, send notifications to computers. Each session is created from a template that includes a kiosk desktop (Xfce), a timer for the current session, a notification system (sent via the management interface), a web browser, and other necessary software. See [the article in the journal Information and Control Systems](/assets/files/classman_i-us-3-53-2011.pdf)."
   poster: "/assets/images/classman.png"
 
 - title: "Computer virus research"

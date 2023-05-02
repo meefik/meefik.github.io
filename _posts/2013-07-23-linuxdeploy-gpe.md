@@ -6,20 +6,23 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="https://en.wikipedia.org/wiki/GPE_Palmtop_Environment">GPE</a>.
+Installing and configuring a desktop environment that is not on the Linux Deploy settings list, using <a href="https://en.wikipedia.org/wiki/GPE_Palmtop_Environment">GPE</a> as an example.
 
 ![linuxdeploy](/assets/images/linuxdeploy-debian-gpe.png "Debian и GPE"){: .center}
 
 <!--more-->
 
-Для этого нужна установленная система, можно без окружения рабочего стола (в данном случае Debian Wheezy). Далее нужно подключиться к системе по SSH и выполнить установку окружения:
+This requires an installed system, possibly without a desktop environment (in this case Debian Wheezy). Next, you need to connect to the system via SSH and install the environment:
+
 ```sh
 sudo apt-get update
 sudo apt-get install tightvncserver x11-xserver-utils xfonts-base \
                      gpe --no-install-recommends -yq
 sudo apt-get clean
 ```
-После этого нужно настроить автозапуск:
+
+After that, you need to configure autostart:
+
 ```sh
 mkdir ~/.vnc
 chmod 755 ~/.vnc
@@ -34,5 +37,5 @@ matchbox-session
 EOF
 chmod 755 ~/.vnc/xstartup
 ```
-После этих опрерация будет установлены VNC сервер и GPE, а также настроен автозапуск при старте VNC. Пароль к VNC будет: changeme
 
+After this operation, the VNC server and GPE will be installed, and autostart will be configured at the start of the VNC. VNC password will be: `changeme`

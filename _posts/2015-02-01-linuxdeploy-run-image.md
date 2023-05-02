@@ -6,25 +6,23 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Linux Deploy предназначен для автоматической установки через Интернет последних версий наиболее популярных Linux-дистрибутивов и последующего запуска Linux-приложений этих дистрибутивов под Android. Однако он также поддерживает запуск дистрибутив из уже готовых образов. Подготовленные образы дистрибутивов можно скачать с сайта проекта [Linux-on-Android](http://sourceforge.net/projects/linuxonandroid/).
+Linux Deploy is designed to automatically install the latest versions of the most popular Linux distributions via the Internet and then run Linux applications of these distributions on Android. However, it also supports running the distribution from ready-made images. Prepared images of distributions can be downloaded from the [Linux-on-Android](http://sourceforge.net/projects/linuxonandroid/) project website.
 
 <!--more-->
 
-### Инструкция
+### Playbook
 
-- Скачать образ нужного дистрибутива ([выбрать zip-архив с образом](http://sourceforge.net/projects/linuxonandroid/files/)), распаковать и скопировать его на карту памяти.
+- Download the image of the desired distribution ([select the zip archive with the image](http://sourceforge.net/projects/linuxonandroid/files/)), unpack and copy it to the memory card.
 
-- В приложении Linux Deploy создать новый профиль и в параметрах указать (обязательно):<br>
--- *Дистрибутив* - должен соответствовать образу;<br>
--- *Версия дистрибутива* - должна соответствовать образу;<br>
--- *Архитектура* - должна соответствовать образу;<br>
--- *Тип установки* - Файл;<br>
--- *Путь установки* - путь к файлу *.img (например, /storage/sdcard0/debian.img).<br>
-Остальные параметры настраиваются по желанию.
+- In Linux Deploy, create a new profile and specify (mandatory) the following in the parameters:
+  - *Distribution* - should correspond to the image;
+  - *Distribution suite* - should correspond to the image;
+  - *Architecture* - should correspond to the image;
+  - *Installation type* - File;
+  - *Installation path* - the path to the *.img file (for example, `/sdcard/linux.img`).
 
-- Выполнить переконфигурацию (Параметры -> Переконфигурировать).
+- Run reconfiguration via "Properties" -> "Reconfigure".
 
-- Запустить GNU/Linux систему кнопкой СТАРТ из главного окна приложения.
+- Start the GNU/Linux system with the "START" button from the main application window.
 
-- Подключиться по SSH или VNC, пароль - changeme.
-
+- Connect via SSH or VNC, password - `changeme`.

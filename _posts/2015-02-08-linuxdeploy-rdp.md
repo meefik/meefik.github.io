@@ -6,34 +6,33 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Linux Deploy в качестве графической подсистемы по умолчанию использует [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing), как наиболее нативный сбособ организации удаленного доступа к рабочему столу GNU/Linux системы. Однако можно настроить удаленный доступ и по протоколу [RDP](https://en.wikipedia.org/wiki/Remote_Desktop_Protocol), используемый в операционных системах MS Windows. В примере используется дистрибутив Ubuntu 12.04 (Precise Pangolin), однако с небольшими изменениями это будет работать и в других дистрибутивах. В данном случае RDP будет работать поверх VNC-сервера, поэтому требуется чтобы он был установлен. В Linux Deploy VNC-сервер устанавливается по умолчанию.
+Linux Deploy uses [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing) as the default graphics subsystem, as the most native remote access to the GNU/Linux desktop system. However, you can configure remote access via the [RDP](https://en.wikipedia.org/wiki/Remote_Desktop_Protocol) protocol used in MS Windows operating systems. The example uses the Ubuntu 12.04 distribution (Precise Pangolin), but with minor changes this will work in other distributions. In this case, the RDP will run on top of the VNC server, so it is required that it be installed. In Linux Deploy, the VNC server is installed by default.
 
 <!--more-->
 
-### Инструкция
+### Playbook
 
-* Запустить предварительно установленную GNU/Linux систему кнопкой СТАРТ из главного окна приложения.
+- Start the pre-installed GNU/Linux system with the START button from the main application window.
 
-* Подключиться к системе по SSH, VNC (IP-адрес для подключения указан в верхней строке главного окна приложения) или через Android-терминал (сценарий linuxdeploy shell).
+- Connect to the system via SSH, VNC (the IP address for connecting is indicated in the upper line of the main application window) or through the Android terminal (linuxdeploy shell script).
 
-* Открыть командную строку (терминал) системы и переключиться в режим суперпользователя:
+- Open the command line (terminal) of the system and switch to superuser mode:
 ```sh
 sudo -s
 ```
 
-* Установить пакет xrdp:
+- Install xrdp package:
 ```sh
 apt-get install xrdp
 ```
 
-* Разрешить пользователю xrdp работать с сетью:
+- Allow xrdp user to work with network:
 ```sh
 usermod -aG aid_inet xrdp
 ```
 
-* Для автоматического запуска и остановки RDP-сервера через интерфейс Linux Deploy необходимо в параметрах разрешить сценарии пользователя (Параметры -> Сценарии пользователя) и в список сценариев добавить путь /etc/init.d/xrdp (Параметры -> Список сценариев).
+- To automatically start and stop the RDP server via the Linux Deploy interface, you must allow user scenarios ("Properties" -> "Custom scripts") in the settings and add the `/etc/init.d/xrdp` path to the list of scripts.
 
-* Перезапустить GNU/Linux систему кнопками СТОП/СТАРТ из главного окна приложения.
+- Restart the GNU/Linux system with the STOP/START buttons from the main application window.
 
-* Подключиться через RDP-клиент: module - sesman-Xvnc, username - android, password - changeme.
-
+- Connect via the RDP client: module - sesman-Xvnc, username - `android`, password - `changeme`.

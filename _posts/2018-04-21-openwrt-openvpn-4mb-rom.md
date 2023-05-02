@@ -6,26 +6,26 @@ categories: [openwrt]
 comments: true
 ---
 
-Проблема роутера TL-WR841N (v9 в моем случае) в том, что там всего 4 МБ flash-памяти и после прошивки OpenWRT остается всего около 300 КБ для личного пользования, чего не хватает для установки OpenVPN. Решение этой проблемы есть в посте [OpenWrt + VPNclient для роутера с 4mb ROM](https://habr.com/ru/articles/211174/), но прошло несколько лет и скрипты требуют изменений.
+The problem with the TL-WR841N router (v9 in my case) is that there's only 4MB of flash memory and after the OpenWRT firmware, there's only about 300KB left for personal use, which is not enough to install OpenVPN. The solution to this problem is in the post [OpenWrt + VPNclient for a router with 4mb ROM](https://habr.com/ru/articles/211174/), but several years have passed and scripts require changes.
 
 <!--more-->
 
-### Опишу по шагам как заставить работать OpenVPN клиент на этом роутере
+### I will describe in steps how to make OpenVPN client work on this router
 
-**1)** Файлы клиента OpenVPN нужно положить в директорию /etc/openvpn/ на роутере. Для этого нужно запаковать файлы ca.crt, client.conf, client.crt, client.key и ta.key в архив tar и отправить на роутер через scp:
+**1)** OpenVPN client files should be placed in the `/etc/openvpn/` directory on the router. To do this, pack the files `ca.crt`, `client.conf`, `client.crt`, `client.key` and `ta.key` into the tar archive and send them to the router via `scp`:
 
-```
+```sh
 scp openvpn_client.tar root@192.168.1.1:/tmp/openvpn_client.tar
 ```
 
-После этого зайти на роутер по SSH и распаковать архив в директорию /etc/openvpn/:
+After that, go to the router via SSH and unpack the archive to the `/etc/openvpn/` directory:
 
-```
+```sh
 mkdir /etc/openvpn
 tar xf /tmp/openvpn_client.tar -C /etc/openvpn
 ```
 
-**2)** Настройки клиента OpenVPN на роутере в файле /etc/openvpn/client.conf:
+**2)** Settings of the OpenVPN client on the router in the file `/etc/openvpn/client.conf`:
 
 ```
 client
@@ -45,14 +45,14 @@ cipher AES-256-CBC
 verb 3
 ```
 
-**3)** Установка модуля tun из репозитория OpenWRT:
+**3)** Installing the `tun` module from the OpenWRT repository:
 
-```
+```sh
 opkg update
 opkg install kmod-tun
 ```
 
-**4)** Создать скрипт автозапуска /etc/init.d/openvpn:
+**4)** Create autorun script `/etc/init.d/openvpn`:
 
 ```sh
 #!/bin/sh /etc/rc.common
@@ -92,21 +92,21 @@ stop() {
 }
 ```
 
-**5)** Отредактировать в файле /etc/profile переменную PATH и добавить LD_LIBRARY_PATH:
+**5)** Edit the `PATH` variable in the `/etc/profile` file and add `LD_LIBRARY_PATH`:
 
-```
+```sh
 export PATH=/usr/sbin:/usr/bin:/sbin:/bin:/tmp/usr/sbin
 export LD_LIBRARY_PATH=/tmp/usr/lib
 ```
 
-**6)** Включить автозапуск скрипта openvpn:
+**6)** Enable `openvpn` script autostart:
 
-```
+```sh
 chmod +x /etc/init.d/openvpn
 /etc/init.d/openvpn enable
 ```
 
-**7)** Далее нужно зайти в веб-интерфейс OpenWRT в раздел “Network -> Interfaces” и добавить новый интерфейс кнопкой “Add new interface...”. После чего указать следующие параметры:
+**7)** Next, you need to go to the OpenWRT web interface in the "Network -> Interfaces" section and add a new interface with the "Add new interface..." button. Then specify the following parameters:
 
 _General Setup_
 ```
@@ -129,7 +129,7 @@ _Firewall Settings_
 Create / Assign firewall-zone -> unspecified -or- create: vpn
 ```
 
-**8)** В веб-интерфейсе перейти в раздел “Network -> Firewall -> Zones” и там нажать кнопку “Edit” напротив строчки с именем “vpn”. На странице редактирования зоны нужно указать следующие параметры:
+**8)** In the web interface, go to the "Network -> Firewall -> Zones" section and click the "Edit" button next to the line with the name "vpn". On the zone editing page, specify the following parameters:
 
 _General Settings_
 ```
@@ -146,5 +146,4 @@ _Inter-Zone Forwarding_
 Allow forward from source zones: lan
 ```
 
-**9)** Теперь можно перезагрузить роутер, VPN должен заработать для всех клиентов локальной сети.
-
+**9)** Now you can reboot the router, the VPN should work for all customers of the local network.

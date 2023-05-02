@@ -6,112 +6,112 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Ниже приведено описание параметров Linux Deploy для установки дистрибутивов GNU/Linux на Android.
+The following describes the Linux Deploy settings for installing GNU/Linux distributions on Android.
 
 <!--more-->
 
-Настраиваемые параметры Linux Deploy:
+Linux Deploy configurable settings:
 
-* *Параметры -> Установить (Properties -> Install)*
+- *Properties -> Install*
 
-Запускает новую установку GNU/Linux системы. При установке используются заданные ниже параметры.
+Starts a new installation of the GNU/Linux system. The following settings are used during installation:
 
-* *Параметры -> Переконфигурировать (Properties -> Reconfigure)*
+- *Properties -> Reconfigure*
 
-Позволяет выполнить перенастройку уже установленной системы. Все параметры текущей системы будут сконфигурированы заново, в том числе будет сброшен пользовательский пароль.
+Allows you to reconfigure an already installed system. All parameters of the current system will be reconfigured, including the reset of the user password.
 
-* *Параметры -> Экспортировать (Properties -> Export)*
+- *Properties -> Export*
 
-Позволяет сохранить архив корневой файловой системы контейнера. Нужно указать путь к архиву. В зависимости от указанного расширения файла (поддерживаются архивы tar.gz или tar.bz2) будет создан архив указанного типа.
+Allows you to save the archive of the container root file system. You must specify the path to the archive. Depending on the specified file extension (tar.gz or tar.bz2 archives are supported), an archive of the specified type will be created.
 
-* *Параметры -> Дистрибутив (Properties -> Distribution)*
+- *Properties -> Distribution*
 
-Указывает какой дистрибутив следует установить. От выбора этого параметра зависят ряд других параметров развертывания системы.
+Specifies which distribution to install. A number of other system deployment options depend on this setting.
 
-* *Параметры -> Версия дистрибутива (Properties -> Distribution suite)*
+- *Properties -> Distribution suite*
 
-Позволяет указать одну из нескольких доступных версий выбранного дистрибутива.
+Allows you to specify one of several available versions of the selected distribution.
 
-* *Параметры -> Архитектура (Properties -> Architecture)*
+- *Properties -> Architecture*
 
-Выбор архитектуры указывает на то, какую сборку дистрибутива устанавливать. Например, сборка armhf отличается от armel поддержкой набора инструкций процессора, которые позволяют выполнять операции с плавающей точкой на аппаратном уровне (hardware floating point). В то время как armel поддерживает лишь программную реализацию (software floating point). Благодаря оптимизации под современные процессоры сборка armhf потенциально работает быстрее, однако она не запустится на процессоре, который не поддерживает новые инструкции. Следует учесть, что некоторые версии дистрибутивов могут не поддерживать ту или иную архитектуру из списка. При выборе архитектуры x86 на устройствах с архитектурой ARM будет использоваться режим эмуляции ахритектуры с помощью QEMU, однако эмуляция архитектуры снижает производительность примерно в 3-4 раза. Эмуляция будет работать только на устройствах, где ядро собрано с поддержкой модуля binfmt_misc.
+Selecting an architecture indicates which distribution assembly to install. For example, the assembly of armhf differs from armel by supporting a set of processor instructions that allow you to perform floating point operations at the hardware floating point level. While armel supports only software implementation (software floating point). Thanks to optimization for modern processors, the armhf assembly potentially works faster, but it will not run on a processor that does not support new instructions. It should be noted that some distributions may not support a particular architecture from the list. When selecting the architecture of x86 on devices with ARM architecture will use the mode of emulation of the architecture with QEMU, but the emulation of the architecture reduces performance in about 3-4 times. Emulation will only work on devices where the kernel is built with support for the binfmt_misc module.
 
-* *Параметры -> URL-адрес зеркала (Properties -> Mirror URL)*
+- *Properties -> Mirror URL*
 
-Указывается адрес репозитория, с которого будет производиться установка выбранного дистрибутива.
+Specifies the address of the repository from which the selected distribution will be installed.
 
-* *Параметры -> Тип установки (Properties -> Installation type)*
+- *Properties -> Installation type*
 
-Этот параметр определяет какой тип установки будет использоваться. Поддерживается несколько различных варианта установки: в loop-файл образа диска, в раздел на карте памяти, в оперативную память, в директорию или пользовательский вариант. По умолчанию выбрана установка в файл. При пользовательском типе установки пропускается этап создания файла образа диска и файловой системы. Это позволяет выполнять установку на заранее подготовленные носители. Например, это может быть образ (либо раздел) со специфичной файловой системой. В качестве пути установки в этом случае можно указывать любой возможный носитель (файл, раздел карты памяти или директория), тип носителя определяется автоматически. Нужно быть осторожным при установке в этом режиме. В данном случае никакая информация из существующего образа (раздела, директории) не удаляется, а установка осуществляется поверх имеющихся данных, что может привести к конфликтам во время установки. При установке в память создается виртуальный диск заданного объема в оперативной памяти устройства используя файловую систему tmpfs.
+This parameter determines what type of installation will be used. Several installation options are supported: in the loop file of the disk image, in the section on the memory card, in RAM, in the directory or in the user version. By default, the installation in the file is selected. The user-defined installation type skips the step of creating the disk image file and the file system. This allows installation on pre-prepared media. For example, it can be an image (or a partition) with a specific file system. As the installation path in this case, you can specify any possible media (file, memory card partition or directory), the type of media is determined automatically. Care must be taken when installing in this mode. In this case, no information from the existing image (section, directory) is deleted, and the installation is carried out on top of the existing data, which can lead to conflicts during installation. When installed in memory, a virtual disk of a given volume is created in the device's RAM using the tmpfs file system.
 
-* *Параметры -> Путь установки (Properties -> Installation path)*
+- *Properties -> Installation path*
 
-Путь установки указывает на путь к файлу, блочному устройству или директории, в зависимости от выбранного типа установки. По умолчанию указан путь к файлу образа на карте памяти, если путь до карты отличается от /mnt/sdcard, то нужно подправить его на правильный путь. При установке будет создан файл образа, размер которого задается параметром Размер образа (МБ) (Image size (MB)). При установке системы на раздел карты памяти требуется указать путь к разделу, например /dev/block/mmcblk1p1. Список доступных разделов можно получить при вызове системной информации из пункта меню Состояние (Status). Предварительно можно разбить карту на несколько разделов, использовав один раздел под систему GNU/Linux, а другой оставить доступным для Android. Раздел, на которые устанавливается систему GNU/Linux, не может быть использован для нужд Android или чего-либо еще. Третий вариант установки - установка в один из каталогов системы Android. Этот вариант может быть использован в случае, если у вас уже есть смонтированный раздел с файловой систему ext2/ext3/ext4 для каких-то нужд и вы хотите использовать уже имеющуюся файловую систему для развертывания образа GNU/Linux.
+The installation path indicates the path to the file, block device, or directory, depending on the installation type selected. By default, the path to the image file on the memory card is specified, if the path to the card is different from /mnt/sdcard, then you need to correct it to the correct path. During installation, an image file will be created, the size of which is set by the Image size (MB) parameter. When installing the system on a memory card partition, specify the partition path, such as /dev/block/mmcblk1p1. The list of available sections can be obtained by calling the system information from the menu item Status. You can pre-divide the map into several sections, using one section for the GNU/Linux system and leaving the other available for Android. The partition on which the GNU/Linux system is installed cannot be used for Android or anything else. The third option is to install in one of the directories of the Android system. This option can be used if you already have a mounted partition with the ext2/ext3/ext4 file system for some needs, and you want to use an existing file system to deploy the GNU/Linux image.
 
-* *Параметры -> Размер образа (МБ) (Properties -> Image size (MB))*
+- *Properties -> Image size (MB)*
 
-Параметр задает размер файла образа диска в мегабайтах и активен только в случае выполнения установки в файл образа или оперативную память. Рекомендованный минимальный размер образа диска без графического интерфейса - 512 МБ, а с графическим интерфейсом - 1024 МБ (для LXDE). При установке Linux в образ на карту памяти с файловой системой FAT32 размер образа не должен превышать 4095 МБ.
+The parameter specifies the disk image file size in megabytes and is active only if the image file or RAM is installed. The recommended minimum disk image size without a graphical interface is 512 MB, and with a graphical interface - 1024 MB (for LXDE). When installing Linux into an image on a memory card with the FAT32 file system, the image size should not exceed 4095 MB.
 
-* *Параметры -> Файловая система (Properties -> File system)*
+- *Properties -> File system*
 
-Этот параметр определяет в какой файловой системе будет создан новый образ или раздел на карте памяти. Если параметр установлен как «Автоопределение», то будет выбрана наиболее подходящая и поддерживаемая файловая система. Параметр игнорируется при выполнении установки в директорию.
+This setting determines which file system will create a new image or partition on the memory card. If the parameter is set to Autodetect, the most suitable and supported file system will be selected. This parameter is ignored when installing to the directory.
 
-* *Параметры -> Имя пользователя (Properties -> User name)*
+- *Properties -> User name*
 
-Параметр определяет имя для пользователя в Linux-системе. Следует помнить, в дистрибутивах GNU/Linux есть ряд зарезервированных имен, которые не рекомендуется использовать в качестве имени пользователя. В качестве имени пользователя можно указать имя суперпользователя - root.
+The parameter specifies the name for the user in the Linux system. It should be remembered that there are a number of reserved names in GNU/Linux distributions that are not recommended to be used as a username. You can specify the "root" name as the username.
 
-* *Параметры -> DNS-сервер (Properties -> DNS server)*
+- *Properties -> DNS server*
 
-Параметр позволяет указать IP-адрес DNS сервера сети, например 8.8.8.8. Если требуется указать несколько адресов, то их можно причислить через пробел или один из символов «,;». Если поле оставить пустым, то будет осуществляться автоматическое определение параметров DNS при каждом запуске контейнера.
+This parameter allows you to specify the IP address of the DNS server of the network, for example, 8.8.8.8. If multiple addresses are required, they can be separated by a space or one of the characters ",;". If the field is left empty, the DNS parameters are automatically determined each time the container is started.
 
-* *Параметры -> Локализация (Properties -> Localization)*
+- *Properties -> Localization*
 
-Параметр позволяет задать язык локализации системы.
+This parameter allows you to specify the localization language of the system.
 
-* *Параметры -> Окружение рабочего стола (Properties -> Desktop environment)*
+- *Properties -> Desktop environment*
 
-Можно выбрать одно из предложенных окружений рабочего стола. В процессе установки или переконфигурации GNU/Linux-системы будут выполнены настройки профиля пользователя для запуска выбранного окружения рабочего стола. Если выбрано "Другое (Other)", то настройка выполняться не будет. Данный пункт можно выбирать в случае, если настройка запуска окружения рабочего стола выполняется вручную.
+You can select one of the suggested desktop environments. During installation or reconfiguration of the GNU/Linux system, user profile settings will be performed to run the selected desktop environment. If "Other" is selected, the configuration will not be performed. You can select this option if you want to configure the desktop environment to start manually.
 
-* *Параметры -> Выбрать компоненты (Properties -> Select components)*
+- *Properties -> Select components*
 
-Параметр позволяет отмечать необходимые для установки компоненты, такие как SSH сервер, VNC сервер, окружение рабочего стола, X-сервер и др. Если при установке не были выбраны некоторые компоненты, то запуск соответствующих служб будет недоступен. Установку и настройку любых компонентов можно выполнить вручную стандартными интсрументами конкретного дистрибутива.
+This parameter allows you to mark the necessary components for installation, such as SSH server, VNC server, desktop environment, X server, etc. If some components were not selected during installation, the launch of the corresponding services will not be available. Installation and configuration of any components can be done manually with standard tools of a particular distribution.
 
-* *Параметры -> Chroot директория (Properties -> Chroot directory)*
+- *Properties -> Chroot directory*
 
-Указывает директорию, куда будет смонтирован контейнер и выполнен chroot. При работе с несколькими профилями можно для каждого профиля указать разные chroot директории, таким образом появится возможность запускать несколько контейнеров одновременно.
+Specifies the directory where the container will be mounted and chroot executed. When working with multiple profiles, you can specify different chroot directories for each profile, so you can run multiple containers at the same time.
 
-* *Параметры -> SSH (Properties -> SSH)*
+- *Properties -> SSH*
 
-Установка параметра разрешает запуск SSH сервера при старте контейнера.
+Setting the parameter allows the SSH server to start when the container starts.
 
-* *Параметры -> Параметры SSH (Properties -> SSH settings)*
+- *Properties -> SSH settings*
 
-Открывает окно настроек SSH сервера.
+Opens the SSH server settings window.
 
-* *Параметры -> GUI (Properties -> GUI)*
+- *Properties -> GUI*
 
-Установка параметра разрешает запуск окружения рабочего стола при старте системы через выбранную графическую подсистему (VNC, внешний X-сервер, фрейм-буфер).
+Setting the parameter allows the desktop environment to start when the system starts through the selected graphics subsystem (VNC, external X-server, frame buffer).
 
-* *Параметры -> Графическая подсистема (Properties -> Graphics subsystem)*
+- *Properties -> Graphics subsystem*
 
-Можно выбрать одну из трех графических подсистем для запуска окружения рабочего стола: VNC, X Server, Framebuffer. Выбор подсистемы VNC позволяет запускать графический интерфейс пользователя через VNC сервер, подключиться к которому можно через сторонний VNC клиент. Выбор подсистемы X Server позволяет запускать графический интерфейс пользователя через внешний X-сервер. Выбор подсистемы Framebuffer позволяет отображать графический интерфейс пользователя напрямую (в обход Android) через видеодрайвер. Данный режим поддерживается не на всех устройствах.
+You can select one of three graphics subsystems to run the desktop environment: VNC, X Server, Framebuffer. Selecting the VNC subsystem allows you to run the graphical user interface through a VNC server, to which you can connect through a third-party VNC client. Selecting the X Server subsystem allows you to run the graphical user interface through an external X server. Selecting the Framebuffer subsystem allows you to display the graphical user interface directly (bypassing Android) through the video driver. This mode is not supported on all devices.
 
-* *Параметры -> Параметры GUI (Properties -> GUI settings)*
+- *Properties -> GUI settings*
 
-Открывает окно настроек выбранной графической подсистемы.
+Opens the settings window of the selected graphics subsystem.
 
-* *Параметры -> Сценарии пользователя (Properties -> Custom scripts)*
+- *Properties -> Custom scripts*
 
-Позволяет автоматически запускать любые сценарии внутри GNU/Linux-системы при её запуске. При запуске и остановке системы сценарию в качестве параметра будут переданы start или stop, соответственно.
+Allows you to automatically run any scripts inside the GNU/Linux system when it starts. When starting and stopping the system, the script will be passed start or stop, respectively, as a parameter.
 
-* *Параметры -> Список сценариев (Properties -> List of scripts)*
+- *Properties -> List of scripts*
 
-Открывает список пользовательских сценариев для автозапуска. Список можно редактировать используя контекстное меню.
+Opens a list of custom scripts for autoplay. The list can be edited using the context menu.
 
-* *Параметры -> Монтирование (Properties -> Custom mounts)*
+- *Properties -> Custom mounts*
 
-Позволяет смонтировать в контейнере один из каталогов, образов или разделов системы Android.
+Allows you to mount one of the directories, images or sections of the Android system in the container.
 
-* *Параметры -> Точки монтирования (Properties -> Mount points)*
+- *Properties -> Mount points*
 
-Открывает список пользовательских сценариев для автозапуска. Список можно редактировать используя контекстное меню. Можно указать каталог, например /mnt/sdcard, для подключения к запускаемой системе внешней карты памяти, либо можно указать блочное устройство, например /dev/block/mmcblk1p2, чтобы смонтировать в запускаемой системе один из разделов карты.
+Opens a list of custom scripts for autoplay. The list can be edited using the context menu. You can specify a directory, such as /mnt/sdcard, to connect to an external memory card system to be run, or you can specify a block device, such as /dev/block/mmcblk1p2, to mount one of the card partitions on the system to be run.

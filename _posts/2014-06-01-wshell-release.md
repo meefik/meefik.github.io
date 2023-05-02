@@ -6,15 +6,15 @@ categories: [android, wshell]
 comments: true
 ---
 
-wShell - эмулятор терминала с веб-интерфейсом для Android. Основан на [Shell In A Box](http://code.google.com/p/shellinabox/). Приложение позволяет подключиться к консоли Android-устройства прямо из веб-браузера, если компьютер и устройства находятся в одной локальной сети.
+Web-based terminal emulator for Android based on [Shell In A Box](http://code.google.com/p/shellinabox/). The application allows you to connect to the console of your Android device directly from a web browser if the computer and devices are on the same local network.
 
-![wshell](/assets/images/wshell.png "wShell в веб-браузере"){: .center}
+![wshell](/assets/images/wshell.png "wShell in a web browser"){: .center}
 
 <!--more-->
 
-Приложение распространяется под лицензией [GPL версии 3](http://www.gnu.org/licenses/) или более поздней.
+The application is distributed under license [GPLv3](https://www.gnu.org/licenses/gpl-3.0.html) or later.
 
-Исходный код: <https://github.com/meefik/wshell>
-<br>
-Установить из Google play: <https://play.google.com/store/apps/details?id=ru.meefik.wshell>
+Links:
 
+- [Source code](https://github.com/meefik/wshell/)
+- [APK installer](https://github.com/meefik/wshell/releases/latest)

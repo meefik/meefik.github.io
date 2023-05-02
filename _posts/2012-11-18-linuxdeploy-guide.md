@@ -6,25 +6,24 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Инструкция по установке дистрибутива GNU/Linux через программу Linux Deploy под Android:
+Instructions for installing the GNU/Linux distribution via Linux Deploy for Android:
 
-1. Подключите WiFi или другую сеть с доступом в Интернет. Установка осуществляется по сети и не будет работать без доступа в Интернет.
+1. Connect WiFi or another network with Internet access. Installation is carried out over the network and will not work without Internet access.
 
-2. Убедитесь, что на устройстве получены права суперпользователя (root).
+2. Make sure that you have superuser (root) rights on the device.
 
-3. Установите последнюю версию программы [Linux Deploy](https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy).
+3. Install the latest version of [Linux Deploy](https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy).
 
-4. Установите приложение [BusyBox](https://play.google.com/store/apps/details?id=ru.meefik.busybox) и запустите установку кнопкой "Установить" (Install). По умолчанию BusyBox устанавливается в директорию /system/xbin, которую обычно не требуется менять. Если в директории установки уже присутствуют одноименные утилиты, то они не будут заменены утилитами из BusyBox, что в последствии может привести к проблемам в работе Linux Deploy. Чтобы такого не произошло в настройках приложения BusyBox нужно выставить опцию "Настройки -> Заменить апплеты" (Settings -> Replace applets).
+4. Install the [BusyBox](https://play.google.com/store/apps/details?id=ru.meefik.busybox) app and start the installation with the "Install" button. By default, BusyBox is installed in the `/system/xbin` directory, which usually does not need to be changed. If the installation directory already contains utilities of the same name, they will not be replaced by utilities from BusyBox, which can subsequently lead to problems with Linux Deploy. To prevent this from happening, in the BusyBox settings the option "Settings" -> "Replace applets" must be selected.
 
-5. Запустите приложение Linux Deploy и зайтите в настройки. Проверьте, чтобы в пункте "Настройки -> Директория BusyBox" (Settings -> BusyBox directory) была указана директория, в которую осуществлялась установка BusyBox на предыдущем шаге. Если по какой-то причине установка BusyBox на системный раздел невозможна (например, на HTC есть блокировка записи на системный раздел), то можно качестве директории BusyBox указать путь "/data/data/ru.meefik.busybox/files/bin". После изменения директории BusyBox небходимо обновить рабочее окружение программы "Настройки -> Обновить окружение" (Settings -> Update ENV). Полезно оставить включенной опцию "Настройки -> Не отключать экран" (Settings -> Screen Lock), пока приложение будет активно, экран, WiFi и процессор не будут переходить в спящий режим.
+5. Launch the Linux Deploy application and go to settings. Verify that "Settings" -> "BusyBox directory" specifies the BusyBox installation directory in the previous step. If for some reason BusyBox cannot be installed on the system partition (for example, HTC has a system partition write lock), you can specify the `/data/data/ru.meefik.busybox/files/bin` path as the BusyBox directory. After changing the BusyBox directory, you need to update the working environment of the "Settings" -> "Update ENV". It is useful to leave the "Settings" -> "Screen Lock" option enabled: while the application is active, the screen, WiFi and processor will not go into sleep mode.
 
-6. Программа поддерживает работу с несколькими профилями, где хранятся настройки для каждого экземпляра Linux. Можно быстро переключаться между экземплярами через окно управления профилями (открывается по нажатию на пиктограмму в заголовке главного окна). По умолчанию создается профиль с именем Linux. Зайдите в параметры текущего профиля (крайняя правая кнопка) и установите необходимые опции установки и запуска дистрибутива GNU/Linux (см. [описание параметров](/blog/2012/11/19/linuxdeploy-properties/)).
+6. The program supports work with several profiles, where the settings for each Linux instance are stored. You can quickly switch between instances through the profile management window (opens by clicking on the icon in the header of the main window). By default, a profile is created with the name Linux. Go to the settings of the current profile (rightmost button) and set the necessary options for installing and running the GNU/Linux distribution (see [description of parameters](/2012/11/19/linuxdeploy-properties/)).
 
-7. Запустите установку из окна параметров "Параметры -> Установить" (Properties -> Install). Журнал установки отображается в главном окне приложения. Установка в среднем занимает около 30 минут.
+7. Start the installation from the "Properties" -> "Install" button. The installation log is displayed in the main application window. Installation takes about 30 minutes on average.
 
-8. Если установка завершилась без ошибок, то можно запустить Linux-систему кнопкой "СТАРТ" (START). При этом будут запущены отмеченные в параметрах сервисы - SSH, VNC.
+8. If the installation is complete without errors, you can start the Linux system with the "START" button. This will start the services selected in the parameters - SSH, VNC.
 
-9. Для доступа к консоли Linux-системы по SSH следует установить [ConnectBot](https://play.google.com/store/apps/details?id=org.connectbot) (или другой SSH клиент). Для доступа к рабочему столу Linux-системы следует установить VNC клиент, например [VNC Viewer](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android). Параметры подключения к системе через VNC по умолчанию: Host - 127.0.0.1, Port - 5900. Пароль по умолчанию к SSH и VNC - changeme. Изменить пароль текущего пользователя можно в параметрах приложения, либо из консоли командой passwd для SSH или vncpasswd для VNC. Для запуска программ из-под пользователя root используйте команду sudo (например, sudo synaptic). По умолчанию для пользователя root (если только он не указан в настройках в качестве имени пользователя) пароль не установлен, однако можно задать для него пароль командой sudo passwd root.
+9. To access the Linux console over SSH, you must install [ConnectBot](https://play.google.com/store/apps/details?id=org.connectbot) (or another SSH client). To access the Linux desktop, you must install a VNC client, such as [VNC Viewer](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android). The default settings for connecting to the system via VNC are: Host - `127.0.0.1`, Port - `5900`. The default password for SSH and VNC is changeme. You can change the password of the current user in the application settings, either from the console with the passwd command for SSH or vncpasswd for VNC. To run programs from the root user, use the sudo command (for example, sudo synaptic). By default, the root user (unless specified in the settings as the user name) does not have a password, but you can set a password for it with sudo passwd root.
 
-10. Чтобы остановить Linux-систему, все запущенные под ней сервисы и размонтировать диски, достаточно нажать кнопку "СТОП" (STOP).
-
+10. To stop the Linux system, all the services running under it and unmount the disks, just press the "STOP" button.

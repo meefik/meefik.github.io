@@ -6,28 +6,28 @@ categories: [javascript]
 comments: true
 ---
 
-Когда появляется задача передать некоторый код по аудио, то классическим решением являются DTMF коды. DTMF - это двухтональный многочастотный сигнал, используемый для набора телефонного номера. Однако реальное применение данной технологии гораздо шире.
+When the task appears to transmit some code by audio, the classic solution is DTMF codes. DTMF is a two-tone multi-frequency signal used to dial a phone number. However, the actual application of this technology is much wider.
 
-Формат сигнала представляет собой сумму двух синусоидальных сигналов определенных частот. Символы DTMF кодируются следующими частотами:
+The signal format is the sum of two sinusoidal signals of certain frequencies. DTMF symbols are encoded by the following frequencies:
 
-|        | 1209 Гц | 1336 Гц | 1477 Гц | 1633 Гц |
+|        | 1209 Hz | 1336 Hz | 1477 Hz | 1633 Hz |
 |--------|---------|---------|---------|---------|
-| 697 Гц | 1       | 2       | 3       | A       |
-| 770 Гц | 4       | 5       | 6       | B       |
-| 852 Гц | 7       | 8       | 9       | C       |
-| 941 Гц | *       | 0       | #       | D       |
+| 697 Hz | 1       | 2       | 3       | A       |
+| 770 Hz | 4       | 5       | 6       | B       |
+| 852 Hz | 7       | 8       | 9       | C       |
+| 941 Hz | \*      | 0       | #       | D       |
 
-Есть множество примеров реализации DTMF, один из наиболее известных алгоритмов детекции DTMF является [алгоритм Герцеля](https://en.wikipedia.org/wiki/Goertzel_algorithm). Есть даже его [реализация на JavaScript](https://github.com/Ravenstine/goertzeljs).
+There are many examples of DTMF implementation, one of the most well-known DTMF detection algorithms is [Goertzel algorithm](https://en.wikipedia.org/wiki/Goertzel_algorithm). There is even its [JavaScript implementation](https://github.com/Ravenstine/goertzeljs).
 
-Распознавание кода происходит по частотной характеристики, а по временной характеристике можно реализовать фильтрацию от шумов.
+Code recognition occurs by frequency response, and by time response, noise filtering can be implemented.
 
 <!--more-->
 
-### JS-библиотека для работы с DTMF
+### JS library for working with DTMF
 
-Моя версия библитеки [DTMF.js](https://github.com/meefik/dtmf.js) достаточно проста и использует [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) как для генерации сигнала, так и для его распознавания в браузере. Аудио захватывается с микрофона функцией getUserMedia.
+My version of the library [DTMF.js](https://github.com/meefik/dtmf.js) is quite simple and uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) for both signal generation and recognition in the browser. Audio is captured from the microphone by the getUserMedia function.
 
-Пример получения и распознавания DTMF кодов:
+Example of receiving and recognizing DTMF codes:
 
 ```js
 var receiver = new DTMF.Receiver();
@@ -40,14 +40,13 @@ navigator.getUserMedia({ audio: true }, function(stream) {
 });
 ```
 
-А вот пример генерации и воспроизведения DTMF кодов:
+And here is an example of generating and reproducing DTMF codes:
 
 ```js
 var sender = new DTMF.Sender();
 sender.play('1234567890ABCD#*');
 ```
 
-И небольшая демонстрация:
+A small demonstration:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/OS6yIiq_Cp8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-

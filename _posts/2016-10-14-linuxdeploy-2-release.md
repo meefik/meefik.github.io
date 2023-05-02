@@ -6,71 +6,70 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Сегодня состоялся официальный выпуск Linux Deploy 2.0, включающий много новых разработок, которые велись последний год. Не все удалось реализовать из задуманного по тем или иным причинам, настало время разобраться что же именно поменялось и как с этим жить.
+Today was the official release of Linux Deploy 2.0, which includes many new developments that have been conducted over the past year. Not everything could be realized from what was conceived for one reason or another, it's time to figure out what exactly has changed and how to live with it. For more details, see [the project page](/linuxdeploy).
 
 ![linuxdeploy](/assets/images/linuxdeploy-2.png "Linux Deploy 2.0")
 
 <!--more-->
 
-### Графический интерфейс
+### Graphic interface
 
-Интерфейс приложения переработан на современный лад — Material Design. Помимо стилизации функции приложения более логично распределены по разделам, добавлена выдвижная панель навигации. Благодаря библиотеке совместимости интерфейс почти одинаково отображается под разными версиями Android, начиная с версии Android 2.3.3. Скринкаст по работе с приложением Linux Deploy можно [посмотреть тут](https://www.youtube.com/watch?v=9b8PnZge7vA).
+The application interface has been redesigned in a modern way — Material Design. In addition to styling, the functions of the application are more logically divided into sections, a sliding navigation panel has been added. Thanks to the compatibility library, the interface is almost equally displayed under different versions of Android, starting with Android 2.3.3. You can [see here](https://www.youtube.com/watch?v=9b8PnZge7vA) a screencast of the Linux Deploy application.
 
-### Интерфейс командной строки
+### Command Line Interface
 
-Интерфейс командной строки ([CLI](https://github.com/meefik/linuxdeploy/tree/cli)) претерпел значительные изменения, ядро приложения разделено на отдельные части — компоненты, а сам интерфейс теперь позволяет управлять почти всеми функциями Linux Deploy вообще без графического интерфейса. Также CLI можно использовать и за пределами Android (на других [системах с ядром Linux](/2016/01/26/linuxdeploy-cli-on-pc/)) как самостоятельное приложение, для работы которого требуется лишь набор утилит [BusyBox](https://github.com/meefik/busybox). Еще одной приятной особенностью являются единые конфигурационные файлы для CLI и интерфейса Android-приложения, т.е. настройки, измененные через CLI, отображаются в интерфейсе приложения и наоборот.
+The command line interface [Linux Deploy CLI](https://github.com/meefik/linuxdeploy-cli) has undergone significant changes, the application core is divided into separate parts — components, and the interface itself now allows you to manage almost all the functions of Linux Deploy without a graphical interface at all. CLI can also be used outside of Android (on other [Linux-based systems](/2016/01/26/linuxdeploy-cli-on-pc/)) as a stand-alone application that only requires a set of [BusyBox](https://github.com/meefik/busybox) utilities to work. Another nice feature is the unified configuration files for the CLI and the Android application interface, i.e. the settings changed through the CLI are displayed in the application interface and vice versa.
 
-### Интерфейсы управления
+### Control connections
 
-Теперь в Linux Deploy появилась возможность получить доступ к CLI не только из терминала Android или по adb, но и через telnet или веб-интерфейс. Наиболее интересная функция — веб-терминал, который предоставляет доступ к командной строке на устройстве прямо через браузер, что стало возможно благодаря проектам [websocket.sh](https://github.com/meefik/websocket.sh) и [xterm.js](https://github.com/sourcelair/xterm.js) (подробности можно [посмотреть тут](/2016/08/04/websocket-sh/)). Доступ к веб-интерфейсу ограничивается правилами (несколько правил могут задаваться через пробел) в [формате httpd](https://wiki.openwrt.org/doc/howto/http.httpd), например, по умолчанию доступ ограничивается по логину и паролю ("/:username:password"), а можно открыть доступ для всех ("A:*"), либо только для конкретного IP-адреса ("A:127.0.0.1").
+Linux Deploy now has the ability to access the CLI not only from the Android terminal or via adb, but also via telnet or the web interface. The most interesting feature is the web terminal, which provides access to the command line on the device directly through the browser, which became possible thanks to the [websocket.sh](https://github.com/meefik/websocket.sh) and [xterm.js](https://github.com/sourcelair/xterm.js) projects (details can be [found here](/2016/08/04/websocket-sh/)). Access to the web interface is limited by rules (several rules can be set through a space) in [httpd format](https://wiki.openwrt.org/doc/howto/http.httpd), for example, by default, access is limited by login and password ("/:username:password"), or you can open access for everyone ("A:\*"), or only for a specific IP address ("A:127.0.0.1").
 
-### Поддержка новых версий дистрибутивов
+### Support for new versions of distributions
 
-Добавлена поддержка дистрибутивов Debian 9 (stretch), Fedora 24 и Ubuntu 16.10 (yakkety), а также улучшена поддержка других дистрибутивов. Проведенные тесты показали, что на данный момент базовая установка проходит для всех поддерживаемых дистрибутивов, включая архитектуры ARM и x86.
+Added support for Debian 9 (stretch), Fedora 24 and Ubuntu 16.10 (yakkety) distributions, and improved support for other distributions. The tests showed that the base installation is currently running for all supported distributions, including arm and x86 architectures.
 
-### Поддержка окружений рабочего стола
+### Support for desktop environments
 
-Добавлена поддержка окружения рабочего стола MATE, но из-за различных проблем с запуском GNOME и KDE, пришлось отказаться от их поддержки. Проблемы связаны с завышенными требованиями к ресурсам, а также отсутствием графического ускорения X и VNC в Android.
+Added support for the MATE desktop environment, but due to various problems with the launch of GNOME and KDE, it was necessary to abandon their support. The problems are due to inflated resource requirements, as well as the lack of graphical acceleration of X and VNC in Android.
 
-### Запуск контейнеров без прав суперпользователя
+### Running containers without superuser rights
 
-Большие надежды возлагались на функцию запуска GNU/Linux приложений без прав суперпользователя, которая основывается на возможностях программы [PRoot](https://github.com/meefik/PRoot). Проект PRoot предлагает инструмент, который позволяет запускать приложения, требующие определенных системных привилегий, путем перехвата и подмены системных вызовов, используя механизм трассировки. К сожалению, сам проект не обновляется с 2015 года, поддержка прекращена. Однако был сделан форк проекта. Удалось внести ряд изменений и даже выпустить [версию 5.1.1](https://github.com/meefik/PRoot/releases/tag/v5.1.1), благодаря чему PRoot заработал в Android 5+, и было добавлено расширение fake_link для эмуляции жестких ссылок, которые перестали работать в Android 6+. Но, к сожалению, усилия по доработке PRoot не оправдали себя, т. к. в Android 5+ настройки SELinux стали настолько суровыми, что часть системных вызовов перестали работать под обычным пользователем. Среди них работа с pty, управление пользователями и группами, доступ к /dev. На данный момент установка дистрибутивов без прав суперпользователя под Android 5+ не работает, а запуск уже готовых контейнеров возможен, но с большими ограничениями.
+High hopes were placed on the function of running GNU/Linux applications without superuser rights, which is based on the capabilities of the program [PRoot](https://github.com/meefik/PRoot). The PRoot project offers a tool that allows you to run applications that require certain system privileges by intercepting and replacing system calls using a trace mechanism. Unfortunately, the project itself has not been updated since 2015, support has been discontinued. However, a fork of the project was made. We managed to make a number of changes and even release [version 5.1.1](https://github.com/meefik/PRoot/releases/tag/v5.1.1), thanks to which PRoot earned in Android 5+, and the fake_link extension was added to emulate hard links that stopped working in Android 6+. But, unfortunately, the efforts to refine PRoot did not justify themselves, because in Android 5+ SELinux settings have become so severe that some system calls have ceased to work under the usual user. These include working with pty, managing users and groups, and accessing /dev. At the moment, the installation of distributions without superuser rights for Android 5+ does not work, and the launch of ready-made containers is possible, but with great restrictions.
 
-### Поддержка систем инициализации
+### Support for initialization systems
 
-Ранее запуск скриптов внутри контейнера при его старте осуществлялся по списку. Сейчас появилась поддержка двух систем инициализации — run-parts и sysv. Система run-parts работает просто, указывается путь к файлу или каталогу, которые нужно запустить при старте контейнера. Если указана директория, то все файлы в директории запускаются в алфавитном порядке, в качестве параметра передается «start», а останавливаются в обратном порядке, и передается параметр «stop». Система инициализации sysv подразумевает указание уровня запуска (номер 0 - 5), запуск и остановка сценариев осуществляется в соответствии с данной системой инициализации. В качестве дополнительных опций можно указать пользователя, под которым будет выполняться запуск сценариев, а также способ запуска — асинхронный (параллельный) или обычный (последовательный).
+Previously, running scripts inside the container at its start was carried out according to the list. Now there is support for two initialization systems — run-parts and sysv. The run-parts system works simply by specifying the path to the file or directory to run when the container starts. If the directory is specified, all files in the directory are run in alphabetical order, the parameter is passed "start", and stopped in reverse order, and the parameter "stop" is passed. The sysv initialization system implies the indication of the startup level (number 0 - 5), starting and stopping scenarios is carried out in accordance with this initialization system. As additional options, you can specify the user under whom the scripts will be run, as well as the method of starting — asynchronous (parallel) or normal (sequential).
 
-### Взаимодействие с Android из контейнера
+### Interaction with Android from the container
 
-Появилась возможность отправлять сообщения на панель уведомлений в Android прямо из контейнера. Для этого используются команды, которые можно выполнять через unchroot. Отобразить уведомление:
+Now you can send messages to the notification panel in Android directly from the container. To do this, use commands that can be executed through unchroot. Display notification:
 ```sh
 am broadcast -a ru.meefik.linuxdeploy.BROADCAST_ACTION --user 0 --es "info" "Hello World!"
 ```
-Отобразить предупреждение:
+Display warning:
 ```sh
 am broadcast -a ru.meefik.linuxdeploy.BROADCAST_ACTION --user 0 --es "alert" "Hello World!"
 ```
-Скрыть сообщение:
+Hide message:
 ```sh
 am broadcast -a ru.meefik.linuxdeploy.BROADCAST_ACTION --user 0 --esn "hide"
 ```
 
-### Репозиторий контейнеров
+### Container repository
 
-Теперь помимо установки дистрибутивов из официальных источников есть возможность загрузить уже готовый контейнер из репозитория контейнеров (http://hub.meefik.ru). Это позволит сократить время установки и трафик, а также обойти некоторые возможные проблемы, которые могут возникнуть при установке обычным способом. На данный момент в репозитории доступны контейнеры с Debian (ARM и x86), остальные дистрибутивы становятся доступны после покупки приложения [Piggy Helper](https://play.google.com/store/apps/details?id=ru.meefik.donate) (приложение для доната). Платный доступ к репозиторию продиктован необходимостью оплачивать хостинг с большим исходящим трафиком, а также необходимостью поддерживать архивы контейнеров в актуальном состоянии.
+Now, in addition to installing distributions from official sources, it is possible to download a ready-made container from the container repository <http://hub.meefik.ru>. This will reduce installation time and traffic, as well as bypass some of the possible problems that may arise when installing in the usual way. At the moment, containers with Debian (arm and x86) are available in the repository, the rest of the distributions become available after buying the [Piggy Helper](https://play.google.com/store/apps/details?id=ru.meefik.donate) application (donation application). Paid access to the repository is dictated by the need to pay for hosting with large outgoing traffic, as well as the need to keep the archives of containers up to date.
 
-### Другие интересные функции
+### Other cool features
 
-На этом новые функции не заканчиваются. Помимо множества мелких доработок еще можно выделить следующие:
+The new functions do not end there. In addition to many minor improvements, the following can be distinguished:
 
-* добавлена функция синхронизации рабочего окружения с сервером или другим устройством (команда linuxdeploy sync);
-* добавлена генерация случайного пароля пользователя (вместо changeme);
-* добавлена функция отслеживания изменения сети и обновления текущего контейнера (параметр NET_TRIGGER может содержать путь к файлу, который будет выполняться при изменениях в сети);
-* добавлена возможность добавлять пользователей в группы aid_* из интерфейса приложения (параметр PRIVILEGED_USERS);
-* добавлена опция предотвращения торможения процессора при отключении экрана;
-* расширен синтаксис описания точек монтирования, теперь можно указывать откуда и куда монтировать (/from/dir:/to/dir).
+- added the function of synchronizing the working environment with the server or other device (the `linuxdeploy sync` command);
+- added generation of a random user password (instead of "changeme");
+- added the function of tracking network changes and updating the current container (the `NET_TRIGGER` parameter may contain the path to the file that will be executed when changes are made to the network);
+- added the ability to add users to `aid_*` groups from the application interface (`PRIVILEGED_USERS` parameter);
+- added the option to prevent the processor from braking when the screen is turned off;
+- extended the syntax of the description of mount points, now you can specify where and where to mount "/from/dir:/to/dir".
 
-### Обратная связь
+### Feedback
 
-Поддержка русскоговорящих пользователей осуществляется на [форуме 4pda](https://4pda.to/forum/index.php?showtopic=378043), а англоговорящих — в [разделе вопросов](https://github.com/meefik/linuxdeploy/issues) на странице проекта в GitHub. Само приложение можно скачать в [Google Play](https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy), на [форуме 4pda](https://4pda.to/forum/index.php?showtopic=378043) или в [GitHub](https://github.com/meefik/linuxdeploy/releases).
-
+Support for Russian-speaking users is carried out on the [4pda forum](https://4pda.to/forum/index.php?showtopic=378043) and English-speaking — in the [question section](https://github.com/meefik/linuxdeploy/issues) on the GitHub project page. The app itself can be downloaded from [Google Play](https://play.google.com/store/apps/details?id=ru.meefik.linuxdeploy) or from [GitHub](https://github.com/meefik/linuxdeploy/releases).

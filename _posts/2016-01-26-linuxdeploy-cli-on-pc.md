@@ -6,118 +6,117 @@ categories: [linuxdeploy]
 comments: true
 ---
 
-Несмотря на то, что изначально Linux Deploy (сокращенно LD) задумывался как приложение для Android, со временем появляются и другие варианты его применения. С появлением Linux Deploy CLI стал доступен ряд новых возможностей, открывающие новые сферы применения этого инструмента.
+Despite the fact that initially Linux Deploy (abbreviated LD) was conceived as an application for Android, over time there are other options for its application. With the Linux Deploy CLI, a number of new features have become available that open up new uses for the tool.
 
-[Linux Deploy CLI](https://github.com/meefik/linuxdeploy-cli) - это приложение с интерфейсом для командной строки, предназначенное для автоматизации процесса установки, конфигурирования и запуска GNU/Linux дистрибутивов внутри контейнера chroot. Приложение может работать как в обычных десктопных Linux-дистрибутивах, так и на мобильных платформах, основанных на ядре Linux, при условии соблюдения необходимых зависимостей (все зависимости могут быть собраны статически). Приложения из Linux-дистрибутива запускаются в chroot окружении, работают параллельно с основной системой и сопоставимы с ней по скорости. Поскольку работа Linux Deploy базируется на системном вызове ядра Linux, то в роли "гостевых" систем могут выступать только дистрибутивы Linux.
+[Linux Deploy CLI](https://github.com/meefik/linuxdeploy-cli) is a command-line application designed to automate the process of installing, configuring, and running GNU/Linux distributions inside a chroot container. The application can work both in ordinary desktop Linux-distributions and on mobile platforms based on the Linux kernel, provided that the necessary dependencies are observed (all dependencies can be collected statically). Applications from the Linux distribution run in a chroot environment, operate in parallel with the main system, and are comparable with it in terms of speed. Since the work of Linux Deploy is based on a system call to the Linux kernel, only Linux distributions can act as guest systems.
 
 <!--more-->
 
-Приложение может работать в двух режимах: с правами суперпользователя (chroot) и без них (proot). В обычном режиме доступны все поддерживаемые типы установки: установка в файл, на раздел диска (логический диск), в POSIX совместимую директорию и в оперативную память (tmpfs). В режиме proot доступна установка только в директорию, а также появляется ряд ограничений:
+The application can work in two modes: with superuser rights (chroot) and without them (proot). In normal mode, all supported installation types are available: installation in a file, on a disk partition (logical disk), in a POSIX compatible directory and in RAM (tmpfs). In proot mode, installation is only available in the directory, and a number of restrictions appear:
 
-* все пользователи внутри контейнера имеют полный доступ ко всей файловой системе контейнера, а владельцем всех файлов и каталогов является текущий пользователь;
-* нет доступа к привилегированным операциям с системой, например, не работает ping, ulimit и т.п.;
-* приложения могут работать только с номерами сетевых портов выше 1024;
-* если приложение в своей работе использует системный вызов chroot, то его необходимо запускать через специальную утилиту fakechroot, например fakechroot /usr/sbin/sshd -p 2222.
+- all users inside the container have full access to the entire file system of the container, and the owner of all files and directories is the current user;
+- no access to privileged operations with the system, for example, `ping`, `ulimit`, etc. does not work;
+- applications can only work with network port numbers higher than 1024.
+- if the application uses the chroot system call in its work, then it must be run through a special fakechroot utility, for example, `fakechroot /usr/sbin/sshd -p 2222`.
 
-Приложение поддерживает автоматическую установку (базовой системы) и начальную настройку дистрибутивов Debian, Ubuntu, Kali Linux, Arch Linux, Fedora, CentOS, Gentoo, openSUSE и Slackware. Установка Linux-дистрибутива осуществляется по сети с официальных зеркал в интернете. Также поддерживается импорт любой другой системы из заранее подготовленного rootfs-ахрива в формате tar.gz, tar.bz2 или tar.xz. Приложение позволяет подключаться к консоли установленной системы (контейнеру), а также запускать и останавливать приложения внутри контейнера (есть поддержка различных систем инициализации и собственных сценариев автозапуска). Каждый вариант установки сохраняется в отдельный конфигурационный файл, который отвечает за настройку каждого контейнера. При необходимости, контейнеры можно запускать параллельно. Можно экспортировать конфигурацию и сам контейнер как rootfs-архив для последующего развертывания этого контейнера без повторной установки и настройки.
+The application supports automatic installation (base system) and initial configuration of distributions of Debian, Ubuntu, Kali Linux, Arch Linux, Fedora, CentOS, Gentoo, openSUSE and Slackware. Installation of Linux-distribution is carried out over the network from the official mirrors on the Internet. It also supports importing any other system from a pre-prepared rootfs archive in the format tar.gz, tar.bz2 or tar.xz. The application allows you to connect to the console of the installed system (container), as well as start and stop applications inside the container (there is support for various initialization systems and own autoplay scenarios). Each installation option is saved in a separate configuration file, which is responsible for setting up each container. If necessary, containers can be started in parallel. You can export the configuration and the container itself as a rootfs archive for later deployment of this container without re-installing and configuring it.
 
-Вообще, идея Linux Deploy возникла из желания получить легкий и удобный инструмент для быстрого развертывания Linux-дистрибутива, который можно было бы использовать для целей разработки, тестирования или обучения, а затем быстро удалить его, не внося изменения в основную (хост) Linux-систему и не рискуя ее целостностью. Благодаря программе [proot](http://proot.me) стало возможным создавать контейнеры для запуска Linux-приложений без прав суперпользователя (root), а также использовать программную эмуляцию [QEMU](https://ru.wikipedia.org/wiki/QEMU) для запуска приложений с отличающийся от хоста архитектурой без необходимости поддержки модуля [binfmt_misc](https://en.wikipedia.org/wiki/Binfmt_misc) на уровне ядра.
+In general, the idea of Linux Deploy arose from the desire to get an easy and convenient tool for quickly deploying a Linux distribution that could be used for development, testing or training purposes, and then quickly remove it without making changes to the main (host) Linux system and without risking its integrity. The [proot](https://proot-me.github.io) program made it possible to create containers for running Linux applications without root privileges, and to use the [QEMU](https://en.wikipedia.org/wiki/QEMU) software emulation to run applications with a different architecture from the host without the need to support the [binfmt_misc](https://en.wikipedia.org/wiki/Binfmt_misc) module at the kernel level.
 
-Так вышло, что на моей основной работе с 2011 года используются компьютеры с Debian. Местные разработчики периодически нуждаются в системе для запуска и тестирования своих веб-приложений (в основном Java, PHP, Python). Для этих целей обычно использовались виртуальные системы либо на базе VirtualBox, либо в местном "облаке" Proxmox, либо Docker. Основным недостатком VirtualBox является его требовательность к ресурсам компьютера, большой размер VDI образа диска, относительно невысокая скорость работы и вероятность поломки образа VM при неправильном выключении системы. Недостатком при использовании "облака" можно назвать необходимость самому администратору обслуживать запросы пользователей на создание таких систем, а также расходование ресурсов "облака" на второстепенные задачи. Для работы с Docker требуются права суперпользователя.
+It so happens that my main job since 2011 is using computers with Debian. Local developers periodically need a system to run and test their web applications (mainly Java, PHP, Python). For this purpose, virtual systems were usually used either on the basis of VirtualBox, or in the local Proxmox cloud, or Docker. The main disadvantage of VirtualBox is its demanding computer resources, large VDI disk image size, relatively low speed and the likelihood of VM image failure if the system is incorrectly turned off. The disadvantage when using the "cloud" can be called the need for the administrator himself to service user requests for the creation of such systems, as well as spending the resources of the "cloud" on minor tasks. Superuser rights are required to use Docker.
 
-В этом месяце был проведен эксперимент, PHP-разработчикам их виртуальный сервер был заменен на LD-контейнер. Были подготовлены два контейнера на базе Debian: Apache + PHP + OCI8 и Apache + PHP + MySQL + PhpMyAdmin. Контейнеры были размещены на общем сетевом диске в локальной сети, размер каждого контейнера составил около 150 МБ.
+This month, an experiment was conducted, PHP developers their virtual server was replaced by an LD container. Two Debian-based containers were prepared: Apache + PHP + OCI8 and Apache + PHP + MySQL + PhpMyAdmin. Containers were placed on a shared network drive on a local network, the size of each container was about 150 MB.
 
-Что от этого получил администратор:
+What the administrator got from this:
 
-* один раз подготовленный контейнер может быть развернут на компьютере разработчика одной командой без участия администратора;
-* работа с контейнером не требует прав суперпользователя, поэтому отсутствует риск поломки основной системы.
+- once prepared, the container can be deployed on the developer's computer by one team without the participation of the administrator;
+- working with the container does not require superuser rights, so there is no risk of failure of the main system.
 
-Что получил разработчик:
+What the developer got:
 
-* развертывание, запуск и управление системой в контейнере осуществляется без участия администратора одной командой;
-* развертывание контейнера из заранее подготовленных архивов осуществляется по сети менее чем за минуту;
-* запуск и остановка контейнера (Веб-сервер + БД) происходит мгновенно, не нужно ждать запуска операционной системы;
-* нет риска повредить контейнер, если забыл его отключить при выключени компьютера, т.к. образ системы представляет собой обычный каталог без собственной файловой системы;
-* компьютер работает быстрее, т.к. ресурсы тратятся только на запускаемый софт в контейнере, а не на всю операционную систему (в нашем случае это порядка 50 МБ, вместо 500 МБ в VirtualBox).
-* проверка работоспособности ПО прямо из каталога IDE без необходимости заливать его на сервер, для этого достаточно подключить к контейнеру необходимый каталог основной системы.
+- deployment, launch, and management of the system in the container is carried out without the participation of an administrator by one team;
+- deployment of the container from pre-prepared archives is carried out over the network in less than a minute;
+- start and stop the container (Web server + database) occurs instantly, you do not need to wait for the operating system to start;
+- there is no risk of damaging the container if you forget to disconnect it when turning off the computer, because the system image is a normal directory without its own file system;
+- the computer works faster, because resources are spent only on the software being run in the container, and not on the entire operating system (in our case, this is about 50 MB, instead of 500 MB in VirtualBox).
+- checking the operability of the software directly from the IDE directory without having to fill it to the server, for this it is enough to connect the necessary directory of the main system to the container.
 
-А теперь более подробно о том, как этого добиться. Далее будет приведена инструкция по подготовке и развертыванию LD-контейнера.
+Now for more details on how to do this. Following are instructions for preparing and deploying the LD container.
 
-Для запуска контейнеров без прав суперпользователя необходимо установить [proot](http://proot.me):
-```
+To run containers without superuser rights, you must install [proot](https://proot-me.github.io):
+```sh
 mkdir ~/bin
-wget http://portable.proot.me/proot-x86_64 -O ~/bin/proot
+wget https://proot.gitlab.io/proot/bin/proot -O ~/bin/proot
 chmod 755 ~/bin/proot
 ```
 
-Загрузка и установка Linux Deploy CLI:
-```
+To download and install the Linux Deploy CLI:
+```sh
 wget -O cli.zip https://github.com/meefik/linuxdeploy-cli/archive/master.zip
 unzip cli.zip
 rm cli.zip
 ln -sf ~/linuxdeploy-cli/cli.sh ~/bin/linuxdeploy
 ```
 
-Создание конфигурации с именем "linux" для развертывания базовой системы Debian Wheezy (64 бита):
-```
+Create a configuration named "linux" to deploy the Debian Wheezy base system (64 bits):
+```sh
 linuxdeploy -p linux conf --method='proot' --source-path='http://deb.debian.org/debian/' \
     --distrib='debian' --arch='amd64' --suite='wheezy' --target-path='$ENV_DIR/rootfs/linux' \
     --chroot-dir='$TARGET_PATH' --target-type='directory' --username='webmaster' --include='bootstrap'
 ```
 
-Посмотреть сохраненную конфигурацию:
-```
+View saved configuration:
+```sh
 linuxdeploy -p linux conf -x
 ```
 
-Запуск развертывания новой системы:
-```
+Starting a new system deployment:
+```sh
 linuxdeploy -p linux deploy
 ```
 
-Подключение к консоли контейнера под пользователем root (для выхода команда exit):
-```
+Connecting to the container console as root (the `exit` command to stop):
+```sh
 linuxdeploy -p linux shell -u root
 ```
 
-Далее можно установить и настроить необходимый софт в контейнере, однако следует учитывать описанные ранее особенности. Например, для запуска Apache нужно поменять его порт (файл /etc/apache2/ports.conf) на 8000, установить пустой параметр APACHE_ULIMIT_MAX_FILES=" " (файл /etc/apache2/envvars), а сам apachectl запускать из-под обычного пользователя (не root).
+Next, you can install and configure the necessary software in the container, but you should take into account the features described above. For example, to run Apache, you need to change its port (file `/etc/apache2/ports.conf`) to 8000, set the empty parameter `APACHE_ULIMIT_MAX_FILES=" "` (file `/etc/apache2/envvvars`), and run `apachectl` itself from under an ordinary user (not root).
 
-Настройка автозапуска на базе системы инициализации SysV:
-```
+Configuring autostart based on the SysV initialization system:
+```sh
 linuxdeploy -p linux conf --include='$INCLUDE init' --init='sysv' --init-level='3' --init-user='$USER_NAME' --init-async
 ```
-Параметры: INIT_LEVEL - уровень инициализации SysV, INIT_USER - из-под какого пользователя запускать сервисы (по умолчанию это root), INIT_ASYNC - запускать сервисы параллельно.
+Parameters: INIT_LEVEL - SysV initialization level, INIT_USER - from under which user to run services (by default this is root), INIT_ASYNC - to run services in parallel.
 
-Подготовка конфигурации, экспорт ее и экспорт контейнера в rootfs-архив (поддерживаются tar.gz, tar.bz2 и tar.xz архивы):
-```
+Preparing the configuration, exporting it and exporting the container to the rootfs archive (tar.gz, tar.bz2 and tar.xz archives are supported):
+```sh
 linuxdeploy -p linux conf --source-path='linux.tgz' --target-path='\$ENV_DIR/rootfs/linux' --chroot-dir='\$TARGET_PATH'
 linuxdeploy -p linux conf -x > /path/to/linux.conf
 linuxdeploy -p linux export /path/to/linux.tgz
 ```
 
-Экранирование "\$" позволяет сохранять в конфиг имена переменных, а не их значения. Таким образом при импорте конфига эти переменные будут автоматически заменены на соответствующие значения, которые могут отличаться от текущих.
+Escaping "\$" allows you to save the names of variables to config, rather than their values. Thus, when importing a config, these variables will be automatically replaced with the corresponding values, which may differ from the current values.
 
-Теперь есть два файла (linux.conf и linux.tgz), которые можно использовать при импорте контейнера на другом компьютере:
-```
+Now, there are two files (`linux.conf` and `linux.tgz`) that you can use when importing a container on another computer:
+```sh
 cd /path/to
 linuxdeploy -p linux conf -i ./linux.conf
 linuxdeploy -p linux deploy
 ```
 
-Подключить к контейнеру каталог основной системы (каталог ~/www подключить в /var/www контейнера):
-```
+Connect the main system directory to the container (directory `~/www` connect to `/var/www container`):
+```sh
 linuxdeploy -p linux conf --mounts='$HOME/www:/var/www'
 ```
 
-Запуск контейнера (для SysV выполняются сценарии /etc/rcN.d/SXXname start):
-```
+Starting the container (`/etc/rcN.d/SXXname start` commands are executed for SysV):
+```sh
 linuxdeploy -p linux start
 ```
 
-Остановка контейнера с освобождением ресурсов (для SysV выполняются сценарии /etc/rc6.d/KXXname stop):
-```
+Stop container and release resources (`/etc/rc6.d/KXXname stop` commands are executed for SysV):
+```sh
 linuxdeploy -p linux stop -u
 ```
 
-В итоге получилось решение, которое удовлетворяет потребностям как разработчиков, так и администраторов.
-
+The result is a solution that meets the needs of both developers and administrators.

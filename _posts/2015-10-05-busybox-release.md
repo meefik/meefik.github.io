@@ -6,22 +6,20 @@ categories: [android, busybox]
 comments: true
 ---
 
-Приложение представляет собой инсталлятор последней версии [BusyBox](http://busybox.net) для Android. Приложение содержит сборку BusyBox для различных аппаратных архитектур и является сборкой с наиболее полным набором функций, на данный момент поддерживается 335 апплетов (для busybox v1.23.2). Приложение позволяет установить в систему BusyBox или удалить уже установленный. Есть возможность выбора директории установки и режима установки (с установкой апплетов, с заменой существующих апплетов или без). Также сборку можно сохранить на карту памяти в виде zip-архива для последующей установки через рекавери.
+The application is an installer of the latest version [BusyBox](http://busybox.net) for Android. The application contains a BusyBox assembly for various hardware architectures and is the assembly with the most complete set of functions, 335 applets are currently supported (for busybox v1.23.2). The application allows you to install BusyBox in the system or remove the one already installed. It is possible to select the installation directory and installation mode (with the installation of applets, with or without replacing existing applets). Also, the assembly can be saved to the memory card in the form of a zip archive for subsequent installation through a recovery.
 
 ![busybox](/assets/images/busybox.png "BusyBox for Android"){: .center}
 
 <!--more-->
 
-Что же такое BusyBox? BusyBox содержит крошечные версии многих утилит UNIX в одном маленьком исполняемом файле. Он обеспечивает замену для большинства утилит, которые можно найти в GNU fileutils, shellutils и др. Утилиты BusyBox обычно имеют меньше возможностей, чем их полнофункциональные собратья GNU, однако те функции, которые включены в BusyBox, совместимы с аналогичными функциями утилит GNU. BusyBox предоставляет довольно полное окружение для любых мобильных или встраиваемых систем.
+What is BusyBox?
 
-Требования:
+BusyBox combines tiny versions of many common UNIX utilities into a single small executable. It provides replacements for most of the utilities you usually find in GNU fileutils, shellutils, etc. The utilities in BusyBox generally have fewer options than their full-featured GNU cousins; however, the options that are included provide the expected functionality and behave very much like their GNU counterparts. BusyBox provides a fairly complete environment for any small or embedded system.
 
-* Устройство с архитектурой ARM, x86 или MIPS
-* Android 2.3 (API 9) или выше
-* Права суперпользователя (root)
+Requirements:
 
-Приложение распространяется под лицензией [GPL версии 3](http://www.gnu.org/licenses/) или более поздней.
+- Device with architecture arm, arm64, x86, x86_64
+- Android 5 (API 21) or later
+- Superuser permissions (root)
 
-Исходный код: <https://github.com/meefik/busybox>
-<br>
-Установить из Google play: <https://play.google.com/store/apps/details?id=ru.meefik.busybox>
+The application is distributed under license [GPLv2](https://www.gnu.org/licenses/gpl-2.0.html). For more details, see [the project page](/busybox).

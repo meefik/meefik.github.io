@@ -6,10 +6,10 @@ categories: [linuxdeploy]
 comments: true
 ---
 
-В журнале [Information and Control Systems N 5(66)/2013](https://web.archive.org/web/20180731190157/http://www.i-us.ru/journal66) опубликована статья "Приложение для автоматизации процессов установки и запуска GNU/Linux-окружения на устройствах под управлением Android", страницы 56-60.
+The magazine [Information and Control Systems N 5(66)/2013](https://web.archive.org/web/20180731190157/http://www.i-us.ru/journal66) published an article "Application for automating the installation and running of GNU/Linux environment on Android devices", pages 56-60.
 
-![linuxdeploy](/assets/images/linuxdeploy-chroot.png "Внутренняя структура Linux Deploy"){: .center}
+![linuxdeploy](/assets/images/linuxdeploy-chroot.png "Internal structure of Linux Deploy"){: .center}
 
-В статье проводится обзор основных функций разработанного программного обеспечения для автоматизации установки GNU/Linux-дистрибутивов и запуска Linux-приложений на устройствах под управлением Android. Даны примеры его возможного использования, сравнение с аналогами. Описываются принципы работы программного обеспечения. Приведены оценка производительности и статистика по апробации.
+The article provides an overview of the main functions of the developed software to automate the installation of GNU/Linux distributions and run Linux applications on Android devices. Examples of its possible use, comparison with analogues are given. The principles of software operation are described. Performance estimates and approbation statistics are provided.
 
 [Download PDF](/assets/files/linuxdeploy_i-us-5-66-2013.pdf).

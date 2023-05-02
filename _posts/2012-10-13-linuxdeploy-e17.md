@@ -6,11 +6,11 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="https://en.wikipedia.org/wiki/Enlightenment_(software)">Enlightenment</a>.
+Installing and configuring the desktop environment, which is not in the list of Linux Deploy program settings, on the example of <a href="https://en.wikipedia.org/wiki/Enlightenment_(software)">Enlightenment</a>.
 
 <!--more-->
 
-Для этого нужна установленная система, можно без окружения рабочего стола (в данном случае Debian Wheezy). Далее нужно подключиться к системе по SSH и выполнить установку окружения:
+This requires an installed system, possibly without a desktop environment (in this case Debian Wheezy). Next, you need to connect to the system via SSH and install the environment:
 
 ```sh
 sudo apt-get update
@@ -19,7 +19,7 @@ sudo apt-get install tightvncserver x11-xserver-utils xfonts-base \
 sudo apt-get clean
 ```
 
-После этого нужно настроить автозапуск:
+After that, you need to configure autostart:
 
 ```sh
 mkdir ~/.vnc
@@ -32,4 +32,4 @@ echo 'enlightenment_start &' >> ~/.vnc/xstartup
 chmod 755 ~/.vnc/xstartup
 ```
 
-После этих опрерация будет установлены VNC сервер и Enlightenment E17, а также настроен автозапуск при старте VNC. Пароль к VNC будет: changeme
+After this operation, the VNC server and Enlightenment E17 will be installed, and autostart will be configured at the start of the VNC. VNC password will be: `changeme`

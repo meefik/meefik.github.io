@@ -1,7 +1,7 @@
 ---
 permalink: /about
 layout: page
-title: "About me"
+title: About me
 comments: false
 footer: false
 ---
@@ -22,7 +22,13 @@ footer: false
     <tr>
       <td style="border: none;">
         <div>{{ experience.position }}</div>
-        <div><a href="{{ experience.link }}" target="_blank">{{ experience.company }}</a></div>
+        <div>
+          {% if experience.link %}
+          <a href="{{ experience.link }}" target="_blank" rel="nofollow noopener">{{ experience.company }}</a>
+          {% else %}
+          {{ experience.company }}
+          {% endif %}
+        </div>
       </td>
       <td style="border: none; width: 40%">{{ experience.duration }}</td>
     </tr>
@@ -41,7 +47,7 @@ footer: false
     <tr>
       <td style="border: none">
         <div>{{ education.specialty }}</div>
-        <a href="{{ education.link }}" target="_blank">{{ education.institution }}</a>
+        <a href="{{ education.link }}" target="_blank" rel="nofollow noopener">{{ education.institution }}</a>
       </td>
       <td style="border: none; width: 40%">{{ education.duration }}</td>
     </tr>

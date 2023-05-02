@@ -6,31 +6,38 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Через Linux Deploy под Android можно запустить дистрибутив [OpenPandora](http://www.openpandora.org).
+You can run the [OpenPandora](http://www.openpandora.org) distribution via Linux Deploy on Android.
 
 <!--more-->
 
-### Инструкция
+### Playbook
 
-- В приложении Linux Deploy 1.4.1+ создать новый профиль и в параметрах указать следующее: Дистрибутив - RootFS; URL-адрес зеркала - http://www.openpandora.org/firmware/pandora-rootfs.tar.bz2; Тип установки - Файл; Путь установки - путь к будущему образу (например, /mnt/sdcard/pandora.img); Размер образа (МБ) - 1000 (можно больше); Имя пользователя - android, Окружение рабочего стола - Xfce; Установить GUI - нет. Остальные параметры менять не нужно.
+- In the Linux Deploy 1.4.1+ application, create a new profile and specify the following in the parameters:
+  - *Distribution* - RootFS;
+  - *Mirror URL* - http://www.openpandora.org/firmware/pandora-rootfs.tar.bz2;
+  - *Installation type* - File;
+  - *Installation path* - the path to the image file (for example, `/sdcard/pandora.img`);
+  - *Image size (MB)* - 1000 (possible more);
+  - *User name* - android;
+  - *Desktop environment* - Xfce;
+  - *Install GUI* - No.
 
-- Запустить установку через Параметры -> Установить. В результате должен быть создан файл образа диска на карте памяти и в него распакован архив rootfs.
+- Start the installation via "Properties" -> "Install". As a result, a disk image file must be created on the memory card and the rootfs archive unpacked into it.
 
-- Запустить SSH сервер (из консоли Android, можно использовать терминал ConnectBot):
+- Start the SSH server (from the Android console, you can use the ConnectBot terminal):
 ```sh
 linuxdeploy shell "/etc/init.d/dropbear start"
 ```
-Теперь можно подключиться по SSH, логин - android, пароль - changeme, порт 22.
+Now you can connect via SSH, login - `android`, password - `changeme`, port `22`.
 
-- Остановить SSH сервер:
+- Stop SSH Server:
 ```sh
 linuxdeploy shell "/etc/init.d/dropbear stop"
 ```
 
-- Настройка автоматического запуска/остановки SSH через Android-интерфейс Linux Deploy (кнопками СТАРТ/СТОП):
+- Configuring automatic SSH start/stop via the Android interface of Linux Deploy (START/STOP buttons):
 ```sh
 linuxdeploy shell "cp /etc/init.d/dropbear /etc/init.d/ssh"
 ```
 
-**Комментарий:** Чтобы из консоли Android была доступна команда linuxdeploy нужно в настройках разрешить создавать в системе символьную ссылку (Настройки -> Создать симлинк) и обновить рабочее окружение (Настройки -> Обновить окружение). Однако это необязательное требование и можно вызывать команду linuxdeploy по полному пути ENV_DIR/bin/linuxdeploy, где ENV_DIR - каталог рабочего окружения, по умолчанию /data/data/ru.meefik.linuxdeploy/linux.
-
+**Notice:** In order for the linuxdeploy command to be available from the Android console, you need to allow creating a symbolic link in the system ("Settings" -> "Create a simlink") and updating the working environment ("Settings" -> "Update ENV") in the settings. However, this is an optional requirement, and you can call the `linuxdeploy` command using the full path `ENV_DIR/bin/linuxdeploy`, where `ENV_DIR` is the directory of the working environment, by default `/data/data/ru.meefik.linuxdeploy/linux`.

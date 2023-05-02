@@ -1,0 +1,47 @@
+---
+permalink: /tzupdater
+layout: page
+title: Timezone Updater for Android
+comments: false
+footer: false
+---
+
+<p>This application is <a href="https://github.com/meefik/tzupdater" target="_blank" rel="nofollow noopener">open-source software</a> for downloads and updates time zones to the latest version on your Android device. This update should fix all known problems with time zones, such as incorrect time in Android and some applications.</p>
+
+<img alt="Timezone Updater" src="/assets/images/tzupdater.png" />
+
+<p>Requirements:</p>
+
+<ul>
+  <li>Android 4.0 (API 14) or later</li>
+  <li>Superuser permissions (root)</li>
+  <li><a href="https://github.com/meefik/busybox" target="_blank" rel="nofollow noopener">BusyBox</a></li>
+</ul>
+
+<p>Update procedure:</p>
+
+<ol>
+  <li>Get superuser privileges (root)</li>
+  <li>Install BusyBox</li>
+  <li>Check your connection to the Internet</li>
+  <li>Tap UPDATE button</li>
+  <li>Restart your device</li>
+</ol>
+
+<p>The following files will be updated:</p>
+
+<ul>
+  <li><a href="https://www.iana.org/time-zones/" target="_blank" rel="nofollow noopener">TZ data</a>: /data/misc/zoneinfo/tzdata or /system/usr/share/zoneinfo/*</li>
+  <li><a href="https://icu.unicode.org/" target="_blank" rel="nofollow noopener">ICU data</a>: /system/usr/icu/*.dat</li>
+</ul>
+
+<p><strong>Attention!</strong> Before starting the update procedure is recommended to make backup copies of these files or the entire system.</p>
+
+<p>The app is available for download in Google Play and GitHub (<a href="/tzupdater/privacy">Privacy Policy</a>):</p>
+
+<div class="no-border">
+  <a href="https://play.google.com/store/apps/details?id=ru.meefik.tzupdater" target="_blank" rel="nofollow noopener"><img src="/assets/images/get-it-on-google-play.png" alt="Get it on Google Play"></a>
+  <a href="https://github.com/meefik/tzupdater/releases/latest" target="_blank" rel="nofollow noopener"><img src="/assets/images/get-apk-from-github.png" alt="Get it on Github"></a>
+</div>
+
+<p><iframe src="https://ghbtns.com/github-btn.html?user=meefik&repo=tzupdater&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe></p>

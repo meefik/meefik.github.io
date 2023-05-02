@@ -6,13 +6,13 @@ categories: [opencv]
 comments: true
 ---
 
-Относительно недавно в OpenCV появился API для обнаружения антропометрических точек лица. По использованию Facemark API есть неплохая [статья на Learn OpenCV](https://www.learnopencv.com/facemark-facial-landmark-detection-using-opencv/). Хорошая реализация поиска таких точек есть в [библиотеке dlib](http://dlib.net/face_landmark_detection_ex.cpp.html), однако иногда хочется ограничиться одной библиотекой, особенно если речь идет о портировании кода на мобильные устройства или браузер (кстати, OpenCV [поддерживает компиляцию в WebAssembly](https://docs.opencv.org/master/d5/d10/tutorial_js_root.html)). К сожалению, в алгоритмах поиска точек лица используются модели достаточно большого размера (68 точек ~ 54 МБ), а размер загружаемого кода на клиент может быть ограничен. В библиотеке dlib есть предобученная [модель на 5 точек](https://github.com/davisking/dlib-models) (5.44 MB), однако для OpenCV такой модели нет, причем нет даже поддержки такой модели, на данный момент поддерживаются модели на 68 и 29 точек. Модель на 5 точек может использоваться для нормализации лиц на клиенте. Ниже я опишу процесс обучения собственной модели небольшого размера на 5 точек.
+More recently, OpenCV introduced an API for detecting anthropometric points of the face. There is a good article on using the Facemark API [at Learn OpenCV](https://www.learnopencv.com/facemark-facial-landmark-detection-using-opencv/). A good implementation of the search for such points is in [the dlib library](http://dlib.net/face_landmark_detection_ex.cpp.html), but sometimes you want to limit yourself to one library, especially when it comes to porting code to mobile devices or a browser (by the way, OpenCV [supports compilation in WebAssembly](https://docs.opencv.org/master/d5/d10/tutorial_js_root.html)). Unfortunately, face point search algorithms use models of a sufficiently large size (68 points ~ 54 MB), and the size of the downloadable code per client may be limited. The dlib library has a pre-trained [model for 5 points](https://github.com/davisking/dlib-models) (5.44 MB), but for OpenCV there is no such model, and there is not even support for such a model, at the moment models for 68 and 29 points are supported. The 5-point model can be used to normalize faces on the client. Below I will describe the process of learning your own model of a small size for 5 points.
 
 <!--more-->
 
-### Патч для OpenCV
+### Patch for OpenCV
 
-Как я уже сказал, на данный момент OpenCV не поддерживает модели на 5 точек. Поэтому пришлось залезть в код модуля FacemarkLBF и исправить это недоразумение. Будем использовать реализацию метода LBF для поиска точек, однако в OpenCV есть также реализация метода AAM. Ниже патч для файла [facemarkLBF.cpp](https://github.com/opencv/opencv_contrib/blob/master/modules/face/src/facemarkLBF.cpp), который добавлять поддержку модели на 5 точек:
+As I said, OpenCV does not currently support 5-point models. Therefore, I had to get into the code of the FacemarkLBF module and correct this misunderstanding. We will use the implementation of the LBF method to search for points, but in OpenCV there is also an implementation of the AAM method. Below is a patch for the [facemarkLBF.cpp](https://github.com/opencv/opencv_contrib/blob/master/modules/face/src/facemarkLBF.cpp) file that adds support for the 5-point model:
 
 ```diff
 diff --git a/modules/face/src/facemarkLBF.cpp b/modules/face/src/facemarkLBF.cpp
@@ -36,7 +36,7 @@ index 50192286..dc354617 100644
              SWAP(gt_shapes[i], 3, 4);
 ```
 
-Модуль `face` находится в репозитории [opencv_contrib](https://github.com/opencv/opencv_contrib), а сам OpenCV в репозитории [opencv](https://github.com/opencv/opencv). Для сборки нужно скачать основной репозиторий `opencv` и `opencv_contrib` и выполнить следующий скрипт из отдельного пустого подкаталога.
+The `face` module is in the [opencv_contrib](https://github.com/opencv/opencv_contrib) repository, and the OpenCV itself is in the [opencv](https://github.com/opencv/opencv) repository. To build, you need to download the main repository `opencv` and `opencv_contrib` and execute the following script from a separate empty subdirectory.
 
 ```sh
 #!/bin/sh
@@ -49,13 +49,13 @@ cmake "../opencv" \
 make -j$(grep -c ^processor /proc/cpuinfo)
 ```
 
-### Подготовка набора для обучения модели
+### Preparing the Model Training Set
 
-Вообще, процедура обучения описана в [руководстве OpenCV](https://docs.opencv.org/master/d7/dec/tutorial_facemark_usage.html). Но в нашем случае нужно подготовить обучающий набор фотографий с разметкой на 5 точек. К счастью, в dlib выложен [соответствующий обучающий набор](http://dlib.net/files/data/dlib_faces_5points.tar), остается только его преобразовать к формату OpenCV. В архиве 7364 фотографий с разметкой как на следующей картинке:
+In general, the training procedure is described in the [OpenCV manual](https://docs.opencv.org/master/d7/dec/tutorial_facemark_usage.html). But in our case, you need to prepare a training set of photos with markup on 5 points. Fortunately, there is a [corresponding training set](http://dlib.net/files/data/dlib_faces_5points.tar) in dlib, all that remains is to convert it to OpenCV format. The archive contains 7364 photos with the markup as in the following picture:
 
 ![face_045889](/assets/images/face_045889.jpg "5 points facemark")
 
-Я написал скрипт для преобразования меток в формат OpenCV:
+I wrote a script to convert labels to OpenCV format:
 
 ```sh
 #!/bin/sh
@@ -88,23 +88,22 @@ parse_xml ./train_cleaned.xml ./points
 ( cd ./points; ls $PWD/* ) >./points_train.txt
 ```
 
-Скрипт нужно разместить в директории `dlib_faces_5points`, на выходе будет директория с метками `points`, а также файлы `images_train.txt` и `points_train.txt` со списком файлов изображений и меток.
+The script must be placed in the `dlib_faces_5points` directory, the output will be the `points` directory with labels, as well as `images_train.txt` and `points_train.txt` files with a list of image and label files.
 
-### Обучение и использование модели
+### Training and use of the model
 
-Для обучения модели подготовлена программа, которую нужно предварительно скомпилировать с помощью `cmake`. Параметры модели следующие:
+To train the model, a program has been prepared that must be precompiled using `cmake`. The model parameters are as follows:
 
-| Параметр    | Значение | Описание                    |
+| Parameter   | Value    | Description                 |
 |-------------|----------|-----------------------------|
-| n_landmarks | 5        | Количество точек            |
-| initShape_n | 10       | Множитель обучающей выборки |
-| stages_n    | 10       | Количество этапов обучения  |
-| tree_n      | 20       | Количество деревьев         |
-| tree_depth  | 5        | Глубина каждого дерева      |
+| n_landmarks | 5        | Number of points            |
+| initShape_n | 10       | Training Sample Multiplier  |
+| stages_n    | 10       | Number of training stages   |
+| tree_n      | 20       | Number of trees             |
+| tree_depth  | 5        | Depth of each tree          |
 
-Результат можно посмотреть на примере отрывка из видео [15 Newly Discovered Facial Expressions](https://www.youtube.com/watch?v=h-Gcl58WbGQ):
+You can see the result in an excerpt from the video [15 Newly Discovered Facial Expressions](https://www.youtube.com/watch?v=h-Gcl58WbGQ):
 
 ![facemark](/assets/images/facemark.gif "5 points video")
 
-Код выложен в [репозитории на Github](https://github.com/meefik/opencv_facemark). Уже обученная модель [выложена тут](https://raw.githubusercontent.com/meefik/opencv_facemark/master/lbfmodel.yaml), размер файла 3.6 МБ. Там же есть код для детекции точек на видео с веб-камеры, который запускается сразу после обучения. Следует учесть, что использовать модель нужно только с детектором лиц, который использовался при обучении, в данном случае Viola-Jones.
-
+The code is published in [the repository on Github](https://github.com/meefik/opencv_facemark). Already trained model is [available here](https://raw.githubusercontent.com/meefik/opencv_facemark/master/lbfmodel.yaml), file size 3.6 MB. There is also a code for detecting points on video from a webcam, which is launched immediately after training. It should be noted that the model should be used only with the face detector, which was used in training, in this case Viola-Jones.

@@ -6,20 +6,20 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Linux Deploy поддерживает автоматическую установку и настройку нескольких наиболее распространенных окружений рабочего стола. В версии [LD 2.0](https://github.com/meefik/linuxdeploy/releases) оставлена поддержка окружений XTerm (терминал на весь экран), LXDE, Xfce и MATE. Эти окружения есть почти во всех поддерживаемых LD дистрибутивах, они не сильно требовательны к ресурсам и могут работать без графического ускорения. Однако запустить другие окружения рабочего стола можно вручную. Для этого нужно в настройках LD выбрать окружение рабочего стола "Другое" и выполнить команду "Конфигурировать". После этого нужно подключиться к контейнеру, установить пакеты нужного окружения рабочего стола, и под пользователем (по умолчанию - android) отредактировать файл ~/.xsession, прописав команду запуска рабочего окружения.
+Linux Deploy supports automatic installation and configuration of some of the most common desktop environments. Version [LD 2.0](https://github.com/meefik/linuxdeploy/releases) retains support for XTerm (full-screen terminal), LXDE, Xfce, and MATE environments. These environments are in almost all supported LD distributions, they are not very demanding on resources and can work without graphical acceleration. However, you can start other desktop environments manually. To do this, in the LD settings, select the "Other" desktop environment and execute the "Configure" command. After that, you need to connect to the container, install the packages of the desired environment of the desktop, and under the user (by default - android) edit the file `~/.xsession`, prescribing the command to start the working environment.
 
 <!--more-->
 
-Установку и настройку различных рабочих окружений можно выполнить следующим образом (на примере дистрибутива Debian/Ubuntu):
+You can install and configure various work environments as follows (using the example of the Debian/Ubuntu distribution):
 
 ### 1. GNOME
 
-Установка:
+Installation:
 ```sh
 apt-get install desktop-base x11-xserver-utils xfonts-base xfonts-utils gnome-core
 ```
 
-Файл ~/.xsession:
+File `~/.xsession`:
 ```sh
 XKL_XMODMAP_DISABLE=1
 export XKL_XMODMAP_DISABLE
@@ -33,39 +33,38 @@ fi
 
 ### 2. KDE
 
-Установка:
+Installation:
 ```sh
 apt-get install desktop-base x11-xserver-utils xfonts-base xfonts-utils kde-standard
 ```
 
-Файл ~/.xsession:
+File `~/.xsession`:
 ```sh
 startkde
 ```
 
 ### 3. E17
 
-Установка:
+Installation:
 ```sh
 apt-get install desktop-base dbus-x11 x11-xserver-utils xfonts-base xfonts-utils e17
 ```
 
-Файл ~/.xsession:
+File `~/.xsession`:
 ```sh
 enlightenment_start
 ```
 
 ### 4. Cinnamon
 
-Установка:
+Installation:
 ```sh
 apt-get install desktop-base x11-xserver-utils xfonts-base xfonts-utils cinnamon
 ```
 
-Файл ~/.xsession:
+File `~/.xsession`:
 ```sh
 XKL_XMODMAP_DISABLE=1
 export XKL_XMODMAP_DISABLE
 cinnamon
 ```
-

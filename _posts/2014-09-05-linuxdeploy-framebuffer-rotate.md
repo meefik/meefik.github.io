@@ -6,45 +6,45 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Ниже приводится решение для правильного поворота экрана в режиме фрейм-буфера. Т.е. чтобы была повернута картинка на 90 градусов (ландшафтная ориентация) и драйвер сенсорного экрана обрабатывал это поворот корректно. Решение опробовано на Samsung Galaxy S2 (i9100), тачскрин MXT224 (узнать модель тачскрина можно командой: cat /sys/devices/virtual/sec/sec_touchscreen/tsp_touchtype), Ubuntu 13.04 Raring Ringtail и Debian 7.0/wheezy.
+Below is a solution for turning the screen correctly in frame buffer mode. That is, to rotate the picture by 90 degrees (landscape orientation) and the touch screen driver handled this rotation correctly. The solution is tested on Samsung Galaxy S2 (i9100), touchscreen MXT224 (you can find out the touchscreen model by using the command: `cat /sys/devices/virtual/sec/sec_touchscreen/tsp_touchtype`), Ubuntu 13.04 Raring Ringtail and Debian 7.0 Wheezy.
 
-Что работает:
+What does work?
 
-* позиционирование курсора к месту нажатия;
-* обработка удерживания (эмуляция удерживания левой кнопки мыши);
-* обработка двойного нажатия одним пальцем (эмуляция левой кнопки мыши);
-* обработка нажатия двумя пальцами (эмуляция правой кнопки мыши);
-* поворот координат сенсорного экрана.
+- positioning the cursor to the click location;
+- retention processing (left mouse button retention emulation);
+- processing of double-click with one finger (emulation of the left mouse button);
+- processing of pressing with two fingers (emulation of the right mouse button);
+- rotating the coordinates of the touch screen.
 
 <!--more-->
 
-Для этого нужно выполнить следующие шаги:
+To do this, follow these steps:
 
-* Установить дистрибутив через Linux Deploy (Debian или Ubuntu) и подключиться к консоли под пользователем root (например, по SSH).
+- Install the distribution via Linux Deploy (Debian or Ubuntu) and connect to the console under the root user (for example, over SSH).
 
-* Доставить необходимые пакеты:
+- Install the necessary packages:
 ```sh
 apt-get install build-essential wget unzip xorg-dev libmtdev-dev
 ```
 
-* Загрузить [исходный код](https://github.com/meefik/xorg-input-mtev) модифицированного драйвера mtev для Xorg:
+- Download the [source code](https://github.com/meefik/xorg-input-mtev) of the modified mtev driver for Xorg:
 ```sh
 wget https://github.com/meefik/xorg-input-mtev/archive/master.zip --no-check-certificate
 unzip master.zip
 ```
 
-* Запустить сборку драйвера:
+- Start driver building:
 ```sh
 cd ./xorg-input-mtev-master/
 make
 ```
 
-* Скопировать драйвер в каталог модулей Xorg:
+- Copy the driver to Xorg module directory:
 ```sh
 cp obj/mtev.so /usr/lib/xorg/modules/input/mtev_drv.so
 ```
 
-* Отредактировать файл /etc/X11/xorg.conf:
+- Edit the file `/etc/X11/xorg.conf`:
 ```
     Section "ServerLayout"
         Identifier "Layout0"
@@ -76,5 +76,4 @@ cp obj/mtev.so /usr/lib/xorg/modules/input/mtev_drv.so
     EndSection
 ```
 
-* Запустить GNU/Linux через Linux Deploy в режиме фрейм-буфера (Параметры -> Графическая подсистема -> Framebuffer). Для набора текста можно использовать виртуальную клавиатуру [florence](http://packages.debian.org/wheezy/florence).
-
+- Run GNU/Linux via Linux Deploy in frame buffer mode ("Properties" -> "Graphics subsystem" -> "Framebuffer"). You can use the virtual keyboard [florence](https://packages.debian.org/search?keywords=florence) to type.

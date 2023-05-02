@@ -6,11 +6,11 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Установка и настройка окружения рабочего стола, которого нет в списке настроек программы Linux Deploy, на примере <a href="https://en.wikipedia.org/wiki/IceWM">IceWM</a>.
+Installing and configuring a desktop environment that is not on the Linux Deploy settings list, using <a href="https://en.wikipedia.org/wiki/IceWM">IceWM</a> as an example.
 
 <!--more-->
 
-Для этого нужна установленная система, можно без окружения рабочего стола (в данном случае Debian Wheezy). Далее нужно подключиться к системе по SSH и выполнить установку окружения:
+This requires an installed system, possibly without a desktop environment (in this case Debian Wheezy). Next, you need to connect to the system via SSH and install the environment:
 
 ```sh
 sudo apt-get update
@@ -20,7 +20,7 @@ sudo apt-get install tightvncserver x11-xserver-utils xfonts-base \
 sudo apt-get clean
 ```
 
-После этого нужно настроить автозапуск:
+After that, you need to configure autostart:
 
 ```sh
 mkdir ~/.vnc
@@ -33,4 +33,4 @@ echo 'icewm-session &' >> ~/.vnc/xstartup
 chmod 755 ~/.vnc/xstartup
 ```
 
-После этих опрерация будет установлены VNC сервер и IceWM, а также настроен автозапуск при старте VNC. Пароль к VNC будет: changeme
+After this operation, the VNC server and IceWM will be installed, and autostart will be configured at the start of the VNC. VNC password will be: `changeme`

@@ -6,47 +6,48 @@ categories: [javascript]
 comments: true
 ---
 
-Не так давно наткнулся на публикацию [Object Detection with Pixel Intensity Comparisons Organized in Decision Trees](https://arxiv.org/abs/1305.4537), авторы которой предлагают модификацию метода детекции лиц [Виолы-Джонса](https://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework). Основное отличие метода состоит в том, что вместо [признаков Хаара](https://en.wikipedia.org/wiki/Haar-like_feature) используются простые пиксельные тесты без необходимости рассчитывать [интегральное изображение](https://en.wikipedia.org/wiki/Summed-area_table). Это позволяет повысить скорость вычислений и сэкономить память.
+Not so long ago I came across the publication [Object Detection with Pixel Intensity Comparisons Organized in Decision Trees](https://arxiv.org/abs/1305.4537), the authors of which offer a modification of the [Viola-Jones](https://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework). The main difference of the method is that instead of [Haar features](https://en.wikipedia.org/wiki/Haar-like_feature), simple pixel tests are used without the need to calculate [an integral image](https://en.wikipedia.org/wiki/Summed-area_table). This allows you to increase the speed of calculations and save memory.
 
-Авторы статьи приводят [пример реализации](https://github.com/nenadmarkus/pico) данного алгоритма на C с предобученным классификатором для детекции лиц. Недавно появилась реализация алгоритма [PICO на JS](https://github.com/tehnokv/picojs), однако в ней нет реализации инвариантности к повороту изображения (или наклона головы влево/вправо). Эту недоработку я и решил исправить.
+The authors of the article give [an example of the implementation](https://github.com/nenadmarkus/pico) of this algorithm in C with a pre-trained classifier for face detection. Recently, an implementation of the [PICO algorithm in JS](https://github.com/tehnokv/picojs) has appeared, but it does not implement the invariance of turning the image (or tilting the head to the left/right). This is the shortcoming I decided to fix.
 
-Для реализации инвариантности к повороту требуется несколько раз запустить алгоритм для повернутого на несколько разных углов изображения. Но так как алгоритм работает с пикселями, а не интегральным изображением, то можно не выполнять ресурсоемкую операцию поворота изображения, а просто читать нужные пиксели, используя [матрицу поворота](https://en.wikipedia.org/wiki/Rotation_matrix).
+To implement the rotation invariance, it is necessary to run the algorithm several times for the image rotated at several angles. But since the algorithm works with pixels, and not an integral image, you can not perform a resource-intensive image rotation operation, but simply read the desired pixels using [a rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix).
 
-В доработку вошло:
-- реализация инвариантности к повороту;
-- переобученный классификатор лиц;
-- более производительный метод для преобразования RGBA изображения в оттенки сергого (grayscale);
-- параллельное выполнение в Web-воркере;
-- код на ES6.
+The revision included:
+
+- implementation of invariance to turn;
+- re-trained classifier of persons;
+- a more productive method for converting the RGBA image to grayscale;
+- parallel execution in the Web-worker;
+- code on ES6.
 
 <!--more-->
 
-Код JS-библиотеки: [https://github.com/meefik/pico.js](https://github.com/meefik/pico.js)
+JS library code: <https://github.com/meefik/pico.js>
 
-### Использование JS-библиотеки
+### Using the JS library
 
-Все параметры библиотеки задаются в конструкторе, вот их описание:
+All parameters of the library are set in the constructor, here is their description:
 
-| Параметр    | По умолчанию | Описание                                                                              |
+| Parameter   | Default      | Descriptio                                                                            |
 |-------------|--------------|---------------------------------------------------------------------------------------|
-| shiftfactor | 0.1          | Шаг перемешения скользящего окна в процентах (10%) от размера изображения             |
-| scalefactor | 1.1          | Шаг изменения размера скользящего окна в процентах (10%) от размера изображения       |
-| initialsize | 0.1          | Начальный размер скользящего окна в процентах (10%) от размера изображения            |
-| rotation    | 0            | Массив углов вращения для которых будет выполнен поиск (от 0 до 360 с шагом 1 градус) |
-| threshold   | 0.2          | Процент (20%) пересечения найденных кандидатов для группировки их в одну область      |
-| memory      | 1            | Число изображений (кадров) в памяти для повышения качества поиска                     |
+| shiftfactor | 0.1          | Sliding window movement step as a percentage (10%) of the image size                  |
+| scalefactor | 1.1          | Sliding window resizing step as a percentage (10%) of image size                      |
+| initialsize | 0.1          | Initial size of the sliding window as a percentage (10%) of the image size            |
+| rotation    | 0            | Array of rotation angles to be searched (0 to 360 in 1 degree increments)             |
+| threshold   | 0.2          | Percentage (20%) of intersections of found candidates for grouping them into one area |
+| memory      | 1            | Number of images (frames) in memory to improve detection quality                      |
 
-На выходе получается массив областей, где, как алгоритм предполагает, находятся лица. Вот описание такой области:
+The output is an array of areas where the algorithm assumes there are faces. Here is a description of this area:
 
-| Свойство    | Описание                                                                             |
+| Feature     | Description                                                                          |
 |-------------|--------------------------------------------------------------------------------------|
-| c           | X-коортината центра найденной области лица                                           |
-| r           | Y-коортината центра найденной области лица                                           |
-| s           | Размер найденной области (ширина и высота или диаметр)                               |
-| q           | Качество обнаружения (чем больше, тем лучше качество)                                |
-| a           | Угол поворота изображения (наиболее вероятный из перечисленных в параметре rotation) |
+| c           | X-coordinate of the center of the found face area                                    |
+| r           | Y-coordinate of the center of the found face area                                    |
+| s           | Size of found area (width and height or diameter)                                    |
+| q           | Detection quality (higher is better quality)                                         |
+| a           | Rotation angle of the image (the most likely one listed in the rotation parameter)   |
 
-Пример кода:
+Code example:
 
 ```js
 // load cascade
@@ -76,14 +77,15 @@ fetch('./cascade.dat')
   });
 ```
 
-Запуск демонстрации:
-```
+Running a demo:
+
+```sh
 npm install
 npm start
 ```
-После запуска сервера демонстрационная страница будет доступна по адресу [http://localhost:8080](http://localhost:8080)
 
-И небольшое видео:
+Once the server is up and running, the demo page will be available at <http://localhost:8080>
+
+And a small video:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9WiGC08_ZFY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-

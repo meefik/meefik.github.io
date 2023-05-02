@@ -6,19 +6,26 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Через Linux Deploy под Android можно запустить дистрибутив <a href="https://en.wikipedia.org/wiki/%C3%85ngstr%C3%B6m_distribution">Ångström</a>.
+You can run the <a href="https://en.wikipedia.org/wiki/%C3%85ngstr%C3%B6m_distribution">Ångström</a> distribution on Android using Linux Deploy.
 
 <!--more-->
 
-### Инструкция
+### Playbook
 
-- Создать образ системы (rootfs) в формате tar.gz на сайте [narcissus.angstrom-distribution.org](http://narcissus.angstrom-distribution.org/) и получить ссылку на архив.
+- Create a system image (rootfs) in tar.gz format on the website [narcissus.angstrom-distribution.org](http://narcissus.angstrom-distribution.org/) and get a link to the archive.
 
-- В приложении Linux Deploy 1.4.1+ создать новый профиль и в параметрах указать следующее: Дистрибутив - RootFS; URL-адрес зеркала - полученная ранее ссылка; Тип установки - Файл; Путь установки - путь к будущему образу (например, /mnt/sdcard/angstrom.img); Размер образа (МБ) - 100 (можно больше); Имя пользователя - android, Окружение рабочего стола - XTerm. Остальные параметры менять не нужно.
+- In the Linux Deploy 1.4.1+ application, create a new profile and specify the following in the parameters:
+  - *Distribution* - RootFS;
+  - *Mirror URL* - the previously received link;
+  - *Installation type* - File;
+  - *Installation path* - the path to the image file (for example, `/sdcard/angstrom.img`);
+  - *Image size (MB)* - 100 (possible more);
+  - *User name* - android;
+  - *Desktop environment* - XTerm.
 
-- Запустить установку через Параметры -> Установить. В результате должен быть создан файл образа диска на карте памяти и в него распакован архив rootfs.
+- Start the installation via "Properties" -> "Install". As a result, a disk image file must be created on the memory card and the rootfs archive unpacked into it.
 
-- Установить необходимые пакеты и выполнить базовую конфигурацию. Для этого из любого Android-терминала выполнить (через программу ConnectBot или другой терминал, выполнять от рута):
+- Install the required packages and perform the basic configuration. To do this, from any Android terminal, perform (through the ConnectBot program or another terminal, perform from the root):
 ```sh
 linuxdeploy shell "opkg update"
 linuxdeploy shell "opkg install initscripts sysvinit sysvinit-pidof shadow bash \
@@ -27,36 +34,36 @@ linuxdeploy shell "opkg install initscripts sysvinit sysvinit-pidof shadow bash 
 linuxdeploy configure
 ```
 
-- Запустить SSH сервер:
+- Start SSH Server:
 ```sh
 linuxdeploy shell "/etc/init.d/dropbear start"
 ```
-Теперь можно подключиться по SSH: логин - android, пароль - changeme, порт 22.
+Now you can connect via SSH: login - android, password - `changeme`, port `22`.
 
-- Остановить SSH сервер:
+- Stop SSH Server:
 ```sh
 linuxdeploy shell "/etc/init.d/dropbear stop"
 ```
 
-- Запустить VNC сервер:
+- Start VNC Server:
 ```sh
 linuxdeploy shell
 xinit /bin/su - android -c 'export DISPLAY=:0; ~/.vnc/xstartup' -- /usr/bin/Xvfb :0 -screen 0 800x400x16 -nolisten tcp -ac &
 su - android -c 'x11vnc -forever -display :0 -wait 10' &
 ```
-Теперь можно подключиться по VNC: пароль - changeme, порт 5900.
+Now you can connect via VNC: password - `changeme`, port `5900`.
 
-- Остановить VNC сервер:
+- Stop VNC Server:
 ```sh
 pkill -9 Xvfb
 ```
 
-- Настройка автоматического запуска/остановки SSH через Linux Deploy (кнопками СТАРТ/СТОП):
+- Configuring automatic SSH start/stop via Linux Deploy (START/STOP buttons):
 ```sh
 linuxdeploy shell "cp /etc/init.d/dropbear /etc/init.d/ssh"
 ```
 
-- Настройка автоматического запуска/остановки VNC через Linux Deploy (кнопками СТАРТ/СТОП):
+- Configuring automatic start/stop of VNC via Linux Deploy (START/STOP buttons):
 ```sh
 linuxdeploy shell
 cat << EOF > /usr/bin/vncserver
@@ -94,5 +101,4 @@ EOF
 chmod 755 /usr/bin/vncserver
 ```
 
-**Комментарий:** Чтобы из консоли Android была доступна команда linuxdeploy нужно в настройках разрешить создавать в системе символьную ссылку (Настройки -> Создать симлинк) и обновить рабочее окружение (Настройки -> Обновить окружение). Однако это необязательное требование и можно вызывать команду linuxdeploy по полному пути ENV_DIR/bin/linuxdeploy, где ENV_DIR - каталог рабочего окружения, по умолчанию /data/data/ru.meefik.linuxdeploy/linux.
-
+**Notice:** In order for the linuxdeploy command to be available from the Android console, you need to allow creating a symbolic link in the system ("Settings" -> "Create a simlink") and updating the working environment ("Settings" -> "Update ENV") in the settings. However, this is an optional requirement, and you can call the `linuxdeploy` command using the full path `ENV_DIR/bin/linuxdeploy`, where `ENV_DIR` is the directory of the working environment, by default `/data/data/ru.meefik.linuxdeploy/linux`.

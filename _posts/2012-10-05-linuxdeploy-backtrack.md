@@ -6,13 +6,22 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Linux Deploy поддерживает запуск дистрибутива [BackTrack](https://en.wikipedia.org/wiki/BackTrack) под Android. Подготовленный образ этого дистрибутива можно скачать с сайта проекта [Linux-on-Android](https://sourceforge.net/projects/linuxonandroid/).
+Linux Deploy supports the launch of the [BackTrack](https://en.wikipedia.org/wiki/BackTrack) distribution for Android. The prepared image of this distribution can be downloaded from the [Linux-on-Android](https://sourceforge.net/projects/linuxonandroid/) project website.
 
-### Инструкция
+### Playbook
 
-- Скачать [образ](https://downloads.sourceforge.net/project/linuxonandroid/Backtrack/Image/backtrack-v10-image.zip), распаковать и скопировать его на SD карту.
-- В параметрах указать дистрибутив - Ubuntu, версия дистрибутива - lucid, тип установки - файл образа, указать путь к образу (например, /mnt/sdcard/backtrack.img), имя пользователя - backtrack или root, окружение рабочего стола - GNOME
-- Запустить переконфигурацию (Параметры -> Переконфигурировать).
-- Запустить систему кнопкой СТАРТ.
-- Подключиться к системе по VNC. Пароль для доступа к системе после переконфигурации будет: changeme
+- Download the [image](https://downloads.sourceforge.net/project/linuxonandroid/Backtrack/Image/backtrack-v10-image.zip), unpack it and copy it to the SD card.
 
+- In the properties:
+  - *Distribution* - Ubuntu;
+  - *Distribution suite* - lucid; 
+  - *Installation type* - File;
+  - *Installation path* - the path to the image file (for example, `/sdcard/backtrack.img`);
+  - *User name* - backtrack (or root);
+  - *Desktop environment* - GNOME.
+
+- Run reconfiguration ("Properties" -> "Reconfigure").
+
+- Start the GNU/Linux system with the "START" button from the main application window.
+
+- Connect to the system via VNC. The password to access the system after reconfiguration will be: `changeme`

@@ -6,43 +6,50 @@ categories: [bash]
 comments: true
 ---
 
-[Websocket.sh](https://github.com/meefik/websocket.sh) - кроссплатформенная реализация [WebSocket](https://tools.ietf.org/html/rfc6455) сервера на bash. Для работы требуется только busybox, вместо bash можно использовать ash. Может использоваться во встраиваемых системах.
+[Websocket.sh](https://github.com/meefik/websocket.sh) is a cross-platform implementation of [WebSocket](https://tools.ietf.org/html/rfc6455) server on bash. Only busybox is required to work, instead of bash, you can use ash. Can be used in embedded systems.
 
 ![websocket.sh](/assets/images/websocket-sh.png "websocket.sh + xterm.js")
 
 <!--more-->
 
-### Bash-оболочка через веб-браузер
+### Bash wrapper via web browser
 
-Для демонстрации работы websocket.sh подготовлен простой сценарий (файл /cgi-bin/terminal), позволяющий получить доступ к shell из браузера. Для этого сначала нужно запустить httpd (из пакета busybox) в директории с websocket.sh.
+To demonstrate the work websocket.sh prepared a simple script (file `/cgi-bin/terminal`), allowing you to access the shell from the browser. To do this, first you need to run `httpd` (from `busybox`) in the directory with `websocket.sh`.
 
-Для запуска примера работы через библиотеку [JQuery Terminal Emulator](http://terminal.jcubic.pl), позволяющая реализовать выполнение простых команд и отображение результата выполнения, нужно выполнить:
+To run an example of work through the [JQuery Terminal Emulator](http://terminal.jcubic.pl) library, which allows you to implement the execution of simple commands and display the result of execution, you need to perform:
+
 ```sh
 cd jquery.terminal
 WS_SHELL="sh" httpd -p 8080
 ```
 
-Для запуска примера работы через библиотеку [xterm.js](https://github.com/sourcelair/xterm.js), благодаря которой можно получить полноценный терминал в браузере, нужно выполнить:
+To run an example of work through the [xterm.js](https://github.com/sourcelair/xterm.js) library, thanks to which you can get a full-fledged terminal in the browser, you need to perform:
+
 ```sh
 cd xterm.js
 telnetd -p 5023 -l /bin/bash -f /etc/issue
 WS_SHELL="telnet 127.0.0.1 5023" httpd -p 8080
 ```
 
-После этого достаточно открыть страницу в браузере [http://localhost:8080/cgi-bin/terminal](http://localhost:8080/cgi-bin/terminal), где должна отобразиться командная строка терминала. Чтобы корректно обрабатывалось изменение размера терминала в зависимости от размера окна (в xterm.js), нужно чтобы в файле issue присутствовал символ "\l". Или просто ввести команду tty в браузере для отображения текущего устройства pty.
+After that, it is enough to open the page in the browser <http://localhost:8080/cgi-bin/terminal>, where the terminal command line should be displayed. In order to correctly process the change in the size of the terminal depending on the size of the window (in xterm.js), you need to have the "\l" symbol in the issue file. Or simply type tty in the browser to display the current `pty` device.
 
-### Ручной запуск
+### Manual start
 
-Можно обойтись без httpd, запустив websocket.sh вручную, однако при перезагрузке страницы браузера скрипт придется запускать заново:
+You can do it without `httpd` by running `websocket.sh` manually, but when you reload the browser page, the script will have to be run again:
+
 ```sh
 WS_SHELL="cat" nc -l -p 5000 -e websocket.sh
 ```
-Здесь используется версия NetCat из пакета busybox, имеющая параметр -e. Также, возможно, в самом скрипте потребуется указать другой путь к интерпретатору, например, так:
+
+This uses the NetCat version from `busybox`, which has the "-e" parameter. You may also need to specify a different path to the interpreter in the script itself, for example, as follows:
+
 ```sh
 #!/bin/busybox ash
 ...
 ```
-Теперь из браузера можно подключиться к серверу по порту 5000 через WebSocket:
+
+Now from the browser you can connect to the server on port 5000 via WebSocket:
+
 ```js
 var port = 5000;
 var ws = new WebSocket('ws://' + location.hostname + ':' + port);
@@ -60,5 +67,4 @@ ws.onopen = function() {
 }
 ```
 
-Прослойка websocket.sh создавалась для Linux Deploy, чтобы получить возможность управлять контейнерами из браузера, однако может быть использована и для других целей.
-
+The `websocket.sh` layer was created for Linux Deploy to be able to manage containers from the browser, but it can also be used for other purposes.

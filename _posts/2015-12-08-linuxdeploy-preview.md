@@ -6,32 +6,32 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Готовится к выходу следующая версия Linux Deploy, которая будет включать много новых интересных функций. Вот основные из них:
+Preparing for the release of the next version of Linux Deploy, which will include many new interesting features. The main one's are:
 
-* работа с контейнерами без прав суперпользователя (на базе [proot](http://proot.me)), в том числе эмуляция архитектуры без необходимости поддержки модуля [binfmt_misc](https://en.wikipedia.org/wiki/Binfmt_misc) на уровне ядра;
-* модульная архитектура на основе подключаемых компонентов;
-* обновленный интерфейс приложения для Android;
-* встроенный в Android-приложение интерфейс управления через telnet и веб-интерфейс;
-* расширенный CLI для управления контейнерами из командной строки;
-* CLI с поддержкой различных платформ на базе ядра Linux, не только Android;
-* репозиторий готовых контейнеров (конфигурации контейнеров и rootfs-архивы к ним).
+- work with containers without superuser rights (based on [proot](https://proot-me.github.io)), including architecture emulation without the need to support the [binfmt_misc](https://en.wikipedia.org/wiki/Binfmt_misc) module at the core level;
+- modular architecture based on plug-in components;
+- updated application interface for Android;
+- built-in Android-application management interface via telnet and web interface;
+- extended CLI for managing containers from the command line;
+- CLI with support for various platforms based on the Linux kernel, not only Android;
+- repository of finished containers (container configurations and rootfs archives for them).
 
 <!--more-->
 
-Уже сейчас доступен для тестирования [интерфейс командной строки Linux Deploy 2.0](https://github.com/meefik/linuxdeploy-cli), который существенно изменился. Теперь он позволяет создавать, настраивать и полностью управлять контейнерами через команду linuxdeploy. Каждый контейнер имеет конфигурационный файл, содержащий в себе все параметры развертывания и запуска конкретного дистрибутива. Можно работать с несколькими конфигурациями, переключаясь между ними при необходимости. Linux Deploy теперь имеет модульную архитектуру, состоящую из отдельных компонентов, написанных на Bash-совместимом языке сценариев Ash. Компоненты связаны между собой зависимостями и подключаются в заданном порядке, есть защита от циклических зависимостей. Каждый компонент имеет пять базовых функций, которые являются обработчиками действий: установка, конфигурация, запуск, остановка, справка. Компоненты имеют древовидную структуру и располагаются в корневом каталоге, который задается в переменной окружения INCLUDE_DIR. Каждый компонент представляет собой каталог, в котором содержатся необходимые компоненту файлы. Основных файлов два: deploy.conf - конфигурация компонента, deploy.sh - функции компонента.
+The [Linux Deploy 2.0 command line interface](https://github.com/meefik/linuxdeploy-cli) is already available for testing, which has changed significantly. Now it allows you to create, configure and fully manage containers through the `linuxdeploy` command. Each container has a configuration file that contains all the parameters for deploying and running a specific distribution. You can work with several configurations, switching between them if necessary. Linux Deploy now has a modular architecture consisting of separate components written in a Bash-compatible ash scripting language. Components are interconnected by dependencies and are connected in a given order, there is protection against cyclic dependencies. Each component has five basic functions that are action handlers: installation, configuration, start, stop, help. The components have a tree structure and are located in the root directory, which is set in the `INCLUDE_DIR` environment variable. Each component is a directory containing the files required by the component. There are two main files: `deploy.conf` - component configuration, `deploy.sh` - component functions.
 
-Компоненты разделены на несколько групп, отвечающих за какой-то определенный функционал. Например, группа компонентов bootstrap отвечает за подготовку rootfs и развертывание дистрибутива. Группа компонентов core включает основные настройки дистрибутивов и базовые функции для работы с контейнерами. Есть еще группы для поддержки различных систем инициализации (init), графических подсистем (graphics) и окружений рабочего стола (desktop), а также коллекция компонентов для установки и запуска различного программного обеспечения. Комбинируя компоненты можно собрать собственную версию дистрибутива с необходимым набором программ.
+Components are divided into several groups responsible for a certain functionality. For example, the bootstrap component group is responsible for preparing rootfs and deploying the distribution. The core component group includes basic distributions settings and basic functions for working with containers. There are also groups to support various initialization systems, graphics subsystem and desktop environments, as well as a collection of components for installing and running various software. By combining components, you can build your own version of the distribution with the necessary set of programs.
 
-Допустим, мы хотим создать контейнер с Arch Linux в базовой комплектации. Чтобы создать контейнер, первым делом, нужно задать его параметры, для этого следует использовать команду config:
-```
+Let's say we want to create a container with Arch Linux as standard. To create a container, first you need to set its parameters, use the `config` command:
+```sh
 linuxdeploy -p arch config --target-path='linux.img' --chroot-dir='/mnt' \
     --target-type='file' --disk-size='2000' --fs-type='auto' \
     --source-path='http://mirrors.kernel.org/archlinux/' --distrib='archlinux' --arch='i686' \
     --user-name='android' --include='bootstrap'
 ```
 
-Дамп получившегося конфигурационного файла можно получить командой:
-```
+The dump of the resulting configuration file can be obtained using the command:
+```sh
 linuxdeploy -p arch config -x
 
 TARGET_PATH="linux.img"
@@ -46,35 +46,40 @@ USER_NAME="android"
 INCLUDE="bootstrap"
 ```
 
-Когда базовые параметры установлены, можно запускать установку командой deploy:
-```
+When the basic parameters are set, you can start the installation with the `deploy` command:
+```sh
 linuxdeploy -p arch deploy
 ```
 
-Эта команда без параметров запускает установку и конфигурацию всех подключенных через параметр INCLUDE компонентов, в данном случае это bootstrap. После завершения процесса развертывания и конфигурации можно подключиться к контейнеру командой shell:
-```
+This parameterless command starts the installation and configuration of all components connected through the `INCLUDE` parameter, in this case bootstrap. Once the deployment and configuration process is complete, you can connect to the container with the `shell` command:
+```sh
 linuxdeploy -p arch shell -u root
 ```
-Возможно, нам понадобится в последствии установить какие-то дополнительные компоненты без переустановки базовой системы, тогда можно воспользоваться следующей командой, например, для установки ssh-сервера:
-```
+
+We may need to install some additional components in the future without reinstalling the basic system, then you can use the following command, for example, to install an ssh server:
+```sh
 linuxdeploy -p arch deploy -n bootstrap extra/ssh
 ```
-Здесь опция "-n bootstrap" исключает из установки компоненты группы bootstrap, от которых зависит компонент extra/ssh. Аналогичным образом будут работать следующие команды, однако компонент extra/ssh будет сохранен в конфигурации контейнера:
-```
+
+Here, the option "-n bootstrap" excludes from the installation the components of the bootstrap group on which the `extra/ssh` component depends. The following commands will work in the same way, but the `extra/ssh` component will be saved in the container configuration:
+```sh
 linuxdeploy -p arch config --include='${INCLUDE} extra/ssh'
 linuxdeploy -p arch deploy -n bootstrap
 ```
-Здесь переменная ${INCLUDE} берется из текущей конфигурации и в данном случае содержит "bootstrap". Развернутый контейнер можно экспортировать как rootfs-архив:
-```
+
+Here, the `${INCLUDE}` variable is taken from the current configuration and in this case contains "bootstrap". The expanded container can be exported as a rootfs archive:
+```sh
 linuxdeploy -p arch export rootfs.tar.gz
 ```
-Иногда нужно импортировать дистрибутив из rootfs-архива, для этого можно воспользоваться такими командами:
-```
+
+Sometimes you need to import the distribution from the rootfs archive, for this you can use the following commands:
+```sh
 linuxdeploy -p arch config --source-path='rootfs.tar.gz'
 linuxdeploy -p arch deploy bootstrap/rootfs
 ```
-Список созданных конфигураций можно посмотреть через команду conf:
-```
+
+The list of created configurations can be viewed through the `conf` command:
+```sh
 linuxdeploy -p arch config
 
 arch            archlinux  i686       latest     bootstrap extra/ssh
@@ -87,8 +92,9 @@ opensuse        opensuse   i586       13.2       bootstrap
 slackware       slackware  x86        latest     bootstrap
 ubuntu          ubuntu     i386       wily       bootstrap
 ```
-Список доступных компонентов можно посмотреть через команду conf. Каждый компонент имеет совместимость со всеми или только некоторыми дистрибутивами. Список подключенных (через INCLUDE) и совместимых с текущей конфигурацией компонентов с их зависимостями можно получить командой:
-```
+
+The list of available components can be viewed through the `conf` command. Each component is compatible with all or only some distributions. The list of components connected (via `INCLUDE`) and compatible with the current configuration with their dependencies can be obtained with the command:
+```sh
 linuxdeploy -p arch config -l
 
 bootstrap                      Installer of Linux distibution
@@ -110,20 +116,24 @@ core/sudo                      Sudoers file
 core/timezone                  Time zone
 core/unchroot                  Break chroot
 ```
-Список всех компонентов:
-```
+
+List of all components:
+```sh
 linuxdeploy config -la
 ```
-Список зависимостей для конкретного компонента:
-```
+
+List of dependencies for a specific component:
+```sh
 linuxdeploy -p arch config -l extra/ssh
 ```
-Запуск/остановка текущей конфигурации со всеми компонентами делается командами start и stop, например:
-```
+
+Starting/stopping the current configuration with all components is done with `start` and `stop` commands, for example:
+```sh
 linuxdeploy -p arch start
 ```
-Справку по всем подключенным компонентам можно получить командой help, информацию о конкретном компоненте можно получить так:
-```
+
+Help for all connected components can be obtained with the `help` command, information about a particular component can be obtained as follows:
+```sh
 linuxdeploy help extra/ssh
 
 Name: extra/ssh
@@ -139,4 +149,5 @@ Help:
      Defines other sshd options, separated by a space.
 
 ```
-На данный момент идет тестирование и отладка CLI, удалось добиться установки без прав суперпользователя дистрибутивов Debian (wheezy), Ubuntu (precise), Kali Linux (moto), Arch Linux, Gentoo и Slackware.
+
+At the moment, testing and debugging of the CLI is underway, it was possible to achieve the installation of Debian (wheezy), Ubuntu (precise), Kali Linux (moto), Arch Linux, Gentoo and Slackware distributions without superuser rights.

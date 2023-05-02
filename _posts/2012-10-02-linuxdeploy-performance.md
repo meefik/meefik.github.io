@@ -6,22 +6,21 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Испытания проводились под Debian/wheezy/armhf на Samsung Galaxy S II.
+Tested under Debian/wheezy/armhf on a Samsung Galaxy S II.
 
-Скорость чтения/записи SD карты (10 класс) на Android для различных файловых систем:
+SD card read / write speed (10 class) on Android for file systems vfat, ext2, ext4:
 
-* **vfat**: скорость чтения 14.1 МБ/с; скорость записи 12.0 МБ/с
-* **ext2**: скорость чтения 14.9 МБ/с; скорость записи 3.9 МБ/с
-* **ext4**: скорость чтения 14.9 МБ/с; скорость записи 16.6 МБ/с
-* **ext2 (loop)**: скорость чтения 17.0 МБ/с; скорость записи 7.4 МБ/с
-* **ext4 (loop)**: скорость чтения 17.2 МБ/с; скорость записи 8.8 МБ/с
+* **vfat**: read speed 14.1 MB/s; write speed 12.0 MB/s
+* **ext2**: read speed 14.9 MB/s; write speed 3.9 MB/s
+* **ext4**: read speed 14.9 MB/s; write speed 16.6 MB/s
+* **ext2 (loop)**: read speed 17.0 MB/s; write speed 7.4 MB/s
+* **ext4 (loop)**: read speed 17.2 MB/s; write speed 8.8 MB/s
 
-Время установки и занимаемое место на диске:
+Installation time and use space on disk (Debian wheezy/armhf on Samsung Galaxy S II):
 
-* **Без графики** ~ 0:12 / 260 МБ
-* **XTerm** ~ 0:14 / 290 МБ
-* **LXDE** ~ 0:19 / 450 МБ
-* **Xfce** ~ 0:20 / 495 МБ
-* **GNOME** ~ 0:55 / 1.3 ГБ
-* **KDE** ~ 1:20 / 1.3 ГБ
-
+* **Without GUI** ~ 0:12 / 260 MB
+* **XTerm** ~ 0:14 / 290 MB
+* **LXDE** ~ 0:19 / 450 MB
+* **XFCE** ~ 0:20 / 495 MB
+* **GNOME** ~ 0:55 / 1.3 GB
+* **KDE** ~ 1:20 / 1.3 GB

@@ -6,27 +6,23 @@ categories: [android, tzupdater]
 comments: true
 ---
 
-Приложение появилось из-за сложившийся сложной ситуации с обновлением часовых поясов в Android. Международная база данных часовых поясов обновляется каждый месяц, но нет никаких штатных средств обновления этой базы на устройствах. Следить за обновлениями часовых поясов и выпускать своевременные обновления прошивок, по идее, должны производители устройств, но на деле этого нет. В итоге было разработано приложение Timezone Updater, которое скачивает и обновляет до последней версии данные часовых поясов на Android-устройстве. Обновляются [база данных часовых поясов](http://www.iana.org/time-zones) и [ICU данные](http://site.icu-project.org). Данное приложение призвано решить все известные проблемы, связанные с часовыми поясами в Android.
+The application appeared because of the current difficult situation with the update of time zones in Android. The International Time Zone Database is updated every month, but there are no regular means of updating this database on devices. Keep track of time zone updates and release timely firmware updates, in theory, should device manufacturers, but in fact it is not. As a result, Timezone Updater was developed, which downloads and updates to the latest version of the time zone data on the Android device. The [time zone database](http://www.iana.org/time-zones) and [ICU data](http://site.icu-project.org) are updated. This application is designed to solve all the known problems associated with time zones in Android.
 
 ![tzupdater](/assets/images/tzupdater.png "Timezone Updater"){: .center}
 
 <!--more-->
 
-На устройстве изменяются следующие файлы:
+Updated the following files:
 
-* /data/misc/zoneinfo/tzdata или /system/usr/share/zoneinfo/*
-* /system/usr/icu/*.dat
+- /data/misc/zoneinfo/tzdata or /system/usr/share/zoneinfo/*
+- /system/usr/icu/*.dat
 
-Перед использованием приложения рекомендуется сделать резервную копию системы устройства.
+Before starting the update procedure is recommended to make backup copies of these files or the entire system.
 
-Для работы приложения необходимы:
+Requirements:
 
-* Android 2.3 (API 9) или выше
-* права суперпользователя (root)
-* установленный BusyBox
+- Android 4.0 (API 14) or later
+- Superuser permissions (root)
+- [BusyBox](https://github.com/meefik/busybox)
 
-Приложение распространяется под лицензией [GPL версии 3](http://www.gnu.org/licenses/) или более поздней.
-
-Исходный код: <https://github.com/meefik/tzupdater>
-<br>
-Установить из Google play: <https://play.google.com/store/apps/details?id=ru.meefik.tzupdater>
+The application is distributed under license [GPLv3](https://www.gnu.org/licenses/gpl-3.0.html) or later. For more details, see [the project page](/tzupdater).

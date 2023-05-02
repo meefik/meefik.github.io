@@ -6,33 +6,37 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Дистрибутив [Kali Linux](https://www.kali.org) основан на Debian и позиционируется как дистрибутив для тестирования информационной безопасности. Установка этого дистрибутива в Linux Deploy полностью поддерживается в автоматическом режиме с установкой из официального репозитория (см. [инструкцию по установке GNU/Linux](/blog/2012/11/18/linuxdeploy-guide/) и [инструкцию на сайте www.kali.org](https://www.kali.org/how-to/kali-linux-android-linux-deploy/)), однако в некоторых случаях может понадобиться установка из уже готового образа без доступа в Интернет.
+The [Kali Linux](https://www.kali.org) distribution is based on Debian and is positioned as a distribution for testing information security. Installation of this distribution in Linux Deploy is fully supported automatically with installation from the official repository (see [the GNU/Linux installation instructions](/2012/11/18/linuxdeploy-guide/) and the [instructions at www.kali.org](https://www.kali.org/how-to/kali-linux-android-linux-deploy/)), but in some cases you may need to install from a ready-made image without Internet access.
 
 ![linuxdeploy](/assets/images/linuxdeploy-kali-xfce.png "Kali Linux"){: .center}
 
 <!--more-->
 
-### Инструкция
+### Playbook
 
-* Скачать [архив ARM образа](https://www.offensive-security.com/kali-linux-vmware-arm-image-download/) (например, для Raspberry Pi) и распаковать.
+- Download the [ARM image archive](https://www.offensive-security.com/kali-linux-vmware-arm-image-download/) (for example, for Raspberry Pi) and unpack.
 
-* Извлечь из полного образа образ второго раздела (выполнять из-под Linux):
+- Extract an image of the second partition from the full image (run it under Linux):
 ```sh
 kpartx -v -a kali-1.0.9-rpi.img
 dd if=/dev/mapper/loop0p2 of=/tmp/kali.img bs=1M
 ```
-Для образа Raspberry Pi это второй раздел, для образов других устройств нормер раздела может отличаться. Посмотреть таблицу разделов в образе можно командой:
+For the Raspberry Pi image, this is the second partition, for images of other devices the partition normalizer may differ. To view the table of sections in an image, use the command:
 ```sh
 fdisk -l kali-1.0.9-rpi.img
 ```
 
-* Скопировать файл kali.img на карту памяти устройства. Если образ занимает более 4095 МБ, то карта памяти должна быть отформатирована в файловой системе exFAT, NTFS или другой, которая поддерживается на устройстве и может хранить файлы размером более 4 ГБ.
+- Copy the kali.img file to the memory card of the device. If the image takes up more than 4095 MB, then the memory card must be formatted in an exFAT, NTFS or other file system that is supported on the device and can store files larger than 4 GB.
 
-* В приложении Linux Deploy создать новый профиль и в параметрах указать: Дистрибутив - Kali Linux; Версия дистрибутива - kali; Тип установки - Файл; Путь установки - путь к файлу kali-linux.img (например, /storage/sdcard1/kali.img); Окружение рабочего стола - Xfce.
+- In the Linux Deploy application, create a new profile and specify in the settings:
+  - *Distribution* - Kali Linux;
+  - *Distribution suite* - kali;
+  - *Installation type* - File;
+  - *Installation path* - the path to the image file (for example, `/sdcard/kali.img`);
+  - *Desktop environment* - Xfce.
 
-* Выполнить переконфигурацию (Параметры -> Переконфигурировать).
+- Run reconfiguration ("Properties" -> "Reconfigure").
 
-* Запустить GNU/Linux систему кнопкой СТАРТ из главного окна приложения.
+- Start the GNU/Linux system with the "START" button from the main application window.
 
-* Подключиться по SSH или VNC, пароль - changeme.
-
+- Connect via SSH or VNC, password - `changeme`.
