@@ -22,13 +22,13 @@ The revision included:
 
 <!--more-->
 
-JS library code: <https://github.com/meefik/pico.js>
+JS library code: <https://github.com/meefik/picojs>
 
 ### Using the JS library
 
 All parameters of the library are set in the constructor, here is their description:
 
-| Parameter   | Default      | Descriptio                                                                            |
+| Parameter   | Default      | Description                                                                           |
 |-------------|--------------|---------------------------------------------------------------------------------------|
 | shiftfactor | 0.1          | Sliding window movement step as a percentage (10%) of the image size                  |
 | scalefactor | 1.1          | Sliding window resizing step as a percentage (10%) of image size                      |
@@ -81,10 +81,10 @@ Running a demo:
 
 ```sh
 npm install
-npm start
+npm run dev
 ```
 
-Once the server is up and running, the demo page will be available at <http://localhost:8080>
+Once the server is up and running, the demo page will be available at <http://localhost:8000>
 
 And a small video:
 
