@@ -1,3 +1,10 @@
+- title: "Auto parts search engine"
+  year: 2022
+  stack: ["Node.js", "Svelte", "Puppeteer"]
+  homepage: "https://github.com/meefik/fastfinder"
+  description: "The MVP for an auto parts search engine. The system parses the websites of parts stores, caches the results and searches them. Search criteria are cost, car compatibility, availability, delivery time."
+  poster: "/assets/images/fastfinder.png"
+
 - title: "UX library without dependencies"
   year: 2021
   stack: ["JavaScript"]
