@@ -6,7 +6,7 @@ comments: false
 footer: false
 ---
 
-[NEUX](https://github.com/meefik/neux) is a nifty ecosystem for user experience development. The JS frontend library has features and tools are suitable for building small single-page applications (SPA) or isolated UI components.
+[NEUX](https://github.com/meefik/neux) is a nifty ecosystem for user experience development. It is a JavaScript frontend micro-library with reactivity states and views. The library has features and tools are suitable for building small single-page applications (SPA) or isolated UI components.
 
 Here are the main concepts behind NEUX:
 
@@ -33,8 +33,9 @@ Here are the main concepts behind NEUX:
 6. [Routing](#routing)
 7. [Remote procedure call](#remote-procedure-call)
 8. [State synchronization](#state-synchronization)
-9. [Use with Tailwind CSS](#use-with-tailwind-css)
-10. [Examples](#examples)
+9. [Use with Vite](#use-with-vite)
+10. [Use with Tailwind CSS](#use-with-tailwind-css)
+11. [Examples](#examples)
 
 ## Installation
 
@@ -621,16 +622,57 @@ sync('undo');
 sync('clear');
 ```
 
-## Use with Tailwind CSS
+## Use with Vite
 
-It also fits well with the [Tailwind CSS](https://tailwindcss.com). After [installing Tailwind CSS](https://tailwindcss.com/docs/installation) into your project you can use CSS classes in the `classList` field as `String` or `Array`.
+You can use NEUX with [Vite](https://vitejs.dev) bundler.
 
-An example of the `tailwind.config.js` configuration file:
+How to set up:
+
+**1.** Create a new Vite project (select a variant JavaScript):
+
+```sh
+npm create vite@latest
+```
+
+**2.** Install the `neux` module:
+
+```sh
+npm install --save-dev neux
+```
+
+**3.** Paste your application code into the `main.js` file:
 
 ```js
-/** @type {import('tailwindcss').Config} */
+import { createView } from 'neux';
+
+createView({
+  textContent: 'Hello World!'
+}, document.body);
+```
+
+**4.** Run the project:
+
+```sh
+npm run dev
+```
+
+## Use with Tailwind CSS
+
+It also fits well with [Tailwind CSS](https://tailwindcss.com). After [installing Tailwind CSS](https://tailwindcss.com/docs/installation) into your project you can use CSS classes in the `classList` field as `String` or `Array`.
+
+How to set up your Vite project:
+
+**1.** Install the required modules:
+
+```sh
+npm install --save-dev tailwindcss postcss autoprefixer
+```
+
+**2.** Create the file `tailwind.config.js`:
+
+```js
 export default {
-  content: ['./index.html', './src/**/*.{js,ts}'],
+  content: ['./index.html', './main.js'],
   theme: {
     extend: {}
   },
@@ -638,32 +680,63 @@ export default {
 };
 ```
 
-Use attribute `classList` in your NEUX view:
+**3.** Create the file `postcss.config.js`:
 
 ```js
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {}
+  }
+};
+```
+
+**4.** Replace the contents of the `style.css` file with:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+**5.** Replace the contents of the `main.js` file with:
+
+```js
+import './style.css';
+import { createView } from 'neux';
+
 createView({
-  classList: ['bg-white', 'shadow', 'sm:rounded-lg'],
+  classList: ['container', 'mx-auto', 'py-5'],
   children: [{
-    classList: ['px-4', 'py-5', 'sm:p-6'],
+    classList: ['bg-white', 'shadow', 'sm:rounded-lg'],
     children: [{
-      tagName: 'h3',
-      classList: ['text-base', 'font-semibold', 'leading-6', 'text-gray-900'],
-      textContent: 'Manage subscription'
-    }, {
-      classList: ['mt-2', 'max-w-xl', 'text-sm', 'text-gray-500'],
+      classList: ['px-4', 'py-5', 'sm:p-6'],
       children: [{
-        tagName: 'p',
-        textContent: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae voluptatibus corrupti atque repudiandae nam.'
-      }]
-    }, {
-      classList: ['mt-5'],
-      children: [{
-        tagName: 'button',
-        type: 'button',
-        classList: ['inline-flex', 'items-center', 'rounded-md', 'bg-indigo-600', 'px-3', 'py-2', 
-          'text-sm', 'font-semibold', 'text-white', 'shadow-sm', 'hover:bg-indigo-500', 
-          'focus-visible:outline', 'focus-visible:outline-2', 'focus-visible:outline-offset-2','focus-visible:outline-indigo-500'],
-        textContent: 'Change plan'
+        tagName: 'h3',
+        classList: ['text-base', 'font-semibold', 'leading-6', 'text-gray-900'],
+        textContent: 'Welcome to NEUX'
+      }, {
+        classList: ['mt-2', 'max-w-xl', 'text-sm', 'text-gray-500'],
+        children: [{
+          tagName: 'p',
+          textContent: 'It is a JavaScript frontend micro-library with reactivity states and views.'
+        }]
+      }, {
+        classList: ['mt-5'],
+        children: [{
+          tagName: 'button',
+          type: 'button',
+          classList: ['inline-flex', 'items-center', 'rounded-md', 'bg-indigo-600', 'px-3', 'py-2', 
+            'text-sm', 'font-semibold', 'text-white', 'shadow-sm', 'hover:bg-indigo-500', 
+            'focus-visible:outline', 'focus-visible:outline-2', 'focus-visible:outline-offset-2',
+            'focus-visible:outline-indigo-500'],
+          textContent: 'See on GitHub',
+          on: {
+            click: () => {
+              window.open('https://meefik.github.io/neux');
+            }
+          }
+        }]
       }]
     }]
   }]
@@ -676,6 +749,6 @@ Output:
 
 ## Examples
 
-You can find more development examples with the NEUX library in a separate [neux-demo](https://github.com/meefik/neux-demo) repository.
+You can find an example To-Do application in the [neux-todo-app](https://github.com/meefik/neux-todo-app) repository. More development examples with the NEUX library are in the [neux-demo](https://github.com/meefik/neux-demo) repository.
 
 <p><iframe src="https://ghbtns.com/github-btn.html?user=meefik&repo=neux&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe></p>

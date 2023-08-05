@@ -2,7 +2,7 @@
   year: 2023
   stack: ["JavaScript"]
   homepage: "https://github.com/meefik/neux"
-  description: "NEUX is a nifty ecosystem for user experience development. The JS frontend library has features and tools are suitable for building small single-page applications (SPA) or isolated UI components. The library includes a set of functions for creating such entities as states, views, localization, routing, synchronization with storage, remote procedure call. For more details, see [the project page](/neux)."
+  description: "NEUX is a nifty ecosystem for user experience development. It is a JavaScript frontend micro-library with reactivity states and views. The library has features and tools are suitable for building small single-page applications (SPA) or isolated UI components. The library includes a set of functions for creating such entities as states, views, localization, routing, synchronization with storage, remote procedure call. For more details, see [the project page](/neux)."
   poster: "/assets/images/neux.png"
 
 - title: "Auto parts search engine"
