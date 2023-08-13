@@ -35,7 +35,8 @@ Here are the main concepts behind NEUX:
 8. [State synchronization](#state-synchronization)
 9. [Use with Vite](#use-with-vite)
 10. [Use with Tailwind CSS](#use-with-tailwind-css)
-11. [Examples](#examples)
+11. [Use with Web Components](#use-with-web-components)
+12. [Examples](#examples)
 
 ## Installation
 
@@ -746,6 +747,37 @@ createView({
 Output:
 
 ![TailwindCSS](/assets/images/neux-tailwindcss.png "NEUX + Tailwind CSS")
+
+## Use with Web Components
+
+You can use NEUX along with any [Web Components](https://developer.mozilla.org/docs/Web/API/Web_Components). Many component libraries can be [found here](https://open-wc.org/guides/community/component-libraries/). You can create your own components using [one of the libraries](https://open-wc.org/guides/community/base-libraries/), for example [Lit](https://lit.dev).
+
+Let's say you have a Web Component that looks like this:
+
+```html
+<my-component attr1="one" attr-two="two" onMyEvent="alert('Action')">
+  <my-nested-component>Hello</my-nested-component>
+</my-component>
+```
+
+In NEUX, it would be the following definition:
+
+```js
+createView({
+  tagName: 'my-component',
+  attr1: 'one',
+  attrTwo: 'two',
+  on: {
+    MyEvent() {
+      alert('Action');
+    }
+  },
+  children: [{
+    tagName: 'my-nested-component',
+    textContent: 'Hello'
+  }]
+}, document.body);
+```
 
 ## Examples
 
