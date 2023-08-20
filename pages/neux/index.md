@@ -6,7 +6,7 @@ comments: false
 footer: false
 ---
 
-[NEUX](https://github.com/meefik/neux) is a nifty ecosystem for user experience development. It is a JavaScript frontend micro-library with reactivity states and views. The library has features and tools are suitable for building small single-page applications (SPA) or isolated UI components.
+[NEUX](https://github.com/meefik/neux) is a nifty ecosystem for user experience development. It is a JavaScript frontend micro-library with reactivity states and views. The library has features and tools are suitable for building single-page applications (SPA).
 
 Here are the main concepts behind NEUX:
 
@@ -221,8 +221,14 @@ createView({
   }, {
     textContent: () => `Total items: ${state.list.$length}`
   }]
-}, document.body);
+}, { target: document.body });
 ```
+
+Additional events for each element:
+
+- `mounted` - the element was mounted in the DOM;
+- `removed` - the element was removed from the DOM;
+- `changed` - an element attribute has been changed.
 
 ## Components
 
@@ -256,7 +262,7 @@ createView({
     view: document.createElement('footer'),
     textContent: 'Powered by NEUX'
   }]
-}, document.body);
+}, { target: document.body });
 ```
 
 You can include SVG icons as a component and change their styles (size, color) via the `classList` or `attributes` field:
@@ -271,7 +277,7 @@ createView({
     width: '64px',
     height: '64px'
   }
-}, document.body);
+}, { target: document.body });
 ```
 
 ## Localization
@@ -282,18 +288,17 @@ An example with comments:
 
 ```js
 const l10n = createL10n({
-  locales: {
-    en: {
-      say: {
-        hello: "Hello %{name}!"
-      }
-    },
-    ru: {
-      say: {
-        hello: "Привет %{name}!"
-      }
+  en: {
+    say: {
+      hello: "Hello %{name}!"
     }
   },
+  ru: {
+    say: {
+      hello: "Привет %{name}!"
+    }
+  }
+}, {
   fallback: 'en',
   lang: navigator.language
 });
@@ -315,30 +320,34 @@ An example with comments:
 
 ```js
 const router = createRouter({
-  home: 'page1'
+  // #/:section/:page
+  section: /^\/(\w+)\/\w+$/,
+  page: /^\/\w+\/(\w+)$/
+}, {
+  home: '/section1/page1'
 });
 createView({
   children: [{
     children: [{
       tagName: 'a',
-      href: '#page1',
+      href: '#/section1/page1',
       textContent: 'Page 1'
     }, {
       tagName: 'a',
-      href: '#page2?param1=1',
+      href: '#/section1/page2?key1=1',
       textContent: 'Page 2'
     }, {
       tagName: 'button',
       textContent: 'Page 3',
       on: {
         click: () => {
-          router.navigate('page3', { param1: '1', param2: '2' });
+          router.navigate('/section1/page3', { key1: '1', key2: '2' });
         }
       }
     }]
   }, {
     children: () => {
-      switch (router.$path) {
+      switch (router.params.$page) {
       case 'page1':
         return [{
           tagName: 'p',
@@ -362,9 +371,14 @@ createView({
       }
     }
   }, {
-    textContent: () => `Path: ${router.$path} , Params: ${JSON.stringify(router.$params)}`
+    tagName: 'pre',
+    textContent: () => [
+      `Path: ${router.$path}`,
+      `Params: ${JSON.stringify(router.params)}`,
+      `Query: ${JSON.stringify(router.query)}`
+    ].join('\n')
   }]
-}, document.body);
+}, { target: document.body });
 ```
 
 ## Remote procedure call
@@ -648,7 +662,7 @@ import { createView } from 'neux';
 
 createView({
   textContent: 'Hello World!'
-}, document.body);
+}, { target: document.body });
 ```
 
 **4.** Run the project:
@@ -741,12 +755,8 @@ createView({
       }]
     }]
   }]
-}, document.body);
+}, { target: document.body });
 ```
-
-Output:
-
-![TailwindCSS](/assets/images/neux-tailwindcss.png "NEUX + Tailwind CSS")
 
 ## Use with Web Components
 
@@ -776,11 +786,15 @@ createView({
     tagName: 'my-nested-component',
     textContent: 'Hello'
   }]
-}, document.body);
+}, { target: document.body });
 ```
 
 ## Examples
 
-You can find an example To-Do application in the [neux-todo-app](https://github.com/meefik/neux-todo-app) repository. More development examples with the NEUX library are in the [neux-demo](https://github.com/meefik/neux-demo) repository.
+You can find development examples with NEUX in the following repositories:
+
+- [neux-todo-app](https://github.com/meefik/neux-todo-app) - example To-Do application on NEUX + Tailwind CSS + Vite;
+- [neux-ionic-app](https://github.com/meefik/neux-ionic-app) - example To-Do application on NEUX + Ionic Web Components + Vite;
+- [neux-demo](https://github.com/meefik/neux-demo) - various examples on NEUX.
 
 <p><iframe src="https://ghbtns.com/github-btn.html?user=meefik&repo=neux&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe></p>
