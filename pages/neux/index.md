@@ -21,8 +21,6 @@ Here are the main concepts behind NEUX:
 - Small library size ~ 11kb (5kb gzipped).
 - It is open source software under MIT license.
 
-![neux](/assets/images/neux.png "NEUX")
-
 ## Content
 
 1. [Installation](#installation)
@@ -269,7 +267,7 @@ view.children.push({
   textContent: 'Item 2'
 });
 view.children[1].textContent = 'Item 3';
-view.children.unshift();
+view.children.shift();
 ```
 
 You can pass HTML markup or the entire HTML element in the "node" parameter:
@@ -302,6 +300,54 @@ createView({
     width: '64px',
     height: '64px'
   }
+}, { target: document.body });
+```
+
+For convenience, you can divide the code into separate components, which can have input properties of the parent element:
+
+```js
+const state = createState({
+  counter: 0
+});
+
+function Button() {
+  return [{
+    tagName: 'button',
+    textContent: '+1',
+    on: {
+      click() {
+        return (e) => {
+          e.preventDefault();
+          const ev = new CustomEvent('increase', { bubbles: true });
+          e.target.dispatchEvent(ev);
+        }
+      }
+    }
+  }];
+}
+
+function Counter(obj) {
+  return [{
+    tagName: 'label',
+    textContent: () => obj.$text
+  }];
+}
+
+createView({
+  children: [{
+    on: {
+      increase() {
+        return (e) => {
+          e.preventDefault();
+          state.counter++;
+        };
+      }
+    },
+    children: Button
+  }, {
+    text: () => state.$counter,
+    children: Counter
+  }]
 }, { target: document.body });
 ```
 
