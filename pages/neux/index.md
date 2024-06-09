@@ -32,9 +32,10 @@ Here are the main concepts behind NEUX:
 7. [State synchronization](#state-synchronization)
 8. [Use with Vite](#use-with-vite)
 9. [Use with Tailwind CSS](#use-with-tailwind-css)
-10. [Use with Web Components](#use-with-web-components)
-11. [Create your own Web Component](#create-your-own-web-component)
-12. [Examples](#examples)
+10. [Use with daisyUI](#use-with-daisyui)
+11. [Use with Web Components](#use-with-web-components)
+12. [Create your own Web Component](#create-your-own-web-component)
+13. [Examples](#examples)
 
 ## Installation
 
@@ -96,6 +97,14 @@ const state = createState({
   // the computed field for an array
   filtered: (obj, prop) => {
     return obj.$list.filter(item => item.checked);
+  },
+  // subscribe to track changes to the "double" field
+  $double: (newv, oldv, prop, obj) => {
+    console.log(newv, oldv, prop, obj);
+  },
+  // subscribe to track any object changes
+  $: (newv, oldv, prop, obj) => {
+    console.log(newv, oldv, prop, obj);
   }
 });
 // set or change the computed field
@@ -243,6 +252,8 @@ const view = createView({
     textContent: () => `Total items: ${state.list.$length}`
   }]
 }, { target: document.body });
+// get the HTML element
+console.log(view.el);
 ```
 
 Additional events for each element:
@@ -270,19 +281,12 @@ view.children[1].textContent = 'Item 3';
 view.children.shift();
 ```
 
-You can pass HTML markup or the entire HTML element in the "node" parameter:
+You can pass the entire HTML element in the "el" parameter:
 
 ```js
 createView({
   children: [{
-    // create element from HTML markup
-    node: '<main><p>My content</p></main>',
-    style: {
-      color: 'red'
-    }
-  }, {
-    // create element from HTMLElement
-    node: document.createElement('footer'),
+    el: document.createElement('footer'),
     textContent: 'Powered by NEUX'
   }]
 }, { target: document.body });
@@ -294,7 +298,7 @@ You can include any SVG icon as HTML markup and change its styles (size, color) 
 import githubIcon from '@svg-icons/fa-brands/github.svg?raw';
 
 createView({
-  node: githubIcon,
+  outerHTML: githubIcon,
   classList: ['icon'],
   attributes: {
     width: '64px',
@@ -758,7 +762,7 @@ How to set up:
 **1.** Create a new Vite project (select a variant JavaScript):
 
 ```sh
-npm create vite@latest
+npm init vite@latest
 ```
 
 **2.** Install the `neux` module:
@@ -826,84 +830,156 @@ export default {
 @tailwind utilities;
 ```
 
-**5.** Replace the contents of the `main.js` file with:
+**5.** Replace the contents of the `main.js` file with the example:
 
 ```js
 import './style.css';
 import { createView } from 'neux';
 
 createView({
-  classList: ['container', 'mx-auto', 'py-5'],
+  tagName: 'h1',
+  classList: ['text-3xl', 'font-bold', 'underline'],
+  textContent: 'Hello world!'
+}, { target: document.body });
+```
+
+## Use with daisyUI
+
+To simplify styles you can use [daisyUI](https://daisyui.com). This is a popular component library for [Tailwind CSS](https://tailwindcss.com).
+
+How to set up your Tailwind CSS project:
+
+**1.** Install the required modules:
+
+```sh
+npm install --save-dev daisyui @tailwindcss/typography
+```
+
+**2.** Change the file `tailwind.config.js`:
+
+```js
+import daisyui from 'daisyui';
+import typography from '@tailwindcss/typography';
+
+export default {
+  // ...
+  plugins: [typography, daisyui]
+};
+```
+
+**3.** Replace the contents of the `main.js` file with the example:
+
+```js
+import './style.css';
+import { createState, createView } from 'neux';
+
+const state = createState({ counter: 0 });
+
+createView({
+  classList: ['container', 'm-auto', 'p-8', 'flex', 'gap-4'],
   children: [{
-    classList: ['bg-white', 'shadow', 'sm:rounded-lg'],
-    children: [{
-      classList: ['px-4', 'py-5', 'sm:p-6'],
-      children: [{
-        tagName: 'h3',
-        classList: ['text-base', 'font-semibold', 'leading-6', 'text-gray-900'],
-        textContent: 'Welcome to NEUX'
-      }, {
-        classList: ['mt-2', 'max-w-xl', 'text-sm', 'text-gray-500'],
-        children: [{
-          tagName: 'p',
-          textContent: 'It is a JavaScript frontend micro-library with reactivity states and views.'
-        }]
-      }, {
-        classList: ['mt-5'],
-        children: [{
-          tagName: 'button',
-          type: 'button',
-          classList: ['inline-flex', 'items-center', 'rounded-md', 'bg-indigo-600', 'px-3', 'py-2', 
-            'text-sm', 'font-semibold', 'text-white', 'shadow-sm', 'hover:bg-indigo-500', 
-            'focus-visible:outline', 'focus-visible:outline-2', 'focus-visible:outline-offset-2',
-            'focus-visible:outline-indigo-500'],
-          textContent: 'See on GitHub',
-          on: {
-            click() {
-              return () => {
-                window.open('https://meefik.github.io/neux');
-              };
-            }
-          }
-        }]
-      }]
-    }]
+    tagName: 'button',
+    classList: ['btn', 'btn-primary'],
+    textContent: '-1',
+    on: {
+      click() {
+        return () => state.counter--;
+      }
+    }
+  }, {
+    tagName: 'input',
+    type: 'number',
+    classList: ['input', 'input-bordered', 'w-full'],
+    value: () => state.$counter,
+    on: {
+      change() {
+        return ({ target }) => state.counter = parseInt(target.value);
+      }
+    }
+  }, {
+    tagName: 'button',
+    classList: ['btn', 'btn-primary'],
+    textContent: '+1',
+    on: {
+      click() {
+        return () => state.counter++;
+      }
+    }
   }]
 }, { target: document.body });
 ```
 
 ## Use with Web Components
 
-You can use NEUX along with any [Web Components](https://developer.mozilla.org/docs/Web/API/Web_Components). Many component libraries can be [found here](https://open-wc.org/guides/community/component-libraries/). You can create your own components using [one of the libraries](https://open-wc.org/guides/community/base-libraries/), for example [Lit](https://lit.dev).
+You can use NEUX along with any [Web Components](https://developer.mozilla.org/docs/Web/API/Web_Components). Many component libraries can be [found here](https://open-wc.org/guides/community/component-libraries/).
 
-Let's say you have a Web Component that looks like this:
+Let's take an example of working with the [BlueprintUI](https://blueprintui.dev) library:
 
-```html
-<my-component attr1="one" attr-two="two" onMyEvent="alert('Action')">
-  <my-nested-component>Hello</my-nested-component>
-</my-component>
+**1.** Install the required modules:
+
+```sh
+npm install --save-dev @blueprintui/components @blueprintui/themes @blueprintui/layout @blueprintui/typography
 ```
 
-In NEUX, it would be the following definition:
+**2.** Import styles in the `style.css` file:
+
+```css
+@import '@blueprintui/layout/index.min.css';
+@import '@blueprintui/typography/index.min.css';
+@import '@blueprintui/themes/index.min.css';
+```
+
+**3.** Replace the contents of the `main.js` file with the example:
 
 ```js
+import { createView } from 'neux';
+import './style.css';
+import '@blueprintui/components/include/button.js';
+import '@blueprintui/components/include/card.js';
+import '@blueprintui/components/include/input.js';
+
 createView({
-  tagName: 'my-component',
-  attr1: 'one',
-  attrTwo: 'two',
-  on: {
-    MyEvent() {
-      return () => alert('Action');
-    }
-  },
+  tagName: 'bp-card',
   children: [{
-    tagName: 'my-nested-component',
-    textContent: 'Hello'
+    tagName: 'h2',
+    slot: 'header',
+    attributes: {
+      'bg-text': 'section'
+    },
+    textContent: 'Heading'
+  }, {
+    tagName: 'bp-field',
+    children: [{
+      tagName: 'label',
+      textContent: 'label'
+    }, {
+      tagName: 'bp-input'
+    }]
+  }, {
+    slot: 'footer',
+    attributes: {
+      'bp-layout': 'inline gap:xs inline:end'
+    },
+    children: [{
+      tagName: 'bp-button',
+      attributes: {
+        action: 'secondary'
+      },
+      textContent: 'Cancel'
+    }, {
+      tagName: 'bp-button',
+      attributes: {
+        status: 'accent'
+      },
+      textContent: 'Confirm'
+    }]
   }]
 }, { target: document.body });
 ```
 
 ## Create your own Web Component
+
+You can create your own components using [one of the libraries](https://open-wc.org/guides/community/base-libraries/), for example [Lit](https://lit.dev). But you can also create your own Web Components using NEUX.
 
 An example of a web component definition:
 
@@ -914,36 +990,36 @@ class Counter extends HTMLElement {
   }
   constructor() {
     super();
-    const context = {};
-    this.attrs = createState({}, context);
-    this.attrs.$$on('*', (newv, oldv, prop) => {
-      this.setAttribute(prop, newv);
-    });
     const target = this.attachShadow({ mode: 'open' });
+    const context = {};
     this.view = createView(this.template(), { context, target });
-  }
-  attributeChangedCallback(name, oldv, newv) {
-    this.attrs[name] = newv;
   }
   template() {
     return {
-      children: [{
+      attributes: {
+        value: '',
+        $: (newv, oldv, prop) => this.setAttribute(prop, newv)
+      },
+      children: (obj) => [{
         tagName: 'input',
         type: 'number',
-        value: () => this.attrs.$value,
+        value: () => obj.attributes.$value,
         on: {
           change() {
             return (e) => {
-              this.attrs.value = e.target.value;
+              obj.attributes.value = e.target.value;
             };
           }
         }
       }, {
         tagName: 'slot',
         name: 'label',
-        textContent: () => this.attrs.$value
+        textContent: () => obj.attributes.$value
       }]
     };
+  }
+  attributeChangedCallback(name, oldv, newv) {
+    this.view.attributes[name] = newv;
   }
 }
 customElements.define('ne-counter', Counter);
@@ -980,7 +1056,6 @@ createView({
 You can find development examples with NEUX in the following repositories:
 
 - [neux-todo-app](https://github.com/meefik/neux-todo-app) - example To-Do application on NEUX + Tailwind CSS + Vite;
-- [neux-ionic-app](https://github.com/meefik/neux-ionic-app) - example To-Do application on NEUX + Ionic Web Components + Vite;
 - [neux-demo](https://github.com/meefik/neux-demo) - various examples on NEUX.
 
 <p><iframe src="https://ghbtns.com/github-btn.html?user=meefik&repo=neux&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe></p>
