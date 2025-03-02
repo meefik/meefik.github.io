@@ -6,589 +6,589 @@ comments: false
 footer: false
 ---
 
-[NEUX](https://github.com/meefik/neux) is a nifty ecosystem for user experience development. It is a JavaScript frontend micro-library with reactivity states and views. The library has features and tools are suitable for building single-page applications (SPA) or isolated components.
+[NEUX](https://github.com/meefik/neux) is a lightweight frontend library for building dynamic user interfaces using declarative element definitions and reactive signals to modify them. It leverages native JavaScript and browser APIs to minimize boilerplate, making it ideal for creating single page applications (SPA) and custom web components.
 
-Here are the main concepts behind NEUX:
+**Key features:**
 
-- Minimum interaction with the library during development, more native JS code.
-- Instead of HTML templates and JSX, defining views as nested JS objects with a set of attributes that are completely equivalent to the attributes of native HTML elements.
-- Support for modern two-way reactivity.
-- Availability of standard components to implement the basic SPA functionality:
-  - routing,
-  - localization,
-  - synchronization of states with persistent storage,
-  - calling remote procedures on the backend.
-- Small library size ~ 11kb (5kb gzipped).
-- It is open source software under MIT license.
+- No JSX, no compiler, just in real-time.
+- Framework-agnostic, use any part of the library independently.
+- Declarative element definitions using plain objects powered by reactive state management.
+- Intuitive two-way reactivity with direct DOM changes without virtual DOM.
+- Built-in localization support for dynamic language adaptation.
+- Integrated remote procedure calls (RPC) for seamless backend connectivity.
+- Easy integration with CSS modules, Tailwind CSS, and other styling solutions.
+- Minimal bundle size (~8kb or 4kb gzipped) for fast loading.
+- Open source and available under the MIT license.
+
+**Just try it** in the playground:
+
+<iframe title="NEUX: To-Do App" scrolling="no" loading="lazy" style="height:400px; width: 100%;" src="https://v42.livecodes.io/?x=id/d7tcxpwp2dd&lite=true">
+  See the project <a href="https://v42.livecodes.io/?x=id/d7tcxpwp2dd" target="_blank">NEUX: To-Do App</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
+</iframe>
 
 ## Content
 
-1. [Installation](#installation)
-2. [States](#states)
-3. [Views](#views)
-4. [Localization](#localization)
-5. [Routing](#routing)
-6. [Remote procedure call](#remote-procedure-call)
-7. [State synchronization](#state-synchronization)
-8. [Use with Vite](#use-with-vite)
-9. [Use with Tailwind CSS](#use-with-tailwind-css)
-10. [Use with daisyUI](#use-with-daisyui)
-11. [Use with Web Components](#use-with-web-components)
-12. [Create your own Web Component](#create-your-own-web-component)
-13. [Examples](#examples)
+1. [Getting Started](#getting-started)
+2. [Signals](#signals)
+3. [Elements](#elements)
+4. [Custom Context](#custom-context)
+5. [Simple Routing](#simple-routing)
+6. [Localization](#localization)
+7. [Remote Procedure Call](#remote-procedure-call)
+8. [Building with Vite](#building-with-vite)
+9. [Using with Tailwind CSS](#using-with-tailwind-css)
+10. [Using with daisyUI](#using-with-daisyui)
+11. [Using with Web Components](#using-with-web-components)
+12. [Creating your own Web Component](#creating-your-own-web-component)
+13. [Code Example](#code-example)
 
-## Installation
+## Getting Started
 
-When using bundlers, you need to install the library from NPM:
+Getting started with NEUX is quick and effortless. You can include NEUX directly in your project without any additional build steps. However, you can use the library with bundlers like Vite if it needed.
 
-```sh
-npm install neux
-```
-
-And import it into your project:
-
-```js
-import { 
-  createState,
-  createView,
-  createL10n,
-  createRouter,
-  createSync,
-  createRPC
-} from 'neux'
-// use the library here...
-```
-
-Also, you can use it from the browser:
+To use NEUX in the browser, simply add the following to your HTML page:
 
 ```html
 <script src="https://unpkg.com/neux"></script>
 <script>
-  const { 
-    createState,
-    createView,
-    createL10n,
-    createRouter,
-    createSync,
-    createRPC
-  } = NEUX;
-  // use the library here...
+  // Import NUEX functions
+  const { render, mount, signal, effect, l10n, rpc } = window.neux;
+  // Start building your app right away!
 </script>
 ```
 
-## States
+Or you can import it as an ES module:
 
-The state is a proxy for objects. States are used to track changes and distribute them to related views and other state fields.
+```html
+<script type="module">
+  // Import NUEX functions
+  import { render, mount, signal, effect, l10n, rpc } from 'https://esm.sh/neux';
+  // Start building your app right away!
+</script>
+```
 
-An example with comments:
+Take a look at the example below. It creates a button that displays a counter. Every time the button is clicked, the count is incremented and the displayed text is automatically updated via NEUX's reactive state management.
 
 ```js
-const state = createState({
-  // regular fields
-  counter: 1,
+// Create reactive state
+const state = signal({ count: 1 });
+// Render button element
+const el = render({
+  // Tag name
+  tag: 'button',
+  // Event listeners
+  on: {
+    // Increment count on click
+    click: () => state.count++,
+  },
+  // Dynamic text content ($ mark enables reactivity)
+  children: () => `Count: ${state.$count}`,
+});
+// Mount to DOM
+mount(el, document.body);
+```
+
+NEUX also supports a concise HyperScript-like syntax for element creation using a `h()` function, similar to approaches found in other libraries. This syntax helps to define your elements in a more functional manner.
+
+```js
+// Create reactive state
+const state = signal({ count: 1 });
+// Render button element
+const el = h(
+  // Tag name
+  'button',
+  {
+    // Event listeners
+    on: {
+      // Increment count on click
+      click: () => state.count++,
+    },
+  },
+  // Dynamic text content ($ mark enables reactivity)
+  () => `Count: ${state.$count}`,
+);
+// Mount to DOM
+mount(el, document.body);
+```
+
+## Signals
+
+Signals in NEUX are reactive proxies for objects. They track changes automatically and update any linked views or computed fields. Use signals to create reactive state, derived values, and listeners for side effects or debugging.
+
+For example:
+
+```js
+// Reactive state with fields and computed properties
+const state = signal({
+  count: 1,
   multiplier: 2,
-  // the field as array
   list: [
     { text: 'Item 1' },
-    { text: 'Item 2', checked: true }
+    { text: 'Item 2', checked: true },
   ],
-  // the computed field for an object
-  double: (obj, prop) => obj.$counter * 2,
-  // the computed field for an array
-  filtered: (obj, prop) => {
-    return obj.$list.filter(item => item.checked);
-  },
-  // subscribe to track changes to the "double" field
-  $double: (newv, oldv, prop, obj) => {
-    console.log(newv, oldv, prop, obj);
-  },
-  // subscribe to track any object changes
-  $: (newv, oldv, prop, obj) => {
-    console.log(newv, oldv, prop, obj);
-  }
+  double: obj => obj.$count * 2,
+  filtered: obj => obj.$list.filter(item => item.checked),
+  $double: (newv, oldv) => console.log(newv, oldv),
+  $: (newv, oldv, prop) => console.log(newv, oldv, prop),
 });
-// set or change the computed field
-state.double = (obj, prop) => state.$counter * state.$multiplier;
-// change the regular field
-state.counter++;
+// Update computed field
+state.double = obj => state.$count * state.$multiplier;
+// Modify state
+state.count++;
 state.list.push({ text: 'Item 3' });
-// remove the field with all listeners
+// Remove field and listeners
 delete state.double;
 ```
 
-The `$` character ahead of a field name is used in computed fields to observe its changes. When changes occur in this field, this function will automatically recalled and receives the new value of the computed field.
+In computed fields, prefixing a property name with `$` marks it as reactive. When the property's value changes, the computed function is automatically invoked with its new value.
 
-**Attention!**
+**ATTENTION**
+- Removing or replacing the observed object/array will break all bindings.
+- Only the fields accessed during the initial synchronous execution are tracked for updates.
 
-1. When deleting or replacing the tracking object/array in the computed field, all binding is lost.
-2. In computed fields, binding occurs only with those fields that are called during the first synchronous execution.
+You can creates a reactive effect that computes a derived value and triggers a side effect.
 
-Listening for state changes:
+For example:
 
 ```js
-const handler = (newv, oldv, prop, obj) => {
-  console.log(newv, oldv, prop, obj);
-  if (newv === undefined) {
-    console.log('deleted');
-  } else if (oldv === undefined) {
-    console.log('added');
+const dispose = effect(
+  // Reactive getter: get count from state and subscribe to changes with '$' marker
+  () => {
+    const { $count } = state;
+    return $count * 2;
+  },
+  // Non-reactive setter: get result from getter and use it
+  (value) => {
+    console.log(`The doubled count is: ${value}`);
+  }
+);
+// Stop tracking changes and clear all associated subscriptions
+dispose();
+```
+
+The first function (getter) retrieves `$count` from the reactive state and returns its multiplied value (in this case, doubled). This ensures that any change in `$count` will automatically update the computed result.
+
+The second function (setter) acts as a non-reactive callback that receives the computed value and performs an action, such as logging it to the console.
+
+Optionally, all reactivity subscriptions set up by the effect can be cleared by invoking the `dispose()` function, which stops further tracking and updates.
+
+Additionally, you can subscribe to changes in your reactive state using dedicated listener methods. These listeners help you capture when a property's value is added, updated, or deleted. In the example below, the handler function demonstrates how to log the new value, old value, property name, the changed object, and any additional nested fields that were affected.
+
+Here’s the example:
+
+```js
+// Define a handler function that receives state change details
+const handler = (newv, oldv, prop, obj, nested) => {
+  console.log('New value:', newv);
+  console.log('Old value:', oldv);
+  console.log('Changed property:', prop);
+  console.log('Reactive object:', obj);
+  console.log('Nested fields (if any):', nested);
+
+  // Determine if the property was added, updated, or deleted
+  if (newValue === undefined) {
+    console.log('Property deleted');
+  } else if (oldValue === undefined) {
+    console.log('Property added');
   } else {
-    console.log('updated');
+    console.log('Property updated');
   }
 };
-// add a specified listener
+// Subscribe to changes on the 'double' property
 state.$$on('double', handler);
-// add a specified listener that only calls once
+// Subscribe with a one-time listener for the 'double' property
 state.$$once('double', handler);
-// remove a specified listener
+// Unsubscribe a specific listener from the 'double' property
 state.$$off('double', handler);
-// remove all listeners for the specified field
+// Remove all listeners for the 'double' property
 state.$$off('double');
-// add a listener to observe any changes
-// on this object and all children
+// Subscribe to any changes on this object and all nested children
 state.$$on('*', handler);
 ```
 
-## Views
+In this example:
+- The handler function logs useful details about state changes.
+- Using `$$on()`, you can add persistent listeners.
+- With `$$once()`, the listener triggers only the first time the change occurs.
+- The `$$off()` method allows you to remove specific or all listeners for a given property.
+- The wildcard `'*'` subscribes the handler to any changes across the entire reactive structure.
 
-A view is a declarative definition of DOM elements.
+This flexibility lets you efficiently track and respond to state mutations across your application.
 
-An example with comments:
+## Elements
+
+NEUX allows to render HTML elements and mount them in the DOM. You can declaratively define HTML elements and then mount them in the DOM using plain JavaScript objects and functions.
+
+You should use the `render()` function to create an `Element` or `DocumentFragment` by declarative definition. Below is an overview of the most common parameters available for element configuration:
+
+- `tag`: (String or Element) Specifies the HTML tag name (e.g., "div", "span") or HTML markup to create or an existing Element to use directly.
+- `classList`: (Array of Strings or Function) Specifies one or more CSS classes to add to the element. It can be a static array or a function that returns an array based on dynamic context.
+- `attributes`: (Object or Function) Maps attribute names to their corresponding values. Use a static object for fixed attributes or a function for dynamic assignment.
+- `style`: (Object or Function) Sets inline CSS styles via an object where keys are CSS property names. This can also be defined as a function to handle dynamic styling.
+- `dataset`: (Object or Function) Assigns custom data attributes (data-*) through a static mapping or a function that returns the mapping.
+- `on`: (Object) Adds event listeners to the element. Each key represents an event name (e.g., "click", "change") with its corresponding handler function.
+- `children`: (String, Array of Elements, or Function) Defines the inner content of the element. This can be a direct string, an array of element definitions, or a function that returns child nodes for dynamic rendering.
+- `ref`: (Function) A callback that receives the created element, allowing you to store a reference or perform additional operations immediately after creation.
+- `namespaceURI`: (String) Specifies the XML namespace URI when creating namespaced elements, such as SVG or MathML. Usually, this property is not required because it is automatically determined by the tag name.
+- `shadowRootMode`: (String) Defines the mode of the element’s shadow DOM, determining its accessibility and encapsulation. Options include 'open' (the shadow root is accessible via the element’s shadowRoot property) and 'closed' (the shadow root is hidden, preventing external access).
+
+You can also include any other parameters specific to particular elements. This flexible approach supports both static configurations and dynamic, reactive user interfaces.
 
 ```js
-const state = createState({
+const el = render({
+  tag: 'ul',
+  classList: ['list'],
+  ref: el => {
+    console.log(el);
+  },
+  children: ['Item 1', 'Item 2']
+    .map((item, index) => {
+      return {
+        tag: 'li',
+        style: {
+          color: 'red',
+        },
+        attributes: {
+          title: item,
+        },
+        dataset: {
+          index,
+        },
+        textContent: item,
+      };
+    }),
+});
+```
+
+The `el` variable will contain an HTML element with the following markup:
+
+```html
+<ul class="list">
+  <li title="Item 1" data-index="0" style="color: red;">Item 1</li>
+  <li title="Item 2" data-index="1" style="color: red;">Item 2</li>
+</ul>
+```
+
+To attach any HTML element to the DOM you should use the `mount()` function. This function attaches elements to the DOM and sets up a [MutationObserver](https://developer.mozilla.org/docs/Web/API/MutationObserver) on the target to dispatch custom events on lifecycle changes. These events are emitted for each element in the target DOM tree.
+
+List of lifecycle events:
+
+- `mounted` – Fired when the element is added to the DOM.
+- `changed` – Fired when an element attribute or property is modified.
+- `removed` – Fired when the element is removed from the DOM.
+
+The `removed` event is used internally to clean up signal bindings. You can prevent the default behavior for the target element and all its children by calling the `preventDefault()` method.
+
+Example of using lifecycle events:
+
+```js
+// Create an HTML element
+const el = render({
+  // Event listeners
+  on: {
+    mounted(e) {
+      console.log('Element mounted:', e);
+    },
+    changed(e) {
+      console.log('Element changed:', e);
+    },
+    removed(e) {
+      // you can prevent the default behavior
+      // e.preventDefault();
+      console.log('Element removed:', e);
+    },
+  },
+  textContent: 'Hello World!',
+});
+// Mount to DOM and set up lifecycle events
+mount(el, document.body);
+// Change the element attribute
+el.setAttribute('title', 'Text');
+// Remove the element fomr DOM
+el.remove();
+```
+
+In the `mount()` function, the second argument can be a target HTML element or CSS selector that will be used to find the target.
+
+You can use the `$$map()` method of arrays in state to optimize the rendering of child elements. Instead of re-rendering the entire list when the associated array changes, only the elements that have been added, updated, or removed are affected. This minimizes unnecessary DOM manipulations, resulting in smoother and more efficient UI updates, especially when dealing with large or frequently changing arrays.
+
+```js
+// Create a reactive state with an array
+const state = signal({
   list: [
-    { text: 'Item 1'},
-    { text: 'Item 2', checked: true },
-    { text: 'Item 3' }
-  ]
+    { text: 'Item 1' },
+    { text: 'Item 2' },
+  ],
 });
-const view = createView({
-  children: [{
-    tagName: 'h1',
-    textContent: 'To Do'
-  }, {
-    tagName: 'input',
-    placeholder: 'Enter your task...',
-    autofocus: true,
-    on: {
-      keyup() {
-        return (e) => {
-          if (e.keyCode === 13) {
-            e.preventDefault();
-            state.list.push({ text: e.target.value });
-            e.target.value = '';
-          }
-        };
-      }
-    }
-  }, {
-    tagName: 'div',
-    children: [{
-      tagName: 'input',
-      type: 'checkbox',
-      on: {
-        change() {
-          return (e) => {
-            const checked = e.target.checked;
-            state.list.forEach((item) => {
-              item.checked = checked;
-            });
-          };
-        }
-      }
-    }, {
-      tagName: 'label',
-      textContent: 'Mark all as complete'
-    }]
-  }, {
-    tagName: 'ul',
-    children: () => {
-      // redraw the list if any child element is added, replaced or removed
-      // any updates inside children are ignored
-      return state.list.$$each(item => {
-        return {
-          tagName: 'li',
-          on: {
-            mounted() {
-              return () => console.log('mounted', item);
-            },
-            removed() {
-              return () => console.log('removed', item);
-            }
-          },
-          children: [{
-            tagName: 'input',
-            type: 'checkbox',
-            checked: () => item.$checked,
-            on: {
-              change() {
-                return (e) => {
-                  item.checked = e.target.checked;
-                };
-              }
-            }
-          }, {
-            tagName: 'label',
-            textContent: () => item.$text
-          }, {
-            tagName: 'a',
-            href: '#',
-            textContent: '[x]',
-            on: {
-              click() {
-                return (e) => {
-                  e.preventDefault();
-                  const index = state.list.indexOf(item);
-                  state.list.splice(index, 1);
-                };
-              }
-            }
-          }]
-        };
-      });
-    }
-  }, {
-    textContent: () => `Total items: ${state.list.$length}`
-  }]
-}, { target: document.body });
-// get the HTML element
-console.log(view.el);
-```
-
-Additional events for each element:
-
-- `mounted` - the element was mounted in the DOM;
-- `removed` - the element was removed from the DOM;
-- `changed` - the element attribute was changed.
-
-You can change the DOM using simple operations on objects and arrays:
-
-```js
-const view = createView({
-  tagName: 'ul',
-  children: [{
-    tagName: 'li',
-    textContent: 'Item 1'
-  }]
-}, { target: document.body });
-
-view.children.push({
-  tagName: 'li',
-  textContent: 'Item 2'
+// Create an HTML element
+const el = render({
+  tag: 'ul',
+  children: () => {
+    return state.list.$$map((item) => {
+      return {
+        tag: 'li',
+        textContent: () => item.$text,
+      };
+    });
+  },
 });
-view.children[1].textContent = 'Item 3';
-view.children.shift();
+// Add item to the array
+state.list.push({ text: 'Item 3' });
 ```
 
-You can pass the entire HTML element in the "el" parameter:
-
-```js
-createView({
-  children: [{
-    el: document.createElement('footer'),
-    textContent: 'Powered by NEUX'
-  }]
-}, { target: document.body });
-```
-
-You can include any SVG icon as HTML markup and change its styles (size, color) via the `classList` or `attributes` field:
+You can include any SVG icon as HTML markup and change its styles (size, color) via the `classList` or `attributes` parameters (raw import works with Vite):
 
 ```js
 import githubIcon from '@svg-icons/fa-brands/github.svg?raw';
 
-createView({
-  outerHTML: githubIcon,
+const svgElement = render({
+  tag: githubIcon,
   classList: ['icon'],
   attributes: {
     width: '64px',
     height: '64px'
   }
-}, { target: document.body });
+});
 ```
 
-For convenience, you can divide the code into separate components, which can have input properties of the parent element:
+Additionally, you can create a [DocumentFragment](https://developer.mozilla.org/docs/Web/API/DocumentFragment) by simply passing an array to the `render()` function:
 
 ```js
-const state = createState({
-  counter: 0
-});
-
-function Button() {
-  return [{
-    tagName: 'button',
-    textContent: '+1',
-    on: {
-      click() {
-        return (e) => {
-          e.preventDefault();
-          const ev = new CustomEvent('increase', { bubbles: true });
-          e.target.dispatchEvent(ev);
-        }
-      }
-    }
-  }];
-}
-
-function Counter(obj) {
-  return [{
-    tagName: 'label',
-    textContent: () => obj.$text
-  }];
-}
-
-createView({
-  children: [{
-    on: {
-      increase() {
-        return (e) => {
-          e.preventDefault();
-          state.counter++;
-        };
-      }
-    },
-    children: Button
-  }, {
-    text: () => state.$counter,
-    children: Counter
-  }]
-}, { target: document.body });
+// Create DocumentFragment
+const fragment = render([
+  { tag: 'span', textContent: 'Item 1' },
+  { tag: 'span', textContent: 'Item 2' },
+  { tag: 'span', textContent: 'Item 3' },
+]);
+// Mount to DOM
+mount(fragment, document.body);
 ```
+
+## Custom Context
+
+By default, NEUX uses a global context for the `signal()` and `render()` functions. However, there are scenarios where you might need to use a custom context for signals and rendering. This allows you to separate multiple states, ensuring that reactivity works only within the same context. You can create an object and bind it to these functions.
+
+Here’s an example of how to use a custom context:
+
+```js
+// Custom context
+const context = { hi: 'hello' };
+// Signal with custom context
+const state = signal.call(context, {
+  count() {
+    console.log('signal', this.hi); // hello
+    return 1;
+  }
+});
+// Render with the same context
+const el = render.call(context, {
+  textContent() {
+    console.log('render', this.hi); // hello
+    return state.$count;
+  }
+});
+// Mount to DOM
+mount(el, document.body);
+```
+
+In this example:
+- A custom context object is created with a property `hi`.
+- The `signal` function is called with the custom context using `signal.call(context, {...})`.
+- The `render` function is also called with the same custom context using `render.call(context, {...})`.
+- The `this` keyword inside the signal and render functions refers to the custom context, allowing access to its properties.
+
+This approach ensures that the reactivity and rendering logic are scoped to the custom context, providing better modularity and separation of concerns in your application or within Web Components.
+
+## Simple Routing
+
+NEUX lets you implement routing simply with reactive state. By tracking the URL hash, you can switch between views dynamically. The following example demonstrates a basic routing setup with detailed comments and improved styling.
+
+```js
+// Initialize routing state
+const state = signal({
+  path: location.hash.slice(1) || 'Home',
+});
+// Route components
+const Home = () => ({
+  tag: 'div',
+  textContent: 'Welcome to the Home Page!',
+});
+const About = () => ({
+  tag: 'div',
+  textContent: 'This is the About Page.',
+});
+const NotFound = () => ({
+  tag: 'div',
+  textContent: '404 - Page Not Found',
+});
+// Route views
+const views = { Home, About };
+// App layout with navigation and content
+const el = render({
+  children: [
+    // Navigation links
+    {
+      tag: 'nav',
+      children: [{
+        tag: 'a',
+        href: '#Home',
+        textContent: 'Home',
+      }, {
+        tag: 'a',
+        href: '#About',
+        textContent: 'About',
+      }, {
+        tag: 'a',
+        href: '#Blog',
+        textContent: 'Blog',
+      }],
+    },
+    // Main content
+    {
+      tag: 'main',
+      children: () => {
+        const View = views[state.$path];
+        return View ? View() : NotFound();
+      },
+    },
+  ],
+});
+// Update state on hash change
+window.addEventListener('hashchange', () => {
+  state.path = location.hash.slice(1);
+});
+// Mount to DOM
+mount(el, document.body);
+```
+
+In this setup:
+- The reactive state holds the current path.
+- Navigation links update the URL hash, which triggers a state change.
+- The main content area dynamically renders the corresponding view.
+- If the route is not found, a default "Not Found" view is displayed.
 
 ## Localization
 
-Localization is used to display the application interface in different languages.
+Localization is used to display the application interface in different languages.You can use localized number and date formatting with [Intl.NumberFormat](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) and [Intl.DateTimeFormat](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat).
 
 Translation example:
 
 ```js
-const l10n = createL10n({
+const t = l10n({
   en: {
     say: {
       hello: "Hello %{name}!"
-    }
+    },
+    number: 'number: %{val}',
+    date: 'date: %{val}'
   },
   ru: {
     say: {
       hello: "Привет %{name}!"
-    }
+    },
+    number: 'число: %{val}',
+    date: 'дата: %{val}'
   }
 }, {
-  fallback: 'en',
-  lang: navigator.language
+  language: navigator.language,
+  fallback: 'en'
 });
-l10n.lang = 'en';
-const msgEn = l10n.t('say.hello', { name: 'World' });
+
+const msgEn = t('say.hello', { name: 'World' });
 console.log(msgEn); // Hello World!
-l10n.lang = 'ru';
-const msgRu = l10n.t('say.hello', { name: 'Мир' });
-console.log(msgRu); // Привет Мир!
-const msg = l10n.t('say.hello', { name: 'World' }, 'en');
-console.log(msg); // Hello World!
-```
 
-Convert date and time to localized string:
-
-```js
-const l10n = createL10n({
-  en: {
-    month: {
-      full: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-      short: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-    },
-    day:{
-      full: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-      short: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-    },
-    time: {
-      am: ['am','AM'],
-      pm: ['pm','PM']
-    }
-  }
-}, {
-  fallback: 'en',
-  lang: navigator.language
-});
-// date format
-const date = new Date('2024-03-15T14:30:00.000Z');
-const text = l10n.d(date, '{dddd}, {DD} {MMM} {YYYY} {h}:{mm} {A} {Z}');
-console.log(text); // Friday, 15 Mar 2024 2:30 PM +0:00
-```
-
-Description of date format similar to [Moment.js](https://momentjs.com/docs/#/parsing/string-format/)
-
-| Input    | Example        | Description                         |
-|----------|----------------|-------------------------------------|
-| YYYY     | 2024           | 4 digit year                        |
-| YY       | 24             | 2 digit year                        |
-| Q        | 1..4           | Quarter of year                     |
-| M MM     | 1..12          | Month number                        |
-| MMM MMMM | Jan..December  | Month name                          |
-| D DD     | 1..31          | Day of month                        |
-| DDD DDDD | 1..365         | Day of year                         |
-| ddd dddd | Mon...Sunday   | Day name                            |
-| X        | 1712751431.381 | Unix timestamp                      |
-| x        | 1712751431381  | Unix ms timestamp                   |
-| H HH     | 0..23          | Hours (24 hour time)                |
-| h hh     | 1..12          | Hours (12 hour time used with a A.) |
-| k kk     | 1..24          | Hours (24 hour time from 1 to 24)   |
-| a A      | am PM          | Post or ante meridiem               |
-| m mm     | 0..59          | Minutes                             |
-| s ss     | 0..59          | Seconds                             |
-| Z ZZ     | +12:00         | Offset from UTC                     |
-
-## Routing
-
-Routing is used to link separate states or pages of a web application to the address bar in the browser.
-
-An example with comments:
-
-```js
-const router = createRouter({
-  // #/:section/:page
-  section: /^\/(\w+)\/\w+$/,
-  page: /^\/\w+\/(\w+)$/
-}, {
-  home: '/section1/page1'
-});
-createView({
-  children: [{
-    children: [{
-      tagName: 'a',
-      href: '#/section1/page1',
-      textContent: 'Page 1'
-    }, {
-      tagName: 'a',
-      href: '#/section1/page2?key1=1',
-      textContent: 'Page 2'
-    }, {
-      tagName: 'button',
-      textContent: 'Page 3',
-      on: {
-        click() {
-          return () => {
-            router.navigate('/section1/page3', { key1: '1', key2: '2' });
-          };
-        }
-      }
-    }]
-  }, {
-    children: () => {
-      switch (router.params.$page) {
-      case 'page1':
-        return [{
-          tagName: 'p',
-          textContent: 'Page 1'
-        }];
-      case 'page2':
-        return [{
-          tagName: 'p',
-          textContent: 'Page 2'
-        }];
-      case 'page3':
-        return [{
-          tagName: 'p',
-          textContent: 'Page 3'
-        }];
-      default:
-        return [{
-          tagName: 'p',
-          textContent: 'Not found'
-        }];
-      }
-    }
-  }, {
-    tagName: 'pre',
-    textContent: () => [
-      `Path: ${router.$path}`,
-      `Params: ${JSON.stringify(router.params)}`,
-      `Query: ${JSON.stringify(router.query)}`
-    ].join('\n')
+const numberMsg = t('number', {
+  val: [12345, {
+    style: 'currency',
+    currency: 'USD'
   }]
-}, { target: document.body });
+});
+console.log(numberMsg); // number: $12,345.00
+
+const dateMsg = t('date', {
+  val: [new Date('2025-01-15'), {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }]
+});
+console.log(dateMsg); // date: Wednesday, January 15, 2025
+
+const msgRu = t('say.hello', { name: 'Мир' }, 'ru');
+console.log(msgRu); // Привет Мир!
 ```
 
-## Remote procedure call
+## Remote Procedure Call
 
-RPC is short for Remote Procedure Call. This abstraction allows you to execute code on the backend by calling normal functions on the frontend.
+RPC, short for Remote Procedure Call, lets you invoke backend functions directly from the frontend. This abstraction streamlines the process of sending data to the server and handling responses.
 
-Here is an example of calling some function:
+Below is an example demonstrating how to set up and use RPC in NEUX:
 
 ```js
-// create RPC client
-const rpc = createRPC({ url: '/api/rpc' });
-// define input parameters
-const text = 'Text'; // as text
-const object = { text }; // as object
-const blob = new Blob([text]); // as blob
-const file = new File([blob], 'file.txt'); // as file
-const formData = new FormData(); // as form-data
-formData.append('file', file);
-// call the remote function named "hello"
-const response = await rpc.hello(/* params */);
+// Create the RPC client
+const api = rpc('/api/rpc');
+
+// Define various input types
+const text = 'Text';                        // as a simple string
+const object = { text };                    // as a JavaScript object
+const blob = new Blob([text]);              // as a Blob
+const file = new File([blob], 'file.txt');  // as a File
+
+// Call the remote function named "hello" (pass parameters as needed)
+const response = await api.hello(/* params */);
 console.log(response);
 ```
 
-The function can accept input parameters in the formats `String`, `Object`, `Blob`, `File` or `FormData`. The function response can be one of three types `String`, `Object` or `Blob`.
+The function accepts parameters in several formats: String, Object, Blob, File, or FormData. The response can be a String, Object, or Blob.
 
-The default backend request HTTP method is `POST`. The API address on the backend has the format `/api/rpc/:method`, where `:method` is the name of the function to run.
+By default, RPC sends requests to URLs with the pattern `/api/rpc/:method` using the HTTP `POST` method. The type of the request is determined by the parameter format:
 
-The request can be of the following types:
+- **application/json** – for JavaScript objects.
+- **multipart/form-data** – for file transfers.
+- **text/plain** – for simple text parameters.
 
-- `application/json` - format for passing JavaScript objects.
-- `multipart/from-data` - file transfer format.
-- `text/plain` - all non-objects are passed as text.
+The server response uses one of the following content types:
 
-The response must be of the following types:
+- **application/json** – for objects.
+- **application/octet-stream** – for file transfers.
+- **text/plain** – for plain text.
 
-- `application/json` - format for passing JavaScript objects.
-- `application/octet-stream` - file transfer format.
-- `text/plain` - all non-objects are passed as text.
-
-Below is an example of using RPC for some imaginary backend:
+Below is a more comprehensive example of using RPC in NEUX:
 
 ```js
 let token = '';
-// create RPC client
-const rpc = createRPC({
-  // RPC backend endpoint
-  url: '/api/rpc',
-  // include headers for every request
+// Create an API endpoint using RPC with custom settings
+const api = rpc('/api/rpc', {
+  method: 'POST',
   headers: {
-    // getter for authorization header
+    // Dynamically retrieves the Authorization header
     get Authorization() {
       return token && `Bearer ${token}`;
     }
   },
-  // include cookies for every request
-  // credentials: 'include',
-  // enable CORS for requests
-  // mode: 'cors'
 });
-// authorize and get the session token
-token = await rpc.login({ username, password });
-// upload file from <input id="file" type="file" />
-const file = document.getElementById('file').files[0];
-const { id, name, type, size } = await rpc.upload(file);
-// send json data
-const res = await rpc.addComment({
-  author: 'John Doe',
-  text: 'Hello World!',
-  time: new Date(),
-  attachments: [id]
+// Call a backend function without parameters
+api.time().then(data => {
+  console.log('time:', data);
 });
-// update data
-await rpc.updateComment({
-  id: res.id,
-  text: 'Edited message'
+// Call a backend function with a text parameter
+api.hello('World').then(data => {
+  console.log('hello:', data);
 });
-// receive json data
-const comment = await rpc.getComment({
-  id: res.id
+// Create and upload a file
+const blob = new Blob(['Hello World!']);
+const file = new File([blob], 'demo.txt');
+api.upload(file).then(data => {
+  console.log('upload:', data);
+});
+// Download a file from the backend
+api.download('/tmp/demo.txt').then(data => {
+  console.log('download:', data);
 });
 ```
 
-Below is an example implementation of the server API for RPC on Node.js:
+The following example outlines a simple Node.js server API implementation for RPC using Express and Multer:
 
 ```js
 // server.js
@@ -604,37 +604,36 @@ const upload = multer({ dest: os.tmpdir() });
 const app = express();
 
 app.enable('trust proxy');
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.text());
-app.use(express.json());
 
-const todos = [];
 const handlers = {
-  async hello (name) {
+  async hello(name) {
     return `Hello ${name}!`;
   },
-  async time () {
+  async time() {
     return { time: new Date() };
   },
-  async upload (file) {
+  async upload(file) {
     return file;
   },
-  async download (path) {
+  async download(path) {
     return fs.createReadStream(path);
   }
 };
 
-app.post('/api/rpc/:method',
+app.post('/api/rpc/:method', 
   upload.single('file'),
-  async function (req, res, next) {
+  async (req, res, next) => {
     try {
       const { method } = req.params;
       const params = req.file || req.body;
-        const handler = handlers[method];
-        if (typeof handler !== 'function') {
-          throw Error('Method not found');
-        }
-        const data = await handler(params);
+      const handler = handlers[method];
+      if (typeof handler !== 'function') {
+        throw Error('Method not found');
+      }
+      const data = await handler(params);
       if (data instanceof Readable) {
         res.set('Content-Type', 'application/octet-stream');
         data.on('error', () => res.end());
@@ -649,120 +648,30 @@ app.post('/api/rpc/:method',
     } catch (err) {
       next(err);
     }
-  });
+});
 
-http.Server(app).listen(PORT, HOST);
+http.createServer(app).listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}`);
+});
 ```
 
-You can start the server like this:
+To start the server, install the required dependencies and run the script:
 
 ```sh
 npm install express multer
 node server.js
 ```
 
-And an example of calling RPC methods in NEUX:
-
-```js
-const rpc = createRPC({ url: '/api/rpc' })
-rpc.hello('World').then(data => {
-  console.log('hello:', data);
-});
-rpc.time().then(data => {
-  console.log('time:', data);
-});
-rpc.download('/tmp/test').then(data => {
-  console.log('download:', data);
-});
-const blob = new Blob(['Hello World!']);
-const file = new File([blob], 'demo.txt');
-rpc.upload(file).then(data => {
-  console.log('upload:', data);
-});
-```
-
-## State synchronization
-
-State synchronization is used to save their data to persistent storage.
-
-Synchronizing state with `localStorage`:
-
-```js
-const state = createState({
-  list: []
-});
-// describe the synchronization function
-const syncer = (newv, oldv) => {
-  if (!oldv) {
-    return JSON.parse(localStorage.getItem('todos') || '[]');
-  } else {
-    localStorage.setItem('todos', JSON.stringify(newv));
-  }
-  return newv;
-};
-// create a synchronization with state
-// slippage (in ms) helps group and reduce call frequency
-const sync = createSync(state.list, syncer, { slippage: 100 });
-// sync state with local storage
-sync();
-```
-
-Synchronizing state with remote store:
-
-```js
-const state = createState({
-  list: []
-});
-// describe the synchronization function
-const syncer = async (newv, oldv) => {
-  return await rpc.getTodoList();
-};
-// create a synchronization with state
-const sync = createSync(state.list, syncer);
-// sync state with remote store
-sync();
-```
-
-Undo last changes or clear:
-
-```js
-const state = createState({
-  list: [
-    { text: 'Item 1', checked: false }
-  ]
-});
-// describe the synchronization function
-const syncer = (newv, oldv, action) => {
-  if (action === 'undo') return oldv;
-  if (action === 'clear') return [];
-  return newv;
-};
-// create a synchronization with state
-const sync = createSync(state.list, syncer);
-// commit current state
-sync();
-// change state
-state.list[0].checked = true;
-// commit changes
-sync();
-// change state again
-state.list[0].checked = false;
-// undo last change
-sync('undo');
-// delete all data
-sync('clear');
-```
-
-## Use with Vite
+## Building with Vite
 
 You can use NEUX with [Vite](https://vitejs.dev) bundler.
 
 How to set up:
 
-**1.** Create a new Vite project (select a variant JavaScript):
+**1.** Create a new Vite project:
 
 ```sh
-npm init vite@latest
+npm init vite@latest -- --template vanilla
 ```
 
 **2.** Install the `neux` module:
@@ -771,14 +680,16 @@ npm init vite@latest
 npm install --save-dev neux
 ```
 
-**3.** Paste your application code into the `main.js` file:
+**3.** Paste your application code into the `src/main.js` file:
 
 ```js
-import { createView } from 'neux';
+import { render, mount } from 'neux';
 
-createView({
-  textContent: 'Hello World!'
-}, { target: document.body });
+const el = render({
+  textContent: 'Hello World!',
+});
+
+mount(el, '#app');
 ```
 
 **4.** Run the project:
@@ -787,7 +698,7 @@ createView({
 npm run dev
 ```
 
-## Use with Tailwind CSS
+## Using with Tailwind CSS
 
 It also fits well with [Tailwind CSS](https://tailwindcss.com). After [installing Tailwind CSS](https://tailwindcss.com/docs/installation) into your project you can use CSS classes in the `classList` field as `String` or `Array`.
 
@@ -796,54 +707,44 @@ How to set up your Vite project:
 **1.** Install the required modules:
 
 ```sh
-npm install --save-dev tailwindcss postcss autoprefixer
+npm install --save-dev tailwindcss @tailwindcss/vite
 ```
 
-**2.** Create the file `tailwind.config.js`:
+**2.** Create the file `vite.config.js`:
 
 ```js
-export default {
-  content: ['./index.html', './main.js'],
-  theme: {
-    extend: {}
-  },
-  plugins: []
-};
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+});
 ```
 
-**3.** Create the file `postcss.config.js`:
-
-```js
-export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {}
-  }
-};
-```
-
-**4.** Replace the contents of the `style.css` file with:
+**3.** Replace the contents of the `src/style.css` file with:
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 ```
 
-**5.** Replace the contents of the `main.js` file with the example:
+**4.** Replace the contents of the `src/main.js` file with the example:
 
 ```js
 import './style.css';
-import { createView } from 'neux';
+import { render, mount } from 'neux';
 
-createView({
-  tagName: 'h1',
+const el = render({
+  tag: 'h1',
   classList: ['text-3xl', 'font-bold', 'underline'],
-  textContent: 'Hello world!'
-}, { target: document.body });
+  textContent: 'Hello world!',
+});
+
+mount(el, '#app');
 ```
 
-## Use with daisyUI
+## Using with daisyUI
 
 To simplify styles you can use [daisyUI](https://daisyui.com). This is a popular component library for [Tailwind CSS](https://tailwindcss.com).
 
@@ -852,64 +753,58 @@ How to set up your Tailwind CSS project:
 **1.** Install the required modules:
 
 ```sh
-npm install --save-dev daisyui @tailwindcss/typography
+npm install --save-dev daisyui
 ```
 
-**2.** Change the file `tailwind.config.js`:
+**2.** Replace the contents of the `src/style.css` file:
 
-```js
-import daisyui from 'daisyui';
-import typography from '@tailwindcss/typography';
-
-export default {
-  // ...
-  plugins: [typography, daisyui]
-};
+```css
+@plugin "daisyui";
 ```
 
-**3.** Replace the contents of the `main.js` file with the example:
+**3.** Replace the contents of the `src/main.js` file with the example:
 
 ```js
 import './style.css';
-import { createState, createView } from 'neux';
+import { signal, render, mount } from 'neux';
 
-const state = createState({ counter: 0 });
+const state = signal({ count: 0 });
 
-createView({
+const el = render({
   classList: ['container', 'm-auto', 'p-8', 'flex', 'gap-4'],
   children: [{
-    tagName: 'button',
+    tag: 'button',
     classList: ['btn', 'btn-primary'],
     textContent: '-1',
     on: {
-      click() {
-        return () => state.counter--;
-      }
-    }
+      click: () => {
+        state.count--;
+      },
+    },
   }, {
-    tagName: 'input',
+    tag: 'input',
     type: 'number',
     classList: ['input', 'input-bordered', 'w-full'],
-    value: () => state.$counter,
+    value: () => state.$count,
     on: {
-      change() {
-        return ({ target }) => state.counter = parseInt(target.value);
-      }
-    }
+      change: ({ target }) => {
+        state.count = parseInt(target.value);
+      },
+    },
   }, {
-    tagName: 'button',
+    tag: 'button',
     classList: ['btn', 'btn-primary'],
     textContent: '+1',
     on: {
-      click() {
-        return () => state.counter++;
-      }
-    }
-  }]
-}, { target: document.body });
+      click: () => state.count++,
+    },
+  }],
+});
+
+mount(el, '#app');
 ```
 
-## Use with Web Components
+## Using with Web Components
 
 You can use NEUX along with any [Web Components](https://developer.mozilla.org/docs/Web/API/Web_Components). Many component libraries can be [found here](https://open-wc.org/guides/community/component-libraries/).
 
@@ -921,7 +816,7 @@ Let's take an example of working with the [BlueprintUI](https://blueprintui.dev)
 npm install --save-dev @blueprintui/components @blueprintui/themes @blueprintui/layout @blueprintui/typography
 ```
 
-**2.** Import styles in the `style.css` file:
+**2.** Import styles in the `src/style.css` file:
 
 ```css
 @import '@blueprintui/layout/index.min.css';
@@ -929,133 +824,243 @@ npm install --save-dev @blueprintui/components @blueprintui/themes @blueprintui/
 @import '@blueprintui/themes/index.min.css';
 ```
 
-**3.** Replace the contents of the `main.js` file with the example:
+**3.** Replace the contents of the `src/main.js` file with the example:
 
 ```js
-import { createView } from 'neux';
 import './style.css';
 import '@blueprintui/components/include/button.js';
 import '@blueprintui/components/include/card.js';
 import '@blueprintui/components/include/input.js';
+import { render, mount } from 'neux';
 
-createView({
-  tagName: 'bp-card',
+const el = render({
+  tag: 'bp-card',
   children: [{
-    tagName: 'h2',
+    tag: 'h2',
     slot: 'header',
     attributes: {
-      'bg-text': 'section'
+      'bg-text': 'section',
     },
-    textContent: 'Heading'
+    textContent: 'Heading',
   }, {
-    tagName: 'bp-field',
+    tag: 'bp-field',
     children: [{
-      tagName: 'label',
-      textContent: 'label'
+      tag: 'label',
+      textContent: 'label',
     }, {
-      tagName: 'bp-input'
-    }]
+      tag: 'bp-input',
+    }],
   }, {
     slot: 'footer',
     attributes: {
-      'bp-layout': 'inline gap:xs inline:end'
+      'bp-layout': 'inline gap:xs inline:end',
     },
     children: [{
-      tagName: 'bp-button',
+      tag: 'bp-button',
       attributes: {
-        action: 'secondary'
+        action: 'secondary',
       },
-      textContent: 'Cancel'
+      textContent: 'Cancel',
     }, {
-      tagName: 'bp-button',
+      tag: 'bp-button',
       attributes: {
-        status: 'accent'
+        status: 'accent',
       },
-      textContent: 'Confirm'
-    }]
-  }]
-}, { target: document.body });
+      textContent: 'Confirm',
+    }],
+  }],
+});
+
+mount(el, document.body);
 ```
 
-## Create your own Web Component
+## Creating your own Web Component
 
 You can create your own components using [one of the libraries](https://open-wc.org/guides/community/base-libraries/), for example [Lit](https://lit.dev). But you can also create your own Web Components using NEUX.
 
 An example of a web component definition:
 
 ```js
+// Create a custom web component
 class Counter extends HTMLElement {
-  static get observedAttributes() {
-    return ['value'];
-  }
+  static observedAttributes = ['value'];
+
   constructor() {
     super();
-    const target = this.attachShadow({ mode: 'open' });
     const context = {};
-    this.view = createView(this.template(), { context, target });
+    this.state = signal.call(context, this.data());
+    const el = render.call(context, this.template());
+    const target = this.attachShadow({ mode: 'open' });
+    mount(el, target);
   }
-  template() {
+
+  attributeChangedCallback(name, oldv, newv) {
+    this.state[name] = newv;
+  }
+
+  data() {
     return {
-      attributes: {
-        value: '',
-        $: (newv, oldv, prop) => this.setAttribute(prop, newv)
-      },
-      children: (obj) => [{
-        tagName: 'input',
-        type: 'number',
-        value: () => obj.attributes.$value,
-        on: {
-          change() {
-            return (e) => {
-              obj.attributes.value = e.target.value;
-            };
-          }
-        }
-      }, {
-        tagName: 'slot',
-        name: 'label',
-        textContent: () => obj.attributes.$value
-      }]
+      value: '',
+      $: (newv, oldv, prop) => this.setAttribute(prop, newv),
     };
   }
-  attributeChangedCallback(name, oldv, newv) {
-    this.view.attributes[name] = newv;
+
+  template() {
+    return {
+      children: () => [{
+        tag: 'slot',
+        name: 'label',
+        textContent: () => `Count: ${this.state.$value} `,
+      }, {
+        tag: 'input',
+        type: 'number',
+        value: () => this.state.$value,
+        on: {
+          change: (e) => {
+            this.state.value = e.target.value;
+          },
+        },
+      }],
+    };
   }
 }
+// Define custom element
 customElements.define('ne-counter', Counter);
 ```
 
 Use this web component:
 
 ```js
-const state = createState({
-  counter: 1
+const state = signal({
+  count: 1,
 });
-createView({
-  tagName: 'ne-counter',
+
+const el = render({
+  tag: 'ne-counter',
   attributes: {
-    value: () => state.$counter,
+    value: () => state.$count,
   },
   on: {
-    changed() {
-      return (e) => {
-        state.counter = parseInt(e.detail.newValue);
-      };
-    }
+    changed: (e) => {
+      state.count = parseInt(e.detail.newValue);
+    },
   },
   children: [{
-    tagName: 'span',
+    tag: 'span',
     slot: 'label',
-    textContent: () => state.$counter
-  }]
-}, { target: document.body });
+    textContent: () => state.$count,
+  }],
+});
+
+mount(el, document.body);
 ```
 
-## Examples
+## Code Example
 
-You can find development examples with NEUX in the following repositories:
+This example shows how to write a simple app (To-Do List):
 
-- [neux-todo-app](https://github.com/meefik/neux-todo-app) - example To-Do application on NEUX + Tailwind CSS + Vite;
-- [neux-demo](https://github.com/meefik/neux-demo) - various examples on NEUX.
+```js
+// Create a reactive state
+const state = signal({
+  // Todo items
+  list: [
+    { text: 'Item 1' },
+    { text: 'Item 2', checked: true },
+    { text: 'Item 3' },
+  ],
+  // List of checked items
+  filtered: (obj) => {
+    return obj.$list.filter(item => !item.checked);
+  },
+});
+// Create HTML elements
+const el = render({
+  children: [{
+    tag: 'h1',
+    textContent: 'To Do',
+  }, {
+    tag: 'input',
+    placeholder: 'Enter your task...',
+    autofocus: true,
+    on: {
+      keyup(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          state.list.push({ text: e.target.value });
+          e.target.value = '';
+        }
+      },
+    },
+  }, {
+    children: [{
+      tag: 'input',
+      type: 'checkbox',
+      on: {
+        change(e) {
+          const checked = e.target.checked;
+          state.list.forEach((item) => {
+            item.checked = checked;
+          });
+        },
+      },
+    }, {
+      tag: 'label',
+      textContent: 'Mark all as complete',
+    }],
+  }, {
+    tag: 'ul',
+    children: () => {
+      // Redraw the list if any child element is added, replaced or removed.
+      // Any updates inside children are ignored.
+      return state.list.$$map((item) => {
+        return {
+          tag: 'li',
+          children: [{
+            tag: 'input',
+            type: 'checkbox',
+            checked: () => item.$checked,
+            on: {
+              change(e) {
+                item.checked = e.target.checked;
+              },
+            },
+          }, {
+            tag: 'label',
+            style: {
+              textDecoration: () => item.$checked ? 'line-through' : 'none',
+            },
+            textContent: () => item.$text,
+          }, {
+            tag: 'button',
+            textContent: 'x',
+            on: {
+              click(e) {
+                e.preventDefault();
+                const index = state.list.indexOf(item);
+                state.list.splice(index, 1);
+              },
+            },
+          }],
+        };
+      });
+    },
+  }, {
+    textContent: () => {
+      return `Total items: ${state.$filtered.length} / ${state.list.$length}`;
+    },
+  }],
+});
+// Mount to the DOM
+mount(el, document.body);
+```
+
+Try it in the playground:
+
+- [To-Do App](https://livecodes.io/?x=id/v5zg2ajb4p3)
+- [15 Puzzle](https://livecodes.io/?x=id/ye2c7gd7dpw)
+- [Tic-Tac-Toe](https://livecodes.io/?x=id/bg3vy6gyubq)
+- [SVG Clock](https://livecodes.io/?x=id/fre8jw79dnc)
+- [Sketch](https://livecodes.io/?x=id/6xu6zkckiad)
+- [File Tree](https://livecodes.io/?x=id/c77bi6y5nvh)
 
 <p><iframe src="https://ghbtns.com/github-btn.html?user=meefik&repo=neux&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe></p>
