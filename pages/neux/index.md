@@ -6,7 +6,7 @@ comments: false
 footer: false
 ---
 
-[NEUX](https://github.com/meefik/neux) is a lightweight frontend library for building dynamic user interfaces using declarative element definitions and reactive signals to modify them. It leverages native JavaScript and browser APIs to minimize boilerplate, making it ideal for creating single page applications (SPA) and custom web components.
+[NEUX](https://github.com/meefik/neux "Native Extended User eXperience") is a lightweight frontend library for building dynamic user interfaces using declarative element definitions and reactive signals to modify them. It leverages native JavaScript and browser APIs to minimize boilerplate, making it ideal for creating single page applications (SPA) and custom web components.
 
 **Key features:**
 
