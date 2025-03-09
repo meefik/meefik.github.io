@@ -98,10 +98,9 @@ export default class Dispatcher {
     this.timer = setInterval(async () => {
       const job = getNextJob();
       if (!job) return;
-
       this.inprogress++;
       job.state = 'active';
-      job.attempt = job.attempt || 1;
+      job.attempt = (job.attempt || 0) + 1;
       try {
         if (typeof job.run === 'function') {
           await job.run(job);
@@ -114,11 +113,11 @@ export default class Dispatcher {
         job.state = 'error';
         job.error = err;
         job.errorAt = Date.now();
-        job.attempt++;
         const attempts = typeof job.attempts === 'function'
           ? job.attempts(job)
           : job.attempts;
-        if (job.attempt > attempts) {
+        if (job.attempt >= attempts) {
+          job.state = 'failed';
           delete job.nextRunAt;
           this.queue.delete(job);
         }
