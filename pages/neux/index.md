@@ -15,9 +15,8 @@ footer: false
 - Declarative element definitions using plain objects powered by reactive state management.
 - Intuitive two-way reactivity with direct DOM changes without virtual DOM.
 - Built-in localization support for dynamic language adaptation.
-- Integrated remote procedure calls (RPC) for seamless backend connectivity.
 - Easy integration with CSS modules, Tailwind CSS, and other styling solutions.
-- Minimal bundle size (~8kb or 4kb gzipped) for fast loading.
+- Minimal bundle size (~4kb gzipped) for fast loading.
 - Open source and available under the MIT license.
 
 **Just try it** in the playground:
@@ -31,16 +30,15 @@ footer: false
 1. [Getting Started](#getting-started)
 2. [Signals](#signals)
 3. [Elements](#elements)
-4. [Custom Context](#custom-context)
-5. [Simple Routing](#simple-routing)
-6. [Localization](#localization)
-7. [Remote Procedure Call](#remote-procedure-call)
-8. [Building with Vite](#building-with-vite)
-9. [Using with Tailwind CSS](#using-with-tailwind-css)
-10. [Using with daisyUI](#using-with-daisyui)
-11. [Using with Web Components](#using-with-web-components)
-12. [Creating your own Web Component](#creating-your-own-web-component)
-13. [Code Example](#code-example)
+4. [Localization](#localization)
+5. [Custom Context](#custom-context)
+6. [Simple Routing](#simple-routing)
+7. [Building with Vite](#building-with-vite)
+8. [Using with Tailwind CSS](#using-with-tailwind-css)
+9. [Using with daisyUI](#using-with-daisyui)
+10. [Using with Web Components](#using-with-web-components)
+11. [Creating your own Web Component](#creating-your-own-web-component)
+12. [Code Example](#code-example)
 
 ## Getting Started
 
@@ -52,7 +50,7 @@ To use NEUX in the browser, simply add the following to your HTML page:
 <script src="https://unpkg.com/neux"></script>
 <script>
   // Import NUEX functions
-  const { render, mount, signal, effect, l10n, rpc } = window.neux;
+  const { render, mount, signal, effect, l10n } = window.neux;
   // Start building your app right away!
 </script>
 ```
@@ -62,7 +60,7 @@ Or you can import it as an ES module:
 ```html
 <script type="module">
   // Import NUEX functions
-  import { render, mount, signal, effect, l10n, rpc } from 'https://esm.sh/neux';
+  import { render, mount, signal, effect, l10n } from 'https://esm.sh/neux';
   // Start building your app right away!
 </script>
 ```
@@ -363,6 +361,57 @@ const fragment = render([
 // Mount to DOM
 mount(fragment, document.body);
 ```
+## Localization
+
+Localization is used to display the application interface in different languages.You can use localized number and date formatting with [Intl.NumberFormat](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) and [Intl.DateTimeFormat](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat).
+
+Translation example:
+
+```js
+const t = l10n({
+  en: {
+    say: {
+      hello: "Hello %{name}!"
+    },
+    number: 'number: %{val}',
+    date: 'date: %{val}'
+  },
+  ru: {
+    say: {
+      hello: "Привет %{name}!"
+    },
+    number: 'число: %{val}',
+    date: 'дата: %{val}'
+  }
+}, {
+  language: navigator.language,
+  fallback: 'en'
+});
+
+const msgEn = t('say.hello', { name: 'World' });
+console.log(msgEn); // Hello World!
+
+const numberMsg = t('number', {
+  val: [12345, {
+    style: 'currency',
+    currency: 'USD'
+  }]
+});
+console.log(numberMsg); // number: $12,345.00
+
+const dateMsg = t('date', {
+  val: [new Date('2025-01-15'), {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }]
+});
+console.log(dateMsg); // date: Wednesday, January 15, 2025
+
+const msgRu = t('say.hello', { name: 'Мир' }, 'ru');
+console.log(msgRu); // Привет Мир!
+```
 
 ## Custom Context
 
@@ -466,201 +515,6 @@ In this setup:
 - Navigation links update the URL hash, which triggers a state change.
 - The main content area dynamically renders the corresponding view.
 - If the route is not found, a default "Not Found" view is displayed.
-
-## Localization
-
-Localization is used to display the application interface in different languages.You can use localized number and date formatting with [Intl.NumberFormat](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) and [Intl.DateTimeFormat](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat).
-
-Translation example:
-
-```js
-const t = l10n({
-  en: {
-    say: {
-      hello: "Hello %{name}!"
-    },
-    number: 'number: %{val}',
-    date: 'date: %{val}'
-  },
-  ru: {
-    say: {
-      hello: "Привет %{name}!"
-    },
-    number: 'число: %{val}',
-    date: 'дата: %{val}'
-  }
-}, {
-  language: navigator.language,
-  fallback: 'en'
-});
-
-const msgEn = t('say.hello', { name: 'World' });
-console.log(msgEn); // Hello World!
-
-const numberMsg = t('number', {
-  val: [12345, {
-    style: 'currency',
-    currency: 'USD'
-  }]
-});
-console.log(numberMsg); // number: $12,345.00
-
-const dateMsg = t('date', {
-  val: [new Date('2025-01-15'), {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }]
-});
-console.log(dateMsg); // date: Wednesday, January 15, 2025
-
-const msgRu = t('say.hello', { name: 'Мир' }, 'ru');
-console.log(msgRu); // Привет Мир!
-```
-
-## Remote Procedure Call
-
-RPC, short for Remote Procedure Call, lets you invoke backend functions directly from the frontend. This abstraction streamlines the process of sending data to the server and handling responses.
-
-Below is an example demonstrating how to set up and use RPC in NEUX:
-
-```js
-// Create the RPC client
-const api = rpc('/api/rpc');
-
-// Define various input types
-const text = 'Text';                        // as a simple string
-const object = { text };                    // as a JavaScript object
-const blob = new Blob([text]);              // as a Blob
-const file = new File([blob], 'file.txt');  // as a File
-
-// Call the remote function named "hello" (pass parameters as needed)
-const response = await api.hello(/* params */);
-console.log(response);
-```
-
-The function accepts parameters in several formats: String, Object, Blob, File, or FormData. The response can be a String, Object, or Blob.
-
-By default, RPC sends requests to URLs with the pattern `/api/rpc/:method` using the HTTP `POST` method. The type of the request is determined by the parameter format:
-
-- **application/json** – for JavaScript objects.
-- **multipart/form-data** – for file transfers.
-- **text/plain** – for simple text parameters.
-
-The server response uses one of the following content types:
-
-- **application/json** – for objects.
-- **application/octet-stream** – for file transfers.
-- **text/plain** – for plain text.
-
-Below is a more comprehensive example of using RPC in NEUX:
-
-```js
-let token = '';
-// Create an API endpoint using RPC with custom settings
-const api = rpc('/api/rpc', {
-  method: 'POST',
-  headers: {
-    // Dynamically retrieves the Authorization header
-    get Authorization() {
-      return token && `Bearer ${token}`;
-    }
-  },
-});
-// Call a backend function without parameters
-api.time().then(data => {
-  console.log('time:', data);
-});
-// Call a backend function with a text parameter
-api.hello('World').then(data => {
-  console.log('hello:', data);
-});
-// Create and upload a file
-const blob = new Blob(['Hello World!']);
-const file = new File([blob], 'demo.txt');
-api.upload(file).then(data => {
-  console.log('upload:', data);
-});
-// Download a file from the backend
-api.download('/tmp/demo.txt').then(data => {
-  console.log('download:', data);
-});
-```
-
-The following example outlines a simple Node.js server API implementation for RPC using Express and Multer:
-
-```js
-// server.js
-import http from 'node:http';
-import os from 'node:os';
-import fs from 'node:fs';
-import { Readable } from 'node:stream';
-import express from 'express';
-import multer from 'multer';
-
-const { PORT = 3000, HOST = '127.0.0.1' } = process.env;
-const upload = multer({ dest: os.tmpdir() });
-const app = express();
-
-app.enable('trust proxy');
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.text());
-
-const handlers = {
-  async hello(name) {
-    return `Hello ${name}!`;
-  },
-  async time() {
-    return { time: new Date() };
-  },
-  async upload(file) {
-    return file;
-  },
-  async download(path) {
-    return fs.createReadStream(path);
-  }
-};
-
-app.post('/api/rpc/:method', 
-  upload.single('file'),
-  async (req, res, next) => {
-    try {
-      const { method } = req.params;
-      const params = req.file || req.body;
-      const handler = handlers[method];
-      if (typeof handler !== 'function') {
-        throw Error('Method not found');
-      }
-      const data = await handler(params);
-      if (data instanceof Readable) {
-        res.set('Content-Type', 'application/octet-stream');
-        data.on('error', () => res.end());
-        return data.pipe(res);
-      }
-      if (typeof data === 'object') {
-        res.set('Content-Type', 'application/json');
-        return res.json(data);
-      }
-      res.set('Content-Type', 'text/plain');
-      res.send(data);
-    } catch (err) {
-      next(err);
-    }
-});
-
-http.createServer(app).listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}`);
-});
-```
-
-To start the server, install the required dependencies and run the script:
-
-```sh
-npm install express multer
-node server.js
-```
 
 ## Building with Vite
 
