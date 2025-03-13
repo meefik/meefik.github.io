@@ -86,13 +86,13 @@ const el = render({
 mount(el, document.body);
 ```
 
-NEUX also supports a concise HyperScript-like syntax for element creation using a `h()` function, similar to approaches found in other libraries. This syntax helps to define your elements in a more functional manner.
+NEUX also supports a concise HyperScript-like syntax for element creation using the `render()` function, similar to approaches found in other libraries. This syntax helps to define your elements in a more functional manner.
 
 ```js
 // Create reactive state
 const state = signal({ count: 1 });
 // Render button element
-const el = h(
+const el = render(
   // Tag name
   'button',
   {
