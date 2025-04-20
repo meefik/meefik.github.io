@@ -2,7 +2,7 @@
 layout: post
 title: RPC as native JS functions
 date: 2024-04-14 12:00:00 +0000
-categories: [javascript]
+categories: [javascript, rpc]
 comments: true
 ---
 
