@@ -2,7 +2,7 @@
 layout: post
 title: The story of a (not so) necessary optimization
 date: 2025-04-20 10:00:00 +0000
-categories: [MongoDB]
+categories: [mongodb]
 comments: true
 ---
 

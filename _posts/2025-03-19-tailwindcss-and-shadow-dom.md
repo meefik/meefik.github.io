@@ -2,7 +2,7 @@
 layout: post
 title: Tailwind CSS v4 and the Shadow DOM
 date: 2025-03-19 10:00:00 +0000
-categories: [TailwindCSS]
+categories: [tailwindcss]
 comments: true
 ---
 
