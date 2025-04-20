@@ -86,7 +86,7 @@ const el = render({
 mount(el, document.body);
 ```
 
-NEUX also supports a concise HyperScript-like syntax for element creation using the `render()` function, similar to approaches found in other libraries. This syntax helps to define your elements in a more functional manner.
+NEUX also supports a concise [HyperScript](https://github.com/hyperhype/hyperscript)-like syntax for element creation using the `render()` function, similar to approaches found in other libraries. This syntax helps to define your elements in a more functional manner.
 
 ```js
 // Create reactive state
@@ -227,8 +227,12 @@ You should use the `render()` function to create an `Element` or `DocumentFragme
 - `on`: (Object) Adds event listeners to the element. Each key represents an event name (e.g., "click", "change") with its corresponding handler function.
 - `children`: (String, Array of Elements, or Function) Defines the inner content of the element. This can be a direct string, an array of element definitions, or a function that returns child nodes for dynamic rendering.
 - `ref`: (Function) A callback that receives the created element, allowing you to store a reference or perform additional operations immediately after creation.
-- `namespaceURI`: (String) Specifies the XML namespace URI when creating namespaced elements, such as SVG or MathML. Usually, this property is not required because it is automatically determined by the tag name.
-- `shadowRootMode`: (String) Defines the mode of the element’s shadow DOM, determining its accessibility and encapsulation. Options include 'open' (the shadow root is accessible via the element’s shadowRoot property) and 'closed' (the shadow root is hidden, preventing external access).
+
+Extra configuration for edge cases:
+
+- `shadowRootMode`: (String) Defines the mode of the element’s [shadow DOM](https://developer.mozilla.org/docs/Web/API/Web_components/Using_shadow_DOM), determining its accessibility and encapsulation. Options include 'open' (the shadow root is accessible via the element’s shadowRoot property) and 'closed' (the shadow root is hidden, preventing external access).
+- `adoptedStyleSheets`: (Array) Specifies one or more [CSSStyleSheet](https://developer.mozilla.org/docs/Web/API/CSSStyleSheet) objects that can be associated with the element’s shadow DOM. This enables the use of constructable stylesheets for efficient, reusable styling.
+- `namespaceURI`: (String) Specifies the XML namespace URI when [creating namespaced elements](https://developer.mozilla.org/docs/Web/API/Document/createElementNS), such as SVG or MathML. Usually, this property is not required because it is automatically determined by the tag name.
 
 You can also include any other parameters specific to particular elements. This flexible approach supports both static configurations and dynamic, reactive user interfaces.
 
