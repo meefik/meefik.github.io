@@ -15,6 +15,8 @@ footer: false
     </div>
   </div>
 
+  {% if site.data.experiences.size > 0 %}
+
   <h3>EXPERIENCE</h3>
 
   {% for experience in site.data.experiences %}
@@ -34,11 +36,16 @@ footer: false
     </tr>
     {% if experience.description %}
     <tr>
-      <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">{{ experience.description }}</td>
+      <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">{{
+        experience.description }}</td>
     </tr>
     {% endif %}
   </table>
   {% endfor %}
+
+  {% endif %}
+
+  {% if site.data.educations.size > 0 %}
 
   <h3>EDUCATION</h3>
 
@@ -53,4 +60,6 @@ footer: false
     </tr>
   </table>
   {% endfor %}
+
+  {% endif %}
 </div>
