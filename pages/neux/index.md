@@ -21,8 +21,8 @@ footer: false
 
 **Just try it** in the playground:
 
-<iframe title="NEUX: To-Do App" scrolling="no" loading="lazy" style="height:400px; width: 100%;" src="https://v42.livecodes.io/?x=id/d7tcxpwp2dd&lite=true">
-  See the project <a href="https://v42.livecodes.io/?x=id/d7tcxpwp2dd" target="_blank">NEUX: To-Do App</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
+<iframe title="NEUX: To-Do App" scrolling="no" loading="lazy" style="height:400px; width: 100%;" src="https://v46.livecodes.io/?x=id/cr837ekduhp&lite=true">
+  See the project <a href="https://v46.livecodes.io/?x=id/cr837ekduhp" target="_blank">NEUX: To-Do App</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
 </iframe>
 
 ## Content
@@ -914,11 +914,11 @@ mount(el, document.body);
 
 Try it in the playground:
 
-- [To-Do App](https://livecodes.io/?x=id/v5zg2ajb4p3)
-- [15 Puzzle](https://livecodes.io/?x=id/ye2c7gd7dpw)
-- [Tic-Tac-Toe](https://livecodes.io/?x=id/bg3vy6gyubq)
-- [SVG Clock](https://livecodes.io/?x=id/fre8jw79dnc)
-- [Sketch](https://livecodes.io/?x=id/6xu6zkckiad)
-- [File Tree](https://livecodes.io/?x=id/c77bi6y5nvh)
+- [To-Do App](https://livecodes.io/?x=id/a9bjhc39pqb)
+- [15 Puzzle](https://livecodes.io/?x=id/rczueuxxxus)
+- [Tic-Tac-Toe](https://livecodes.io/?x=id/p5296dy5syc)
+- [SVG Clock](https://livecodes.io/?x=id/w7yya5nzch4)
+- [Sketch](https://livecodes.io/?x=id/tamthnz796p)
+- [File Tree](https://livecodes.io/?x=id/vcziud93f55)
 
 <p><iframe src="https://ghbtns.com/github-btn.html?user=meefik&repo=neux&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe></p>
