@@ -769,52 +769,54 @@ mount(el, document.body);
 
 ## Creating your own Web Component
 
-You can create your own components using [one of the libraries](https://open-wc.org/guides/community/base-libraries/), for example [Lit](https://lit.dev). But you can also create your own Web Components using NEUX.
+You can create your own components using [one of the libraries](https://open-wc.org/guides/community/base-libraries/). However, you can also use NEUX to create your own Web Components.
 
-An example of a web component definition:
+Here is an example of a web component definition:
 
 ```js
+import { signal, render, mount } from 'neux';
+
 // Create a custom web component
 class Counter extends HTMLElement {
+  // List of attributes to observe for changes
   static observedAttributes = ['value'];
-
+  // The component constructor override
   constructor() {
     super();
     const context = {};
-    this.state = signal.call(context, this.data());
-    const el = render.call(context, this.template());
-    const target = this.attachShadow({ mode: 'open' });
-    mount(el, target);
+    this.attrs = signal.call(context, {});
+    this.attrs.$$on(
+      this.constructor.observedAttributes,
+      (newv, oldv, prop) => this.setAttribute(prop, newv),
+    );
+    const el = render.call(context, this.render());
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    mount(el, shadowRoot);
   }
-
+  // Called when an observed attribute is changed
   attributeChangedCallback(name, oldv, newv) {
-    this.state[name] = newv;
+    this.attrs[name] = newv;
   }
-
-  data() {
-    return {
-      value: '',
-      $: (newv, oldv, prop) => this.setAttribute(prop, newv),
-    };
-  }
-
-  template() {
-    return {
-      children: () => [{
+  // Describe the object to render the component
+  render() {
+    return [{
+      tag: 'input',
+      type: 'number',
+      value: () => this.attrs.$value,
+      on: {
+        change: (e) => {
+          this.attrs.value = e.target.value;
+        },
+      },
+    }, {
+      children: [{
         tag: 'slot',
         name: 'label',
-        textContent: () => `Count: ${this.state.$value} `,
       }, {
-        tag: 'input',
-        type: 'number',
-        value: () => this.state.$value,
-        on: {
-          change: (e) => {
-            this.state.value = e.target.value;
-          },
-        },
-      }],
-    };
+        tag: 'span',
+        textContent: () => this.attrs.$value,
+      }]
+    }];
   }
 }
 // Define custom element
@@ -824,24 +826,15 @@ customElements.define('ne-counter', Counter);
 Use this web component:
 
 ```js
-const state = signal({
-  count: 1,
-});
-
 const el = render({
   tag: 'ne-counter',
   attributes: {
-    value: () => state.$count,
-  },
-  on: {
-    changed: (e) => {
-      state.count = parseInt(e.detail.newValue);
-    },
+    value: 5,
   },
   children: [{
     tag: 'span',
     slot: 'label',
-    textContent: () => state.$count,
+    textContent: 'Count: ',
   }],
 });
 
@@ -863,7 +856,7 @@ const state = signal({
   ],
   // List of checked items
   filtered: (obj) => {
-    return obj.$list.filter(item => !item.checked);
+    return obj.list.$$.filter(item => !item.checked);
   },
 });
 // Create HTML elements
@@ -903,7 +896,7 @@ const el = render({
   }, {
     tag: 'ul',
     children: () => {
-      // Redraw the list if any child items is added, replaced or removed.
+      // Redraw the list partially if any child items are added, replaced, or removed.
       // Any updates inside nested objects are ignored.
       return state.list.$map((item) => {
         return {
