@@ -325,18 +325,32 @@ const state = signal({
     { text: 'Item 2' },
   ],
 });
+// Item config
+const Item = (item) => {
+  return {
+    tag: 'li',
+    // Track changes the specific field
+    textContent: () => item.$text,
+  };
+};
 // Create an HTML element
 const el = render({
   tag: 'ul',
   children: () => {
+    // Track changes in the list array, 
+    // such as adding, replacing or deleting items, 
+    // and only update the changed elements
     return state.list.$map((item) => {
       return {
-        tag: 'li',
-        textContent: () => item.$text,
+        tag: Item(item),
+        // Override the item parameters
+        style: { color: 'red' }
       };
     });
   },
 });
+// Mount to DOM
+mount(el, document.body);
 // Add item to the array
 state.list.push({ text: 'Item 3' });
 ```
@@ -344,13 +358,6 @@ state.list.push({ text: 'Item 3' });
 You can use the `$$` sign to subscribe to any changes in this object, array, or nested objects. Alternatively, use the `$` sign to track changes in the object or array without tracking changes in nested objects:
 
 ```js
-// Create a reactive state with an array
-const state = signal({
-  list: [
-    { text: 'Item 1' },
-    { text: 'Item 2' },
-  ],
-});
 // Create an HTML element
 const el = render({
   tag: 'ul',
@@ -400,6 +407,7 @@ const fragment = render([
 // Mount to DOM
 mount(fragment, document.body);
 ```
+
 ## Localization
 
 Localization is used to display the application interface in different languages.You can use localized number and date formatting with [Intl.NumberFormat](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) and [Intl.DateTimeFormat](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat).
