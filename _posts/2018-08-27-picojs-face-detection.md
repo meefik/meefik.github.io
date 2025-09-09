@@ -20,9 +20,11 @@ The revision included:
 - parallel execution in the Web-worker;
 - code on ES6.
 
+[![DEMO](https://img.youtube.com/vi/u38oQQMu0WU/0.jpg)](https://www.youtube.com/watch?v=u38oQQMu0WU)
+
 <!--more-->
 
-JS library code: <https://github.com/meefik/picojs>
+JS library code: <https://github.com/meefik/picoface>
 
 ### Using the JS library
 
@@ -33,9 +35,9 @@ All parameters of the library are set in the constructor, here is their descript
 | shiftfactor | 0.1          | Sliding window movement step as a percentage (10%) of the image size                  |
 | scalefactor | 1.1          | Sliding window resizing step as a percentage (10%) of image size                      |
 | initialsize | 0.1          | Initial size of the sliding window as a percentage (10%) of the image size            |
-| rotation    | 0            | Array of rotation angles to be searched (0 to 360 in 1 degree increments)             |
 | threshold   | 0.2          | Percentage (20%) of intersections of found candidates for grouping them into one area |
 | memory      | 1            | Number of images (frames) in memory to improve detection quality                      |
+| rotation    | [0]          | Array of rotation angles to be searched (0 to 360 in 1 degree increments)             |
 
 The output is an array of areas where the algorithm assumes there are faces. Here is a description of this area:
 
@@ -57,8 +59,8 @@ fetch('./cascade.dat')
     return response.arrayBuffer();
   })
   .then(function(cascade) {
-    // create PICO detector with options
-    return PICO(cascade, {
+    // create the face detector with options
+    return PicoFace(cascade, {
       shiftfactor: 0.1, // move the detection window by 10% of its size
       scalefactor: 1.1, // resize the detection window by 10% when moving to the higher scale
       initialsize: 0.1, // minimum size of a face (10% of image area)
@@ -84,8 +86,4 @@ npm install
 npm run dev
 ```
 
-Once the server is up and running, the demo page will be available at <http://localhost:8000>
-
-And a small video:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9WiGC08_ZFY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Once the server is up and running, the demo page will be available at <http://localhost:8000/demo/>

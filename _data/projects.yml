@@ -29,8 +29,8 @@
 - title: "PICO face detector"
   year: 2018
   stack: ["JavaScript"]
-  homepage: "https://github.com/meefik/picojs"
-  description: "A library for detecting faces using the PICO algorithm with the face rotation invariant implementation."
+  homepage: "https://github.com/meefik/picoface"
+  description: "A JS library for detecting faces using the PICO algorithm with the face rotation invariant implementation."
   poster: "/assets/images/pico-js.png"
 
 - title: "DTMF tone generator and receiver"
