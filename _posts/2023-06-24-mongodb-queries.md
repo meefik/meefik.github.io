@@ -264,3 +264,5 @@ const query = convert('x > 10');
 console.log(query);
 // {"x":{"$gt":10}}
 ```
+
+You can use this as the [humanquery-mongo](https://www.npmjs.com/package/humanquery-mongo) NPM module or find [the source code on GitHub](https://github.com/meefik/humanquery-mongo).
