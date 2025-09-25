@@ -26,20 +26,25 @@ However, the installation did not finish correctly. Next, I will show you how to
 To fix error you need to do the following steps:
 
 **1.** Create the correct directory for the kernel headers:
+
 ```
 sudo mkdir -p /usr/src/ofa_kernel/x86_64/
 sudo ln -s /usr/src/linux-headers-$(uname -r) /usr/src/ofa_kernel/x86_64/$(uname -r)
 ```
 
+I suppose this step isn't required for the latest updates.
+
 **2.** Change the current kernel version for AMDGPU driver:
+
 ```
 uname -r | sudo tee /var/tmp/amdgpu-dkms-kernels
 ```
 
+Note that this file allows you to specify multiple kernel versions.
+
 **3.** Build the AMDGPU driver for the current kernel:
 ```
-export SRCARCH=x86
-sudo dpkg-reconfigure amdgpu-dkms
+sudo SRCARCH=x86 dpkg-reconfigure amdgpu-dkms
 ```
 
 Note that the `SRCARCH=x86` variable fixes [the issue](https://github.com/ROCm/ROCm/issues/5111).
