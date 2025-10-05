@@ -1,3 +1,10 @@
+- title: "P2P WebRTC conferencing library"
+  year: 2025
+  stack: ["JavaScript", "WebRTC"]
+  homepage: "https://github.com/meefik/p2p"
+  description: "A lightweight library for creating peer-to-peer WebRTC conferencing with custom signaling drivers."
+  poster: "/assets/images/p2p-demo.png"
+
 - title: "MongoDB human-readable queries"
   year: 2024
   stack: ["Node.js"]
