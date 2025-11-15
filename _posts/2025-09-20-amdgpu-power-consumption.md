@@ -12,6 +12,8 @@ If you have a PC running Linux with an AMD GPU, you can change your GPU performa
 
 On my system this change reduced the GPU power consumption from 30W to 15W in idle state and completely eliminated fan spinning.
 
+<!--more-->
+
 You can check the current performance level with:
 ```sh
 cat /sys/class/drm/card0/device/power_dpm_force_performance_level
