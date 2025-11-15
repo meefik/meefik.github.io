@@ -2,7 +2,7 @@
 layout: post
 title: How to fix issues with the AMD GPU driver on Debian
 date: 2025-09-13 18:00:00 +0000
-categories: [amdgpu, debian]
+categories: [amdgpu, linux]
 comments: true
 ---
 
@@ -125,10 +125,3 @@ sudo dpkg-reconfigure amdgpu-dkms
 ```
 
 After completing these steps, reboot your system. The AMDGPU driver should now work correctly.
-
-In addition, you can change its performance profile. By default, the AMDGPU driver uses the "auto" performance profile. But if you don't need high performance, you can set it to "low" and reduce power consumption, heat generation, and fan noise. To do this for a low performance profile:
-```sh
-cat << EOF | sudo tee /etc/udev/rules.d/30-amdgpu-low-power.rules
-SUBSYSTEM=="pci", DRIVER=="amdgpu", ATTR{power_dpm_force_performance_level}="low"
-EOF
-```
