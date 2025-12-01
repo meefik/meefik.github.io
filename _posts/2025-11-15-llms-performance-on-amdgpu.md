@@ -8,7 +8,7 @@ comments: true
 
 Recently, I acquired an [AMD Radeon AI PRO R9700](https://www.amd.com/en/products/graphics/workstations/radeon-ai-pro/ai-9000-series/amd-radeon-ai-pro-r9700.html) to enhance my machine learning and development setup. It is a powerful GPU designed for professional workloads, including machine learning and AI applications. In this post, we explore the performance of large language models (LLMs) on the R9700, highlighting its capabilities and benchmarks.
 
-![chart](/assets/images/amdgpu-r9700-ollama-performance.png "AMD Radeon AI PRO R9700 performance on LLMs using Ollama")
+![chart](/assets/images/llm-performance.png "LLM performance using Ollama")
 
 <!--more-->
 
@@ -74,11 +74,11 @@ docker-compose up -d
 
 ## Benchmark results
 
-I used the following prompt for testing:
+I used the following prompt for testing text generation performance:
 
 `Tell me a story about a brave knight who saves a village from a dragon.`
 
-Here are the benchmark results for various models based on this prompt:
+Here are the benchmark results:
 
 | Model            | VRAM usage | Prompt          | Response       |
 |------------------|------------|-----------------|----------------|
@@ -97,6 +97,8 @@ For vision models that understand images, I used this image with the following p
 
 ![image-example](/assets/images/meefik-at-work.png)
 
+Here are the benchmark results:
+
 | Model            | VRAM usage | Prompt          | Response       |
 |------------------|------------|-----------------|----------------|
 | moondream:1.8b   | 3 GB       | 2156 tokens/sec | 188 tokens/sec |
@@ -107,6 +109,34 @@ For vision models that understand images, I used this image with the following p
 | gemma3:27b       | 19 GB      | 171 tokens/sec  | 27 tokens/sec  |
 | qwen3-vl:32b     | 26 GB      | 132 tokens/sec  | 24 tokens/sec  |
 | llava:34b        | 22 GB      | 129 tokens/sec  | 24 tokens/sec  |
+
+For comparison, here are the benchmark results for the same models from the MacBook Pro M4 Max (36 GB RAM, 14 cores).
+
+Here are the benchmark results for models with text generation only:
+
+| Model            | Prompt          | Response       |
+|------------------|-----------------|----------------|
+| mistral:7b       | 208 tokens/sec  | 66 tokens/sec  |
+| llama3.1:8b      | 219 tokens/sec  | 61 tokens/sec  |
+| phi4:14b         | 91 tokens/sec   | 32 tokens/sec  |
+| gpt-oss:20b      | 62 tokens/sec   | 65 tokens/sec  |
+| gemma3:27b       | 11 tokens/sec   | 15 tokens/sec  |
+| qwen3-coder:30b  | 88 tokens/sec   | 63 tokens/sec  |
+| qwen3:32b        | 57 tokens/sec   | 11 tokens/sec  |
+| deepseek-r1:32b  | 48 tokens/sec   | 12 tokens/sec  |
+
+For vision models that understand images, here are the results:
+
+| Model            | Prompt          | Response       |
+|------------------|-----------------|----------------|
+| moondream:1.8b   | 1706 tokens/sec | 180 tokens/sec |
+| gemma3:4b        | 995 tokens/sec  | 81 tokens/sec  |
+| gemma3n:e4b      | 39 tokens/sec   | 46 tokens/sec  |
+| llava:7b         | 640 tokens/sec  | 65 tokens/sec  |
+| qwen3-vl:8b      | 246 tokens/sec  | 56 tokens/sec  |
+| gemma3:27b       | 183 tokens/sec  | 18 tokens/sec  |
+| qwen3-vl:32b     | 76 tokens/sec   | 15 tokens/sec  |
+| llava:34b        | 143 tokens/sec  | 16 tokens/sec  |
 
 ## Conclusion
 
