@@ -1,16 +1,8 @@
-@use "sass:color";
-@use "base/theme";
-@use "base/typography";
-@use "base/layout";
-
 .content {
   a {
     @extend .force-wrap;
 
-    &,
-    &:visited,
-    &:active,
-    &:hover {
+    &, &:visited, &:active, &:hover {
       text-decoration: none;
     }
   }
@@ -23,9 +15,8 @@
       a {
         color: inherit;
       }
-
       a:hover {
-        color: theme.$link-color-hover;
+        color: $link-color-hover;
       }
 
       h1 {
@@ -36,7 +27,7 @@
 
       p {
         font-size: 0.9em;
-        color: theme.$text-color-light;
+        color: $text-color-light;
         margin: 0;
 
         &.meta {
@@ -53,18 +44,19 @@
     }
 
     a[rel=full-article] {
-      background: color.adjust(theme.$border-color, $lightness: -5%);
+      background: darken($border-color, 5);
       display: inline-block;
       padding: 0.4em 0.8em;
       margin-right: 0.5em;
       text-decoration: none;
-      color: color.mix(theme.$text-color, theme.$text-color-light);
+      color: mix($text-color, $text-color-light);
+
       @extend .serif;
 
       &:hover {
-        background: theme.$link-color-hover;
+        background: $link-color-hover;
         text-shadow: none;
-        color: theme.$border-color;
+        color: $border-color;
       }
     }
   }
@@ -72,7 +64,7 @@
   >article[role="article"] {
     >header>h1 {
       padding-bottom: 0.3em;
-      background: theme.$img-border bottom left repeat-x;
+      background: $img-border bottom left repeat-x;
     }
 
     >footer {
@@ -89,34 +81,32 @@
 
         a {
           text-align: center;
-          color: theme.$text-color-light;
+          color: $text-color-light;
 
           &:hover {
-            color: theme.$link-color-hover;
+            color: $link-color-hover;
           }
         }
       }
     }
   }
 
-  article+article {
-    background: theme.$img-border top left repeat-x;
+  article + article {
+    background: $img-border top left repeat-x;
   }
 
-  img,
-  video {
+  img, video {
     @extend .flex-content;
     @extend .basic-alignment;
 
-    border: 1px solid color.adjust(theme.$border-color, $lightness: -20%);
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 0.25em;
+    border: 1px solid darken($border-color, 20);
+    box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
   }
 
   article>iframe {
     max-width: 100%;
-    border: 1px solid color.adjust(theme.$border-color, $lightness: -20%);
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid darken($border-color, 20);
+    box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
     margin-bottom: 1em;
   }
 
@@ -125,22 +115,21 @@
     width: 100%;
     font-size: 0.9em;
     margin: 15px 0;
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
 
     th {
       font-weight: bold;
       white-space: nowrap;
     }
 
-    th,
-    td {
+    th, td {
       text-align: left;
       padding: 8px;
-      border: 1px solid color.adjust(theme.$border-color, $lightness: -20%);
+      border: 1px solid darken($border-color, 20);
     }
 
     thead {
-      background-color: theme.$border-color;
+      background-color: $border-color;
     }
   }
 
@@ -156,19 +145,16 @@
     position: relative;
     margin-top: 4em;
     margin-bottom: 0;
-
     padding: {
       top: 1.5em;
       bottom: 1.5em;
-    }
-
-    ;
-    border-top: solid 1px theme.$border-color;
-    border-bottom: solid 1px theme.$border-color;
+    };
+    border-top: solid 1px $border-color;
+    border-bottom: solid 1px $border-color;
 
     a {
       text-decoration: none;
-      color: theme.$text-color-light;
+      color: $text-color-light;
 
       &.prev {
         position: absolute;
@@ -181,13 +167,11 @@
       }
 
       &:hover {
-        color: theme.$link-color-hover;
+        color: $link-color-hover;
       }
 
       &[href*=archive] {
-
-        &:before,
-        &:after {
+        &:before, &:after {
           content: "—";
           padding: 0 0.3em;
         }
@@ -196,11 +180,7 @@
   }
 
   .no-border {
-
-    img,
-    video,
-    iframe,
-    table {
+    img, video, iframe, table {
       border: none;
       box-shadow: none;
     }

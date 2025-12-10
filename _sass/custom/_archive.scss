@@ -1,15 +1,12 @@
-@use "base/theme";
-@use "base/typography";
-
 .archive {
   >article {
-    color: theme.$text-color-light;
+    color: $text-color-light;
     margin-left: 0;
     padding: 1em 0 1em;
     position: relative;
 
     h1 {
-      color: theme.$text-color;
+      color: $text-color;
       margin-bottom: 0.3em;
       margin-top: 0;
       font-size: 1.5em;
@@ -20,15 +17,14 @@
         display: inline-block;
 
         &:hover {
-          color: theme.$link-color-hover;
+          color: $link-color-hover;
         }
       }
     }
   }
 
-  article+article,
-  h2+article {
-    background: theme.$img-border bottom left repeat-x;
+  article + article, h2 + article {
+    background: $img-border bottom left repeat-x;
   }
 
   >h2 {
@@ -36,26 +32,24 @@
     float: left;
     background: none;
     font-weight: normal;
-    color: theme.$text-color-light;
+    color: $text-color-light;
   }
 
-  a.category,
-  time {
+  a.category, time {
     @extend .sans;
-    color: theme.$text-color-light;
+    color: $text-color-light;
     text-transform: uppercase;
   }
 
   a:hover {
-    color: theme.$link-color-hover;
+    color: $link-color-hover;
   }
 
   time {
     font-size: 0.9em;
     line-height: 1.2em;
 
-    .month,
-    .day {
+    .month, .day {
       display: inline-block;
     }
 

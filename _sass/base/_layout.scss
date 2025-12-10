@@ -24,11 +24,7 @@ body {
   position: relative;
   margin: 0 auto;
 
-  >header,
-  >nav,
-  >footer,
-  .content>article,
-  .content>section {
+  > header, > nav, > footer, .content > article, .content > section {
     @extend .group;
 
     margin-left: $pad-min;
@@ -72,7 +68,7 @@ body {
     }
   }
 
-  >header {
+  > header {
     text-align: center;
     font-size: $header-font-size;
     padding-top: $header-padding-top;
@@ -101,8 +97,7 @@ body {
     margin: 0 auto 1.5em;
   }
 
-  &.left,
-  &.right {
+  &.left, &.right {
     margin-bottom: 0.8em;
   }
 }
@@ -113,7 +108,7 @@ article {
 }
 
 @media only screen and (min-width: 550px) {
-  body>header {
+  body > header {
     font-size: $header-font-size;
   }
 
@@ -128,7 +123,7 @@ article {
     -webkit-text-size-adjust: auto;
   }
 
-  body>header {
+  body > header {
     font-size: $header-font-size * 1.2;
   }
 
@@ -136,8 +131,7 @@ article {
     overflow: visible;
     position: relative;
 
-    >div,
-    >article {
+    > div, > article {
       text-align: justify;
     }
 
@@ -149,7 +143,7 @@ article {
 }
 
 @media only screen and (min-width: 992px) {
-  body>header {
+  body > header {
     font-size: $header-font-size * 1.3;
   }
 

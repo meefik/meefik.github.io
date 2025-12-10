@@ -1,12 +1,9 @@
-@use "base/theme";
-@use "base/typography";
-
-body>footer {
+body > footer {
   @extend .sans;
 
   text-align: center;
   font-size: 0.8em;
-  color: theme.$title-color;
+  color: $title-color;
   background-color: #FFF;
   position: relative;
   padding-top: 1em;

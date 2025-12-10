@@ -1,5 +1,3 @@
-@use "sass:color";
-
 // Borders
 $img-border: url("/assets/images/dotted-border.png");
 $border-color: #f2f2f2 !default;
@@ -7,17 +5,18 @@ $highlight-bg: #f8f8f8 !default;
 
 // Main Link Colors
 $link-color: #195ea2 !default;
-$link-color-hover: color.adjust($link-color, $lightness: 10%, $saturation: 25%) !default;
+$link-color-hover: adjust-color($link-color, $lightness: 10%, $saturation: 25%) !default;
 $link-color-visited: $link-color !default;
-$link-color-active: color.adjust($link-color-hover, $lightness: -15%) !default;
+$link-color-active: adjust-color($link-color-hover, $lightness: -15%) !default;
 
 // Site header
 $title-color: #777 !default;
-$subtitle-color: color.adjust($title-color, $lightness: 25%) !default;
+$subtitle-color: lighten($title-color, 25) !default;
 
 // Text colors
 $text-color: #222 !default;
-$text-color-light: color.adjust($text-color, $lightness: 60%) !default;
+$text-color-light: lighten($text-color, 60) !default;
+
 /* Core theme application */
 
 html {
