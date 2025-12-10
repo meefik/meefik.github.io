@@ -2,14 +2,17 @@
   .desc {
     display: flex;
     margin-top: 2.5em;
+
     >img {
       display: block;
       width: 100px;
       height: 115px;
     }
+
     >div {
       flex: 1;
       padding: 0 2em;
+
       h3 {
         margin: 0.5em 0;
       }

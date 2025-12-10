@@ -11,11 +11,12 @@ sudo apt install ruby-dev bundler
 2. Install gems:
 
 ```sh
-bundler install
+bundle config set --local path .bundle/gems
+bundle install
 ```
 
 3. Start jekyll server
 
 ```sh
-jekyll s
+bundle exec jekyll s
 ```

@@ -1,10 +1,15 @@
-body > header {
+@use "base/theme";
+@use "base/typography";
+
+body>header {
   h1 {
     display: inline-block;
     margin: 0;
 
-    a, a:visited, a:hover {
-      color: $title-color;
+    a,
+    a:visited,
+    a:hover {
+      color: theme.$title-color;
       text-decoration: none;
     }
   }
@@ -14,7 +19,7 @@ body > header {
 
     margin: 0.2em 0 0;
     font-size: 1em;
-    color: $subtitle-color;
+    color: theme.$subtitle-color;
     font-weight: normal;
   }
 }

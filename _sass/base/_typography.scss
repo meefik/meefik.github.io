@@ -1,3 +1,5 @@
+@use "base/theme";
+
 $sans: Ubuntu, "Open Sans", "Helvetica Neue", Arial, sans-serif !default;
 $serif: Ubuntu, Georgia, Times, "Times New Roman", serif !default;
 $mono: "Ubuntu Mono", Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace !default;
@@ -22,7 +24,7 @@ $header-subtitle-font-family: $serif !default;
   font-family: $mono;
 }
 
-body > header h1 {
+body>header h1 {
   @extend .heading;
 
   font-family: $header-title-font-family;
@@ -30,7 +32,7 @@ body > header h1 {
   margin-bottom: 0.6667em;
 }
 
-body > header h2 {
+body>header h2 {
   font-family: $header-subtitle-font-family;
 }
 
@@ -38,7 +40,7 @@ body {
   @extend .serif;
 
   line-height: 1.5em;
-  color: $text-color;
+  color: theme.$text-color;
 }
 
 h1 {
@@ -57,7 +59,12 @@ h1 {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @extend .heading;
 
   text-rendering: optimizelegibility;
@@ -65,27 +72,41 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
-h2, section h1 {
+h2,
+section h1 {
   font-size: 1.5em;
 }
 
-h3, section h2, section section h1 {
+h3,
+section h2,
+section section h1 {
   font-size: 1.3em;
 }
 
-h4, section h3, section section h2, section section section h1 {
+h4,
+section h3,
+section section h2,
+section section section h1 {
   font-size: 1em;
 }
 
-h5, section h4, section section h3 {
+h5,
+section h4,
+section section h3 {
   font-size: 0.9em;
 }
 
-h6, section h5, section section h4, section section section h3 {
+h6,
+section h5,
+section section h4,
+section section section h3 {
   font-size: 0.8em;
 }
 
-p, article blockquote, ul, ol {
+p,
+article blockquote,
+ul,
+ol {
   margin-bottom: 1em;
 }
 
@@ -117,14 +138,21 @@ ol {
   }
 }
 
-ul, ol {
-  &, ul, ol {
+ul,
+ol {
+
+  &,
+  ul,
+  ol {
     margin-left: 1.3em;
   }
 }
 
-ul, ol {
-  ul, ol {
+ul,
+ol {
+
+  ul,
+  ol {
     margin-bottom: 0em;
   }
 }
@@ -137,7 +165,8 @@ em {
   font-style: italic;
 }
 
-sup, sub {
+sup,
+sub {
   font-size: 0.75em;
   position: relative;
   display: inline-block;
@@ -165,24 +194,30 @@ q {
   }
 }
 
-em, dfn {
+em,
+dfn {
   font-style: italic;
 }
 
-strong, dfn {
+strong,
+dfn {
   font-weight: bold;
 }
 
-del, s {
+del,
+s {
   text-decoration: line-through;
 }
 
-abbr, acronym {
+abbr,
+acronym {
   border-bottom: 1px dotted;
   cursor: help;
 }
 
-pre, code, tt {
+pre,
+code,
+tt {
   @extend .mono;
 }
 
@@ -203,31 +238,33 @@ article blockquote {
 
   font-style: italic;
   position: relative;
-  font-size: 1.2em;
   line-height: 1.5em;
-  padding-left: 1em;
-  border-left: 4px solid rgba($text-color-light, 0.5);
+  padding-left: 0.5em;
+  border-left: 4px solid rgba(theme.$text-color-light, 0.5);
+  margin: 0;
 
   cite {
     font-style: italic;
 
     a {
-      color: $text-color-light !important;
+      color: theme.$text-color-light !important;
       word-wrap: break-word;
     }
 
     &:before {
       content: "—";
+
       padding: {
         right: 0.3em;
         left: 0.3em;
-      };
-      color: $text-color-light;
+      }
+
+      color: theme.$text-color-light;
     }
   }
 
   @media only screen and (min-width: 992px) {
-    padding-left: 1.5em;
+    padding-left: 1em;
     border-left-width: 4px;
   }
 }
