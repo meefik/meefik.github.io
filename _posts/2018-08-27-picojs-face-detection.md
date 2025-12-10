@@ -20,7 +20,7 @@ The revision included:
 - parallel execution in the Web-worker;
 - code on ES6.
 
-[![DEMO](https://img.youtube.com/vi/u38oQQMu0WU/0.jpg)](https://www.youtube.com/watch?v=u38oQQMu0WU)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/u38oQQMu0WU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <!--more-->
 

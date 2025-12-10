@@ -3,7 +3,7 @@
   stack: ["ComfyUI", "Ollama", "Kdenlive", "Audacity"]
   homepage: "https://github.com/meefik/humanless-podcast"
   description: "A project demonstrating the creation of a fully AI-generated video podcast using open-source tools and self-hosted models."
-  poster: "/assets/images/humanless-podcast.png"
+  poster: "/assets/images/podcast-title.png"
 
 
 - title: "P2P WebRTC conferencing library"

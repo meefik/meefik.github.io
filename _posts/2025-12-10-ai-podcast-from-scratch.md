@@ -1,7 +1,7 @@
 ---
 layout: post
 title: AI Podcast from scratch with open-source tools
-date: 2025-11-15 18:00:00 +0000
+date: 2025-12-10 18:00:00 +0000
 categories: [comfyui]
 comments: true
 ---
@@ -52,7 +52,7 @@ Here is the prompt I used to guide the model:
 
 Our podcast needs faces! While you could certainly use real photos and skip this step, I chose to generate entirely synthetic hosts to align with the "Humanless" theme.
 
-We used the **Qwen-Image** workflow to create realistic face images for our two hosts.
+I used the **Qwen-Image** workflow to create realistic face images for our two hosts.
 
 **Prompt for a man:** 
 
