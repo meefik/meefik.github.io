@@ -1,10 +1,13 @@
-body > nav {
+body>nav {
   position: relative;
   padding: 0.35em 5px;
+
   border: {
     top: 1px solid $border-color;
     bottom: 1px solid $border-color;
-  };
+  }
+
+  ;
 
   form {
     display: inline-block;
@@ -67,19 +70,21 @@ body > nav {
     text-shadow: $border-color 0 1px;
     text-decoration: none;
   }
+
   a:visited {
     color: darken($border-color, 50);
   }
+
   a:hover {
     color: $link-color-hover;
   }
 
-  li + li {
+  li+li {
     border-left: 0;
     margin-left: 0.8em;
   }
 
-  li.menu + li.menu > a {
+  li.menu+li.menu>a {
     padding-left: 0.8em;
     border-left: 1px solid $border-color;
   }
@@ -100,7 +105,9 @@ body > nav {
     width: 28px;
     height: 30px;
   }
+
   #toggle:hover {
+
     span,
     span:before,
     span:after {
@@ -114,9 +121,11 @@ body > nav {
     position: absolute;
     top: -9px;
   }
-  #toggle span:after{
+
+  #toggle span:after {
     top: 9px;
   }
+
   #toggle span {
     position: absolute;
     display: block;
@@ -140,9 +149,11 @@ body > nav {
   #toggle.on span {
     background-color: transparent;
   }
+
   #toggle.on span:before {
     transform: rotate(45deg) translate(5px, 5px);
   }
+
   #toggle.on span:after {
     transform: rotate(-45deg) translate(7px, -8px);
   }
@@ -152,7 +163,7 @@ body > nav {
     position: absolute;
     background-color: $border-color;
     min-width: 160px;
-    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     left: 0;
 
@@ -160,12 +171,13 @@ body > nav {
       display: block;
       padding: 4px 8px;
     }
+
     >a:hover {
-      background-color: rgba(0,0,0,0.1);
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
 
-  #toggle.on + .dropdown-content {
+  #toggle.on+.dropdown-content {
     display: block;
   }
 
@@ -173,6 +185,7 @@ body > nav {
     #toggle {
       display: none;
     }
+
     ul li.menu {
       display: inline;
     }

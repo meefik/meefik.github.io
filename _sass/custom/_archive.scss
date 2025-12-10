@@ -23,7 +23,8 @@
     }
   }
 
-  article + article, h2 + article {
+  article+article,
+  h2+article {
     background: $img-border bottom left repeat-x;
   }
 
@@ -35,7 +36,8 @@
     color: $text-color-light;
   }
 
-  a.category, time {
+  a.category,
+  time {
     @extend .sans;
     color: $text-color-light;
     text-transform: uppercase;
@@ -49,7 +51,8 @@
     font-size: 0.9em;
     line-height: 1.2em;
 
-    .month, .day {
+    .month,
+    .day {
       display: inline-block;
     }
 

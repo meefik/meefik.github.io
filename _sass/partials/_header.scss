@@ -1,9 +1,11 @@
-body > header {
+body>header {
   h1 {
     display: inline-block;
     margin: 0;
 
-    a, a:visited, a:hover {
+    a,
+    a:visited,
+    a:hover {
       color: $title-color;
       text-decoration: none;
     }
