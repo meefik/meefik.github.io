@@ -78,7 +78,15 @@ I used the following prompt for testing text generation performance:
 
 `Tell me a story about a brave knight who saves a village from a dragon.`
 
-Here are the benchmark results:
+For vision models that understand images, I used this image with the following prompt:
+
+`What is in this picture?`
+
+![image-example](/assets/images/meefik-at-work.png)
+
+### AMD Radeon AI PRO R9700 (32 GB VRAM, RDNA 4)
+
+Here are the benchmark results for models with text generation only:
 
 | Model            | VRAM usage | Prompt          | Response       |
 |------------------|------------|-----------------|----------------|
@@ -91,13 +99,7 @@ Here are the benchmark results:
 | qwen3:32b        | 21 GB      | 179 tokens/sec  | 23 tokens/sec  |
 | deepseek-r1:32b  | 22 GB      | 99 tokens/sec   | 23 tokens/sec  |
 
-For vision models that understand images, I used this image with the following prompt:
-
-`What is in this picture?`
-
-![image-example](/assets/images/meefik-at-work.png)
-
-Here are the benchmark results:
+For vision models that understand images, here are the results:
 
 | Model            | VRAM usage | Prompt          | Response       |
 |------------------|------------|-----------------|----------------|
@@ -110,7 +112,7 @@ Here are the benchmark results:
 | qwen3-vl:32b     | 26 GB      | 132 tokens/sec  | 24 tokens/sec  |
 | llava:34b        | 22 GB      | 129 tokens/sec  | 24 tokens/sec  |
 
-For comparison, here are the benchmark results for the same models from the MacBook Pro M4 Max (36 GB RAM, 14 cores).
+### MacBook Pro M4 Max (36 GB RAM, 14 cores)
 
 Here are the benchmark results for models with text generation only:
 
@@ -137,6 +139,36 @@ For vision models that understand images, here are the results:
 | gemma3:27b       | 183 tokens/sec  | 18 tokens/sec  |
 | qwen3-vl:32b     | 76 tokens/sec   | 15 tokens/sec  |
 | llava:34b        | 143 tokens/sec  | 16 tokens/sec  |
+
+### AMD Ryzen 9 5950X (16 cores/32 threads)
+
+This is the CPU-only performance without GPU acceleration.
+
+Here are the benchmark results for models with text generation only:
+
+| Model            | Prompt          | Response       |
+|------------------|-----------------|----------------|
+| mistral:7b       | 61 tokens/sec   | 8 tokens/sec   |
+| llama3.1:8b      | 62 tokens/sec   | 7 tokens/sec   |
+| phi4:14b         | 32 tokens/sec   | 4 tokens/sec   |
+| gpt-oss:20b      | 94 tokens/sec   | 8 tokens/sec   |
+| gemma3:27b       | 18 tokens/sec   | 2 tokens/sec   |
+| qwen3-coder:30b  | 79 tokens/sec   | 15 tokens/sec  |
+| qwen3:32b        | 15 tokens/sec   | 2 tokens/sec   |
+| deepseek-r1:32b  | 14 tokens/sec   | 2 tokens/sec   |
+
+For vision models that understand images, here are the results:
+
+| Model            | Prompt          | Response       |
+|------------------|-----------------|----------------|
+| moondream:1.8b   | 293 tokens/sec  | 27 tokens/sec  |
+| gemma3:4b        | 63 tokens/sec   | 7 tokens/sec   |
+| gemma3n:e4b      | 82 tokens/sec   | 10 tokens/sec  |
+| llava:7b         | 65 tokens/sec   | 8 tokens/sec   |
+| qwen3-vl:8b      | 26 tokens/sec   | 6 tokens/sec   |
+| gemma3:27b       | 18 tokens/sec   | 2 tokens/sec   |
+| qwen3-vl:32b     | 10 tokens/sec   | 1 tokens/sec   |
+| llava:34b        | 14 tokens/sec   | 2 tokens/sec   |
 
 ## Conclusion
 
