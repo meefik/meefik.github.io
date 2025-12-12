@@ -1,6 +1,8 @@
 ---
 layout: post
 title: BusyBox for Android
+description: BusyBox installer application for Android devices.
+image: /assets/images/busybox.png
 date: 2015-10-05 12:00:00 +0000
 categories: [android, busybox]
 comments: true

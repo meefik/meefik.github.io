@@ -1,6 +1,7 @@
 ---
 layout: post
 title: How to fix issues with the AMD GPU driver on Debian
+description: A guide to resolving common installation and runtime issues with the AMDGPU driver on Debian systems.
 date: 2025-09-13 18:00:00 +0000
 categories: [amdgpu, linux]
 comments: true

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Launch Bodhi Linux on Android
+description: Guide to launching Bodhi Linux distribution on Android using Linux Deploy.
+image: /assets/images/linuxdeploy-bodhilinux-e17.png
 date: 2013-01-02 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Linux Deploy release 1.0
+description: Announcement of the initial release of Linux Deploy, an open source tool for installing GNU/Linux on Android devices.
+image: /assets/images/linuxdeploy-debian-lxde.png
 date: 2012-08-21 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

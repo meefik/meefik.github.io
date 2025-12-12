@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Building the Linux Kernel and Modules for Android
+description: Instructions for building the Linux kernel and modules for Android devices.
 date: 2015-02-05 12:00:00 +0000
 categories: [android, android]
 comments: true

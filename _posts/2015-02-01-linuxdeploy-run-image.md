@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Run any Linux distribution on Android from an image
+description: Instructions for running any Linux distribution on Android using Linux Deploy and a pre-made image.
 date: 2015-02-01 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

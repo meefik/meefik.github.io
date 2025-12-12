@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Human-readable MongoDB query syntax
+description: A simple query syntax and parser to convert human-readable queries into MongoDB query syntax.
 date: 2023-06-24 12:00:00 +0000
 categories: [javascript, mongodb]
 comments: true

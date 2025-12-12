@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Release Linux Deploy 2.0
+description: Overview of new features and improvements in the Linux Deploy 2.0 release.
+image: /assets/images/linuxdeploy-2.png
 date: 2016-10-14 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

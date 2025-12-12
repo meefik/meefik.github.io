@@ -1,6 +1,8 @@
 ---
 layout: post
 title: IntelliJ IDEA launched on Android
+description: Running IntelliJ IDEA on Android using Linux Deploy.
+image: /assets/images/linuxdeploy-idea.png
 date: 2012-10-03 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

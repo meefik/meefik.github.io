@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Reflections on JavaScript templates
+description: A review of various JavaScript templating approaches including imperative, JSX, HyperScript, and declarative methods.
 date: 2023-05-17 12:00:00 +0000
 categories: [javascript]
 comments: true

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Instructions for installing GNU/Linux via Linux Deploy
+description: Step-by-step guide to install a GNU/Linux distribution on Android using Linux Deploy.
 date: 2012-11-18 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

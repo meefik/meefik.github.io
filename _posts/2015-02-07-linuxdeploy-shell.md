@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Managing Linux Deploy from the command line
+description: How to use the linuxdeploy command line script to manage Linux Deploy environments.
 date: 2015-02-07 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Announcement of Linux Deploy 2.0
+description: Preparing for the release of Linux Deploy 2.0 with new features and modular architecture.
 date: 2015-12-08 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

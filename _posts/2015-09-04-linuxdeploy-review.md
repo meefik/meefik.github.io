@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A bit about Linux Deploy
+description: Statistics and features of the Linux Deploy project after three years of development.
 date: 2015-09-04 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

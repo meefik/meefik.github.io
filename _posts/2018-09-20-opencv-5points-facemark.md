@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Training 5 points model for OpenCV Facemark API
+description: A guide to training a lightweight 5-point facial landmark detection model for OpenCV's Facemark API, including code modifications and dataset preparation.
+image: /assets/images/facemark.gif
 date: 2018-09-20 12:00:00 +0000
 categories: [opencv]
 comments: true

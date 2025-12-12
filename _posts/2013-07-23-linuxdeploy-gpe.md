@@ -1,6 +1,8 @@
 ---
 layout: post
 title: GPE desktop environment setup
+description: Installing and configuring GPE desktop environment on Linux Deploy.
+image: /assets/images/linuxdeploy-debian-gpe.png
 date: 2013-07-23 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

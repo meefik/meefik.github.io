@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Publication in the Information and Control Systems
+description: An article about Linux Deploy published in the Information and Control Systems journal.
+image: /assets/images/linuxdeploy-chroot.png
 date: 2013-11-30 12:00:00 +0000
 categories: [linuxdeploy]
 comments: true

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Create and verify JWT with pure JavaScript
+description: Implementing JSON Web Token (JWT) creation and verification using pure JavaScript and the Web Crypto API.
 date: 2024-07-14 12:00:00 +0000
 categories: [javascript, jwt]
 comments: true

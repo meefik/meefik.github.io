@@ -1,6 +1,8 @@
 ---
 layout: post
 title: WebSocket implementation for UNIX shell
+description: Cross-platform WebSocket server implementation in Unix shell using BusyBox.
+image: /assets/images/websocket-sh.png
 date: 2016-08-04 12:00:00 +0000
 categories: [bash]
 comments: true

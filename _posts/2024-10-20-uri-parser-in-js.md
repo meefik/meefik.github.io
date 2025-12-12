@@ -1,6 +1,7 @@
 ---
 layout: post
 title: URI parser in JavaScript
+description: A lightweight JavaScript URI parser that breaks down connection strings into their components.
 date: 2024-10-20 12:00:00 +0000
 categories: [javascript]
 comments: true

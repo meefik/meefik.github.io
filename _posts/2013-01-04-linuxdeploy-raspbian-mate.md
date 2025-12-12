@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Launch Raspbian MATE on Android
+description: Running the Raspbian MATE distribution on Android using Linux Deploy.
 date: 2013-01-04 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

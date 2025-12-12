@@ -1,6 +1,8 @@
 ---
 layout: post
 title: AI Podcast from scratch with open-source tools
+description: Creating a full AI-generated podcast using only open-source models and tools on a local machine.
+image: /assets/images/podcast-title.png
 date: 2025-12-10 18:00:00 +0000
 categories: [comfyui]
 comments: true

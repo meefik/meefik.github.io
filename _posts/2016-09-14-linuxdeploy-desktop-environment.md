@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Desktop environment in Linux Deploy 2.0
+description: Guide to installing and configuring various desktop environments in Linux Deploy 2.0.
+image: /assets/images/linuxdeploy-debian-lxde.png
 date: 2016-09-14 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

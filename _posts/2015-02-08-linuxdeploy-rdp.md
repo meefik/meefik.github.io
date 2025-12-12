@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Installing and configuring the RDP server
+description: Guide to setting up Remote Desktop Protocol (RDP) access on Linux Deploy.
 date: 2015-02-08 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

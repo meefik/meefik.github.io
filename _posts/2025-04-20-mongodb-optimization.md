@@ -1,6 +1,8 @@
 ---
 layout: post
 title: The story of a (not so) necessary optimization
+description: Exploring optimizations in MongoDB Change Streams and Tailable Cursors to improve performance in a Node.js Cluster application.
+image: /assets/images/mongodb-nodejs-scale.jpg
 date: 2025-04-20 10:00:00 +0000
 categories: [mongodb]
 comments: true

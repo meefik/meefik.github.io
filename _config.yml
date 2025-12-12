@@ -5,9 +5,11 @@
 url: "https://meefik.github.io"
 title: "Meefik's Blog"
 subtitle: "Freedom and Open Source"
+description: "Thoughts, tutorials and ideas about programming, technology and open source."
 author: "Anton Skshidlevsky"
 author_url: "/about"
 email: "meefik [at] gmail.com"
+locale: "en_US"
 simple_search: "https://www.google.com/search"
 permalink: "/:year/:month/:day/:title/"
 markdown: "kramdown"
@@ -44,3 +46,6 @@ linkedin_user: meefik
 
 # Disqus Comments
 disqus_short_name: meefik
+
+webmaster_verifications:
+  google: dGJ6VfcCIScnbBvYNzNsa7jnV5AoX60mv6eoQIEIYk0

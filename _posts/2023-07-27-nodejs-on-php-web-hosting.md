@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Running Node.js server on PHP web hosting
+description: A guide to running a Node.js application on a typical PHP web hosting environment using a reverse proxy.
+image: /assets/images/nodejs-via-php.png
 date: 2023-07-27 12:00:00 +0000
 categories: [nodejs, php]
 comments: true

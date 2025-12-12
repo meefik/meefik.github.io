@@ -1,6 +1,8 @@
 ---
 layout: post
 title: LLM performance on AMD Radeon AI PRO R9700
+description: Benchmarking large language models (LLMs) on AMD's Radeon AI PRO R9700 GPU using Ollama and Open WebUI.
+image: /assets/images/llm-performance.png
 date: 2025-11-15 18:00:00 +0000
 categories: [amdgpu, llm]
 comments: true

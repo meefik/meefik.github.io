@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Launch Kali Linux on Android
+description: Running the Kali Linux distribution on Android using Linux Deploy.
+image: /assets/images/linuxdeploy-kali-xfce.png
 date: 2015-01-31 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

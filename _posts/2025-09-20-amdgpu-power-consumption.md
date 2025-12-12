@@ -1,6 +1,8 @@
 ---
 layout: post
 title: How to reduce AMD GPU power consumption on Linux
+description: A simple guide to lower AMD GPU power consumption by changing performance levels on Linux systems.
+image: /assets/images/amdgpu-power-level.png
 date: 2025-09-20 18:00:00 +0000
 categories: [amdgpu, linux]
 comments: true

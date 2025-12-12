@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Integrating Linux Deploy with Android
+description: How to integrate GNU/Linux containers with the Android environment using Linux Deploy.
 date: 2015-09-14 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: RPC as native JS functions
+description: Implementing Remote Procedure Call (RPC) as native JavaScript functions for seamless client-server communication.
 date: 2024-04-14 12:00:00 +0000
 categories: [javascript, rpc]
 comments: true

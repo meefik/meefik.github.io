@@ -1,8 +1,10 @@
 ---
 layout: post
 title: Video of Linux Deploy 2.0
+description: Demo of installing and running Debian on Android phone using Linux Deploy.
+image: /assets/images/linuxdeploy-debian-lxde.png
 date: 2017-02-25 12:00:00 +0000
-categories: [linuxdeploy]
+categories: [android, linuxdeploy]
 comments: true
 ---
 

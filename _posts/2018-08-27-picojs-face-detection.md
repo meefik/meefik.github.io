@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Face detection with rotation invariance
+description: An improved JavaScript implementation of the PICO face detection algorithm with rotation invariance and performance enhancements.
+image: /assets/images/pico-js.png
 date: 2018-08-27 12:00:00 +0000
 categories: [javascript]
 comments: true

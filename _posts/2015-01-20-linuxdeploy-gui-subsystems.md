@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Overview of Linux Deploy graphics subsystems
+description: Explanation of the different graphics subsystems supported by Linux Deploy.
 date: 2015-01-20 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

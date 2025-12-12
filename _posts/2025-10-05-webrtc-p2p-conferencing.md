@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Serverless WebRTC conferencing with E2E encryption
+description: Building a peer-to-peer WebRTC conferencing system with NATS for signaling and end-to-end encryption using the P2P library.
+image: /assets/images/p2p-demo.png
 date: 2025-10-05 18:00:00 +0000
 categories: [webrtc, javascript]
 comments: true

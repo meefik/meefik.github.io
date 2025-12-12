@@ -1,6 +1,7 @@
 ---
 layout: post
 title: IceWM desktop environment setup
+description: Installing and configuring IceWM desktop environment on Linux Deploy.
 date: 2012-10-17 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

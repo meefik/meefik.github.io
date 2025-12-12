@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Unity desktop environment setup
+description: Installing and configuring Unity desktop environment on Linux Deploy.
 date: 2012-12-26 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

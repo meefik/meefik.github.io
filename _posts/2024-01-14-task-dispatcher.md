@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Task dispatcher with queuing and concurrency
+description: A JavaScript Dispatcher class for managing asynchronous tasks with queue depth and concurrency limits.
 date: 2024-01-14 12:00:00 +0000
 categories: [javascript]
 comments: true

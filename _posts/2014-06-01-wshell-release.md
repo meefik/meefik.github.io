@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Web Terminal for Android
+description: Web-based terminal emulator for Android based on Shell In A Box.
+image: /assets/images/wshell.png
 date: 2014-06-01 12:00:00 +0000
 categories: [android, wshell]
 comments: true

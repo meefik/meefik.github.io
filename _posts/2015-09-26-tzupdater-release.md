@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Update time zones in Android
+description: Timezone Updater application for updating time zone data on Android devices.
+image: /assets/images/tzupdater.png
 date: 2015-09-26 12:00:00 +0000
 categories: [android, tzupdater]
 comments: true

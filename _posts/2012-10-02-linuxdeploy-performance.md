@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Linux Deploy performance test
+description: Performance test of Linux Deploy on different file systems and desktop environments.
 date: 2012-10-02 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

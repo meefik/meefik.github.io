@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Using Linux Deploy CLI on desktops
+description: Guide to using Linux Deploy CLI for deploying GNU/Linux containers on desktop Linux systems.
 date: 2016-01-26 12:00:00 +0000
 categories: [linuxdeploy]
 comments: true

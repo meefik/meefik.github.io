@@ -1,6 +1,8 @@
 ---
 layout: post
 title: DTMF generation and recognition in JavaScript
+description: A simple JavaScript library for generating and recognizing DTMF tones using the Web Audio API.
+image: /assets/images/dtmf-demo.png
 date: 2018-04-26 12:00:00 +0000
 categories: [javascript]
 comments: true

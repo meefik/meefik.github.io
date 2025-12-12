@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Launch BackTrack on Android
+description: Guide to launching BackTrack Linux distribution on Android using Linux Deploy.
 date: 2012-10-05 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

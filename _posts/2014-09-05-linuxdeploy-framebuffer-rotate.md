@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Screen rotation in framebuffer mode
+description: Solution for rotating the screen and touch input in framebuffer mode on Linux Deploy.
 date: 2014-09-05 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

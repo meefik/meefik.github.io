@@ -1,6 +1,7 @@
 ---
 layout: post
 title: OpenWRT with OpenVPN on TL-WR841N router
+description: A step-by-step guide to setting up OpenWRT with OpenVPN on a TL-WR841N router with only 4MB of ROM.
 date: 2018-04-21 12:00:00 +0000
 categories: [openwrt]
 comments: true

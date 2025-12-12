@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Installing GNU/Linux in RAM
+description: Using Linux Deploy to install GNU/Linux distributions in RAM for improved performance.
 date: 2015-05-21 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Aligning face images in JavaScript
+description: Implementing face detection and alignment in JavaScript for both NodeJS and browser environments using the Viola-Jones method.
 date: 2017-10-01 12:00:00 +0000
 categories: [javascript]
 comments: true

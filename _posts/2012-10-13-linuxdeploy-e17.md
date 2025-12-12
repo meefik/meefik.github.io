@@ -1,6 +1,7 @@
 ---
 layout: post
 title: E17 desktop environment setup
+description: Installing and configuring the Enlightenment E17 desktop environment on Linux Deploy.
 date: 2012-10-13 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

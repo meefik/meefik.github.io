@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Overview of Linux Deploy options
+description: The various settings and options available in Linux Deploy for installing GNU/Linux on Android.
 date: 2012-11-19 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

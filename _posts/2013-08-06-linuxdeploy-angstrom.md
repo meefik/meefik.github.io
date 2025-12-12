@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Launch Angstrom on Android
+description: Running the Ångström distribution on Android using Linux Deploy.
 date: 2013-08-06 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Java keystore password guessing
+description: A tool for recovering lost Java keystore passwords using distributed brute-force attack.
+image: /assets/images/keystorebreaker.png
 date: 2012-11-16 12:00:00 +0000
 categories: [java]
 comments: true

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Tailwind CSS v4 and the Shadow DOM
+description: Workarounds for using Tailwind CSS v4 with Shadow DOM components due to lack of @property support.
 date: 2025-03-19 10:00:00 +0000
 categories: [tailwindcss]
 comments: true

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Launch OpenPandora on Android
+description: Running the OpenPandora distribution on Android using Linux Deploy.
 date: 2013-08-25 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true

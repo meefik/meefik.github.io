@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Extending a Linux Deploy image
+description: Instructions on how to increase the size of a Linux Deploy image file.
 date: 2012-10-08 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true
