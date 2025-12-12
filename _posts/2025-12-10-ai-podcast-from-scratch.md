@@ -20,7 +20,7 @@ I will now walk you through the entire, eight-step process of creating a podcast
 
 ## The Core AI Studio: ComfyUI Setup
 
-For the bulk of the asset generation (images, video, and audio processing), we will rely on [ComfyUI](https://comfyui.com/).
+For the bulk of the asset generation (images, video, and audio processing), we will rely on [ComfyUI](https://www.comfy.org/).
 - **Installation:** Once you have [ComfyUI installed](https://github.com/comfyanonymous/ComfyUI), you'll need to open the workflows.
 - **Custom Nodes & Models:** When you load a workflow, use the [ComfyUI Manager](https://github.com/Comfy-Org/ComfyUI-Manager) to quickly install any missing custom nodes and download the required open-source models.
 
