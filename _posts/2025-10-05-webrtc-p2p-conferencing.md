@@ -12,9 +12,9 @@ Building reliable, privacy-respecting peer-to-peer conferencing can be surprisin
 
 This post describes the library's purpose, core design, how to use it, and a practical example of a [NATS](https://nats.io) signaling driver with end-to-end encryption using the browser [Web Crypto API](https://developer.mozilla.org/docs/Web/API/Web_Crypto_API).
 
-![demo](/assets/images/p2p-demo.png "P2P demo")
+![demo](/assets/images/p2p-demo.png "Peer-to-Peer Video Conference")
 
-Just try it out: [live demo](https://meefik.dev/p2p/) \| [source code](https://github.com/meefik/p2p)
+Just try it out: [live demo](https://talk.meefik.dev/) \| [source code](https://github.com/meefik/p2p)
 
 <!--more-->
 
