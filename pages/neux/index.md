@@ -2,6 +2,8 @@
 permalink: /neux
 layout: page
 title: NEUX library
+description: NEUX is a lightweight frontend library for building dynamic user interfaces using declarative element definitions and reactive signals.
+image: /assets/images/neux.png
 comments: false
 footer: false
 ---
