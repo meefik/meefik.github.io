@@ -16,20 +16,20 @@ footer: false
 - Intuitive two-way reactivity with direct DOM changes without virtual DOM.
 - Built-in localization support for dynamic language adaptation.
 - Easy integration with CSS modules, Tailwind CSS, and other styling solutions.
-- Minimal bundle size (~3kb gzipped) for fast loading.
+- Minimal bundle size (~4kb gzipped) for fast loading.
 - Open source and available under the MIT license.
 
 **Just try it** in the playground:
 
-<iframe title="NEUX: To-Do App" scrolling="no" loading="lazy" style="height:400px; width: 100%;" src="https://v46.livecodes.io/?x=id/5c5fsnreaan&lite=true">
-  See the project <a href="https://v46.livecodes.io/?x=id/5c5fsnreaan" target="_blank">NEUX: To-Do App</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
+<iframe title="NEUX: To-Do App" scrolling="no" loading="lazy" style="height:400px; width: 100%;" src="https://v47.livecodes.io/?x=id/jxghzemwwai&lite=true">
+  See the project <a href="https://v47.livecodes.io/?x=id/jxghzemwwai" target="_blank">NEUX: To-Do App</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
 </iframe>
 
 ## Content
 
 1. [Getting Started](#getting-started)
-2. [Signals](#signals)
-3. [Elements](#elements)
+2. [Rendering Elements](#rendering-elements)
+3. [Reactive Signals](#reactive-signals)
 4. [Localization](#localization)
 5. [Custom Context](#custom-context)
 6. [Simple Routing](#simple-routing)
@@ -109,7 +109,177 @@ const el = render(
 mount(el, document.body);
 ```
 
-## Signals
+## Rendering Elements
+
+NEUX provides a powerful way to declaratively define HTML elements using plain JavaScript objects. You can specify various properties such as tag name, attributes, styles, event listeners, children, and other native HTML properties. The `render()` function processes these definitions and creates the corresponding HTML elements. The created elements can then be mounted to the DOM using the `mount()` function.
+
+You should use the `render()` function to create an `Element` or `DocumentFragment` by declarative definition. Below is an overview of the most common parameters available for element configuration:
+
+- `tag`: (String or Element) Specifies the HTML tag name (e.g., "div", "span") or HTML markup to create or an existing Element to use directly.
+- `classList`: (Array of Strings or Function) Specifies one or more CSS classes to add to the element. It can be a static array or a function that returns an array based on dynamic context.
+- `attributes`: (Object or Function) Maps attribute names to their corresponding values. Use a static object for fixed attributes or a function for dynamic assignment.
+- `style`: (Object or Function) Sets inline CSS styles via an object where keys are CSS property names. This can also be defined as a function to handle dynamic styling.
+- `dataset`: (Object or Function) Assigns custom data attributes (data-*) through a static mapping or a function that returns the mapping.
+- `on`: (Object) Adds event listeners to the element. Each key represents an event name (e.g., "click", "change") with its corresponding handler function.
+- `children`: (String, Array of Elements, or Function) Defines the inner content of the element. This can be a direct string, an array of element definitions, or a function that returns child nodes for dynamic rendering.
+- `ref`: (Function) A callback that receives the created element, allowing you to store a reference or perform additional operations immediately after creation.
+
+Extra configuration for edge cases:
+
+- `shadowRootMode`: (String) Defines the mode of the element’s [shadow DOM](https://developer.mozilla.org/docs/Web/API/Web_components/Using_shadow_DOM), determining its accessibility and encapsulation. Options include 'open' (the shadow root is accessible via the element’s shadowRoot property) and 'closed' (the shadow root is hidden, preventing external access).
+- `adoptedStyleSheets`: (Array) Specifies one or more [CSSStyleSheet](https://developer.mozilla.org/docs/Web/API/CSSStyleSheet) objects that can be associated with the element’s shadow DOM. This enables the use of constructable stylesheets for efficient, reusable styling.
+- `namespaceURI`: (String) Specifies the XML namespace URI when [creating namespaced elements](https://developer.mozilla.org/docs/Web/API/Document/createElementNS), such as SVG or MathML. Usually, this property is not required because it is automatically determined by the tag name.
+
+You can also include any other parameters specific to particular elements. This flexible approach supports both static configurations and dynamic, reactive user interfaces.
+
+```js
+const el = render({
+  tag: 'ul',
+  classList: ['list'],
+  ref: ref => {
+    console.log(ref);
+  },
+  children: ['Item 1', 'Item 2']
+    .map((item, index) => {
+      return {
+        tag: 'li',
+        style: {
+          color: 'red',
+        },
+        attributes: {
+          title: item,
+        },
+        dataset: {
+          index,
+        },
+        textContent: item,
+      };
+    }),
+});
+```
+
+The `el` variable will contain an HTML element with the following markup:
+
+```html
+<ul class="list">
+  <li title="Item 1" data-index="0" style="color: red;">Item 1</li>
+  <li title="Item 2" data-index="1" style="color: red;">Item 2</li>
+</ul>
+```
+
+To attach any HTML element to the DOM you should use the `mount()` function. This function attaches elements to the DOM and sets up a [MutationObserver](https://developer.mozilla.org/docs/Web/API/MutationObserver) on the target to dispatch custom events on lifecycle changes. These events are emitted for each element in the target DOM tree.
+
+List of lifecycle events:
+
+- `mounted` is fired when the element is added to the DOM.
+- `updated` is fired when the element property is updated.
+- `changed` is fired when the element attribute is changed by external sources.
+- `removed` is fired when the element is removed from the DOM.
+
+The `removed` event is used internally to clean up signal bindings. You can prevent the default behavior for the target element and all its children by calling the `preventDefault()` method.
+
+Example of using lifecycle events:
+
+```js
+// Create an HTML element
+const el = render({
+  // Event listeners
+  on: {
+    mounted(e) {
+      console.log('Element mounted:', e);
+    },
+    changed(e) {
+      console.log('Element changed:', e);
+    },
+    removed(e) {
+      // you can prevent the default behavior
+      // e.preventDefault();
+      console.log('Element removed:', e);
+    },
+  },
+  textContent: 'Hello World!',
+});
+// Mount to DOM and set up lifecycle events
+mount(el, document.body);
+// Change the element attribute
+el.setAttribute('title', 'Text');
+// Remove the element fomr DOM
+el.remove();
+```
+
+In the `mount()` function, the second argument can be a target HTML element or CSS selector that will be used to find the target.
+
+You can include any SVG icon as HTML markup and change its styles (size, color) via the `classList` or `attributes` parameters (raw import works with Vite):
+
+```js
+import githubIcon from '@svg-icons/fa-brands/github.svg?raw';
+
+const svgElement = render({
+  tag: githubIcon,
+  classList: ['icon'],
+  attributes: {
+    width: '64px',
+    height: '64px'
+  }
+});
+```
+
+Additionally, you can create a [DocumentFragment](https://developer.mozilla.org/docs/Web/API/DocumentFragment) by simply passing an array to the `render()` function:
+
+```js
+// Create DocumentFragment
+const fragment = render([
+  { tag: 'span', textContent: 'Item 1' },
+  { tag: 'span', textContent: 'Item 2' },
+  { tag: 'span', textContent: 'Item 3' },
+]);
+// Mount to DOM
+mount(fragment, document.body);
+```
+
+Probably you want to change the element properties dynamically. NEUX allows you to use functions for most of the element parameters. These functions are reactive and will be re-evaluated by specific triggers such as `refresh` event or signals.
+
+Look at the example below:
+
+```js
+const list = [
+  { text: 'Item 1' },
+  { text: 'Item 2' },
+];
+const el = render({
+  tag: 'ul',
+  children: () => {
+    return list.map(item => {
+      return {
+        tag: 'li',
+        textContent: () => item.text,
+      };
+    });
+  },
+});
+mount(el, document.body);
+```
+
+In this example, the `children` parameter is defined as a function that returns an array of list items. Each list item has its `textContent` defined as a function that retrieves the `text` property from the corresponding item in the `list` array.
+
+When you want to update the list or change the text of an item, you can modify the `list` array or its items directly. To trigger a re-evaluation of the functions and update the DOM accordingly, you can dispatch a custom `refresh` event to the target element:
+
+```js
+// Add a new item to the list
+list.push({ text: 'Item 3' });
+// Re-render the entire element
+el.dispatchEvent(new CustomEvent('refresh'));
+// Update the text of the first item
+list[0].text = 'Updated Item 1';
+// Update only specific properties
+el.children[0].dispatchEvent(new CustomEvent('refresh', { detail: ['textContent'] }));
+```
+
+Note that when dispatching the `refresh` event, you can optionally provide a `detail` array that specifies which properties should be updated. If no detail is provided, all reactive functions will be re-evaluated on the target element. It's good to know that only the changed elements are replaced when lists like `children` are updated.
+
+Instead of using `refresh` events, you can also use reactive signals to manage state and automatically update the DOM when the state changes. This approach is more efficient and easier to maintain, as it eliminates the need for manual event dispatching.
+
+## Reactive Signals
 
 Signals in NEUX are reactive proxies for objects. They track changes automatically and update any linked views or computed fields. Use signals to create reactive state, derived values, and listeners for side effects or debugging.
 
@@ -143,6 +313,31 @@ In computed fields, prefixing a property name with `$` marks it as reactive. Whe
 **ATTENTION**
 - Removing or replacing the observed object/array will break all bindings.
 - Only the fields accessed during the initial synchronous execution are tracked for updates.
+
+You can use the `$$` sign to subscribe to any changes in this object, array, or any of its nested objects. Alternatively, use the `$` sign to track changes in the object or array without tracking changes in nested objects:
+
+```js
+// Create an HTML element
+const el = render({
+  tag: 'ul',
+  children: () => {
+    // Track changes in the list array,
+    // such as adding, replacing, or deleting items, 
+    // except for nested objects
+    return state.list.$.map((item) => {
+      return {
+        tag: 'li',
+        // Track changes the specific field
+        textContent: () => item.$text,
+      };
+    });
+  },
+});
+// Add new item to the array and then re-render the list
+state.list.push({ text: 'Item 3' });
+// Change the `li` element without rerendering the entire list
+state.list[0].text = 'Item 1 was changed';
+```
 
 You can creates a reactive effect that computes a derived value and triggers a side effect.
 
@@ -215,198 +410,6 @@ In this example:
 - The wildcard `'*'` subscribes the handler to any changes on this object and all nested children.
 
 This flexibility lets you efficiently track and respond to state mutations across your application.
-
-## Elements
-
-NEUX allows to render HTML elements and mount them in the DOM. You can declaratively define HTML elements and then mount them in the DOM using plain JavaScript objects and functions.
-
-You should use the `render()` function to create an `Element` or `DocumentFragment` by declarative definition. Below is an overview of the most common parameters available for element configuration:
-
-- `tag`: (String or Element) Specifies the HTML tag name (e.g., "div", "span") or HTML markup to create or an existing Element to use directly.
-- `classList`: (Array of Strings or Function) Specifies one or more CSS classes to add to the element. It can be a static array or a function that returns an array based on dynamic context.
-- `attributes`: (Object or Function) Maps attribute names to their corresponding values. Use a static object for fixed attributes or a function for dynamic assignment.
-- `style`: (Object or Function) Sets inline CSS styles via an object where keys are CSS property names. This can also be defined as a function to handle dynamic styling.
-- `dataset`: (Object or Function) Assigns custom data attributes (data-*) through a static mapping or a function that returns the mapping.
-- `on`: (Object) Adds event listeners to the element. Each key represents an event name (e.g., "click", "change") with its corresponding handler function.
-- `children`: (String, Array of Elements, or Function) Defines the inner content of the element. This can be a direct string, an array of element definitions, or a function that returns child nodes for dynamic rendering.
-- `ref`: (Function) A callback that receives the created element, allowing you to store a reference or perform additional operations immediately after creation.
-
-Extra configuration for edge cases:
-
-- `shadowRootMode`: (String) Defines the mode of the element’s [shadow DOM](https://developer.mozilla.org/docs/Web/API/Web_components/Using_shadow_DOM), determining its accessibility and encapsulation. Options include 'open' (the shadow root is accessible via the element’s shadowRoot property) and 'closed' (the shadow root is hidden, preventing external access).
-- `adoptedStyleSheets`: (Array) Specifies one or more [CSSStyleSheet](https://developer.mozilla.org/docs/Web/API/CSSStyleSheet) objects that can be associated with the element’s shadow DOM. This enables the use of constructable stylesheets for efficient, reusable styling.
-- `namespaceURI`: (String) Specifies the XML namespace URI when [creating namespaced elements](https://developer.mozilla.org/docs/Web/API/Document/createElementNS), such as SVG or MathML. Usually, this property is not required because it is automatically determined by the tag name.
-
-You can also include any other parameters specific to particular elements. This flexible approach supports both static configurations and dynamic, reactive user interfaces.
-
-```js
-const el = render({
-  tag: 'ul',
-  classList: ['list'],
-  ref: el => {
-    console.log(el);
-  },
-  children: ['Item 1', 'Item 2']
-    .map((item, index) => {
-      return {
-        tag: 'li',
-        style: {
-          color: 'red',
-        },
-        attributes: {
-          title: item,
-        },
-        dataset: {
-          index,
-        },
-        textContent: item,
-      };
-    }),
-});
-```
-
-The `el` variable will contain an HTML element with the following markup:
-
-```html
-<ul class="list">
-  <li title="Item 1" data-index="0" style="color: red;">Item 1</li>
-  <li title="Item 2" data-index="1" style="color: red;">Item 2</li>
-</ul>
-```
-
-To attach any HTML element to the DOM you should use the `mount()` function. This function attaches elements to the DOM and sets up a [MutationObserver](https://developer.mozilla.org/docs/Web/API/MutationObserver) on the target to dispatch custom events on lifecycle changes. These events are emitted for each element in the target DOM tree.
-
-List of lifecycle events:
-
-- `mounted` is fired when the element is added to the DOM.
-- `changed` is fired when the element attribute is changed.
-- `removed` is fired when the element is removed from the DOM.
-
-The `removed` event is used internally to clean up signal bindings. You can prevent the default behavior for the target element and all its children by calling the `preventDefault()` method.
-
-Example of using lifecycle events:
-
-```js
-// Create an HTML element
-const el = render({
-  // Event listeners
-  on: {
-    mounted(e) {
-      console.log('Element mounted:', e);
-    },
-    changed(e) {
-      console.log('Element changed:', e);
-    },
-    removed(e) {
-      // you can prevent the default behavior
-      // e.preventDefault();
-      console.log('Element removed:', e);
-    },
-  },
-  textContent: 'Hello World!',
-});
-// Mount to DOM and set up lifecycle events
-mount(el, document.body);
-// Change the element attribute
-el.setAttribute('title', 'Text');
-// Remove the element fomr DOM
-el.remove();
-```
-
-In the `mount()` function, the second argument can be a target HTML element or CSS selector that will be used to find the target.
-
-You can use the `$map()` method of arrays in state to optimize the rendering of child elements. Instead of re-rendering the entire list when the associated array changes, only the elements that have been added, updated, or removed are affected. This minimizes unnecessary DOM manipulations, resulting in smoother and more efficient UI updates, especially when dealing with large or frequently changing arrays.
-
-```js
-// Create a reactive state with an array
-const state = signal({
-  list: [
-    { text: 'Item 1' },
-    { text: 'Item 2' },
-  ],
-});
-// Item config
-const Item = (item) => {
-  return {
-    tag: 'li',
-    // Track changes the specific field
-    textContent: () => item.$text,
-  };
-};
-// Create an HTML element
-const el = render({
-  tag: 'ul',
-  children: () => {
-    // Track changes in the list array, 
-    // such as adding, replacing or deleting items, 
-    // and only update the changed elements
-    return state.list.$map((item) => {
-      return {
-        tag: Item(item),
-        // Override the item parameters
-        style: { color: 'red' }
-      };
-    });
-  },
-});
-// Mount to DOM
-mount(el, document.body);
-// Add item to the array
-state.list.push({ text: 'Item 3' });
-```
-
-You can use the `$$` sign to subscribe to any changes in this object, array, or nested objects. Alternatively, use the `$` sign to track changes in the object or array without tracking changes in nested objects:
-
-```js
-// Create an HTML element
-const el = render({
-  tag: 'ul',
-  children: () => {
-    // Track changes in the list array,
-    // such as adding, replacing, or deleting items, 
-    // except for nested objects
-    return state.list.$.map((item) => {
-      return {
-        tag: 'li',
-        // Track changes the specific field
-        textContent: () => item.$text,
-      };
-    });
-  },
-});
-// Add new item to the array and then re-render the list
-state.list.push({ text: 'Item 3' });
-// Change the `li` element without rerendering the entire list
-state.list[0].text = 'Item 1 was changed';
-```
-
-You can include any SVG icon as HTML markup and change its styles (size, color) via the `classList` or `attributes` parameters (raw import works with Vite):
-
-```js
-import githubIcon from '@svg-icons/fa-brands/github.svg?raw';
-
-const svgElement = render({
-  tag: githubIcon,
-  classList: ['icon'],
-  attributes: {
-    width: '64px',
-    height: '64px'
-  }
-});
-```
-
-Additionally, you can create a [DocumentFragment](https://developer.mozilla.org/docs/Web/API/DocumentFragment) by simply passing an array to the `render()` function:
-
-```js
-// Create DocumentFragment
-const fragment = render([
-  { tag: 'span', textContent: 'Item 1' },
-  { tag: 'span', textContent: 'Item 2' },
-  { tag: 'span', textContent: 'Item 3' },
-]);
-// Mount to DOM
-mount(fragment, document.body);
-```
 
 ## Localization
 
@@ -906,7 +909,7 @@ const el = render({
     children: () => {
       // Redraw the list partially if any child items are added, replaced, or removed.
       // Any updates inside nested objects are ignored.
-      return state.list.$map((item) => {
+      return state.list.$.map((item) => {
         return {
           tag: 'li',
           children: [{
@@ -950,11 +953,11 @@ mount(el, document.body);
 
 Try it in the playground:
 
-- [To-Do App](https://livecodes.io/?x=id/5c5fsnreaan)
-- [15 Puzzle](https://livecodes.io/?x=id/exp5yjaut7f)
-- [Tic-Tac-Toe](https://livecodes.io/?x=id/spv9vuqhq72)
-- [SVG Clock](https://livecodes.io/?x=id/w7yya5nzch4)
-- [Sketch](https://livecodes.io/?x=id/tamthnz796p)
-- [File Tree](https://livecodes.io/?x=id/9h7tszkucxz)
+- [To-Do App](https://v47.livecodes.io/?x=id/jxghzemwwai)
+- [15 Puzzle](https://v47.livecodes.io/?x=id/efx9s47xqrr)
+- [Tic-Tac-Toe](https://v47.livecodes.io/?x=id/r4cjbuidtb3)
+- [SVG Clock](https://v47.livecodes.io/?x=id/mr5hs94hd5i)
+- [Sketch](https://v47.livecodes.io/?x=id/q7tistivmkt)
+- [File Tree](https://v47.livecodes.io/?x=id/wfcdxuaqbq9)
 
 <p><iframe src="https://ghbtns.com/github-btn.html?user=meefik&repo=neux&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe></p>
