@@ -23,8 +23,8 @@ footer: false
 
 **Just try it** in the playground:
 
-<iframe title="NEUX: To-Do App" scrolling="no" loading="lazy" style="height:400px; width: 100%;" src="https://v47.livecodes.io/?x=id/jxghzemwwai&lite=true">
-  See the project <a href="https://v47.livecodes.io/?x=id/jxghzemwwai" target="_blank">NEUX: To-Do App</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
+<iframe title="NEUX: To-Do App" scrolling="no" loading="lazy" style="height:400px; width: 100%;" src="https://v47.livecodes.io/?x=id/uhkch4mgxfp&lite=true">
+  See the project <a href="https://v47.livecodes.io/?x=id/uhkch4mgxfp" target="_blank">NEUX: To-Do App</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
 </iframe>
 
 ## Content
@@ -955,7 +955,7 @@ mount(el, document.body);
 
 Try it in the playground:
 
-- [To-Do App](https://v47.livecodes.io/?x=id/jxghzemwwai)
+- [To-Do App](https://v47.livecodes.io/?x=id/uhkch4mgxfp)
 - [15 Puzzle](https://v47.livecodes.io/?x=id/efx9s47xqrr)
 - [Tic-Tac-Toe](https://v47.livecodes.io/?x=id/r4cjbuidtb3)
 - [SVG Clock](https://v47.livecodes.io/?x=id/mr5hs94hd5i)
