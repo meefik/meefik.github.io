@@ -123,7 +123,7 @@
   stack: ["Android", "Linux", "Java", "Bash", "C"]
   homepage: "https://github.com/meefik/linuxdeploy"
   description: "This application is open source software for quick and easy installation of the operating system GNU/Linux on your Android device. Later, the utility gained distribution on desktops (see [the article on Habr](https://habr.com/ru/articles/276013/)). For more details, see [the project page](/linuxdeploy) and [the journal Information and Control Systems](/assets/files/linuxdeploy_i-us-5-66-2013.pdf)."
-  poster: "/assets/images/linuxdeploy.png"
+  poster: "/assets/images/linuxdeploy-2.png"
 
 - title: "Password guessing to Java keystore"
   year: 2012

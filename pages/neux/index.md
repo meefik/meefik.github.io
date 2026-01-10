@@ -264,6 +264,25 @@ mount(el, document.body);
 
 In this example, the `children` parameter is defined as a function that returns an array of list items. Each list item has its `textContent` defined as a function that retrieves the `text` property from the corresponding item in the `list` array.
 
+You can even use asynchronous functions to fetch data or perform other asynchronous operations before rendering the element properties:
+
+```js
+const el = render({
+  children: async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+    const data = await response.json();
+    return [{
+      tag: 'h3',
+      textContent: data.title,
+    }, {
+      tag: 'p',
+      textContent: data.body,
+    }]
+  },
+});
+mount(el, document.body);
+```
+
 When you want to update the list or change the text of an item, you can modify the `list` array or its items directly. To trigger a re-evaluation of the functions and update the DOM accordingly, you can dispatch a custom `refresh` event to the target element:
 
 ```js
