@@ -71,9 +71,9 @@ receiver.addEventListener('stream', (e) => {
   const { id, stream } = e.detail;
   // handle incoming MediaStream
 });
-receiver.addEventListener('message', (e) => {
-  const { id, message } = e.detail;
-  // handle incoming data message
+receiver.addEventListener('connect', (e) => {
+  const { id } = e.detail;
+  // handle peer connection established
 });
 receiver.addEventListener('dispose', (e) => {
   const { id } = e.detail;
