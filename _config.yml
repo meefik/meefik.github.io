@@ -30,6 +30,12 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: "/assets/images/og-image.png"
+
 # ----------------------- #
 #   3rd Party Settings    #
 # ----------------------- #
