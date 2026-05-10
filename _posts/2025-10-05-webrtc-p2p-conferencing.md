@@ -23,7 +23,7 @@ Just try it out: [live demo](https://talk.meefik.dev/) \| [source code](https://
 The library focuses on three goals:
 
 - Minimal surface area: two primitives (Sender and Receiver) that cover the common conferencing pattern: one broadcaster, many receivers.
-- Signaling-agnostic: you provide a small driver implementing on/off/emit and the library works with any transport.
+- Signaling-agnostic: you provide a small driver implementing subscribe/unsubscribe/dispatch and the library works with any transport.
 - Practical privacy: support optional E2E encryption at the signaling layer so session offers/answers and candidates are not exposed in plaintext on the bus.
 
 ## Design overview
@@ -43,15 +43,15 @@ Signaling expectations are intentionally simple: drivers produce messages scoped
 npm install p2p
 ```
 
-**2.** Implement a signaling driver that supports on/off/emit.
+**2.** Implement a signaling driver that supports subscribe/unsubscribe/dispatch.
 
 Here's a minimal conceptual example:
 
 ```javascript
 class MyDriver {
-  on(namespace, handler) { /* ... */ }
-  off(namespace, handler) { /* ... */ }
-  emit(namespace, message) { /* ... */ }
+  subscribe(namespace, handler) { /* ... */ }
+  unsubscribe(namespace, handler) { /* ... */ }
+  dispatch(namespace, message) { /* ... */ }
 }
 ```
 
@@ -109,12 +109,10 @@ sender.start({ stream, room: 'demo-room' });
 
 [NATS](https://nats.io) is a great lightweight pub/sub for distributed signaling. The demo repository includes a full driver implementation at [demo/driver/nats.js](https://github.com/meefik/p2p/blob/main/demo/driver/nats.js); below is the compact approach and key ideas used there.
 
-Here's a simple driver implementation using the [nats.ws](https://npmjs.com/package/nats.ws) module:
+Here's a simple driver implementation using the [@nats-io/nats-core](https://npmjs.com/package/@nats-io/nats-core) module:
 
 ```javascript
-import { connect, StringCodec } from 'nats.ws';
-
-const sc = StringCodec();
+import { wsconnect } from '@nats-io/nats-core';
 
 class NatsDriver extends Map {
   constructor({ servers } = {}) {
@@ -123,19 +121,19 @@ class NatsDriver extends Map {
   }
 
   async open() {
-    this.nc = await connect({ servers: this.servers, noEcho: true });
+    this.nc = await wsconnect({ servers: this.servers, noEcho: true });
   }
 
   async close() {
     await this.nc.drain();
   }
 
-  on(namespace, handler) {
+  subscribe(namespace, handler) {
     const ns = namespace.join(':');
     const sub = this.nc.subscribe(ns, {
       callback: async (err, msg) => {
         if (err) return console.error(err);
-        const payload = JSON.parse(sc.decode(msg.data));
+        const payload = JSON.parse(new TextDecoder().decode(msg.data));
         handler(payload);
       },
     });
@@ -145,7 +143,7 @@ class NatsDriver extends Map {
     this.get(ns).set(handler, sub);
   }
 
-  off(namespace, handler) {
+  unsubscribe(namespace, handler) {
     const ns = namespace.join(':');
     const sub = this.get(ns)?.get(handler);
     if (sub) {
@@ -157,10 +155,10 @@ class NatsDriver extends Map {
     }
   }
 
-  async emit(namespace, message) {
+  dispatch(namespace, message) {
     const ns = namespace.join(':');
     if (this.nc) {
-      const data = sc.encode(JSON.stringify(message));
+      const data = new TextEncoder().encode(JSON.stringify(message));
       this.nc.publish(ns, data);
     }
   }
@@ -242,12 +240,12 @@ const message = new TextDecoder().decode(decryptedBytes);
 console.log('decrypted message', message);
 ```
 
-Integrate encryption into the NATS driver by wrapping emit/on methods to encrypt/decrypt payloads. Here is diff of the modified methods:
+Integrate encryption into the NATS driver by wrapping dispatch/subscribe methods to encrypt/decrypt payloads. Here is diff of the modified methods:
 
 ```diff
 -  async open() {
 +  async open(secret) {
-     this.nc = await connect({ servers: this.servers, noEcho: true });
+     this.nc = await wsconnect({ servers: this.servers, noEcho: true });
 +    if (secret) {
 +      this.cryptoKey = await createEncryptionKey(secret);
 +    }
@@ -257,12 +255,12 @@ Integrate encryption into the NATS driver by wrapping emit/on methods to encrypt
      const sub = this.nc.subscribe(ns, {
        callback: async (err, msg) => {
          if (err) return console.error(err);
--        const payload = JSON.parse(sc.decode(msg.data));
+-        const payload = JSON.parse(new TextEncoder().decode(msg.data));
 +        let data = msg.data;
 +        if (this.cryptoKey) {
 +          data = await decrypt(data, this.cryptoKey);
 +        }
-+        const payload = JSON.parse(sc.decode(data));
++        const payload = JSON.parse(new TextDecoder().decode(data));
          handler(payload);
        },
      });
@@ -272,11 +270,11 @@ Integrate encryption into the NATS driver by wrapping emit/on methods to encrypt
     this.get(ns).set(handler, sub);
   }
 
-   async emit(namespace, message) {
+   dispatch(namespace, message) {
      const ns = namespace.join(':');
      if (this.nc) {
--      const data = sc.encode(JSON.stringify(message));
-+      let data = sc.encode(JSON.stringify(message));
+-      const data = new TextEncoder().encode(JSON.stringify(message));
++      let data = new TextEncoder().encode(JSON.stringify(message));
 +      if (this.cryptoKey) {
 +        data = await encrypt(data, this.cryptoKey);
 +      }
@@ -296,4 +294,4 @@ Operational considerations:
 
 This project shows how a small, well-factored library can enable flexible, serverless peer-to-peer conferencing while giving you control over signaling and privacy. The NATS driver with E2E encryption is a practical option for distributed systems where you want to keep signaling private without a heavy backend.
 
-See the [live demo](https://meefik.dev/p2p/) for runnable examples and the full NATS driver implementation: [demo/driver/nats.js](https://github.com/meefik/p2p/blob/main/demo/driver/nats.js).
+This library is a good place to start. However, if you want to build more complex applications that include multiple data channels, two-way peer connections, additional built-in drivers or extra features, take a look at the [Peerix](https://peerix.dev) project, which is based on these peer-to-peer ideas and offers a richer API and ecosystem.
