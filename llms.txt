@@ -1,0 +1,22 @@
+---
+layout: none
+permalink: /llms.txt
+---
+
+# {{ site.title }}
+
+{{ site.description }}
+
+## Pages
+{{ "" }}
+{%- assign items = site.posts | concat: site.pages -%}
+{%- for item in items -%}
+{% if item.title and item.llms != false %}
+- [{{ item.title | strip }}]({{ item.url | prepend: site.url }}): {% if item.description %}{{ item.description | strip }}{% else %}{% endif %}
+{% endif %}
+{%- endfor -%}
+{{ "" }}
+
+---
+Generated on {{ site.time | date: "%Y-%m-%d %H:%M:%S %Z" }}
+Site: {{ site.url }}

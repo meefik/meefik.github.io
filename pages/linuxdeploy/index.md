@@ -1,5 +1,5 @@
 ---
-permalink: /linuxdeploy
+permalink: /linuxdeploy/
 layout: page
 title: Linux Deploy for Android
 description: Linux Deploy is an open-source Android application that facilitates the quick and easy installation of GNU/Linux operating systems on Android devices.

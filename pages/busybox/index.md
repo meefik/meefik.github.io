@@ -1,5 +1,5 @@
 ---
-permalink: /busybox
+permalink: /busybox/
 layout: page
 title: BusyBox for Android
 description: BusyBox for Android is an open-source application that installs BusyBox, a collection of UNIX utilities, on Android devices with root access.

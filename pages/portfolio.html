@@ -1,33 +1,38 @@
 ---
-permalink: /portfolio
+permalink: /portfolio/
 layout: page
 title: Portfolio
+description: My projects and works.
 comments: false
 footer: false
 ---
 
 <div class="portfolio">
-{% for prj in site.data.projects %}
-<article>
-  <header><h1>{{ prj.title }}</h1> <h2>'{{ prj.year }}</h2></header>
-  {% if prj.poster %}
-  <img src="{{ prj.poster }}" alt="{{ prj.title }}" />
-  {% endif %}
-  <table>
-  <tr>
-    <td>Year</td>
-    <td>{{ prj.year }}</td>
-  </tr>
-  <tr>
-    <td>Technology stack</td>
-    <td>{{ prj.stack | join: ', ' }}</td>
-  </tr>
-  <tr>
-    <td>Homepage</td>
-    <td><a style="word-break: break-all" href="{{ prj.homepage }}" target="_blank" rel="nofollow noopener">{{ prj.homepage }}</a></td>
-  </tr>
-  </table>
-  <p>{{ prj.description | markdownify }}</p>
-</article>
-{% endfor %}
+  {% for prj in site.data.projects %}
+  <article>
+    <header>
+      <h1>{{ prj.title }}</h1>
+      <h2>'{{ prj.year }}</h2>
+    </header>
+    {% if prj.poster %}
+    <img src="{{ prj.poster }}" alt="{{ prj.title }}" />
+    {% endif %}
+    <table>
+      <tr>
+        <td>Year</td>
+        <td>{{ prj.year }}</td>
+      </tr>
+      <tr>
+        <td>Technology stack</td>
+        <td>{{ prj.stack | join: ', ' }}</td>
+      </tr>
+      <tr>
+        <td>Homepage</td>
+        <td><a style="word-break: break-all" href="{{ prj.homepage }}" target="_blank" rel="nofollow noopener">{{
+            prj.homepage }}</a></td>
+      </tr>
+    </table>
+    <p>{{ prj.description | markdownify }}</p>
+  </article>
+  {% endfor %}
 </div>

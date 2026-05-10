@@ -18,5 +18,11 @@ bundle install
 3. Start jekyll server
 
 ```sh
-bundle exec jekyll s
+bundle exec jekyll serve
+```
+
+4. Build the site
+
+```sh
+bundle exec jekyll build
 ```

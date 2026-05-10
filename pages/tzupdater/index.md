@@ -1,5 +1,5 @@
 ---
-permalink: /tzupdater
+permalink: /tzupdater/
 layout: page
 title: Timezone Updater for Android
 description: Timezone Updater is an open-source Android application that updates your device's time zone data to the latest version, ensuring accurate timekeeping.
