@@ -7,59 +7,71 @@ footer: false
 ---
 
 <div class="about">
-  <div class="desc">
-    <img src="/assets/images/avatar.png" alt="avatar" />
-    <div>
-      <h3>{{ site.author }}</h3>
-      <div>{{ site.email }}</div>
+  <div class="author">
+    <a class="avatar" href="{{ site.profile }}" target="_blank" rel="nofollow noopener">
+      <img src="{{ site.avatar }}" alt="avatar" />
+    </a>
+    <div class="info">
+      <div class="name">{{ site.author }}</div>
+      <div class="email">{{ site.email }}</div>
     </div>
   </div>
 
   {% if site.data.experiences.size > 0 %}
 
-  <h3>EXPERIENCE</h3>
+  <article>
+    <header>
+      <h1>EXPERIENCE</h1>
+    </header>
 
-  {% for experience in site.data.experiences %}
-  <table>
-    <tr>
-      <td style="border: none;">
-        <div>{{ experience.position }}</div>
-        <div>
-          {% if experience.link %}
-          <a href="{{ experience.link }}" target="_blank" rel="nofollow noopener">{{ experience.company }}</a>
-          {% else %}
-          {{ experience.company }}
-          {% endif %}
-        </div>
-      </td>
-      <td style="border: none; width: 40%">{{ experience.duration }}</td>
-    </tr>
-    {% if experience.description %}
-    <tr>
-      <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">{{
-        experience.description }}</td>
-    </tr>
-    {% endif %}
-  </table>
-  {% endfor %}
+    {% for experience in site.data.experiences %}
+    <table>
+      <tr>
+        <td style="border: none;">
+          <div>{{ experience.position }}</div>
+          <div>
+            {% if experience.link %}
+            <a href="{{ experience.link }}" target="_blank" rel="nofollow noopener">{{ experience.company }}</a>
+            {% else %}
+            {{ experience.company }}
+            {% endif %}
+          </div>
+        </td>
+        <td style="border: none; width: 40%">{{ experience.duration }}</td>
+      </tr>
+      {% if experience.description %}
+      <tr>
+        <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">{{
+          experience.description }}</td>
+      </tr>
+      {% endif %}
+    </table>
+    {% endfor %}
+
+  </article>
 
   {% endif %}
 
   {% if site.data.educations.size > 0 %}
 
-  <h3>EDUCATION</h3>
+  <article>
+    <header>
+      <h1>EDUCATION</h1>
+    </header>
 
-  {% for education in site.data.educations %}
-  <table>
-    <tr>
-      <td style="border: none">
-        <div>{{ education.specialty }}</div>
-        <a href="{{ education.link }}" target="_blank" rel="nofollow noopener">{{ education.institution }}</a>
-      </td>
-      <td style="border: none; width: 40%">{{ education.duration }}</td>
-    </tr>
-  </table>
-  {% endfor %}
+    {% for education in site.data.educations %}
+    <table>
+      <tr>
+        <td style="border: none">
+          <div>{{ education.specialty }}</div>
+          <a href="{{ education.link }}" target="_blank" rel="nofollow noopener">{{ education.institution }}</a>
+        </td>
+        <td style="border: none; width: 40%">{{ education.duration }}</td>
+      </tr>
+    </table>
+    {% endfor %}
+
+  </article>
 
   {% endif %}
 </div>

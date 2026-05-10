@@ -2,13 +2,15 @@
 #      Main Config        #
 # ----------------------- #
 
-url: "https://meefik.github.io"
+url: "https://meefik.dev"
 title: "Meefik's Blog"
 subtitle: "Freedom and Open Source"
 description: "Thoughts, tutorials and ideas about programming, technology and open source."
 author: "Anton Skshidlevsky"
 author_url: "/about"
 email: "meefik [at] gmail.com"
+avatar: "https://gravatar.com/avatar/460dcd88ac4a0088b561166e395aa29f?s=100"
+profile: "https://gravatar.com/meefik"
 locale: "en_US"
 simple_search: "https://www.google.com/search"
 permalink: "/:year/:month/:day/:title/"
