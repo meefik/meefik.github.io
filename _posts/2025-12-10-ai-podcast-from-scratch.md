@@ -23,6 +23,7 @@ I will now walk you through the entire, eight-step process of creating a podcast
 ## The Core AI Studio: ComfyUI Setup
 
 For the bulk of the asset generation (images, video, and audio processing), we will rely on [ComfyUI](https://www.comfy.org/).
+
 - **Installation:** Once you have [ComfyUI installed](https://github.com/comfyanonymous/ComfyUI), you'll need to open the workflows.
 - **Custom Nodes & Models:** When you load a workflow, use the [ComfyUI Manager](https://github.com/Comfy-Org/ComfyUI-Manager) to quickly install any missing custom nodes and download the required open-source models.
 
@@ -56,13 +57,13 @@ Our podcast needs faces! While you could certainly use real photos and skip this
 
 I used the **Qwen-Image** workflow to create realistic face images for our two hosts.
 
-**Prompt for a man:** 
+**Prompt for a man:**
 
 > This is a portrait of a handsome, bearded, 30-year-old European man wearing glasses and standing against a white background.
 
 ![man](/assets/images/podcast-face-man.png "Podcast Man"){: width="200"}
 
-**Prompt for a woman:** 
+**Prompt for a woman:**
 
 > This is a portrait of a beautiful 25-year-old European woman standing against a white background.
 
@@ -71,6 +72,7 @@ I used the **Qwen-Image** workflow to create realistic face images for our two h
 ## Step 3: Creating the Podcast Environment (Scene Images)
 
 I designed three distinct views for the podcast to maintain visual interest:
+
 1. **Intro Scene:** The podcast room with only the title graphic.
 2. **Main Scene:** A cozy podcast room where the hosts sit at a table with a single microphone.
 3. **Outro Scene:** The same room, dimly lit, to display the credits.
@@ -126,6 +128,7 @@ Every professional podcast needs custom audio cues: music for the intro (5 secon
 I used the **ACE-Step** model for music generation. Audio generation can be iterative, and I found using batches helped speed up the process of finding the perfect track.
 
 Here are the parameters I used to generate a 30-second loopable track that I could then segment:
+
 - **Genre:** `funk, pop, soul, melodic`
 - **Lyrics:** `[inst]`
 
@@ -135,8 +138,6 @@ Listen to the full track here:
   <source src="/assets/audio/podcast-music.mp3" type="audio/mp3">
   Your browser does not support the audio element.
 </audio>
-
-**Note:** I also tried generating songs, and it works, but they feel more synthetic.
 
 ## Step 5: Creating the Animated Video Intro
 
@@ -157,7 +158,8 @@ Now we bring the script to life. I used the highly capable **IndexTTS-2** model 
 ### The Audio Pipeline: TTS Audio Suite
 
 To manage the complex script, I utilized the ComfyUI **TTS Audio Suite** custom module. This module streamlines the TTS process and allows for fine control over multiple speakers with voice cloning. There are two well-suited workflows engines for this task:
-- **IndexTTS-2**: This TTS engine supports emotional control, which is crucial for making the hosts sound engaging. 
+
+- **IndexTTS-2**: This TTS engine supports emotional control, which is crucial for making the hosts sound engaging.
 - **Chatterbox**: This TTS engine is also good. It copies the emotions from the reference audio, but lacks a manual emotional control function.
 
 All of these TTS engines create one audio file with multiple speakers' voices. Unfortunately, this module does not natively support outputting multiple audio tracks, so we must manually separate the audio for each speaker. I used an open-source audio editor, **Audacity**, to split the audio tracks.
@@ -165,6 +167,7 @@ All of these TTS engines create one audio file with multiple speakers' voices. U
 ![audacity](/assets/images/audacity-splitting-audio.png "Splitting Audio in Audacity")
 
 However, I found a way to do that without using an audio editor. We can use the TTS SRT markup to automate this process:
+
 1. Create a segment in the SRT format for each speaker with start and end timestamps for one second of each segment.
 2. Feed the SRT markup into the TTS SRT node.
 3. Obtain an adjusted SRT markup with accurate timestamps for each speaker after generation.
@@ -218,13 +221,13 @@ Man's voice sample:
 
 To add these voice samples to the TTS Audio Suite, you need to put them into the `custom_nodes/tts_audio_suite/voices_examples/` folder with the reference text file (transcription). And then add the voices to the `#character_alias_map.txt` file in the same folder in the format:
 
-`<character_name> <voice_sample_filename_without_extension> <language_code>`
+`<character_name> = <voice_sample_filename_without_extension>, <language_code>`
 
 There is an example for our voices:
 
 ```
-[LEO] voice_man en
-[MAYA] voice_woman en
+LEO = voice_man, en
+MAYA = voice_woman, en
 ```
 
 **Note:** All spaces should be replaced with a tab character.
@@ -252,6 +255,7 @@ The generation time for each **one-minute** segment was about **60 minutes** on 
 The last stage is combining all the assets we generated into a cohesive whole.
 
 I used the open-source video editor **Kdenlive** to assemble the project:
+
 1. **Stitching Segments:** Combining the five animated segments.
 2. **Transitions:** Adding the 3-second B-rolls between the main discussion segments.
 3. **Final Touches:** Adding the animated intro clip and the dim-lit outro scene with credits.
