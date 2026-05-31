@@ -7,13 +7,11 @@ body>nav {
     bottom: 1px solid $border-color;
   }
 
-  ;
-
   form {
     display: inline-block;
     width: 100%;
 
-    fieldset[role=search] {
+    fieldset[role="search"] {
       all: unset;
       width: inherit;
     }
@@ -30,7 +28,9 @@ body>nav {
 
       &:focus {
         border-color: $link-color-hover;
-        box-shadow: $link-color-hover 0 0 2px, $link-color-hover 0 0 2px inset;
+        box-shadow:
+          $link-color-hover 0 0 2px,
+          $link-color-hover 0 0 2px inset;
         outline: none;
         background: none;
       }
@@ -81,16 +81,16 @@ body>nav {
 
   li+li {
     border-left: 0;
-    margin-left: 0.8em;
+    margin-left: 0.5em;
   }
 
   li.menu+li.menu>a {
-    padding-left: 0.8em;
+    padding-left: 0.5em;
     border-left: 1px solid $border-color;
   }
 
   svg {
-    fill: darken($border-color, 20);
+    fill: darken($border-color, 50);
     transition: 0.3s;
   }
 
@@ -102,8 +102,8 @@ body>nav {
   #toggle {
     display: block;
     position: relative;
-    width: 28px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
   }
 
   #toggle:hover {
@@ -139,7 +139,7 @@ body>nav {
   #toggle span:before {
     width: 100%;
     height: 5px;
-    background-color: darken($border-color, 20);
+    background-color: darken($border-color, 50);
     transition: all 0.3s;
     backface-visibility: hidden;
     border-radius: 2px;

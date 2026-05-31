@@ -9,12 +9,12 @@ footer: false
 
 <div class="about">
   <div class="author">
-    <a class="avatar" href="{{ site.profile }}" target="_blank" rel="nofollow noopener">
-      <img src="{{ site.avatar }}" alt="avatar" />
-    </a>
+    <img src="{{ site.avatar }}" alt="avatar" />
     <div class="info">
       <div class="name">{{ site.author }}</div>
-      <div class="email">{{ site.email }}</div>
+      <div>
+        <a href="{{ site.profile }}" target="_blank" rel="nofollow noopener">View profile →</a>
+      </div>
     </div>
   </div>
 
@@ -28,32 +28,28 @@ footer: false
     {% for experience in site.data.experiences %}
     <table>
       <tr>
-        <td style="border: none;">
+        <td style="border: none">
           <div>{{ experience.position }}</div>
           <div>
             {% if experience.link %}
             <a href="{{ experience.link }}" target="_blank" rel="nofollow noopener">{{ experience.company }}</a>
-            {% else %}
-            {{ experience.company }}
-            {% endif %}
+            {% else %} {{ experience.company }} {% endif %}
           </div>
         </td>
         <td style="border: none; width: 40%">{{ experience.duration }}</td>
       </tr>
       {% if experience.description %}
       <tr>
-        <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">{{
-          experience.description }}</td>
+        <td style="border-style: dashed; border-left: none; border-right: none; border-bottom: none;" colspan="2">
+          {{ experience.description }}
+        </td>
       </tr>
       {% endif %}
     </table>
     {% endfor %}
-
   </article>
 
-  {% endif %}
-
-  {% if site.data.educations.size > 0 %}
+  {% endif %} {% if site.data.educations.size > 0 %}
 
   <article>
     <header>
@@ -71,7 +67,6 @@ footer: false
       </tr>
     </table>
     {% endfor %}
-
   </article>
 
   {% endif %}
