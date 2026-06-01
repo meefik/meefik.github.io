@@ -2,7 +2,7 @@
 layout: post
 title: AI Podcast from scratch with open-source tools
 description: Creating a full AI-generated podcast using only open-source models and tools on a local machine.
-image: /assets/images/podcast-title.png
+image: /assets/images/humanless-podcast.png
 date: 2025-12-10 18:00:00 +0000
 categories: [comfyui]
 comments: true
@@ -14,7 +14,7 @@ I set out to create an entire five-minute AI-generated podcast using only open-s
 
 The result? The ["Humanless Podcast"](https://www.youtube.com/watch?v=0q22KfBByA4&list=PLwCfVtYBO-E6UjG51nbIXEuUD004mAeKt). Take a look at what came out of this experiment (click to play).
 
-[![Humanless-Podcast](/assets/images/podcast-title.png)](https://www.youtube.com/watch?v=0q22KfBByA4&list=PLwCfVtYBO-E6UjG51nbIXEuUD004mAeKt)
+[![Humanless-Podcast](/assets/images/humanless-podcast.png)](https://www.youtube.com/watch?v=0q22KfBByA4&list=PLwCfVtYBO-E6UjG51nbIXEuUD004mAeKt)
 
 I will now walk you through the entire, eight-step process of creating a podcast like this, from the initial script to the final video.
 
@@ -117,7 +117,7 @@ Here is the prompt:
 
 ![main-scene-with-hosts](/assets/images/podcast-main-scene-with-hosts.png "Podcast Main Scene with Hosts"){: width="600"}
 
-The final visual touch involved using the open-source image editor **GIMP** to variate the composite, crop the faces, and place them into a podcast frame that I sourced separately. We will be able to alternately show podcast hosts both on the main stage and in a face-to-face frame.
+The final visual touch involved using the open-source image editor **GIMP** to vary the composite, crop the faces, and place them into a podcast frame that I sourced separately. We can alternate between showing the podcast hosts on the main stage and in a face-to-face frame.
 
 ![main-scene-with-hosts-frame](/assets/images/podcast-main-scene-with-hosts-frame.png "Podcast Main Scene with Hosts in Frame"){: width="600"}
 

@@ -7,7 +7,7 @@ categories: [android, linuxdeploy]
 comments: true
 ---
 
-Preparing for the release of the next version of Linux Deploy, which will include many new interesting features. The main one's are:
+Preparing for the release of the next version of Linux Deploy, which will include many new interesting features. The main ones are:
 
 - work with containers without superuser rights (based on [proot](https://proot-me.github.io)), including architecture emulation without the need to support the [binfmt_misc](https://en.wikipedia.org/wiki/Binfmt_misc) module at the core level;
 - modular architecture based on plug-in components;
@@ -21,9 +21,9 @@ Preparing for the release of the next version of Linux Deploy, which will includ
 
 The [Linux Deploy 2.0 command line interface](https://github.com/meefik/linuxdeploy-cli) is already available for testing, which has changed significantly. Now it allows you to create, configure and fully manage containers through the `linuxdeploy` command. Each container has a configuration file that contains all the parameters for deploying and running a specific distribution. You can work with several configurations, switching between them if necessary. Linux Deploy now has a modular architecture consisting of separate components written in a Bash-compatible ash scripting language. Components are interconnected by dependencies and are connected in a given order, there is protection against cyclic dependencies. Each component has five basic functions that are action handlers: installation, configuration, start, stop, help. The components have a tree structure and are located in the root directory, which is set in the `INCLUDE_DIR` environment variable. Each component is a directory containing the files required by the component. There are two main files: `deploy.conf` - component configuration, `deploy.sh` - component functions.
 
-Components are divided into several groups responsible for a certain functionality. For example, the bootstrap component group is responsible for preparing rootfs and deploying the distribution. The core component group includes basic distributions settings and basic functions for working with containers. There are also groups to support various initialization systems, graphics subsystem and desktop environments, as well as a collection of components for installing and running various software. By combining components, you can build your own version of the distribution with the necessary set of programs.
+Components are divided into several groups responsible for a certain functionality. For example, the bootstrap component group is responsible for preparing rootfs and deploying the distribution. The core component group includes basic distribution settings and basic functions for working with containers. There are also groups for supporting various initialization systems, graphics subsystems, and desktop environments, as well as a collection of components for installing and running various software. By combining components, you can build your own version of the distribution with the necessary set of programs.
 
-Let's say we want to create a container with Arch Linux as standard. To create a container, first you need to set its parameters, use the `config` command:
+Let's say we want to create a standard Arch Linux container. First, set its parameters using the `config` command:
 ```sh
 linuxdeploy -p arch config --target-path='linux.img' --chroot-dir='/mnt' \
     --target-type='file' --disk-size='2000' --fs-type='auto' \
@@ -94,11 +94,11 @@ slackware       slackware  x86        latest     bootstrap
 ubuntu          ubuntu     i386       wily       bootstrap
 ```
 
-The list of available components can be viewed through the `conf` command. Each component is compatible with all or only some distributions. The list of components connected (via `INCLUDE`) and compatible with the current configuration with their dependencies can be obtained with the command:
+The list of available components can be viewed through the `config` command. Each component is compatible with all or only some distributions. The list of components connected via `INCLUDE` and compatible with the current configuration, along with their dependencies, can be obtained with the command:
 ```sh
 linuxdeploy -p arch config -l
 
-bootstrap                      Installer of Linux distibution
+bootstrap                      Installer of Linux distribution
 bootstrap/debian               Bootstrap for Debian GNU/Linux
 bootstrap/rootfs               Prepare and import RootFS
 core                           Core components

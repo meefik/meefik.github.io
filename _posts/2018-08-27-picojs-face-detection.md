@@ -22,7 +22,10 @@ The revision included:
 - parallel execution in the Web-worker;
 - code on ES6.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/u38oQQMu0WU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video controls>
+  <source src="/assets/videos/picoface-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 <!--more-->
 

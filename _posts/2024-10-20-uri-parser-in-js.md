@@ -7,7 +7,7 @@ categories: [javascript]
 comments: true
 ---
 
-In this post, I show a lightweight JavaScript approach to parse a connection string URI like MongoDB connection string. The code breaks down the URI into its components, including the scheme, credentials, hosts, endpoint, and options.
+In this post, I show a lightweight JavaScript approach to parsing a connection-string URI like a MongoDB connection string. The code breaks down the URI into its components, including the scheme, credentials, hosts, endpoint, and options.
 
 Input:
 
@@ -28,7 +28,7 @@ Output:
 }
 ```
 
-I like to use simple and useful own code instead of using external models. So I prepared the URI parser code on pure JavaScript, here it is.
+I like to use simple, useful code of my own instead of using external libraries. So I prepared the URI parser in plain JavaScript; here it is.
 
 <!--more-->
 
@@ -115,7 +115,7 @@ function parseURI(uri) {
 }
 ```
 
-Use the `parseURI()` function to parse URI string. Look at the code example: 
+Use the `parseURI()` function to parse a URI string. Look at the code example:
 
 ```js
 // MongoDB connection string as example
@@ -134,4 +134,4 @@ console.log(params);
 // }
 ```
 
-This simple yet powerful parser efficiently breaks down a URI connection string into usable components. It's especially useful when dealing with multiple hosts or various options in connection strings. Experiment with different URIs to see its in action.
+This simple yet powerful parser efficiently breaks down a URI connection string into usable components. It's especially useful when dealing with multiple hosts or various options in connection strings. Experiment with different URIs to see it in action.

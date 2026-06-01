@@ -3,14 +3,17 @@ permalink: /linuxdeploy/
 layout: page
 title: Linux Deploy for Android
 description: Linux Deploy is an open-source Android application that facilitates the quick and easy installation of GNU/Linux operating systems on Android devices.
-image: /assets/images/linuxdeploy-2.png
+image: /assets/images/linuxdeploy-v2.png
 comments: false
 footer: false
 ---
 
 This application is [open-source software](https://github.com/meefik/linuxdeploy) for quick and easy installation of the operating system GNU/Linux on your Android device.
 
-![Linux Deploy](/assets/images/linuxdeploy-2.png)
+<video controls poster="/assets/images/linuxdeploy-v2.png">
+  <source src="/assets/videos/linuxdeploy-v2-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 The application creates a disk image or a directory on a flash card or uses a partition, mounts it and installs an OS distribution. Applications of the new system are run in a chroot environment and working together with the Android platform. All changes made on the device are reversible, i.e. the application and components can be removed completely. Installation of a distribution is done by downloading files from official mirrors online over the internet. The application can run better with superuser rights (root).
 

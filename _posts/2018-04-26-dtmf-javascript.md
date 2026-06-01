@@ -51,4 +51,7 @@ sender.play('1234567890ABCD#*');
 
 A small demonstration:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OS6yIiq_Cp8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video controls>
+  <source src="/assets/videos/dtmf-js-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>

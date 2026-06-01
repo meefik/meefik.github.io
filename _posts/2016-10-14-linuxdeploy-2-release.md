@@ -2,7 +2,7 @@
 layout: post
 title: Release Linux Deploy 2.0
 description: Overview of new features and improvements in the Linux Deploy 2.0 release.
-image: /assets/images/linuxdeploy-2.png
+image: /assets/images/linuxdeploy-v2.png
 date: 2016-10-14 12:00:00 +0000
 categories: [android, linuxdeploy]
 comments: true
@@ -10,13 +10,18 @@ comments: true
 
 Today was the official release of Linux Deploy 2.0, which includes many new developments that have been conducted over the past year. Not everything could be realized from what was conceived for one reason or another, it's time to figure out what exactly has changed and how to live with it. For more details, see [the project page](/linuxdeploy).
 
-![linuxdeploy](/assets/images/linuxdeploy-2.png "Linux Deploy 2.0")
+![linuxdeploy](/assets/images/linuxdeploy-v2.png "Linux Deploy 2.0")
 
 <!--more-->
 
 ### Graphic interface
 
-The application interface has been redesigned in a modern way — Material Design. In addition to styling, the functions of the application are more logically divided into sections, a sliding navigation panel has been added. Thanks to the compatibility library, the interface is almost equally displayed under different versions of Android, starting with Android 2.3.3. You can [see here](https://www.youtube.com/watch?v=9b8PnZge7vA) a screencast of the Linux Deploy application.
+The application interface has been redesigned in a modern way — Material Design. In addition to styling, the functions of the application are more logically divided into sections, a sliding navigation panel has been added. Thanks to the compatibility library, the interface is almost equally displayed under different versions of Android, starting with Android 2.3.3. Watch the video below to see Linux in action:
+
+<video controls>
+  <source src="/assets/videos/linuxdeploy-v2-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Command Line Interface
 

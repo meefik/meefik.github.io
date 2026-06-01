@@ -9,21 +9,21 @@ comments: true
 
 The <a href="http://www.raspbian.org/RaspbianMate">Raspbian MATE</a> distribution is based on Debian and is being developed for the Raspberry Pi, using <a href="http://mate-desktop.org/">MATE</a> as the desktop environment. This distribution can be run on Android via Linux Deploy.
 
-![linuxdeploy](/assets/images/linuxdeploy-raspbian-mate.png "Rapsbian MATE"){: .center}
+![linuxdeploy](/assets/images/linuxdeploy-raspbian-mate.png "Raspbian MATE"){: .center}
 
 <!--more-->
 
 ### Playbook
 
-- Download image from the <a href="http://www.raspbian.org/PiscesMATEImages">official website</a>: <a href="http://archive.raspbian.org/assets/images/rpi_pisces_mate_r2.zip">rpi_pisces_mate_r2.zip</a>
+- Download the image from the <a href="http://www.raspbian.org/PiscesMATEImages">official website</a>: <a href="http://archive.raspbian.org/assets/images/rpi_pisces_mate_r2.zip">rpi_pisces_mate_r2.zip</a>
 
-- Extract an image of the third partition from the full image (run it under Linux):
+- Extract the image of the third partition from the full image (run it under Linux):
 ```sh
 kpartx -v -a rpi_pisces_mate_r2.img
 dd if=/dev/mapper/loop0p3 of=/tmp/rpi_pisces_mate.img bs=1M
 ```
 
-- Copy the rpi_pisces_mate.img file to the device memory card.
+- Copy the rpi_pisces_mate.img file to the device's memory card.
 
 - In the Linux Deploy application, create a new profile and specify in the properties:
   - *Distribution* - Debian;

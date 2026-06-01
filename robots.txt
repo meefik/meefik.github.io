@@ -1,7 +1,9 @@
 ---
-layout: null
+layout: none
+permalink: /robots.txt
 ---
-User-agent: *
-Disallow:
+User-Agent: *
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 Sitemap: {{ site.url }}/sitemap.xml

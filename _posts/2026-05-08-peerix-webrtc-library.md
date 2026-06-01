@@ -61,6 +61,6 @@ If you're interested in contributing, or if you have any questions, please take 
 
 Try out the Peerix library in the sandbox environment below. You can open multiple tabs with the sandbox in the same browser to simulate multiple peers and see how they interact with each other using Peerix.
 
-<iframe title="Peerix Sandbox" scrolling="no" loading="lazy" style="height:500px; width: 100%; border:1px solid black; border-radius:6px;" src="https://v48.livecodes.io/?x=id/j72zrf6uvqc&embed=true&mode=result">
-  See the project <a href="https://v48.livecodes.io/?x=id/j72zrf6uvqc&mode=result" target="_blank">Peerix Sandbox</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
+<iframe title="Peerix Sandbox" scrolling="no" loading="lazy" style="height:500px; width: 100%; border:1px solid black; border-radius:6px;" src="https://v48.livecodes.io/?x=id/ywc4thzv7ad&embed=true&mode=result">
+  See the project <a href="https://v48.livecodes.io/?x=id/ywc4thzv7ad&mode=result" target="_blank">Peerix Sandbox</a> on <a href="https://livecodes.io" target="_blank">LiveCodes</a>.
 </iframe>

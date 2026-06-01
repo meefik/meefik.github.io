@@ -46,4 +46,7 @@ npm start
 
 After that you just need to access the address <http://localhost:3000> in your browser.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UtkOd42F5-E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video controls>
+  <source src="/assets/videos/face-alignment-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
