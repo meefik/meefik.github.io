@@ -5,15 +5,10 @@
     gap: 1.5em;
     align-items: center;
 
-    .avatar {
+    img {
       display: block;
-      white-space: normal;
-
-      img {
-        display: block;
-        min-width: 100px;
-        min-height: 100px;
-      }
+      width: 100px;
+      height: 100px;
     }
 
     .info {
