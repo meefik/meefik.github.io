@@ -4,17 +4,17 @@ title: LLM performance on AMD GPU with ROCm 7.x vs 6.x
 description: Benchmarking large language models (LLMs) on AMD Radeon AI PRO R9700 GPU using Ollama with ROCm 7.x and comparing it to ROCm 6.x performance.
 image: /assets/images/llm-performance-rocm7.png
 date: 2026-05-31 21:00:00 +0000
-categories: [amdgpu, llm]
+categories: [amdgpu, llm, benchmark]
 comments: true
 ---
 
 In this post, I compare the performance of large language models (LLMs) on the [AMD Radeon AI PRO R9700](https://www.amd.com/en/products/graphics/workstations/radeon-ai-pro/ai-9000-series/amd-radeon-ai-pro-r9700.html) using Ollama with different ROCm versions. The R9700 is a powerful GPU designed for professional workloads, including machine learning and AI applications. In my previous post, [LLM performance on AMD Radeon AI PRO R9700](/2025/11/15/llms-performance-on-amdgpu/), I tested LLM performance with ROCm 6.4. Now, let's see how ROCm 7.1 compares.
 
-![chart](/assets/images/llm-performance-rocm7.png "LLM performance using Ollama")
+![chart](/assets/images/llm-performance-rocm7.png "LLM performance, ROCm 6.x vs ROCm 7.x")
 
 <!--more-->
 
-## Hardware overview
+## Hardware
 
 The PC used for testing is equipped with the following specifications:
 
@@ -22,7 +22,7 @@ The PC used for testing is equipped with the following specifications:
 - **GPU**: AMD Radeon AI PRO R9700 (32 GB VRAM, RDNA 4)
 - **CPU**: AMD Ryzen 9 5950X (16 cores / 32 threads)
 - **RAM**: 64 GB DDR4-2666
-- **Storage**: NVMe Samsung SSD 970 EVO Plus 1TB
+- **Storage**: NVMe Samsung SSD 970 EVO Plus 1TB (x2)
 
 ## Test environment
 

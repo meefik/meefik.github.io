@@ -4,7 +4,7 @@ title: LLM performance on AMD Radeon AI PRO R9700
 description: Benchmarking large language models (LLMs) on AMD's Radeon AI PRO R9700 GPU using Ollama and Open WebUI.
 image: /assets/images/llm-performance.png
 date: 2025-11-15 18:00:00 +0000
-categories: [amdgpu, llm]
+categories: [amdgpu, llm, benchmark]
 comments: true
 ---
 
@@ -14,7 +14,7 @@ Recently, I acquired an [AMD Radeon AI PRO R9700](https://www.amd.com/en/product
 
 <!--more-->
 
-## Hardware overview
+## Hardware
 
 The PC used for testing is equipped with the following specifications:
 
@@ -22,7 +22,7 @@ The PC used for testing is equipped with the following specifications:
 - **GPU**: AMD Radeon AI PRO R9700 (32 GB VRAM, RDNA 4)
 - **CPU**: AMD Ryzen 9 5950X (16 cores / 32 threads)
 - **RAM**: 64 GB DDR4-2666
-- **Storage**: NVMe Samsung SSD 970 EVO Plus 1TB
+- **Storage**: NVMe Samsung SSD 970 EVO Plus 1TB (x2)
 
 ## Setup environment
 
