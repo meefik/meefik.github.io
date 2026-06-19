@@ -206,10 +206,7 @@ Sometimes I ask AI agents to do something using a web browser. In this case, you
       "enabled": true,
       "remote": false,
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest"],
-      "env": {
-        "PLAYWRIGHT_MCP_CAPS": "vision"
-      }
+      "args": ["-y", "@playwright/mcp@latest"]
     }
   }
 }
