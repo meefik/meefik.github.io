@@ -4,7 +4,7 @@ title: Set up self-hosted LLMs for local development
 description: A complete guide to running generative AI models locally on AMD GPU using Ollama and Zed Editor for everyday software development.
 image: /assets/images/local-development.jpg
 date: 2026-06-18 17:00:00 +0000
-categories: [amdgpu, llm]
+categories: [amdgpu, llm, benchmark, linux]
 comments: true
 ---
 
@@ -224,6 +224,9 @@ Here's how everything benchmarks on my AMD Radeon AI PRO R9700 with ROCm 7.2:
 | Qwen 3.6 | 27B     | Q4_K_M | Yes | 131072  | 17 GB  | 127 t/s | 28 t/s |
 | Qwen 3.6 | 35B A3B | Q4_K_M | No  | 131072  | 26 GB  | 246 t/s | 71 t/s |
 | Qwen 3.6 | 35B A3B | Q4_K_M | Yes | 131072  | 22 GB  | 195 t/s | 74 t/s |
+| Gemma 4  | 31B     | Q4_K_M | No  | 131072  | 20 GB  | 251 t/s | 22 t/s |
+| Gemma 4  | 26B A4B | Q4_K_M | No  | 131072  | 18 GB  | 418 t/s | 72 t/s |
+| Gemma 4  | 12 B    | Q4_K_M | No  | 131072  | 9 GB   | 493 t/s | 47 t/s |
 | Zeta 2.1 | 8B      | Q2_K   | No  | 8192    | 3.9 GB | 655 t/s | 95 t/s |
 
 MTP (Multi-Token Prediction) makes Qwen 3.6's output speed slightly faster while reducing memory consumption. For day-to-day coding with the Zed Agent, the 27B MTP variant is a nice balance of quality and speed.
