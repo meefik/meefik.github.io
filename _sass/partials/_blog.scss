@@ -19,6 +19,12 @@
         color: inherit;
       }
 
+      a.category {
+        border-radius: 0.25em;
+        background-color: $border-color;
+        padding: 0.1em 0.25em;
+      }
+
       a:hover {
         color: $link-color-hover;
       }
@@ -31,7 +37,7 @@
 
       p {
         font-size: 0.9em;
-        color: $text-color-light;
+        color: $title-color;
         margin: 0;
 
         &.meta {
@@ -167,7 +173,7 @@
 
     a {
       text-decoration: none;
-      color: $text-color-light;
+      color: $title-color;
 
       &.prev {
         position: absolute;

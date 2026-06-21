@@ -18,7 +18,7 @@ body>nav {
 
     input.search {
       all: unset;
-      border: 1px solid darken($border-color, 20);
+      border: 1px solid $title-color;
       background-color: $border-color;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
@@ -70,13 +70,13 @@ body>nav {
   }
 
   a {
-    color: darken($border-color, 50);
+    color: $title-color;
     text-shadow: $border-color 0 1px;
     text-decoration: none;
   }
 
   a:visited {
-    color: darken($border-color, 50);
+    color: $title-color;
   }
 
   a:hover {
@@ -94,7 +94,7 @@ body>nav {
   }
 
   svg {
-    fill: darken($border-color, 50);
+    fill: $title-color;
     transition: 0.3s;
   }
 
@@ -143,7 +143,7 @@ body>nav {
   #toggle span:before {
     width: 100%;
     height: 5px;
-    background-color: darken($border-color, 50);
+    background-color: $title-color;
     transition: all 0.3s;
     backface-visibility: hidden;
     border-radius: 2px;

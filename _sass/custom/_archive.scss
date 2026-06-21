@@ -1,6 +1,6 @@
 .archive {
   >article {
-    color: $text-color-light;
+    color: $title-color;
     margin-left: 0;
     padding: 1em 0 1em;
     position: relative;
@@ -33,14 +33,20 @@
     float: left;
     background: none;
     font-weight: normal;
-    color: $text-color-light;
+    color: $title-color;
   }
 
   a.category,
   time {
     @extend .sans;
-    color: $text-color-light;
+    color: $title-color;
     text-transform: uppercase;
+  }
+
+  a.category {
+    border-radius: 0.25em;
+    background-color: $border-color;
+    padding: 0.1em 0.25em;
   }
 
   a:hover {
@@ -63,6 +69,10 @@
     .year {
       display: inline;
     }
+  }
+
+  footer {
+    font-size: 0.9em;
   }
 
   @media only screen and (min-width: 550px) {
