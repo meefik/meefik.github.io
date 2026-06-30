@@ -231,6 +231,8 @@ Here's how everything benchmarks on my AMD Radeon AI PRO R9700 with ROCm 7.2:
 
 MTP (Multi-Token Prediction) makes Qwen 3.6's output speed slightly faster while reducing memory consumption. For day-to-day coding with the Zed Agent, the 27B MTP variant is a nice balance of quality and speed.
 
+Learn about model quality and compare them with others you can find [here](https://llm-stats.com/models/qwen3.6-27b) or [there](https://artificialanalysis.ai/models/qwen3-6-27b).
+
 ## Conclusion
 
 This whole setup gives me everything I need for AI-assisted dev without depending on any external service. Zed Editor + Ollama + ROCm handles coding, chat, and browsing — all running locally on one GPU. API cost? Zero. And since everything lives on localhost, latency is basically nonexistent.
