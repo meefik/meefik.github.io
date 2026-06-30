@@ -110,7 +110,7 @@ To get the most out of these models for coding, you'll want to tweak some defaul
 
 ### Qwen 3.6 27B
 
-Pull the model from the Ollama library:
+Pull the model from the Ollama library and run it:
 
 ```sh
 docker exec -it ollama ollama run qwen3.6:27b-mtp-q4_K_M
@@ -123,8 +123,9 @@ Then tweak parameters and save as `qwen3.6:27b-code`:
 /set parameter temperature 0.1
 /set parameter top_p 0.95
 /set parameter top_k 20
-/set parameter presence_penalty 0.5
-/set parameter repeat_penalty 1.05
+/set parameter min_p 0
+/set parameter presence_penalty 0.0
+/set parameter repeat_penalty 1.0
 /save qwen3.6:27b-code
 ```
 
@@ -224,9 +225,10 @@ Here's how everything benchmarks on my AMD Radeon AI PRO R9700 with ROCm 7.2:
 | Qwen 3.6 | 27B     | Q4_K_M | Yes | 131072  | 17 GB  | 127 t/s | 28 t/s |
 | Qwen 3.6 | 35B A3B | Q4_K_M | No  | 131072  | 26 GB  | 246 t/s | 71 t/s |
 | Qwen 3.6 | 35B A3B | Q4_K_M | Yes | 131072  | 22 GB  | 195 t/s | 74 t/s |
+| Ornith   | 35B A3B | Q4_K_M | No  | 131072  | 22 GB  | 675 t/s | 69 t/s |
 | Gemma 4  | 31B     | Q4_K_M | No  | 131072  | 20 GB  | 251 t/s | 22 t/s |
 | Gemma 4  | 26B A4B | Q4_K_M | No  | 131072  | 18 GB  | 418 t/s | 72 t/s |
-| Gemma 4  | 12 B    | Q4_K_M | No  | 131072  | 9 GB   | 493 t/s | 47 t/s |
+| Gemma 4  | 12B     | Q4_K_M | No  | 131072  | 9 GB   | 493 t/s | 47 t/s |
 | Zeta 2.1 | 8B      | Q2_K   | No  | 8192    | 3.9 GB | 655 t/s | 95 t/s |
 
 MTP (Multi-Token Prediction) makes Qwen 3.6's output speed slightly faster while reducing memory consumption. For day-to-day coding with the Zed Agent, the 27B MTP variant is a nice balance of quality and speed.
